@@ -170,8 +170,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .nav-links a:hover { color: var(--text); }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .nav-right .btn { border-radius: 9999px; }
-.nav-cta-ghost { font-size: 14.5px; color: var(--text-muted); transition: color .15s; }
-.nav-cta-ghost:hover { color: var(--text); }
+.nav-cta-ghost { font-size: 14.5px; color: #222; background: #e5e7e6; border: 1px solid #c8cac9; border-radius: 9999px; padding: 8px 18px; transition: background .15s, color .15s; font-weight: 500; }
+.nav-cta-ghost:hover { background: #d4d7d5; color: #111; }
 .nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid var(--border); }
 
 /* ---------- Logo ---------- */
