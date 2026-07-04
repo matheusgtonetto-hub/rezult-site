@@ -793,6 +793,16 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .tl-cta-mobile { display: none !important; }
 }
 
+/* Hero h1 — reflow de 3 linhas em telas muito estreitas
+   Quando "Aumente suas vendas" quebra internamente (~≤430px),
+   move "vendas" para início da linha 2 junto com "com",
+   resultando em: Aumente suas / vendas com / Rezult CRM. */
+@media (max-width: 430px) {
+  .hero-vendas { display: none; }
+  .hero-com::before { content: "vendas "; }
+  .hero h1 .em { white-space: nowrap; }
+}
+
 /* ============================================================
    Páginas legais (/politica e /termo)
    ============================================================ */
