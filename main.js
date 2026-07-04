@@ -228,35 +228,41 @@ wirePricingToggle("priceToggle");
   io.observe(metrics);
 })();
 
-// ---- Entregáveis timeline scroll animation ----
+// ---- Entregáveis timeline — scroll-driven animation (reversível) ----
 (function () {
-  const items = document.querySelectorAll(".tl-item");
+  const items = document.querySelectorAll("#entregaveis .tl-item");
   if (!items.length) return;
 
-  const activate = (item) => {
-    const num = item.querySelector(".tl-num");
-    const fill = item.querySelector(".tl-line-fill");
-    if (num) {
-      num.style.transition = "color 0.5s ease, transform 0.5s ease";
-      num.style.color = "var(--primary)";
-      num.style.transform = "scale(1)";
-    }
-    if (fill) {
-      fill.style.transition = "height 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
-      fill.style.height = "100%";
-    }
-  };
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function map(v, inA, inB) { return clamp01((v - inA) / (inB - inA)); }
 
-  const tlObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        activate(e.target);
-        tlObserver.unobserve(e.target);
+  function tick() {
+    const vh = window.innerHeight;
+    items.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const num  = item.querySelector(".tl-num");
+      const fill = item.querySelector(".tl-line-fill");
+
+      // Número ilumina conforme o item entra na tela (top: vh → vh*0.4)
+      const nP = map(rect.top, vh, vh * 0.4);
+      if (num) {
+        num.style.transition = "none";
+        num.style.color = `rgba(0, 229, 153, ${0.3 + 0.7 * nP})`;
+        num.style.transform = `scale(${0.92 + 0.08 * nP})`;
+      }
+
+      // Linha preenche enquanto o corpo do item é percorrido no scroll
+      if (fill) {
+        const lP = map(rect.top, vh * 0.4, -(item.offsetHeight * 0.25));
+        fill.style.transition = "none";
+        fill.style.height = (lP * 100) + "%";
       }
     });
-  }, { threshold: 0.25, rootMargin: "0px 0px -60px 0px" });
+  }
 
-  items.forEach(item => tlObserver.observe(item));
+  window.addEventListener("scroll", tick, { passive: true });
+  window.addEventListener("resize", tick);
+  tick();
 })();
 
 // ---- FAQ accordion ----
