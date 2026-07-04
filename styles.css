@@ -465,7 +465,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .tcard .stars svg { width: 15px; height: 15px; }
 
 /* ---------- Pricing ---------- */
-.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 229, 153, 0.35); margin: 0 auto 56px; }
+.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 229, 153, 0.20); margin: 0 auto 56px; }
 .price-toggle button { font-size: 14px; font-weight: 500; padding: 9px 9px; border-radius: 100px; color: var(--text-muted); transition: all .15s; display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
 .price-toggle button.active { background: var(--primary); color: var(--on-primary); font-weight: 600; }
 .price-toggle .save { font-size: 10px; padding: 2px 5px; border-radius: 100px; background: rgba(0,229,153,0.16); color: var(--primary); letter-spacing: 0.02em; }
