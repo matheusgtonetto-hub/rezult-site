@@ -2,7 +2,8 @@
   "name": "rezult-site",
   "version": "1.0.0",
   "scripts": {
-    "dev": "browser-sync start --server --files '*.html, *.css, *.js, logos/*' --port 3000"
+    "dev": "browser-sync start --server --files '*.html, *.css, *.js, logos/*' --port 3000",
+    "vercel-build": "echo 'site estático, sem build necessário'"
   },
   "devDependencies": {
     "browser-sync": "^3.0.3"
