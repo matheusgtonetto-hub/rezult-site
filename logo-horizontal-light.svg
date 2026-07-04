@@ -1,0 +1,16 @@
+<svg width="172" height="80" viewBox="0 0 172 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rezult CRM">
+  <defs>
+    <filter id="g1" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="b"></feGaussianBlur>
+      <feFlood flood-color="#00C77F" flood-opacity="0.45"></feFlood>
+      <feComposite in2="b" operator="in" result="g"></feComposite>
+      <feMerge><feMergeNode in="g"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#g1)">
+    <rect x="8" y="16" width="48" height="48" rx="15" fill="#00C77F"></rect>
+    <text x="32" y="48" text-anchor="middle" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.05em" fill="#FFFFFF">RZ</text>
+  </g>
+  <text x="74" y="44" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="25" font-weight="600" letter-spacing="-0.04em" fill="#0E1310">Re<tspan fill="#00C77F">zult</tspan></text>
+  <text x="75" y="60" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" letter-spacing="0.34em" fill="rgba(14,19,16,0.40)">CRM</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg width="200" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rezult CRM">
+  <defs>
+    <filter id="g4" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b"></feGaussianBlur>
+      <feFlood flood-color="#00C77F" flood-opacity="0.55"></feFlood>
+      <feComposite in2="b" operator="in" result="g"></feComposite>
+      <feMerge><feMergeNode in="g"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#g4)">
+    <rect x="76" y="8" width="48" height="48" rx="15" fill="#00C77F"></rect>
+    <text x="100" y="40" text-anchor="middle" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.05em" fill="#FFFFFF">RZ</text>
+  </g>
+  <text x="100" y="116" text-anchor="middle" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="36" font-weight="600" letter-spacing="-0.04em">
+    <tspan fill="#F4F2EC">Re</tspan><tspan fill="#00C77F">zult</tspan>
+  </text>
+  <text x="100" y="138" text-anchor="middle" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" letter-spacing="0.34em" fill="rgba(244,242,236,0.45)">CRM</text>
+</svg>

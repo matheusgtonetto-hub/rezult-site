@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rezult">
+  <defs>
+    <filter id="rz-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+      <feFlood flood-color="#00C77F" flood-opacity="0.45"></feFlood>
+      <feComposite in2="blur" operator="in" result="glow"></feComposite>
+      <feMerge><feMergeNode in="glow"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#rz-glow)">
+    <rect x="8" y="8" width="48" height="48" rx="15" fill="#00C77F"></rect>
+    <text x="32" y="40" text-anchor="middle" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="-0.05em" fill="#FFFFFF">RZ</text>
+  </g>
+</svg>
