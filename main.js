@@ -228,6 +228,37 @@ wirePricingToggle("priceToggle");
   io.observe(metrics);
 })();
 
+// ---- Entregáveis timeline scroll animation ----
+(function () {
+  const items = document.querySelectorAll(".tl-item");
+  if (!items.length) return;
+
+  const activate = (item) => {
+    const num = item.querySelector(".tl-num");
+    const fill = item.querySelector(".tl-line-fill");
+    if (num) {
+      num.style.transition = "color 0.5s ease, transform 0.5s ease";
+      num.style.color = "var(--primary)";
+      num.style.transform = "scale(1)";
+    }
+    if (fill) {
+      fill.style.transition = "height 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+      fill.style.height = "100%";
+    }
+  };
+
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        activate(e.target);
+        tlObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.25, rootMargin: "0px 0px -60px 0px" });
+
+  items.forEach(item => tlObserver.observe(item));
+})();
+
 // ---- FAQ accordion ----
 document.querySelectorAll(".faq-item").forEach(item => {
   const q = item.querySelector(".faq-q");
