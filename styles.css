@@ -791,7 +791,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .tl-body-last { padding-bottom: 0; }
   .tl-title { font-size: 24px; }
   .tl-desc { font-size: 16px; padding-right: 10px; }
-  .lede { font-size: 16px; }
+  .lede { font-size: 18px; }
   .tl-cta-mobile { display: none !important; }
   .mobile-only-br { display: block; }
 }
