@@ -247,9 +247,8 @@ wirePricingToggle("priceToggle");
       // Centro do item em relação à viewport
       const itemCenter = rect.top + item.offsetHeight / 2;
 
-      // Número: começa a iluminar quando o centro entra na metade inferior,
-      // atinge brilho total quando o centro cruza o meio exato da tela
-      const nP = map(itemCenter, vh * 0.85, mid);
+      // Número: só ilumina quando o centro do item cruza o meio da tela
+      const nP = map(itemCenter, mid + 60, mid - 60);
       if (num) {
         num.style.transition = "none";
         num.style.color = `rgba(0, 229, 153, ${0.2 + 0.8 * nP})`;
