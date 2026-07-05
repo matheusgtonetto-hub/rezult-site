@@ -850,6 +850,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .lede { font-size: 17px; }
   .tl-cta-mobile { display: none !important; }
   .mobile-only-br { display: block; }
+  .hero-l1, .hero-l3 { display: inline; }
 }
 
 
