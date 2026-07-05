@@ -568,6 +568,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-actions { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .48s both; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 .hero-mockup-wrap { animation: heroIn .8s cubic-bezier(0.2,0.8,0.2,1) .65s both; }
+.hero-mockup-img { width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: var(--r-lg); }
 
 /* ---------- Page hero (internal pages) ---------- */
 .page-hero { padding-top: calc(var(--nav-h) + 50px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
