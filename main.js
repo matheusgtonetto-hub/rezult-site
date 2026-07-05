@@ -238,22 +238,28 @@ wirePricingToggle("priceToggle");
 
   function tick() {
     const vh = window.innerHeight;
+    const mid = vh * 0.5;
     items.forEach(item => {
       const rect = item.getBoundingClientRect();
       const num  = item.querySelector(".tl-num");
       const fill = item.querySelector(".tl-line-fill");
 
-      // Número ilumina conforme o item chega ao meio da tela (top: vh*0.7 → vh*0.5)
-      const nP = map(rect.top, vh * 0.7, vh * 0.5);
+      // Centro do item em relação à viewport
+      const itemCenter = rect.top + item.offsetHeight / 2;
+
+      // Número: começa a iluminar quando o centro entra na metade inferior,
+      // atinge brilho total quando o centro cruza o meio exato da tela
+      const nP = map(itemCenter, vh * 0.85, mid);
       if (num) {
         num.style.transition = "none";
-        num.style.color = `rgba(0, 229, 153, ${0.3 + 0.7 * nP})`;
-        num.style.transform = `scale(${0.92 + 0.08 * nP})`;
+        num.style.color = `rgba(0, 229, 153, ${0.2 + 0.8 * nP})`;
+        num.style.transform = `scale(${0.90 + 0.10 * nP})`;
       }
 
-      // Linha preenche enquanto o item percorre a metade inferior da tela
+      // Linha: começa a preencher quando o centro cruza o meio,
+      // completa conforme o item sobe para o terço superior
       if (fill) {
-        const lP = map(rect.top, vh * 0.5, -(item.offsetHeight * 0.5));
+        const lP = map(itemCenter, mid, vh * 0.15);
         fill.style.transition = "none";
         fill.style.height = (lP * 100) + "%";
       }
