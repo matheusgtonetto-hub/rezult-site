@@ -559,8 +559,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 }
 .hero-badge  { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .05s both; }
 .mobile-only-br { display: none; }
-.hero-l1 { display: inline; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .15s both; }
-.hero-l2 { display: inline; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .28s both; }
+.hero-l1 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .15s both; }
+.hero-l2 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .28s both; }
 .hero-l3 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .41s both; }
 .hero-sub    { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .38s both; }
 .hero-actions { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .48s both; }
@@ -794,7 +794,6 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .lede { font-size: 17px; }
   .tl-cta-mobile { display: none !important; }
   .mobile-only-br { display: block; }
-  .hero-l1, .hero-l2 { display: block; }
 }
 
 
