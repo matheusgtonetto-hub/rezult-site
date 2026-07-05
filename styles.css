@@ -568,7 +568,35 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-actions { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .48s both; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 .hero-mockup-wrap { animation: heroIn .8s cubic-bezier(0.2,0.8,0.2,1) .65s both; }
-.hero-mockup-img { width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; border-radius: var(--r-lg); }
+
+.mockup-hero {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  transform: perspective(1200px) rotateX(3deg);
+  transform-origin: center top;
+  box-shadow:
+    0 60px 120px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 0 120px rgba(0,229,153,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.mockup-hero .mockup-glow {
+  width: 600px; height: 600px;
+  top: -30%; right: -5%;
+  opacity: 0.25;
+}
+.mockup-hero-body {
+  background: var(--bg-deep);
+  overflow: hidden;
+  line-height: 0;
+}
+.mockup-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-top: 1px solid var(--border);
+}
 
 /* ---------- Page hero (internal pages) ---------- */
 .page-hero { padding-top: calc(var(--nav-h) + 50px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
