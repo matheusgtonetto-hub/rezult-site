@@ -777,7 +777,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   #entregaveis h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; width: 90%; text-align: left !important; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
   .hero-actions { flex-direction: column; }
-  .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
+  .hero-actions .btn { width: 90%; text-align: center; justify-content: center; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
