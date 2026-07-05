@@ -455,7 +455,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 /* ---------- Testimonials ---------- */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 28px; border-radius: var(--r-lg); background: #fff; border: 1px solid #00E599; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s; }
+.tcard { padding: 28px; border-radius: var(--r-lg); background: #fff; border: none; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
 .tcard .quote { font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
