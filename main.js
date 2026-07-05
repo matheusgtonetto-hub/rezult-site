@@ -243,17 +243,17 @@ wirePricingToggle("priceToggle");
       const num  = item.querySelector(".tl-num");
       const fill = item.querySelector(".tl-line-fill");
 
-      // Número ilumina conforme o item entra na tela (top: vh → vh*0.4)
-      const nP = map(rect.top, vh, vh * 0.4);
+      // Número ilumina conforme o item chega ao meio da tela (top: vh*0.7 → vh*0.5)
+      const nP = map(rect.top, vh * 0.7, vh * 0.5);
       if (num) {
         num.style.transition = "none";
         num.style.color = `rgba(0, 229, 153, ${0.3 + 0.7 * nP})`;
         num.style.transform = `scale(${0.92 + 0.08 * nP})`;
       }
 
-      // Linha preenche enquanto o corpo do item é percorrido no scroll
+      // Linha preenche enquanto o item percorre a metade inferior da tela
       if (fill) {
-        const lP = map(rect.top, vh * 0.4, -(item.offsetHeight * 0.25));
+        const lP = map(rect.top, vh * 0.5, -(item.offsetHeight * 0.5));
         fill.style.transition = "none";
         fill.style.height = (lP * 100) + "%";
       }
