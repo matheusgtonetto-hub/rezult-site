@@ -464,7 +464,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .tcard .who .nm { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
 .tcard .who .rl { font-size: 12px; color: var(--text-subtle); }
 .tcard .stars { display: flex; gap: 2px; color: #F59E0B; }
-.tcard .stars svg { width: 15px; height: 15px; }
+.tcard .stars svg { width: 17px; height: 17px; }
 
 /* ---------- Pricing ---------- */
 .price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 229, 153, 0.20); margin: 0 auto 56px; }
