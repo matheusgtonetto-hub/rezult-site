@@ -265,7 +265,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 .hero-actions .btn { border-radius: 9999px !important; padding: 14px 30px; }
 .hero-actions .btn-secondary { border: 1px solid #00e599; }
-.hero-note { font-size: 13.5px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
+.hero-note { font-size: 14px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--primary); }
 
 .hero.va { text-align: center; }
