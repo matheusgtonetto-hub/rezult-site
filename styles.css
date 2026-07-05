@@ -266,7 +266,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-actions .btn { border-radius: 9999px !important; padding: 14px 30px; }
 .hero-actions .btn-primary { box-shadow: none; }
 .hero-actions .btn-primary:hover { box-shadow: none; }
-.hero-actions .btn-secondary { background: #fff; color: #111; border: 1px solid rgba(0,0,0,0.12); }
+.hero-actions .btn-secondary { background: #fff; color: #111; border: 1px solid #00e599; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--primary); }
 
