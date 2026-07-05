@@ -219,7 +219,7 @@ function dashBar(label, pct) {
 // ---- Inject ----
 function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
-  ["mockupSlotA", "mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
+  ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
   set("featAutomation", MK.automation);
   set("featWhatsapp", MK.whatsapp);
   set("featAgent", MK.agent);
