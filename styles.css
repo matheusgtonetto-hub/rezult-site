@@ -255,7 +255,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   display: inline-flex; align-items: center; gap: 10px;
   padding: 7px 14px 7px 8px; border-radius: 100px;
   background: var(--surface-2); border: 1px solid #00e59940;
-  font-size: 14px; color: rgba(244, 246, 244, 0.75); margin-bottom: 32px;
+  font-size: 14px; color: rgba(244, 246, 244, 0.75); margin-bottom: 20px;
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 .hero h1 { font-size: 65px; letter-spacing: -0.04em; line-height: 1; font-weight: 600; }
