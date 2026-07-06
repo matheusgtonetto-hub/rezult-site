@@ -571,10 +571,9 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-mockup-wrap { animation: heroIn .8s cubic-bezier(0.2,0.8,0.2,1) .65s both; }
 
 .hero-mockup-wrap {
-  width: 100vw;
+  width: 100%;
   max-width: 1280px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
 }
 .hero-mockup-img { width: 100%; height: auto; display: block; }
 
