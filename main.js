@@ -295,6 +295,30 @@ wirePricingToggle("priceToggle");
   update();
 })();
 
+// ---- Divisória scroll expand ----
+(function () {
+  const img = document.querySelector('.divisoria-img');
+  if (!img) return;
+
+  let ticking = false;
+
+  function update() {
+    const rect = img.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const progress = Math.min(Math.max((vh - rect.top) / (vh * 0.7), 0), 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const scale = 0.05 + (1 - 0.05) * eased; // 0.05 → 1
+    img.style.transform = `scaleY(${scale})`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
+})();
+
 // ---- FAQ accordion ----
 document.querySelectorAll(".faq-item").forEach(item => {
   const q = item.querySelector(".faq-q");
