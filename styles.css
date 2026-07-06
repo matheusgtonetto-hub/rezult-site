@@ -789,7 +789,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
   .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 90%; margin-left: auto; margin-right: auto; }
   .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
-  .hero-actions .btn-secondary { font-size: 14px; }
+  .hero-actions .btn-secondary { font-size: 15px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
