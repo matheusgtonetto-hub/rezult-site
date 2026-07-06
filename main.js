@@ -279,8 +279,7 @@ wirePricingToggle("priceToggle");
   let ticking = false;
 
   function update() {
-    const isMobile = window.innerWidth <= 768;
-    const startAngle = isMobile ? 10 : 18;
+    const startAngle = 18;
     const progress = Math.min(window.scrollY / scrollRange, 1);
     const eased = 1 - Math.pow(1 - progress, 2);
     const angle = startAngle * (1 - eased);
