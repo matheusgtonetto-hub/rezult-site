@@ -279,7 +279,7 @@ wirePricingToggle("priceToggle");
   let ticking = false;
 
   function update() {
-    const startAngle = -20;
+    const startAngle = -30;
     const progress = Math.min(window.scrollY / scrollRange, 1);
     const eased = 1 - Math.pow(1 - progress, 2);
     const angle = startAngle * (1 - eased);
