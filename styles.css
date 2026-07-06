@@ -572,7 +572,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 .hero-mockup-wrap {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 .hero-mockup-img { width: 100%; height: auto; display: block; }
