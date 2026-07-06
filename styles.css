@@ -276,7 +276,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero.va .hero-actions { justify-content: center; }
 .hero.va .hero-note { justify-content: center; }
 .hero.va .hero-badge { margin-left: auto; margin-right: auto; }
-.hero.va .hero-mockup-wrap { margin-top: 72px; }
+.hero.va .hero-mockup-wrap { margin-top: 30px; }
 .hero-mockup-wrap, .hero-glow, .hero-badge { will-change: transform; }
 
 .hero.vb .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
