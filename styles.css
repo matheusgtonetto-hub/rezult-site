@@ -24,7 +24,7 @@
 
   /* Text */
   --text: #F4F6F4;
-  --text-muted: rgb(200, 200, 200);
+  --text-muted: #D1D1D1;
   --text-subtle: rgba(244, 246, 244, 0.38);
 
   /* Semantic (data only) */
