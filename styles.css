@@ -570,57 +570,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 .hero-mockup-wrap { animation: heroIn .8s cubic-bezier(0.2,0.8,0.2,1) .65s both; }
 
-/* ── Pipeline hero image system ─────────────────────── */
-.pipeline-stage {
-  position: relative;
-  width: 100%;
-  max-width: 1020px;
-  margin: 0 auto;
-}
-
-/* Aura estática atrás da imagem */
-.pipeline-aura {
-  display: none;
-}
-
-/* Frame: perspectiva + float + dissolve no fundo */
-.pipeline-frame {
-  position: relative;
-  z-index: 1;
-  transform: perspective(1800px) rotateX(4deg);
-  transform-origin: center 88%;
-  animation: pipelineFloat 8s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 52%, transparent 88%);
-  mask-image: linear-gradient(to bottom, black 0%, black 52%, transparent 88%);
-}
-@keyframes pipelineFloat {
-  0%, 100% { transform: perspective(1800px) rotateX(4deg) translateY(0px);    }
-  50%       { transform: perspective(1800px) rotateX(4deg) translateY(-10px);  }
-}
-
-.hero-mockup-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 14px 14px 0 0;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.07),
-    0 28px 80px rgba(0,0,0,0.80),
-    0 0 60px rgba(0,229,153,0.07);
-}
-
-.pipeline-shimmer { display: none; }
-
-/* Linha de ancoragem: conecta a imagem ao plano da página */
-.pipeline-ground {
-  position: relative;
-  z-index: 1;
-  height: 1px;
-  width: 55%;
-  margin: 0 auto;
-  background: linear-gradient(90deg, transparent, rgba(0,229,153,0.45), transparent);
-  box-shadow: 0 0 40px 14px rgba(0,229,153,0.10);
-}
+.hero-mockup-img { width: 100%; height: auto; display: block; }
 
 /* ---------- Page hero (internal pages) ---------- */
 .page-hero { padding-top: calc(var(--nav-h) + 50px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
