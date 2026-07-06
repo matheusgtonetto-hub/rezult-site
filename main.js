@@ -270,6 +270,30 @@ wirePricingToggle("priceToggle");
   tick();
 })();
 
+// ---- Hero mockup scroll rotation ----
+(function () {
+  const img = document.querySelector('.hero-mockup-img');
+  if (!img) return;
+
+  const startAngle = 18;
+  const scrollRange = 500;
+  let ticking = false;
+
+  function update() {
+    const progress = Math.min(window.scrollY / scrollRange, 1);
+    const eased = 1 - Math.pow(1 - progress, 2);
+    const angle = startAngle * (1 - eased);
+    img.style.transform = `perspective(1400px) rotateX(${angle}deg)`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
+})();
+
 // ---- FAQ accordion ----
 document.querySelectorAll(".faq-item").forEach(item => {
   const q = item.querySelector(".faq-q");
