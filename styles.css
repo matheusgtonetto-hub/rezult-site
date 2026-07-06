@@ -570,6 +570,13 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 .hero-mockup-wrap { animation: heroIn .8s cubic-bezier(0.2,0.8,0.2,1) .65s both; }
 
+.hero-mockup-wrap {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
 .hero-mockup-img { width: 100%; height: auto; display: block; }
 
 /* ---------- Page hero (internal pages) ---------- */
