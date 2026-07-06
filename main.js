@@ -273,12 +273,13 @@ wirePricingToggle("priceToggle");
 // ---- Hero mockup scroll rotation ----
 (function () {
   const img = document.querySelector('.hero-mockup-img');
-  if (!img) return;
+  if (!img || window.innerWidth > 768) return;
 
   const scrollRange = 500;
   let ticking = false;
 
   function update() {
+    if (window.innerWidth > 768) { img.style.transform = ''; return; }
     const startAngle = -35;
     const progress = Math.min(window.scrollY / scrollRange, 1);
     const eased = 1 - Math.pow(1 - progress, 2);
