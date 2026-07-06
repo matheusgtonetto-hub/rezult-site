@@ -261,7 +261,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero h1 { font-size: 65px; letter-spacing: -0.02em; line-height: 1; font-weight: 600; }
 .em { color: var(--primary); }
 .hero h1 .em { color: var(--primary); }
-.hero-sub { font-size: clamp(16px, 2vw, 20px); color: #C7CDC9; line-height: 1.3; max-width: 600px; margin-top: 23px; letter-spacing: -0.01em; font-weight: 400; }
+.hero-sub { font-size: clamp(16px, 2vw, 20px); color: #D1D1D1; line-height: 1.3; max-width: 600px; margin-top: 23px; letter-spacing: -0.01em; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 .hero-actions .btn { border-radius: 9999px !important; padding: 12px 30px; }
@@ -787,8 +787,9 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   #implementacao h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; }
   #entregaveis h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; width: 90%; text-align: left !important; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
-  .hero-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-  .hero-actions .btn { width: auto; }
+  .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; }
+  .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
+  .hero-actions .btn-secondary { font-size: 14px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
