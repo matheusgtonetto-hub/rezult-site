@@ -193,7 +193,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero-grid {
   position: absolute; inset: 0;
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 18px 18px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 70%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 70%);
   opacity: 0.6;
