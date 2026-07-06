@@ -137,7 +137,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   font-weight: 500; font-size: 15px; letter-spacing: -0.01em;
-  padding: 10px 22px; border-radius: var(--r-md);
+  padding: 8px 22px; border-radius: var(--r-md);
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s;
   white-space: nowrap;
 }
