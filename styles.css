@@ -767,7 +767,6 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .tl-cta-mobile { display: flex; margin-top: 10px; justify-content: center; }
 }
 @media (max-width: 768px) {
-  .hero-mockup-img { transform-origin: center top; }
   .impl-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
   #entregaveis .impl-entregaveis-left .hero-actions { display: none; }
   #implementacao img { width: 90% !important; margin: 0 auto; }
