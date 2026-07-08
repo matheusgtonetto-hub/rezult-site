@@ -47,10 +47,12 @@
 </div>
 
 <!-- HERO -->
-<header class="hero va" id="hero" style="padding: 118px 0px 70px">
+<header class="hero va" id="hero" style="padding: 118px 0px 100px">
   <div class="hero-bg">
     <div class="hero-grid"></div>
-<div class="hero-glow"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-side-l"></div>
+    <div class="hero-side-r"></div>
     <div class="mesh-blob mesh-blob-1"></div>
     <div class="mesh-blob mesh-blob-2"></div>
     <div class="mesh-blob mesh-blob-3"></div>
@@ -74,7 +76,7 @@
     </div>
   </div>
   <div class="hero-mockup-wrap" id="mockupSlotA">
-    <img src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
+    <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
   </div>
 </header>
 
@@ -526,6 +528,15 @@
 <script src="main.js"></script>
 <script type="module">
   import { animate, inView } from "https://esm.sh/motion@12.42.2";
+
+  // Float na imagem da hero — desktop e tablet apenas
+  const heroImg = document.getElementById("hero-img");
+  if (heroImg && window.matchMedia("(min-width: 768px)").matches) {
+    animate(heroImg,
+      { y: [0, -14, 0] },
+      { duration: 4, easing: "ease-in-out", repeat: Infinity, delay: 1.5 }
+    );
+  }
 
   const img = document.getElementById("impl-img");
   if (img) {
