@@ -127,6 +127,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .h2 { font-size: 48px; margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
 .eyebrow + .h2 { margin-top: 15px; }
+#integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
 @media (max-width: 768px) {
   .h2 { line-height: 1.0; }
 }
@@ -780,6 +781,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.05; }
   .hero-sub { max-width: 95%; font-size: 17px; }
   .h2, .cta-final h2 { font-size: 37px; letter-spacing: -0.02em; line-height: 1.1; }
+  #integ-heading { font-size: 35px; }
   .feature-text h3 { font-size: 24px; }
   .feature-text p { font-size: 16px; }
   .metrics { grid-template-columns: 1fr; }

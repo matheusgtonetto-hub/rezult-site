@@ -62,7 +62,7 @@
         <span style="color: #C7CDC9;">Implementação Gratuita</span>
       </div>
       <h1>Receba um <span class="em">diagnóstico</span><br class="desktop-only-br"> <span class="em">comercial</span> para escalar suas<br class="desktop-only-br"> vendas com o <span class="em">Rezult CRM</span></h1>
-      <p class="hero-sub">Identificamos onde sua operação perde vendas (no WhatsApp, na qualificação, no fechamento), antes da implementação. Resultado: 3x mais vendas sem aumentar o time.</p>
+      <p class="hero-sub">Mapeamos onde sua operação perde vendas (WhatsApp, qualificação, fechamento, etc...) antes da implementação gratuita na sua empresa. Resultado: 3x mais vendas sem aumentar o time.</p>
       <div class="hero-actions">
         <a href="#demo" class="btn btn-primary btn-lg">Agendar diagnóstico</a>
         <a href="planos.html" class="btn btn-secondary btn-lg">Ver planos</a>
@@ -227,8 +227,8 @@
     <div class="impl-grid">
 
       <!-- Left: imagem -->
-      <div class="reveal">
-        <img src="implementacao-gratuita2.svg" alt="Implementação gratuita Rezult CRM" style="width: 80%; height: auto; display: block;" />
+      <div>
+        <img id="impl-img" src="implementacao-gratuita2.svg" alt="Implementação gratuita Rezult CRM" style="width: 80%; height: auto; display: block; opacity: 0;" />
       </div>
 
       <!-- Right: texto -->
@@ -367,7 +367,8 @@
   <div class="wrap">
     <div class="section-head center reveal" style="margin-bottom:40px;">
       <span class="eyebrow" style="justify-content:center;margin-bottom:24px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Integrações</span>
-      <h2 class="h2" style="color: #000;">Conecte o Re<span class="em">zult</span> com<br>outras ferramentas</h2>
+      <h2 class="h2" id="integ-heading" style="color: #000;">Todas as suas ferramentas<br>principais <span class="em">sincronizadas</span></h2>
+      <p class="lede" style="color: #4b5563; margin-top: 16px;">O Rezult funciona com todas as aplicações já no seu fluxo, garantindo que tudo funcione perfeitamente em conjunto.</p>
     </div>
   </div>
   <div class="marquee reveal" id="intgMarquee"></div>
@@ -523,5 +524,25 @@
 
 <script src="mockups.js"></script>
 <script src="main.js"></script>
+<script type="module">
+  import { animate, inView } from "https://esm.sh/motion@12.42.2";
+
+  const img = document.getElementById("impl-img");
+  if (img) {
+    inView(img, () => {
+      // Animação de entrada: desliza da esquerda + fade
+      animate(img,
+        { opacity: [0, 1], x: [-48, 0] },
+        { duration: 0.7, easing: [0.2, 0.8, 0.2, 1] }
+      ).then(() => {
+        // Float contínuo após entrada
+        animate(img,
+          { y: [0, -10, 0] },
+          { duration: 3.5, easing: "ease-in-out", repeat: Infinity }
+        );
+      });
+    }, { amount: 0.2 });
+  }
+</script>
 </body>
 </html>
