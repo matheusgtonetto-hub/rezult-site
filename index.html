@@ -428,9 +428,9 @@
 <!-- DOBRA 08 · AGENDE UMA DEMO -->
 <section class="section" id="demo" style="background: rgb(239, 245, 242);">
   <div class="wrap">
-    <div class="section-head center reveal" style="margin-bottom: 40px;">
+    <div class="section-head center reveal" style="margin-bottom: 35px;">
       <span class="eyebrow" style="justify-content:center;margin-bottom:24px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Agende uma demo</span>
-      <h2 class="h2" style="color: #000;">Agende seu diagnóstico comercial e demonstração do CRM</h2>
+      <h2 class="h2" id="demo-heading" style="color: #000;">Receba seu <span class="em">diagnóstico</span> e <span class="em">demonstração</span> do CRM</h2>
       <p class="lede" style="color: #4b5563; margin-top: 16px;">Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
     </div>
     <div class="cta-final reveal">
@@ -450,12 +450,12 @@
             <input class="demo-input" type="tel" id="demo-whatsapp" name="whatsapp" placeholder="Seu WhatsApp" required>
           </div>
           <div class="demo-field">
-            <input class="demo-input" type="text" id="demo-site" name="site" placeholder="Site ou Instagram">
+            <input class="demo-input" type="text" id="demo-site" name="site" placeholder="Site ou Instagram da empresa">
           </div>
         </div>
         <div class="demo-field">
           <select class="demo-input demo-select" id="demo-segmento" name="segmento" required>
-            <option value="" disabled selected>Qual seu segmento?</option>
+            <option value="" disabled selected>Qual o segmento da empresa?</option>
             <option value="varejo">Varejo</option>
             <option value="servicos">Serviços</option>
             <option value="tecnologia">Tecnologia</option>
@@ -579,6 +579,29 @@
       e.preventDefault();
       demoForm.style.display = "none";
       demoSuccess.style.display = "flex";
+    });
+  }
+
+  document.querySelectorAll("select.demo-select").forEach(function(sel) {
+    sel.addEventListener("change", function() {
+      this.classList.toggle("has-value", !!this.value);
+    });
+  });
+
+  const wppInput = document.getElementById("demo-whatsapp");
+  if (wppInput) {
+    wppInput.addEventListener("input", function(e) {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length === 0) { e.target.value = ""; return; }
+      if (v.length <= 2) {
+        e.target.value = "(" + v;
+      } else if (v.length <= 7) {
+        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2);
+      } else if (v.length <= 10) {
+        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,6) + "-" + v.slice(6);
+      } else {
+        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
+      }
     });
   }
 </script>
