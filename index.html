@@ -369,7 +369,7 @@
   <div class="wrap">
     <div class="section-head center reveal" style="margin-bottom:40px;">
       <span class="eyebrow" style="justify-content:center;margin-bottom:24px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Integrações</span>
-      <h2 class="h2" id="integ-heading" style="color: #000;">Todas as suas ferramentas principais <span class="em">sincronizadas</span></h2>
+      <h2 class="h2" id="integ-heading" style="color: #000;">Integração com todas as ferramentas que <span class="em">seu time já usa</span></h2>
       <p class="lede" style="color: #4b5563; margin-top: 16px;">O Rezult funciona com todas as aplicações já no seu fluxo, garantindo que tudo funcione perfeitamente em conjunto.</p>
     </div>
   </div>
@@ -434,9 +434,71 @@
       <span class="eyebrow" style="justify-content:center;margin-bottom:24px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Agende uma demo</span>
       <h2>Ainda está com dúvidas?</h2>
       <p>Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
-      <div class="cta-actions">
-        <a href="https://app.rezultcrm.com" class="btn btn-primary btn-lg">Agendar demonstração</a>
-        <a href="planos.html" class="btn btn-secondary btn-lg" style="border: 1px solid #00E599; background: #fff; color: #111;">Ver planos</a>
+      <form class="demo-form" id="demoForm">
+        <div class="demo-form-row">
+          <div class="demo-field">
+            <label class="demo-label" for="demo-nome">Nome</label>
+            <input class="demo-input" type="text" id="demo-nome" name="nome" placeholder="Seu nome completo" required>
+          </div>
+          <div class="demo-field">
+            <label class="demo-label" for="demo-email">E-mail</label>
+            <input class="demo-input" type="email" id="demo-email" name="email" placeholder="seu@email.com" required>
+          </div>
+        </div>
+        <div class="demo-form-row">
+          <div class="demo-field">
+            <label class="demo-label" for="demo-whatsapp">WhatsApp</label>
+            <input class="demo-input" type="tel" id="demo-whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
+          </div>
+          <div class="demo-field">
+            <label class="demo-label" for="demo-site">Site da empresa</label>
+            <input class="demo-input" type="text" id="demo-site" name="site" placeholder="www.suaempresa.com.br">
+          </div>
+        </div>
+        <div class="demo-field">
+          <label class="demo-label" for="demo-segmento">Segmento</label>
+          <select class="demo-input" id="demo-segmento" name="segmento" required>
+            <option value="" disabled selected>Selecione o segmento</option>
+            <option value="varejo">Varejo</option>
+            <option value="servicos">Serviços</option>
+            <option value="tecnologia">Tecnologia</option>
+            <option value="saude">Saúde</option>
+            <option value="educacao">Educação</option>
+            <option value="imobiliario">Imobiliário</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="industria">Indústria</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="demo-form-row">
+          <div class="demo-field">
+            <label class="demo-label" for="demo-faturamento">Faturamento mensal</label>
+            <select class="demo-input" id="demo-faturamento" name="faturamento" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="ate-10k">Até R$ 10 mil</option>
+              <option value="10k-50k">R$ 10 mil – R$ 50 mil</option>
+              <option value="50k-100k">R$ 50 mil – R$ 100 mil</option>
+              <option value="100k-500k">R$ 100 mil – R$ 500 mil</option>
+              <option value="500k+">Acima de R$ 500 mil</option>
+            </select>
+          </div>
+          <div class="demo-field">
+            <label class="demo-label" for="demo-time">Tamanho do time</label>
+            <select class="demo-input" id="demo-time" name="time_size" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="1-5">1 a 5 pessoas</option>
+              <option value="6-15">6 a 15 pessoas</option>
+              <option value="16-30">16 a 30 pessoas</option>
+              <option value="30+">Mais de 30 pessoas</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg demo-submit">Agendar demonstração</button>
+      </form>
+      <div class="demo-success" id="demoSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <strong>Solicitação enviada!</strong>
+        <span>Nosso time entrará em contato em breve.</span>
       </div>
     </div>
   </div>
@@ -526,6 +588,17 @@
 
 <script src="mockups.js"></script>
 <script src="main.js"></script>
+<script>
+  const demoForm = document.getElementById("demoForm");
+  const demoSuccess = document.getElementById("demoSuccess");
+  if (demoForm) {
+    demoForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      demoForm.style.display = "none";
+      demoSuccess.style.display = "flex";
+    });
+  }
+</script>
 <script type="module">
   import { animate, inView } from "https://esm.sh/motion@12.42.2";
 

@@ -552,7 +552,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
-.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 80px 56px; text-align: center; background: #fff; border: 1px solid #00E599; max-width: 600px; margin: 0 auto; }
+.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 64px 56px; text-align: center; background: #fff; border: 1px solid #00E599; max-width: 680px; margin: 0 auto; }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
@@ -562,6 +562,20 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.01em; margin: 28px auto 36px; max-width: 600px; }
 .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .cta-actions .btn { border-radius: 9999px; flex: 1; text-align: center; justify-content: center; }
+
+/* ---------- Demo form ---------- */
+.demo-form { margin-top: 28px; text-align: left; }
+.demo-form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
+.demo-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.demo-label { font-size: 13px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
+.demo-input { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #f9fafb; outline: none; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; box-sizing: border-box; -webkit-appearance: none; appearance: none; }
+.demo-input:focus { border-color: #00E599; box-shadow: 0 0 0 3px rgba(0,229,153,0.15); background: #fff; }
+.demo-input::placeholder { color: #9ca3af; }
+.demo-submit { width: 100%; margin-top: 6px; border-radius: 9999px !important; justify-content: center; }
+.demo-success { display: none; flex-direction: column; align-items: center; gap: 8px; padding: 32px 0 8px; color: #111; }
+.demo-success svg { width: 40px; height: 40px; color: #00E599; margin-bottom: 4px; }
+.demo-success strong { font-size: 20px; font-weight: 600; }
+.demo-success span { font-size: 15px; color: #6b7280; }
 
 /* ---------- Footer ---------- */
 .footer { background: #0a0d0b; border-top: 1px solid rgba(255,255,255,0.08); padding: 72px 0 40px; }
@@ -823,7 +837,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .footer-col h5 { margin-bottom: 12px; }
   .footer-bottom { justify-content: center; }
   .footer-social { justify-content: center; }
-  .cta-final { padding: 56px 24px; }
+  .cta-final { padding: 48px 24px; }
+  .demo-form-row { grid-template-columns: 1fr; }
   .price-toggle { gap: 3px; padding: 4px; width: 300px; }
   .price-toggle button { padding: 9px 9px; font-size: 14px; gap: 4px; flex: 1; justify-content: center; }
   .price-toggle .save { font-size: 10px; padding: 2px 5px; }
