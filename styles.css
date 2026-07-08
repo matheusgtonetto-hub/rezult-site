@@ -828,7 +828,7 @@ select.demo-select:invalid { color: #374151; }
   .hero-sub { max-width: 95%; font-size: 17px; }
   .h2, .cta-final h2 { font-size: 37px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
-  #demo-heading { font-size: 33px; }
+  #demo-heading { font-size: 31px; }
   .feature-text h3 { font-size: 24px; }
   .feature-text p { font-size: 16px; }
   .metrics { grid-template-columns: 1fr; }
