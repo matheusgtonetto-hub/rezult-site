@@ -129,7 +129,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
-#demo-heading { font-size: 43px; }
+#demo-heading, #demo-planos-heading { font-size: 43px; }
 @media (max-width: 768px) {
   .h2 { line-height: 1.0; }
 }
@@ -159,7 +159,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-h);
   display: flex; align-items: center;
-  background: rgba(10, 13, 11, 0.80);
+  background: rgba(10, 13, 11, 1);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-bottom: 1px solid transparent;
@@ -649,7 +649,7 @@ select.demo-select:invalid { color: #374151; }
 .page-hero { padding-top: calc(var(--nav-h) + 50px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
 .page-hero .hero-bg { inset: 0 0 auto 0; height: 1080px; }
 .page-hero .wrap { position: relative; z-index: 1; }
-.page-hero h1 { font-size: 65px; letter-spacing: -0.02em; line-height: 1.1; }
+.page-hero h1 { font-size: 50px; letter-spacing: -0.02em; line-height: 1; }
 .page-hero p { font-size: clamp(18px, 2.2vw, 22px); color: var(--text-muted); line-height: 1.3; letter-spacing: -0.01em; max-width: 600px; margin: 15px auto 0; }
 
 /* ---------- Implementação Gratuita ---------- */
@@ -831,7 +831,7 @@ select.demo-select:invalid { color: #374151; }
   .hero-sub { max-width: 95%; font-size: 17px; }
   .h2, .cta-final h2 { font-size: 37px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
-  #demo-heading { font-size: 31px; }
+  #demo-heading, #demo-planos-heading { font-size: 31px; }
   .feature-text h3 { font-size: 24px; }
   .feature-text p { font-size: 16px; }
   .metrics { grid-template-columns: 1fr; }

@@ -306,16 +306,64 @@
 </section>
 
 <!-- DOBRA · AGENDE UMA DEMO -->
-<section class="section" id="demo-planos" style="background: rgb(239, 245, 242);">
+<section class="section" id="demo-planos" style="background: rgb(239, 245, 242); position: relative; overflow: hidden;">
+  <div class="demo-side-l"></div>
+  <div class="demo-side-r"></div>
   <div class="wrap">
+    <div class="section-head center reveal" style="margin-bottom: 35px; max-width: 500px;">
+      <span class="eyebrow" style="justify-content:center;margin-bottom:15px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Agende uma demo</span>
+      <h2 class="h2" id="demo-planos-heading" style="color: #000;">Agende seu <span class="em">diagnóstico</span> e <span class="em">demonstração</span> do CRM</h2>
+      <p class="lede" style="color: #4b5563; margin-top: 16px;">Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
+    </div>
     <div class="cta-final reveal">
       <div class="cta-final-grid"></div>
       <div class="cta-final-glow"></div>
-      <span class="eyebrow" style="justify-content:center;margin-bottom:24px;background: rgba(0,229,153,0.18); border: 1px solid #00E599; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0,229,153,0.35);">Agende uma demo</span>
-      <h2>Ainda está com dúvidas?</h2>
-      <p>Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
-      <div class="cta-actions">
-        <a href="https://app.rezultcrm.com" class="btn btn-primary btn-lg">Agendar demonstração</a>
+      <form class="demo-form" id="demoFormPlanos">
+        <div class="demo-form-row">
+          <div class="demo-field">
+            <input class="demo-input" type="text" id="dp-nome" name="nome" placeholder="Nome completo" required>
+          </div>
+          <div class="demo-field">
+            <input class="demo-input" type="email" id="dp-email" name="email" placeholder="E-mail" required>
+          </div>
+        </div>
+        <div class="demo-form-row">
+          <div class="demo-field">
+            <input class="demo-input" type="tel" id="dp-whatsapp" name="whatsapp" placeholder="Seu WhatsApp" required>
+          </div>
+          <div class="demo-field">
+            <input class="demo-input" type="text" id="dp-site" name="site" placeholder="Site ou Instagram da empresa">
+          </div>
+        </div>
+        <div class="demo-field">
+          <select class="demo-input demo-select" id="dp-segmento" name="segmento" required>
+            <option value="" disabled selected>Qual o segmento da empresa?</option>
+            <option value="varejo">Varejo</option>
+            <option value="servicos">Serviços</option>
+            <option value="tecnologia">Tecnologia</option>
+            <option value="saude">Saúde</option>
+            <option value="educacao">Educação</option>
+            <option value="imobiliario">Imobiliário</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="industria">Indústria</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="demo-field">
+          <select class="demo-input demo-select" id="dp-time" name="time_size" required>
+            <option value="" disabled selected>Tamanho do time comercial</option>
+            <option value="1-5">1 a 5 pessoas</option>
+            <option value="6-15">6 a 15 pessoas</option>
+            <option value="16-30">16 a 30 pessoas</option>
+            <option value="30+">Mais de 30 pessoas</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg demo-submit">Agendar demonstração</button>
+      </form>
+      <div class="demo-success" id="demoSuccessPlanos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <strong>Solicitação enviada!</strong>
+        <span>Nosso time entrará em contato em breve.</span>
       </div>
     </div>
   </div>
@@ -399,5 +447,35 @@
 <script src="mockups.js"></script>
 <script src="main.js"></script>
 <script src="live-reload.js"></script>
+<script>
+  // Select yellow fill
+  document.querySelectorAll("#demoFormPlanos select.demo-select").forEach(function(sel) {
+    sel.addEventListener("change", function() {
+      this.classList.toggle("has-value", !!this.value);
+    });
+  });
+  // WhatsApp mask
+  const dpWpp = document.getElementById("dp-whatsapp");
+  if (dpWpp) {
+    dpWpp.addEventListener("input", function(e) {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length === 0) { e.target.value = ""; return; }
+      if (v.length <= 2) { e.target.value = "(" + v; }
+      else if (v.length <= 7) { e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2); }
+      else if (v.length <= 10) { e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,6) + "-" + v.slice(6); }
+      else { e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7); }
+    });
+  }
+  // Form submit
+  const demoFormPlanos = document.getElementById("demoFormPlanos");
+  const demoSuccessPlanos = document.getElementById("demoSuccessPlanos");
+  if (demoFormPlanos) {
+    demoFormPlanos.addEventListener("submit", function(e) {
+      e.preventDefault();
+      demoFormPlanos.style.display = "none";
+      demoSuccessPlanos.style.display = "flex";
+    });
+  }
+</script>
 </body>
 </html>
