@@ -86,19 +86,13 @@ function flowConnector() {
 
 // ---- WhatsApp inbox (feature) ----
 MK.whatsapp = `
-<div style="padding:0;min-height:340px;display:flex;flex-direction:column;">
-  <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;background:var(--surface-2);">
+<div style="padding:0;min-height:340px;display:flex;flex-direction:column;height:100%;">
+  <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;background:var(--surface-2);flex-shrink:0;">
     <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00E599,#00B87A);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:600;font-size:12px;">FC</div>
-    <div style="flex:1;"><div style="font-size:13px;font-weight:600;letter-spacing:-0.01em;">Felipe Costa</div><div style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00E599;"></span>online · FC Logística</div></div>
+    <div style="flex:1;"><div style="font-size:13px;font-weight:600;letter-spacing:-0.01em;">Felipe Costa</div><div style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00E599;display:inline-block;"></span>online · FC Logística</div></div>
     <span style="font-family:var(--mono);font-size:9px;background:rgba(0,229,153,0.14);color:var(--primary);padding:4px 9px;border-radius:100px;letter-spacing:0.06em;">IA ATIVA</span>
   </div>
-  <div style="flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;">
-    ${bubble("agent","Oi Felipe! Vi que você baixou nosso material. Posso ajudar com alguma dúvida?","Sofia · IA")}
-    ${bubble("lead","Sim! Quero entender a parte de WhatsApp.")}
-    ${bubble("agent","A gente centraliza tudo num inbox e o agente IA responde no primeiro contato. Qual o tamanho do seu time?","Sofia · IA")}
-    ${bubble("lead","Somos 24, 6 no comercial.")}
-    <div style="align-self:center;font-family:var(--mono);font-size:9px;background:rgba(0,229,153,0.12);color:var(--primary);padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:0.08em;">✦ Score atualizado: 94 · hot lead</div>
-  </div>
+  <div id="wppMsgs" style="flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;overflow:hidden;"></div>
 </div>`;
 
 function bubble(who, text, name) {
@@ -216,12 +210,87 @@ function dashBar(label, pct) {
   return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:10px;color:var(--text-muted);width:64px;flex-shrink:0;">${label}</span><div style="flex:1;height:7px;background:var(--surface-3);border-radius:100px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,#00E599,#00B87A);box-shadow:0 0 8px var(--glow-soft);"></div></div><span style="font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--primary);width:26px;text-align:right;">${pct}%</span></div>`;
 }
 
+// ---- WhatsApp chat animation ----
+function animateWpp() {
+  const container = document.getElementById("wppMsgs");
+  if (!container) return;
+
+  const TYPING_MS = 1300;
+  const steps = [
+    { type: "agent", text: "Oi Felipe! Vi que você baixou nosso material. Posso ajudar com alguma dúvida?", label: "Sofia · IA", pause: 900 },
+    { type: "lead",  text: "Sim! Quero entender a parte de WhatsApp.", pause: 700 },
+    { type: "agent", text: "Centralizamos tudo num inbox com agente IA no primeiro contato. Qual o tamanho do seu time?", label: "Sofia · IA", pause: 900 },
+    { type: "lead",  text: "Somos 24, 6 no comercial.", pause: 700 },
+    { type: "badge", text: "✦ Score atualizado: 94 · hot lead", pause: 2800 },
+  ];
+
+  let idx = 0;
+  let typingEl = null;
+  let timer = null;
+
+  function fadeIn(el) {
+    el.style.opacity = "0";
+    el.style.transition = "opacity 0.3s";
+    container.appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.opacity = "1"; }));
+  }
+
+  function showTyping() {
+    typingEl = document.createElement("div");
+    typingEl.style.cssText = "align-self:flex-start;";
+    typingEl.innerHTML = `<div style="background:var(--surface-2);border:1px solid var(--border);padding:9px 13px;border-radius:13px;border-top-left-radius:4px;display:flex;gap:4px;align-items:center;">
+      <span class="wpp-dot"></span><span class="wpp-dot" style="animation-delay:.2s"></span><span class="wpp-dot" style="animation-delay:.4s"></span>
+    </div>`;
+    fadeIn(typingEl);
+  }
+
+  function addBubble(step) {
+    if (typingEl) { typingEl.remove(); typingEl = null; }
+    const el = document.createElement("div");
+    if (step.type === "badge") {
+      el.style.cssText = "align-self:center;font-family:var(--mono);font-size:9px;background:rgba(0,229,153,0.12);color:var(--primary);padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:0.08em;";
+      el.textContent = step.text;
+    } else {
+      const isAgent = step.type === "agent";
+      el.style.cssText = `align-self:${isAgent ? "flex-start" : "flex-end"};max-width:75%;`;
+      el.innerHTML = `${step.label ? `<div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:var(--primary);text-transform:uppercase;margin-bottom:3px;margin-left:4px;">${step.label}</div>` : ""}
+        <div style="background:${isAgent ? "var(--surface-2)" : "var(--primary)"};color:${isAgent ? "var(--text)" : "var(--on-primary)"};border:${isAgent ? "1px solid var(--border)" : "none"};padding:9px 13px;border-radius:13px;border-top-${isAgent ? "left" : "right"}-radius:4px;font-size:12.5px;line-height:1.45;">${step.text}</div>`;
+    }
+    fadeIn(el);
+  }
+
+  function next() {
+    if (idx >= steps.length) {
+      timer = setTimeout(() => {
+        container.innerHTML = "";
+        idx = 0;
+        timer = setTimeout(next, 600);
+      }, 1800);
+      return;
+    }
+    const step = steps[idx++];
+    if (step.type === "agent") {
+      showTyping();
+      timer = setTimeout(() => {
+        addBubble(step);
+        timer = setTimeout(next, step.pause);
+      }, TYPING_MS);
+    } else {
+      addBubble(step);
+      timer = setTimeout(next, step.pause);
+    }
+  }
+
+  timer = setTimeout(next, 600);
+}
+
 // ---- Inject ----
 function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
   set("featAutomation", MK.automation);
-  set("featWhatsapp", `<img src="Rezult WPP.png" alt="Rezult CRM WhatsApp" style="width:100%;height:100%;object-fit:contain;display:block;">`);
+  set("featWhatsapp", MK.whatsapp);
+  animateWpp();
   set("featAgent", MK.agent);
   set("featIntegrations", MK.integrations);
   set("featPipelines", MK.pipelines);
