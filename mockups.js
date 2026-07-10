@@ -221,7 +221,7 @@ function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
   set("featAutomation", MK.automation);
-  set("featWhatsapp", MK.whatsapp);
+  set("featWhatsapp", `<img src="Rezult WPP.png" alt="Rezult CRM WhatsApp" style="width:100%;height:100%;object-fit:contain;display:block;">`);
   set("featAgent", MK.agent);
   set("featIntegrations", MK.integrations);
   set("featPipelines", MK.pipelines);
