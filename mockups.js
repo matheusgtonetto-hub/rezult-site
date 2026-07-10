@@ -548,7 +548,12 @@ function animateWpp() {
     el.style.opacity = "0";
     el.style.transition = "opacity 0.3s";
     container.appendChild(el);
-    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.opacity = "1"; }));
+    requestAnimationFrame(() => {
+      while (container.scrollHeight > container.clientHeight && container.children.length > 1) {
+        container.removeChild(container.firstElementChild);
+      }
+      requestAnimationFrame(() => { el.style.opacity = "1"; });
+    });
   }
 
   function showTyping() {

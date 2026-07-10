@@ -808,7 +808,7 @@ select.demo-select:invalid { color: #374151; }
   .feature-row { grid-template-columns: 1fr; gap: 35px; margin-bottom: 40px; padding: 35px 24px; }
   .feature-row.flip .feature-text { order: 0; }
   .feature-visual { order: -1; width: 100%; min-width: 0; overflow: hidden; }
-  .feature-visual > div { width: 100%; box-sizing: border-box; }
+  .feature-visual > div { max-width: 100%; }
   .metrics { grid-template-columns: repeat(2, 1fr); }
   .metric:nth-child(2) { border-right: none; }
   .metric:nth-child(1), .metric:nth-child(2) { border-bottom: 1px solid var(--border); }
