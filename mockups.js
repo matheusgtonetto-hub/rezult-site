@@ -347,7 +347,7 @@ MK.pipelines = `
     <div style="font-size:14px;font-weight:600;letter-spacing:-0.02em;">Funil · Comercial B2B</div>
     <div style="font-family:var(--mono);font-size:10px;color:var(--text-subtle);">5 etapas</div>
   </div>
-  <div id="pipeCols" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
+  <div id="pipeCols" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;"></div>
   <div id="pipeBanner" style="display:flex;align-items:center;gap:8px;margin-top:14px;padding:11px 14px;background:var(--surface-2);border:1px dashed var(--border-active);border-radius:10px;transition:border-color .4s,background .4s;">
     <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,229,153,0.14);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v4m0 8v4M4 12h4m8 0h4" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg></div>
     <span id="pipeMsg" style="font-size:11.5px;color:var(--text-muted);">Automação ativa · move pra "Proposta" ao receber resposta</span>
@@ -385,7 +385,7 @@ function animatePipeline() {
   function render(hlLead = null, hlToCol = -1) {
     colsEl.innerHTML = COLS.map((col, ci) => {
       const isHL = ci === hlToCol;
-      return `<div style="background:var(--surface-2);border:1px solid ${isHL ? col.color + "80" : "var(--border)"};border-radius:10px;padding:8px;min-height:160px;transition:border-color .4s,box-shadow .4s;${isHL ? "box-shadow:0 0 16px " + col.color + "25;" : ""}">
+      return `<div style="background:var(--surface-2);border:1px solid ${isHL ? col.color + "80" : "var(--border)"};border-radius:10px;padding:8px;min-height:160px;min-width:0;overflow:hidden;transition:border-color .4s,box-shadow .4s;${isHL ? "box-shadow:0 0 16px " + col.color + "25;" : ""}">
         <div style="display:flex;align-items:center;gap:6px;padding:2px 4px 8px;">
           <span style="width:6px;height:6px;border-radius:50%;background:${col.color};"></span>
           <span style="font-size:10px;font-weight:600;">${col.name}</span>
@@ -393,8 +393,8 @@ function animatePipeline() {
         </div>
         ${state[ci].map(l => {
           const isHLLead = l === hlLead && ci !== hlToCol;
-          return `<div style="background:${isHLLead ? col.color + "18" : "var(--surface)"};border:1px solid ${isHLLead ? col.color : "var(--border)"};border-radius:7px;padding:7px 8px;margin-bottom:5px;font-size:9.5px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .35s;">
-            <span style="width:16px;height:16px;border-radius:4px;background:${col.color};display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;font-weight:700;">${l.split(" ").map(w=>w[0]).join("")}</span>${l}
+          return `<div style="background:${isHLLead ? col.color + "18" : "var(--surface)"};border:1px solid ${isHLLead ? col.color : "var(--border)"};border-radius:7px;padding:7px 8px;margin-bottom:5px;font-size:9.5px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .35s;min-width:0;overflow:hidden;">
+            <span style="width:16px;height:16px;min-width:16px;border-radius:4px;background:${col.color};display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;font-weight:700;">${l.split(" ").map(w=>w[0]).join("")}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${l}</span>
           </div>`;
         }).join("")}
       </div>`;
@@ -449,10 +449,10 @@ function animatePipeline() {
 // ---- Dashboards completos (feature) ----
 MK.dashboards = `
 <div id="dashMock" style="padding:20px 22px;height:340px;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">LTV</div><div style="display:flex;align-items:baseline;gap:5px;margin-top:4px;"><span id="dashV0" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);">+12%</span></div></div>
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">CAC</div><div style="display:flex;align-items:baseline;gap:5px;margin-top:4px;"><span id="dashV1" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);">-8%</span></div></div>
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">Conversão</div><div style="display:flex;align-items:baseline;gap:5px;margin-top:4px;"><span id="dashV2" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;">0%</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);">+4pp</span></div></div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px;">
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">LTV</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV0" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">+12%</span></div></div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">CAC</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV1" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">-8%</span></div></div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">Conversão</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV2" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">0%</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">+4pp</span></div></div>
   </div>
   <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
     <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:10px;">Receita por mês</div>
