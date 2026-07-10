@@ -161,7 +161,7 @@ function bubble(who, text, name) {
 
 // ---- Agent config (feature) ----
 MK.agent = `
-<div id="agentMock" style="padding:24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(0,229,153,0.07), transparent 55%);">
+<div id="agentMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(0,229,153,0.07), transparent 55%);">
   <div style="display:flex;align-items:center;gap:13px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border-active);border-radius:14px;margin-bottom:14px;">
     <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00E599,#00B87A);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:700;font-size:16px;box-shadow:0 0 20px var(--glow-soft);">S</div>
     <div style="flex:1;"><div style="font-size:14px;font-weight:600;letter-spacing:-0.02em;">Sofia</div><div style="font-size:11px;color:var(--text-muted);">Qualificadora · Tráfego pago</div></div>
