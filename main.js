@@ -38,6 +38,9 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     { nm: "Meet", bg: "rgba(0,172,71,0.15)", c: "#00AC47", svg: '<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3" stroke-linejoin="round"/>' },
     { nm: "Google Calendário", img: "logos/google-calendar.svg", c: "#4285F4" },
     { nm: "Webhook", bg: "rgba(168,85,247,0.15)", c: "#A855F7", svg: '<circle cx="12" cy="7" r="3"/><path d="M9 9l-3 6m6-6 3 6M7 17h10" stroke-linecap="round" stroke-linejoin="round"/>' },
+    { nm: "Hotmart", img: "logos/hotmart-logo.svg", c: "#FF4000" },
+    { nm: "Hubla", img: "logos/hubla-site.svg", c: "#0D0D0D" },
+    { nm: "Kiwify", img: "logos/kiwify-logo.webp", c: "#00C47A" },
   ];
   const itemHTML = (t) => {
     const icoStyle = t.img ? "" : ` style="background:${t.bg}"`;
