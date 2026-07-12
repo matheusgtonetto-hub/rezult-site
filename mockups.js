@@ -142,7 +142,7 @@ function animateAutomation() {
 
 // ---- WhatsApp inbox (feature) ----
 MK.whatsapp = `
-<div style="padding:0;height:340px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:14px;">
+<div style="padding:0;height:340px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:20px;">
   <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;background:var(--surface-2);flex-shrink:0;">
     <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00E599,#00B87A);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:600;font-size:12px;">FC</div>
     <div style="flex:1;"><div style="font-size:13px;font-weight:600;letter-spacing:-0.01em;">Felipe Costa</div><div style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00E599;display:inline-block;"></span>online · FC Logística</div></div>
