@@ -49,11 +49,19 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
       : `<svg viewBox="0 0 24 24" fill="none" stroke="${t.c}" stroke-width="1.8">${t.svg}</svg>`;
     return `<div class="mq-item" style="--accent:${t.c}"><span class="ico"${icoStyle}>${icoContent}</span><span class="nm">${t.nm}</span></div>`;
   };
-  const seq = tools.concat(tools);
-  const track = document.createElement("div");
-  track.className = "marquee-track";
-  track.innerHTML = seq.map(itemHTML).join("");
-  mq.appendChild(track);
+  const half = Math.ceil(tools.length / 2);
+  const seq1 = tools.slice(0, half).concat(tools.slice(0, half));
+  const seq2 = tools.slice(half).concat(tools.slice(half));
+
+  const track1 = document.createElement("div");
+  track1.className = "marquee-track";
+  track1.innerHTML = seq1.map(itemHTML).join("");
+  mq.appendChild(track1);
+
+  const track2 = document.createElement("div");
+  track2.className = "marquee-track marquee-reverse";
+  track2.innerHTML = seq2.map(itemHTML).join("");
+  mq.appendChild(track2);
 })();
 
 // ---- Benefits carousel ----
