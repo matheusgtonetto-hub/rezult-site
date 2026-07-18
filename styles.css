@@ -563,6 +563,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
+#demo .wrap, #demo-planos .wrap { max-width: 1100px; }
 .demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
