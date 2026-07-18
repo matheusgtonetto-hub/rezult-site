@@ -818,6 +818,7 @@ select.demo-select:invalid { color: #374151; }
 @media (max-width: 980px) {
   #ben-grid { grid-template-columns: 1fr !important; }
   .demo-split { grid-template-columns: 1fr; gap: 40px; }
+  #demo, #demo-planos { padding: 70px 0; }
   .hero h1, .page-hero h1 { font-size: 50px; }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
