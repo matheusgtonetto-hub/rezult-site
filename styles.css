@@ -859,7 +859,7 @@ select.demo-select:invalid { color: #374151; }
   .hero-sub { max-width: 95%; font-size: 16px; }
   .h2, .cta-final h2 { font-size: 37px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
-  #demo-heading, #demo-planos-heading { font-size: 31px; }
+  #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
   .feature-text p { font-size: 16px; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
