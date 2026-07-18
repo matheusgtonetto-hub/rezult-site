@@ -820,7 +820,7 @@ select.demo-select:invalid { color: #374151; }
   .demo-split { grid-template-columns: 1fr; gap: 40px; }
   #demo, #demo-planos { padding: 70px 0 !important; }
   .demo-split-left { text-align: center; }
-  .demo-trust { align-items: center; }
+  .demo-trust { display: none; }
   .hero h1, .page-hero h1 { font-size: 50px; }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
