@@ -170,10 +170,10 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   background: rgba(10, 13, 11, 1);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid transparent;
+
   transition: border-color .3s, background .3s;
 }
-.nav.scrolled { border-bottom-color: var(--border); }
+.nav.scrolled { border-bottom: none; }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .nav-left { display: flex; align-items: center; gap: 44px; }
 .nav-links { display: flex; gap: 30px; }
