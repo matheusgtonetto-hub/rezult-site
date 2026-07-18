@@ -845,7 +845,8 @@ select.demo-select:invalid { color: #374151; }
 @media (max-width: 768px) {
   .impl-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
   #entregaveis .impl-entregaveis-left .hero-actions { display: none; }
-  #implementacao img { width: 90% !important; margin: 0 auto; }
+  #implementacao img { width: 90% !important; max-width: 100% !important; margin: 0 auto; display: block; }
+  #implementacao .impl-grid > div:first-child { overflow: hidden; width: 100%; }
 }
 @media (max-width: 560px) {
   .wrap { padding: 0 22px; }
