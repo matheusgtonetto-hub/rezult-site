@@ -819,6 +819,8 @@ select.demo-select:invalid { color: #374151; }
   #ben-grid { grid-template-columns: 1fr !important; }
   .demo-split { grid-template-columns: 1fr; gap: 40px; }
   #demo, #demo-planos { padding: 70px 0 !important; }
+  .demo-split-left { text-align: center; }
+  .demo-trust { align-items: center; }
   .hero h1, .page-hero h1 { font-size: 50px; }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -850,7 +852,7 @@ select.demo-select:invalid { color: #374151; }
   #beneficios .wrap { padding: 0 10px; }
   .section { padding-top: 70px !important; padding-bottom: 70px !important; }
   .section-sm { padding-top: 70px !important; padding-bottom: 70px !important; }
-  #demo { padding-top: 100px !important; padding-bottom: 100px !important; }
+  #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
   .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.05; }
