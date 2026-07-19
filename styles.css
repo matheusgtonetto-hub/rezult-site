@@ -337,7 +337,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .hero.va .hero-mockup-wrap { margin-top: 30px; }
 .hero-mockup-wrap, .hero-glow, .hero-badge { will-change: transform; }
 
-.hero.vb .hero-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+.hero.vb .hero-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: flex-start; }
 .hero.vb .hero-mockup-wrap { margin-top: 0; max-width: 100%; }
 .hero.vb .hero-text { display: flex; flex-direction: column; align-items: flex-start; }
 .hero.vb .hero-sub { max-width: 100%; }
