@@ -233,6 +233,12 @@ function animateAgent() {
 
 // ---- Integrações & API (feature) ----
 MK.integrations = `
+<div style="height:340px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+  <img src="dados-api.png" alt="APIs e Webhooks Rezult" style="width:100%;height:100%;object-fit:cover;display:block;" />
+</div>`;
+
+/* placeholder para manter referência sem animação */
+MK.integrations_disabled = `
 <div id="intgMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 15%, rgba(0,229,153,0.07), transparent 55%);">
   <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px;">
     <div id="intgRow0" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;transition:border-color .3s,box-shadow .3s;">
@@ -617,7 +623,6 @@ function injectMockups() {
   set("featAgent", MK.agent);
   animateAgent();
   set("featIntegrations", MK.integrations);
-  animateIntegrations();
   set("featPipelines", MK.pipelines);
   animatePipeline();
   set("featDashboards", MK.dashboards);
