@@ -4,9 +4,18 @@
 
 // ---- Nav scroll state ----
 const nav = document.getElementById("nav");
+let lastScrollY = window.scrollY;
 function onScroll() {
-  if (window.scrollY > 12) nav.classList.add("scrolled");
+  const currentScrollY = window.scrollY;
+  if (currentScrollY > 12) nav.classList.add("scrolled");
   else nav.classList.remove("scrolled");
+
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    nav.classList.add("nav-hidden");
+  } else {
+    nav.classList.remove("nav-hidden");
+  }
+  lastScrollY = currentScrollY;
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
