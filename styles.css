@@ -543,10 +543,10 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
 .tcard .who { display: flex; align-items: center; gap: 12px; }
 .tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; }
-.tcard .who .nm { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
-.tcard .who .rl { font-size: 12px; color: #666; }
+.tcard .who .nm { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
+.tcard .who .rl { font-size: 14px; color: #666; }
 .tcard .stars { display: flex; gap: 2px; color: #F59E0B; }
-.tcard .stars svg { width: 17px; height: 17px; }
+.tcard .stars svg { width: 19px; height: 19px; }
 
 /* ---------- Pricing ---------- */
 .price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 229, 153, 0.20); margin: 0 auto 56px; }
