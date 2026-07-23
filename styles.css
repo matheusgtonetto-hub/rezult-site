@@ -537,12 +537,12 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 /* ---------- Testimonials ---------- */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 28px; border-radius: var(--r-lg); background: #fff; border: none; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.tcard { padding: 35px 28px; border-radius: var(--r-lg); background: #fff; border: none; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
 .tcard .quote { font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
 .tcard .who { display: flex; align-items: center; gap: 12px; }
-.tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; }
+.tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; object-fit: cover; }
 .tcard .who .nm { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
 .tcard .who .rl { font-size: 14px; color: #666; }
 .tcard .stars { display: flex; gap: 2px; color: #F59E0B; }
