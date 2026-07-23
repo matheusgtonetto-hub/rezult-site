@@ -573,7 +573,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .pcard .pprice-savings s { color: var(--text-subtle); text-decoration-color: var(--text-subtle); }
 .pcard .pprice-recurring { font-size: 13.5px; color: var(--text-subtle); min-height: 16px; }
 .pcard .pfeats { display: flex; flex-direction: column; gap: 13px; }
-.pcard .pfeats li { display: flex; align-items: flex-start; gap: 11px; font-size: 14px; color: var(--text-muted); list-style: none; line-height: 1.45; }
+.pcard .pfeats li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; color: var(--text-muted); list-style: none; line-height: 1.45; }
 .pcard .pfeats li svg { width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
 .pcard .pfeats li b { color: var(--text); font-weight: 600; }
 
