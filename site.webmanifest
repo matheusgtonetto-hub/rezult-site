@@ -1,0 +1,18 @@
+{
+  "name": "Rezult CRM",
+  "short_name": "Rezult",
+  "description": "CRM de vendas com atendimento centralizado, automações e IA integrada.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08120e",
+  "theme_color": "#08120e",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/Favicon.png",
+      "sizes": "704x704",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
