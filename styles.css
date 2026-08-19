@@ -51,11 +51,18 @@
      dele só o respiro que quer: hero, page-hero, scroll-padding das âncoras e o
      índice fixo das páginas legais.
 
-     A parcela env() é o recorte da barra de status em celular com notch. Ela
-     entra aqui, e não só na .nav, porque nesses aparelhos a barra realmente
-     ocupa mais espaço na tela: sem isso, o hero começaria por baixo dela e as
-     âncoras parariam com o alvo escondido. Em desktop o env() vale 0 e nada
-     muda. */
+     A parcela env() cobre o caso do site aberto como app na tela de início
+     (existe site.webmanifest), onde a página recebe a tela inteira e precisa
+     descontar o recorte. Aí ela vale ~47px e tudo que deriva daqui desce junto:
+     hero, page-hero, âncoras e o índice das legais.
+
+     No Safari em navegação normal ela vale ZERO, medido no aparelho pelo
+     Inspetor Web (iPhone, tela de 926px, página recebendo 781px). Ali o Safari
+     reserva a barra de status para si e entrega à página só o que sobra, então
+     a faixa acima da navbar não pertence à página e nenhum CSS a alcança. Se
+     alguém for mexer nisso de novo por causa daquela tira: já foi tentado com
+     padding env(), fundo opaco e pseudo-elemento. Nenhum funciona, e não é
+     defeito do site. */
   --nav-h: calc(60px + env(safe-area-inset-top, 0px));
 }
 
@@ -183,10 +190,9 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  /* O fundo sobe até o topo físico da tela e o padding empurra logo e botões
-     para baixo do recorte. Com box-sizing border-box, a faixa útil continua
-     sendo 60px; o que cresce é só a parte pintada por trás da barra de status,
-     que antes deixava o conteúdo da página passar por cima. */
+  /* Com box-sizing border-box, a faixa útil é sempre 60px: o padding só empurra
+     logo e botões para baixo do recorte quando ele existe. No Safari em
+     navegação normal o env() vale 0 e isto vira height: 60px, padding: 0. */
   height: var(--nav-h);
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
@@ -198,27 +204,6 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   border-radius: 0;
   box-shadow: none;
   transition: background .3s, box-shadow .3s, transform .3s ease;
-}
-/* Prolonga a cor da barra para cima, cobrindo qualquer faixa que sobre entre o
-   topo físico da tela e o topo da navbar.
-
-   Existe porque o viewport-fit=cover + env(safe-area-inset-top) sozinhos não
-   resolveram no iPhone: a barra continuava começando abaixo do recorte, com o
-   conteúdo da página aparecendo naquela tira. Em vez de depender de descobrir
-   por que o env() não surtiu efeito naquele aparelho, este bloco pinta o vão da
-   mesma cor, seja qual for a origem dele.
-
-   Acompanha a barra porque é filho dela (position: fixed no pai). O background
-   é `inherit`, então segue a cor da .nav sem precisar repetir o hexadecimal em
-   dois lugares. Fora do celular o vão é zero e ele fica todo fora da tela. */
-.nav::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  bottom: 100%;
-  height: 100vh;
-  background: inherit;
-  pointer-events: none;
 }
 .nav.scrolled { box-shadow: none; }
 /* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
