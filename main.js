@@ -3,19 +3,13 @@
    ============================================================ */
 
 // ---- Nav scroll state ----
+// A barra é fixa e fica sempre visível. Havia aqui um esconde-ao-descer que
+// tirava a navbar da tela no scroll para baixo; saiu junto o lastScrollY, que
+// só existia para descobrir a direção do movimento.
 const nav = document.getElementById("nav");
-let lastScrollY = window.scrollY;
 function onScroll() {
-  const currentScrollY = window.scrollY;
-  if (currentScrollY > 12) nav.classList.add("scrolled");
+  if (window.scrollY > 12) nav.classList.add("scrolled");
   else nav.classList.remove("scrolled");
-
-  if (currentScrollY > lastScrollY && currentScrollY > 80) {
-    nav.classList.add("nav-hidden");
-  } else {
-    nav.classList.remove("nav-hidden");
-  }
-  lastScrollY = currentScrollY;
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();

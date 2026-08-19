@@ -45,11 +45,16 @@
 
   /* Layout */
   --maxw: 1300px;
-  --nav-h: 84px;
+  /* Altura real da navbar, e é isso que o nome promete. Vinha desencontrada da
+     barra (84px na versão flutuante, 68px depois), o que embutia um erro fixo em
+     todo calc() derivado. Com o valor verdadeiro, cada consumidor soma abaixo
+     dele só o respiro que quer: hero, page-hero, scroll-padding das âncoras e o
+     índice fixo das páginas legais. */
+  --nav-h: 60px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 20px); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 28px); }
 body {
   font-family: var(--sans);
   background: var(--bg);
@@ -170,20 +175,21 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 
 /* ---------- Nav ---------- */
 .nav {
-  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-  width: calc(100% - 48px); max-width: 900px;
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: 100; height: 60px;
   display: flex; align-items: center;
   background: rgba(10, 13, 11, 0.8);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-radius: 15px;
+  border-radius: 0;
   box-shadow: none;
   transition: background .3s, box-shadow .3s, transform .3s ease;
 }
 .nav.scrolled { box-shadow: none; }
-.nav.nav-hidden { transform: translateX(-50%) translateY(-120%); }
-.nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 100%; padding: 0 28px; }
+/* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
+   conteúdo segue o .wrap global (max-width 1300px, centralizado), senão logo e
+   botões grudariam nas bordas da tela em monitor largo. */
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-links { flex: 1; display: flex; gap: 30px; justify-content: center; }
 .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
@@ -196,20 +202,19 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid var(--border); }
 
 /* ---------- Logo ---------- */
-.logo { display: inline-flex; align-items: center; gap: 11px; }
-.logo-mark {
-  width: 34px; height: 34px; border-radius: 11px;
-  background: var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 20px var(--glow-soft);
-  flex-shrink: 0;
-}
-.logo-mark span { font-weight: 700; font-size: 14px; letter-spacing: -0.05em; color: #fff; }
-.logo-word { font-weight: 600; font-size: 21px; letter-spacing: -0.04em; }
-.logo-word b { font-weight: 600; color: var(--primary); }
+.logo { display: inline-flex; align-items: center; }
+/* Logo é só a marca, em imagem, na navbar e no rodapé. A altura de 34px repete
+   a do antigo quadradinho "RZ", para a barra não mudar de peso; o arquivo tem
+   100px, ~3x a exibida, então segue nítida em tela retina.
+   Saíram daqui .logo-mark, .logo-word e .footer .logo-word, que montavam a
+   versão em texto e ficaram sem nenhum elemento para estilizar. */
+.logo img { height: 34px; width: auto; display: block; }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 50px); padding-bottom: 100px; overflow: hidden; }
+/* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
+   Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
+   respiro pelo CSS não surtia efeito nenhum. */
+.hero { position: relative; padding-top: calc(var(--nav-h) + 35px); padding-bottom: 90px; overflow: hidden; }
 .section-dotgrid { position: relative; }
 .section-bg-fx { position: absolute; inset: 0; pointer-events: none; z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); }
 .section-bg-fx .hero-glow { top: -30%; }
@@ -320,7 +325,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   display: inline-flex; align-items: center; gap: 10px;
   padding: 7px 14px 7px 8px; border-radius: 100px;
   background: var(--surface-2); border: 1px solid #00e59940;
-  font-size: 14px; color: rgba(244, 246, 244, 0.75); margin-bottom: 27px;
+  font-size: 14px; color: rgba(244, 246, 244, 0.75); margin-bottom: 25px;
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 .hero h1 { font-size: clamp(28px, 4vw, 50px); letter-spacing: -0.02em; line-height: 1.05; font-weight: 500; }
@@ -629,7 +634,6 @@ select.demo-select:invalid { color: #374151; }
 
 /* ---------- Footer ---------- */
 .footer { background: #0a0d0b; padding: 72px 0 40px; }
-.footer .logo-word { color: #fff; }
 .footer .footer-brand p { color: rgba(255,255,255,0.55); }
 .footer .footer-col h5 { color: rgba(255,255,255,0.4); }
 .footer .footer-col a { color: rgba(255,255,255,0.65); }
@@ -692,7 +696,9 @@ select.demo-select:invalid { color: #374151; }
 .hero-mockup-img { width: 100%; height: auto; display: block; transform-origin: center bottom; will-change: transform; }
 
 /* ---------- Page hero (internal pages) ---------- */
-.page-hero { padding-top: calc(var(--nav-h) + 50px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
+/* Mesmo respiro do hero da home: as três internas (planos, política, termos)
+   repetem a estrutura navbar → pill → h1, então o ritmo do topo é o mesmo. */
+.page-hero { padding-top: calc(var(--nav-h) + 35px); padding-bottom: 40px; text-align: center; position: relative; overflow: hidden; }
 .page-hero .hero-bg { inset: 0 0 auto 0; height: 1080px; }
 .page-hero .wrap { position: relative; z-index: 1; }
 .page-hero h1 { font-size: 50px; letter-spacing: -0.02em; line-height: 1; }
@@ -950,7 +956,7 @@ select.demo-select:invalid { color: #374151; }
    ============================================================ */
 .legal-layout { display: grid; grid-template-columns: 220px 1fr; gap: 64px; align-items: start; }
 
-.legal-toc { position: sticky; top: calc(var(--nav-h) + 24px); }
+.legal-toc { position: sticky; top: calc(var(--nav-h) + 32px); }
 .legal-toc h4 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; font-family: var(--mono); }
 .legal-toc nav { display: flex; flex-direction: column; gap: 2px; }
 .legal-toc nav a { font-size: 13.5px; color: var(--text-muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--border); transition: color .15s, border-color .15s; text-decoration: none; line-height: 1.4; }
