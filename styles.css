@@ -49,8 +49,14 @@
      barra (84px na versão flutuante, 68px depois), o que embutia um erro fixo em
      todo calc() derivado. Com o valor verdadeiro, cada consumidor soma abaixo
      dele só o respiro que quer: hero, page-hero, scroll-padding das âncoras e o
-     índice fixo das páginas legais. */
-  --nav-h: 60px;
+     índice fixo das páginas legais.
+
+     A parcela env() é o recorte da barra de status em celular com notch. Ela
+     entra aqui, e não só na .nav, porque nesses aparelhos a barra realmente
+     ocupa mais espaço na tela: sem isso, o hero começaria por baixo dela e as
+     âncoras parariam com o alvo escondido. Em desktop o env() vale 0 e nada
+     muda. */
+  --nav-h: calc(60px + env(safe-area-inset-top, 0px));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -176,7 +182,13 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 /* ---------- Nav ---------- */
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100; height: 60px;
+  z-index: 100;
+  /* O fundo sobe até o topo físico da tela e o padding empurra logo e botões
+     para baixo do recorte. Com box-sizing border-box, a faixa útil continua
+     sendo 60px; o que cresce é só a parte pintada por trás da barra de status,
+     que antes deixava o conteúdo da página passar por cima. */
+  height: var(--nav-h);
+  padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
   background: rgba(10, 13, 11, 0.8);
   backdrop-filter: blur(20px) saturate(160%);
@@ -845,7 +857,11 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Mobile menu ---------- */
-.mobile-menu { position: fixed; inset: 0; z-index: 98; background: var(--bg); padding: 100px 32px 32px; flex-direction: column; gap: 8px; display: none; }
+/* Ocupa a tela inteira (inset: 0), então com viewport-fit=cover ele passa a
+   cobrir também o recorte de cima e a barra de gestos embaixo. O topo sai de
+   --nav-h para ficar sempre 40px abaixo da navbar, e o rodapé ganha o inset de
+   baixo para o último botão não encostar na barra de gestos. */
+.mobile-menu { position: fixed; inset: 0; z-index: 98; background: var(--bg); padding: calc(var(--nav-h) + 40px) 32px calc(32px + env(safe-area-inset-bottom, 0px)); flex-direction: column; gap: 8px; display: none; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a { font-size: 20px; padding: 16px 0; border-bottom: 1px solid var(--border); color: var(--text); }
 .mobile-menu .btn { margin-top: 24px; }
