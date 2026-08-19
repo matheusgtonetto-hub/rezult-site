@@ -3,23 +3,13 @@
    ============================================================ */
 
 // ---- Nav scroll state ----
-// A barra recolhe ao descer e reaparece ao subir. lastScrollY guarda a posição
-// anterior porque a decisão depende da DIREÇÃO, não da altura: só some quando o
-// movimento é para baixo E já passou de 80px, para o recolhimento não disparar
-// num tranco curto no topo da página.
+// A barra é fixa e fica sempre visível. O scroll só liga a classe .scrolled;
+// não existe mais o recolhe-ao-descer, e com ele saiu o lastScrollY, que servia
+// apenas para descobrir a direção do movimento.
 const nav = document.getElementById("nav");
-let lastScrollY = window.scrollY;
 function onScroll() {
-  const currentScrollY = window.scrollY;
-  if (currentScrollY > 12) nav.classList.add("scrolled");
+  if (window.scrollY > 12) nav.classList.add("scrolled");
   else nav.classList.remove("scrolled");
-
-  if (currentScrollY > lastScrollY && currentScrollY > 80) {
-    nav.classList.add("nav-hidden");
-  } else {
-    nav.classList.remove("nav-hidden");
-  }
-  lastScrollY = currentScrollY;
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
