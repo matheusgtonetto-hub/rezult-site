@@ -186,6 +186,11 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   transition: background .3s, box-shadow .3s, transform .3s ease;
 }
 .nav.scrolled { box-shadow: none; }
+/* Recolhida ao descer a página (classe posta pelo main.js). Só translateY: na
+   versão pill havia um translateX(-50%) junto, que era metade da centralização
+   e não do movimento; com a barra de ponta a ponta, mantê-lo faria ela escapar
+   para a esquerda em vez de subir. O -120% cobre os 60px de altura com folga. */
+.nav.nav-hidden { transform: translateY(-120%); }
 /* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
    conteúdo segue o .wrap global (max-width 1300px, centralizado), senão logo e
    botões grudariam nas bordas da tela em monitor largo. */
