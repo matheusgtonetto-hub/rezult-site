@@ -199,6 +199,27 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   box-shadow: none;
   transition: background .3s, box-shadow .3s, transform .3s ease;
 }
+/* Prolonga a cor da barra para cima, cobrindo qualquer faixa que sobre entre o
+   topo físico da tela e o topo da navbar.
+
+   Existe porque o viewport-fit=cover + env(safe-area-inset-top) sozinhos não
+   resolveram no iPhone: a barra continuava começando abaixo do recorte, com o
+   conteúdo da página aparecendo naquela tira. Em vez de depender de descobrir
+   por que o env() não surtiu efeito naquele aparelho, este bloco pinta o vão da
+   mesma cor, seja qual for a origem dele.
+
+   Acompanha a barra porque é filho dela (position: fixed no pai). O background
+   é `inherit`, então segue a cor da .nav sem precisar repetir o hexadecimal em
+   dois lugares. Fora do celular o vão é zero e ele fica todo fora da tela. */
+.nav::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 100%;
+  height: 100vh;
+  background: inherit;
+  pointer-events: none;
+}
 .nav.scrolled { box-shadow: none; }
 /* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
    conteúdo segue o .wrap global (max-width 1300px, centralizado), senão logo e
