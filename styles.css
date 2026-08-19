@@ -190,9 +190,11 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   height: var(--nav-h);
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
-  background: rgba(10, 13, 11, 0.8);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  /* Opaca. O backdrop-filter saiu junto: ele desfoca o que passa por tras, e
+     com o fundo sem transparencia esse desfoque fica 100% coberto. Era custo de
+     GPU invisivel, sentido justamente em celular, onde a barra fica sempre na
+     tela. */
+  background: #050A07;
   border-radius: 0;
   box-shadow: none;
   transition: background .3s, box-shadow .3s, transform .3s ease;
