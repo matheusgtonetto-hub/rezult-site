@@ -573,6 +573,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero .hero-actions .btn-primary {
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
+  /* O .btn base aperta -0.01em, calibrado para a Geist. A Poppins é mais
+     larga e não pede esse aperto. */
+  letter-spacing: 0;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
