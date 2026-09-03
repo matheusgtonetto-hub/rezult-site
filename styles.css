@@ -1284,7 +1284,10 @@ select.demo-select:invalid { color: #374151; }
   #implementacao h3.h2 { font-size: 28px !important; font-weight: 600 !important; line-height: 1.1 !important; }
   #entregaveis h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; width: 90%; text-align: left !important; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
-  .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 90%; margin-left: auto; margin-right: auto; }
+  /* A largura daqui é o que define o tamanho do botão no celular: o .btn tem
+     flex: 1 e estica para preencher este container, então padding e fonte não
+     alteram a largura dele nesta faixa. */
+  .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 70%; margin-left: auto; margin-right: auto; }
   .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
   .hero-actions .btn-secondary { font-size: 15px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
