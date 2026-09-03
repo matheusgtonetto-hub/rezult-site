@@ -280,13 +280,6 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   border-radius: var(--r-md);
   border: 1px solid rgba(0, 0, 0, 0.10);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  /* Transparência só no estado flutuante: colada no topo a barra segue opaca.
-     O blur vem junto por necessidade, não por enfeite. Sem ele o conteúdo
-     passa nítido por trás e o texto da barra fica ilegível quando um card ou
-     um mockup escuro cruza atrás dela. */
-  background: rgba(255, 255, 255, 0.82);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
 }
 /* O .wrap já reserva 32px de respiro nas laterais para o conteúdo não grudar
    na borda da tela. Flutuando, quem dá esse respiro é a própria margem do
@@ -573,15 +566,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
 .hero .hero-actions .btn { font-size: 16px; border-radius: var(--r-sm) !important; }
 /* Fundo e cor de texto vêm da regra base (.btn-primary): verde --green-text
-   chapado com texto branco. O degradê de verde para branco que existiu aqui
-   foi testado e descartado, junto com o texto preto que ele exigia.
-   Sobram o peso 700 e a Poppins, única exceção tipográfica do site, por isso
-   a fonte é carregada só nesse peso. */
+   chapado com texto branco. Já foram testados e descartados aqui o degradê de
+   verde para branco (com o texto preto que ele exigia) e a Poppins, que era a
+   única exceção tipográfica do site. */
 .hero .hero-actions .btn-primary {
   font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  /* O .btn base aperta -0.01em, calibrado para a Geist. A Poppins é mais
-     larga e não pede esse aperto. */
+  /* Sem o aperto de -0.01em que o .btn base aplica. */
   letter-spacing: 0;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
