@@ -1212,8 +1212,12 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
   .feature-text { padding: 35px 24px; }
+  /* Empilhado: texto em cima, mockup embaixo. O order: -1 que existia no
+     .feature-visual puxava o mockup para o topo; sem ele os dois seguem a
+     ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
+     necessário para desfazer o order: 2 do desktop, que troca os lados. */
   .feature-row.flip .feature-text { order: 0; }
-  .feature-visual { order: -1; width: 100%; min-width: 0; overflow: hidden; }
+  .feature-visual { width: 100%; min-width: 0; overflow: hidden; }
   .feature-visual > div { max-width: 100%; }
   /* Ícone alinhado à primeira linha do título. Em tela estreita o h3 quebra em
      2 ou 3 linhas, e o align-items: center que vale no desktop deixava o ícone
@@ -1240,6 +1244,11 @@ select.demo-select:invalid { color: #374151; }
   #implementacao .impl-grid > div:first-child { width: 100%; overflow: hidden; }
 }
 @media (max-width: 560px) {
+  /* As listas de checks dos cards de recurso saem no celular: em tela estreita
+     cada item quebra em duas linhas e os três juntos alongam demais o card,
+     empurrando o mockup do próximo para longe. O parágrafo acima deles já
+     entrega a mensagem. */
+  .feature-list { display: none; }
   .wrap { padding: 0 22px; }
   #beneficios .wrap { padding: 0 15px; }
   .section { padding-top: 70px !important; padding-bottom: 70px !important; }
@@ -1257,7 +1266,10 @@ select.demo-select:invalid { color: #374151; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
-  .feature-text p { font-size: 16px; }
+  /* A margem de 24px separava o parágrafo da lista de checks, que fica oculta
+     nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
+     no rodapé. Zerada, o respiro passa a ser só o padding. */
+  .feature-text p { font-size: 16px; margin-bottom: 0; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
