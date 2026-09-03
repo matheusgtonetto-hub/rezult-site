@@ -564,7 +564,15 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    !important: sem ele, os 9999px da regra anterior venceriam mesmo com este
    seletor sendo mais específico. O botão do hero deixou de ser cápsula e
    passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
-.hero .hero-actions .btn { font-size: 15px; border-radius: var(--r-sm) !important; }
+.hero .hero-actions .btn { font-size: 16px; border-radius: var(--r-sm) !important; }
+/* Degradê horizontal do verde à esquerda para o branco à direita, com texto
+   preto: o branco da metade direita apagaria texto branco. O peso sobe para
+   700, um degrau acima do 600 dos demais botões. */
+.hero .hero-actions .btn-primary {
+  background: linear-gradient(90deg, var(--green-text), #fff);
+  color: #000;
+  font-weight: 700;
+}
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
    sem sombra). Já foram testados e descartados aqui o degradê animado com anel
