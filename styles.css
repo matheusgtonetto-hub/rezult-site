@@ -1,6 +1,6 @@
 /* ============================================================
    Rezult CRM — Site
-   Dark · Neon · Geist · Filled
+   Dark · Neon · Poppins · Filled
    ============================================================ */
 
 :root {
@@ -34,7 +34,11 @@
   --purple: #A855F7;
 
   /* Type */
-  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Poppins no site inteiro desde 2026-09-02, no lugar da Geist. A Geist Mono
+     ficou: ela não é a mesma família em outro peso, é a voz dos rótulos, dos
+     números e das etiquetas em caixa alta, e a Poppins não tem desenho
+     monoespaçado que ocupe esse lugar. */
+  --sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', ui-monospace, monospace;
 
   /* Radius */
@@ -164,6 +168,9 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .text-grad { color: var(--primary); }
 
 /* ---------- Buttons ---------- */
+/* Sem font-family aqui: a Poppins passou a ser a fonte do site inteiro, via
+   --sans, e repetir a família no botão só criaria um segundo lugar para
+   esquecer de atualizar. Os pesos ficam: 500 no botão comum, 600 no primário. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   font-weight: 500; font-size: 15px; letter-spacing: -0.01em;
@@ -203,19 +210,70 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      aparece. É inevitável com fundo opaco, e não tem correção por CSS (ver a
      medição no comentário de --nav-h).
 
-     As duas alternativas foram testadas e descartadas: barra transparente,
-     como fazem sites em Framer, elimina a emenda mas deixa o logo branco
-     ilegível sobre o mockup claro do notebook; e o degradê como meio termo
-     também não agradou. Ficou o fundo cheio, com a emenda como custo aceito.
+     As alternativas foram testadas e descartadas: barra transparente, como
+     fazem sites em Framer, elimina a emenda mas deixa o logo branco ilegível
+     sobre o mockup claro do notebook; o degradê como meio termo também não
+     agradou; e a barra branca com logo preto (2026-09-02) foi revertida no
+     mesmo dia, porque destoava do resto do site, que é escuro de ponta a
+     ponta. Ficou o fundo cheio, com a emenda como custo aceito.
 
      O backdrop-filter saiu junto do rgba: ele desfoca o que passa por tras, e
      com fundo opaco esse desfoque fica 100% coberto. Era custo de GPU
      invisivel, sentido justamente em celular. */
   background: #050A07;
   box-shadow: none;
-  transition: background .3s, box-shadow .3s, transform .3s ease;
+  transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
+              border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
 }
-.nav.scrolled { box-shadow: none; }
+/* Rolou 12px: a barra descola do topo e vira um cartão flutuante.
+
+   Ela continua fixed e do mesmo tamanho útil (60px); o que muda é que ganha
+   uma margem em volta, cantos e sombra. A largura sai de 100% para o mesmo
+   --maxw do .wrap, então no estado flutuante a barra e o conteúdo da página
+   passam a ter exatamente a mesma caixa — é isso que faz o cartão parecer
+   alinhado ao site em vez de solto.
+
+   margin-inline: auto centraliza mesmo com left/right: 0 herdados do .nav: com
+   left, right e width todos definidos, a caixa fica sobre-restrita e o CSS
+   resolve a sobra nas margens auto.
+
+   O fundo segue opaco: transparência com blur foi tentada e descartada aqui
+   porque o hero tem o mockup claro do notebook passando por trás, e o logo
+   branco some em cima dele. O destaque vem do recorte e da sombra. */
+.nav.scrolled {
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  height: 60px;
+  padding-top: 0;
+  width: min(var(--maxw), calc(100% - 32px));
+  margin-inline: auto;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+/* O .wrap já reserva 32px de respiro nas laterais para o conteúdo não grudar
+   na borda da tela. Flutuando, quem dá esse respiro é a própria margem do
+   cartão, e os 32px de dentro viram excesso: o logo ficaria a 64px da borda. */
+.nav.scrolled .wrap { padding: 0 24px; }
+
+/* Menu de celular aberto: a barra volta a colar no topo.
+
+   O painel do menu ocupa a tela inteira (inset: 0) e fica abaixo da nav no
+   z-index. Uma pílula recortada boiando sobre esse painel mostra o preto do
+   menu contornando o preto da barra, com a sombra marcando a emenda. Colada,
+   os dois viram uma superfície só.
+
+   Precisa da classe no body porque o .mobile-menu vem depois do .nav no DOM, e
+   não existe seletor de irmão anterior em CSS. */
+body.menu-aberto .nav {
+  top: 0;
+  height: var(--nav-h);
+  padding-top: env(safe-area-inset-top, 0px);
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+}
+body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
    conteúdo segue o .wrap global (max-width 1300px, centralizado), senão logo e
    botões grudariam nas bordas da tela em monitor largo. */
@@ -223,21 +281,19 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-links { flex: 1; display: flex; gap: 30px; justify-content: center; }
 .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-.nav-links a { font-size: 14px; color: rgba(244, 246, 244, 0.80); transition: color .15s; font-weight: 450; text-transform: uppercase; letter-spacing: 0.04em; }
+/* Peso 500, não 450: a Geist tinha o 450 e a Poppins não. Deixar o 450 aqui
+   faria o navegador arredondar sozinho, sem controle nosso sobre para que lado. */
+.nav-links a { font-size: 14px; color: rgba(244, 246, 244, 0.80); transition: color .15s; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
 .nav-links a:hover { color: var(--text); }
 .nav-right { display: flex; align-items: center; gap: 16px; }
-/* Inter Medium 14px.
-
-   O font-weight precisa estar aqui: o .btn base pede 500, mas o .btn-primary
-   pede 600 e vence, por vir depois com a mesma especificidade. Este seletor tem
-   especificidade maior e devolve o Medium só para o botão da navbar; o do hero
-   e os demais .btn-primary seguem em 600.
-
-   As quatro páginas passaram a carregar Inter:wght@500, senão o navegador
-   falsificaria o Medium a partir do 400 (ou cairia em fonte de sistema, nas três
-   que nem carregavam Inter). */
-.nav-right .btn { border-radius: 9999px; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; padding: 8px 16px; box-shadow: 0 0 16px rgba(0,229,153,0.35); letter-spacing: 0; }
-.nav-cta-ghost { font-size: 14px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: 9999px; padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
+/* Sem font-weight aqui, de propósito. Este seletor já teve um 500 para devolver
+   o Medium só ao botão da navbar; agora que ele é SemiBold como os outros, o
+   override virou ruído: basta deixar o .btn-primary aplicar o 600 dele. */
+/* O radius dos dois botões da navbar é o mesmo --r-sm (10px) do CTA do hero:
+   desde que o botão do hero deixou de ser cápsula, um par de pílulas aqui em
+   cima destoaria do único botão que a página realmente quer que se clique. */
+.nav-right .btn { border-radius: var(--r-sm); font-size: 13px; padding: 8px 16px; box-shadow: 0 0 16px rgba(0,229,153,0.35); letter-spacing: 0; }
+.nav-cta-ghost { font-size: 12px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
 .nav-cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
 .nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid var(--border); }
 
@@ -361,14 +417,45 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   68%      { transform: translate(45px,  35px)  scale(0.95); }
 }
 .hero .wrap { position: relative; z-index: 1; max-width: 1220px; }
+/* O padding é simétrico desde que a etiqueta "GANHE" saiu daqui. Ela era uma
+   cápsula verde com padding próprio, e por isso o lado esquerdo vinha menor
+   (8px contra 14px); com um ícone solto no lugar, aquele recuo deixaria o raio
+   grudado na borda. */
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 7px 14px 7px 8px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 14px; border-radius: 100px;
   background: var(--surface-2); border: 1px solid #00e59940;
-  font-size: 14px; color: rgba(244, 246, 244, 0.75); margin-bottom: 25px;
+  font-size: 14px; font-weight: 500; color: rgba(244, 246, 244, 0.75); margin-bottom: 25px;
+}
+/* O verde vem para o ícone: era a cápsula que dava o acento de cor da pill, e
+   sem ele a peça inteira ficaria cinza sobre cinza. flex-shrink: 0 porque o
+   raio não pode espremer quando o texto quebra em telas estreitas.
+
+   12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
+   largo. Forçar caixa quadrada nele achataria o desenho. */
+.hero-badge-ico { width: 12px; height: 18px; color: var(--primary); flex-shrink: 0; }
+/* Variante da home: raio no lugar da cápsula, texto em branco cheio e borda de
+   2px. Fica escopada porque as pills de planos, política e termo ainda usam a
+   cápsula .tag, e a borda grossa competiria com ela.
+
+   A pill não tem altura declarada, então borda e padding somam à altura do
+   conteúdo: os 2px de borda a deixam 2px mais alta que a versão de 1px. É o
+   esperado — os 8px de padding vertical são pedido anterior e ficam de pé. */
+.hero-badge-ia {
+  color: #fff;
+  padding: 8px 14px;
+  /* Só a largura: a cor da borda continua vindo da regra base (#00e59940, o
+     verde da marca a 25%). O verde cheio foi testado aqui e descartado. */
+  border-width: 2px;
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
-.hero h1 { font-size: clamp(28px, 4vw, 50px); letter-spacing: -0.02em; line-height: 1.05; font-weight: 500; }
+/* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
+   48px fixo estouraria a largura em tela estreita — o clamp é o que faz o
+   título encolher sozinho antes do primeiro breakpoint. */
+/* O branco aqui não vaza para os trechos em verde: .hero h1 .em vem logo abaixo
+   com especificidade maior e, além disso, pinta o texto por gradiente clipado
+   com -webkit-text-fill-color: transparent, que ignora color. */
+.hero h1 { font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.02em; line-height: 1.05; font-weight: 500; color: #fff; }
 .em { color: var(--primary); }
 .hero h1 .em, .em-shine-text {
   background: linear-gradient(90deg, var(--primary-lo), var(--primary-hi), var(--primary), var(--primary-hi), var(--primary-lo));
@@ -383,10 +470,19 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-.hero-sub { font-size: 18px; color: #D1D1D1; line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-family: 'Inter', sans-serif; font-weight: 400; }
+.hero-sub { font-size: 16px; color: #fff; line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
+/* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
+   nas seções de implementação e entregáveis, que têm tamanhos próprios de
+   botão (16px e 14px, mais abaixo). Sem o .hero na frente, este 15px passaria
+   por cima delas. */
 .hero-actions .btn { border-radius: 9999px !important; padding: 12px 30px; }
+/* O !important repete o da linha acima porque !important só perde para outro
+   !important: sem ele, os 9999px da regra anterior venceriam mesmo com este
+   seletor sendo mais específico. O botão do hero deixou de ser cápsula e
+   passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
+.hero .hero-actions .btn { font-size: 15px; border-radius: var(--r-sm) !important; }
 .hero-actions .btn-primary:hover { box-shadow: 0 0 0 1px var(--primary), 0 12px 40px var(--glow); }
 .hero-actions .btn-secondary { border: 1px solid #00e599; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
@@ -641,8 +737,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .demo-trust li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #374151; font-weight: 500; }
 .demo-trust li svg { flex-shrink: 0; color: #00E599; }
 .demo-split .cta-final { max-width: 100%; margin: 0; }
-.demo-split-left > p { font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.3; }
-.demo-trust li { font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.3; }
+.demo-split-left > p { font-weight: 400; line-height: 1.3; }
+.demo-trust li { font-weight: 400; line-height: 1.3; }
 .cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 48px 24px; text-align: left; background: #fff; border: 1px solid #00E599; max-width: 480px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
@@ -896,7 +992,7 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding: 70px 0 !important; }
   .demo-split-left { text-align: center; }
   .demo-trust { display: none; }
-  .hero h1, .page-hero h1 { font-size: clamp(35px, 4vw, 50px); }
+  .hero h1, .page-hero h1 { font-size: clamp(35px, 4vw, 48px); }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-cta-ghost { display: none; }

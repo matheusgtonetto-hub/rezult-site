@@ -17,9 +17,16 @@ onScroll();
 // ---- Mobile menu ----
 const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
+// A classe no body serve só ao CSS: com o menu aberto a navbar sai do estado
+// flutuante e volta a colar no topo, e esse seletor precisa de um ancestral
+// comum, porque o painel vem depois da nav no DOM.
+function alternarMenu(aberto) {
+  mobileMenu.classList.toggle("open", aberto);
+  document.body.classList.toggle("menu-aberto", aberto);
+}
 if (burger) {
-  burger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
-  mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => mobileMenu.classList.remove("open")));
+  burger.addEventListener("click", () => alternarMenu(!mobileMenu.classList.contains("open")));
+  mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => alternarMenu(false)));
 }
 
 // ---- Scroll reveal ----
