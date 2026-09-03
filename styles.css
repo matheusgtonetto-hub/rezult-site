@@ -681,8 +681,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   /* Proporção, não pixel fixo. Estava em 52px, que dava a razão certa nos 40px
      do desktop, mas não acompanhava a fonte: no mobile o .h2 cai para 32px e
      os mesmos 52px viravam razão 1.63, muito mais solto que o resto do site.
-     Em proporção a entrelinha encolhe junto (38.4px em 32px, 48px em 40px). */
-  line-height: 1.2;
+     Em proporção a entrelinha encolhe junto (35.2px em 32px, 44px em 40px). */
+  line-height: 1.1;
   background: linear-gradient(90deg, rgb(3, 16, 29) 0.13%, rgb(149, 141, 141) 109.5%);
   -webkit-background-clip: text;
   background-clip: text;
