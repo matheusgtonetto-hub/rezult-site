@@ -675,19 +675,19 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
    O trecho em verde não é afetado: o .em-shine-text tem o próprio
    background-clip e o próprio -webkit-text-fill-color, que pintam por cima. */
+/* O degradê recortado no texto saiu daqui. Com ele foram embora o
+   background-clip e o -webkit-text-fill-color: transparent, que existiam só
+   para deixá-lo aparecer; sem desligar os dois, o título ficaria invisível.
+   O display: inline-block também perdeu a função (servia para a caixa
+   encolher até o texto e o degradê percorrer as palavras), então voltou a ser
+   bloco como qualquer outro título.
+
+   A entrelinha fica em proporção, não em pixel fixo: estava em 52px, que dava
+   a razão certa nos 40px do desktop mas não acompanhava a fonte, e no mobile
+   o .h2 cai para 32px. */
 #recursos .h2 {
-  display: inline-block;
   font-weight: 600;
-  /* Proporção, não pixel fixo. Estava em 52px, que dava a razão certa nos 40px
-     do desktop, mas não acompanhava a fonte: no mobile o .h2 cai para 32px e
-     os mesmos 52px viravam razão 1.63, muito mais solto que o resto do site.
-     Em proporção a entrelinha encolhe junto (35.2px em 32px, 44px em 40px). */
   line-height: 1.1;
-  background: linear-gradient(90deg, rgb(3, 16, 29) 0.13%, rgb(149, 141, 141) 109.5%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
 }
 /* Mesmo degradê nos títulos dos cards. Aqui não precisa de inline-block: o h3
    vive dentro do .feature-heading, que é flex, e item de flex já encolhe até o
