@@ -1154,7 +1154,24 @@ select.demo-select:invalid { color: #374151; }
   .hero.vb .hero-text { align-items: center; text-align: center; }
   .hero.vb .hero-sub { margin-left: auto; margin-right: auto; }
   .hero.vb .hero-actions { justify-content: center; }
-  .hero.vb .hero-note { justify-content: center; }
+  /* O justify-content sozinho não centralizava: o texto quebra em duas linhas e
+     o conjunto ícone + texto ocupa a largura toda, então não sobra folga para
+     distribuir e o ícone encostava na margem esquerda com o texto centralizado
+     ao lado. Como bloco de texto, o ícone volta a fluir junto da primeira
+     palavra e o conjunto centraliza de verdade. */
+  .hero.vb .hero-note { display: block; }
+  .hero.vb .hero-note svg { display: inline-block; vertical-align: -2px; margin-right: 8px; }
+
+  /* Os glows e blobs verdes saem no celular. Eles foram desenhados para o hero
+     escuro, onde liam como luz ambiente; sobre o hero branco viram um véu
+     esverdeado. No desktop ainda passam como manchas localizadas, mas aqui cada
+     um deles (de 400 a 700px) é mais largo que a tela inteira e cobre tudo. */
+  .hero .hero-glow,
+  .hero .hero-side-l,
+  .hero .hero-side-r,
+  .hero .mesh-blob,
+  .page-hero .hero-glow,
+  .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
   .feature-text { padding: 35px 24px; }
   .feature-row.flip .feature-text { order: 0; }
