@@ -1,6 +1,6 @@
 /* ============================================================
    Rezult CRM — Site
-   Dark · Neon · Poppins · Filled
+   Dark · Neon · Geist · Filled
    ============================================================ */
 
 :root {
@@ -9,6 +9,9 @@
   --primary-hi: #5CFFC0;
   --primary-lo: #00B87A;
   --on-primary: #04140D;
+  /* Verde de texto: o --primary (#00E599) rende 1.66:1 sobre branco. Este é
+     o tom escolhido para tudo que é texto ou ícone em verde. */
+  --green-text: rgb(0, 184, 115);
   --glow: rgba(0, 229, 153, 0.45);
   --glow-soft: rgba(0, 229, 153, 0.18);
 
@@ -35,9 +38,8 @@
   --text-muted: #575757;
   --text-subtle: rgba(0, 0, 0, 0.45);
 
-  /* Ilha escura: valores que as superfícies que continuam escuras usam para
-     redefinir os tokens acima localmente (navbar, texto do hero, mockups e
-     menu do celular). Ficam aqui para existir um lugar só com o tema escuro. */
+  /* Ilha escura: valores usados pelas superfícies que continuam escuras
+     (os mockups do produto), para redefinir os tokens acima localmente. */
   --dark-bg: #05080A;
   --dark-bg-deep: #02040A;
   --dark-surface: #0C1115;
@@ -48,6 +50,7 @@
   --dark-text-subtle: rgba(244, 246, 244, 0.38);
 
 
+
   /* Semantic (data only) */
   --blue: #3B82F6;
   --amber: #F59E0B;
@@ -55,11 +58,10 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Poppins no site inteiro desde 2026-09-02, no lugar da Geist. A Geist Mono
-     ficou: ela não é a mesma família em outro peso, é a voz dos rótulos, dos
-     números e das etiquetas em caixa alta, e a Poppins não tem desenho
-     monoespaçado que ocupe esse lugar. */
-  --sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Geist no site inteiro. A Poppins entrou em 2026-09-02 e foi revertida no
+     dia seguinte. A Geist Mono segue como voz dos rótulos, dos números e das
+     etiquetas em caixa alta. */
+  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', ui-monospace, monospace;
 
   /* Radius */
@@ -153,7 +155,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .eyebrow {
   font-size: 12px;
-  color: var(--primary);
+  color: var(--green-text);
   font-weight: 300;
   display: inline-flex;
   align-items: center;
@@ -186,12 +188,12 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   .h2 { line-height: 1.0; }
 }
 .lede { font-size: 16px; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
-.text-grad { color: var(--primary); }
+.text-grad { color: var(--green-text); }
 
 /* ---------- Buttons ---------- */
-/* Sem font-family aqui: a Poppins passou a ser a fonte do site inteiro, via
-   --sans, e repetir a família no botão só criaria um segundo lugar para
-   esquecer de atualizar. Os pesos ficam: 500 no botão comum, 600 no primário. */
+/* Sem font-family aqui: a fonte do site vem toda do --sans, e repetir a
+   família no botão só criaria um segundo lugar para esquecer de atualizar.
+   Os pesos ficam: 500 no botão comum, 600 no primário. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   font-weight: 500; font-size: 15px; letter-spacing: -0.01em;
@@ -200,17 +202,24 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   white-space: nowrap;
 }
 .btn svg { width: 17px; height: 17px; }
-.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 1px var(--primary), 0 10px 15px -10px rgba(0,0,0,0.43); font-weight: 600; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--primary), 0 14px 20px -12px rgba(0,0,0,0.5); }
+/* Verde chapado, o mesmo --green-text do resto do site, e sem anel nem sombra.
+   O anel de 1px repetia o verde do fundo e só engrossava a borda; a sombra
+   caiu junto para o botão ficar plano. Sobra o texto em --on-primary, que é
+   escuro e continua legível sobre este verde. */
+.btn-primary { background: var(--green-text); color: #fff; box-shadow: none; font-weight: 600; }
+.btn-primary:hover { background: #009a60; }
+/* .btn-shine perdeu o efeito. Era um degradê animado percorrendo os verdes
+   claros da marca; virou o mesmo verde chapado dos demais botões. A classe
+   continua no HTML de index e planos (5 botões) e agora não faz nada além de
+   garantir o fundo, então pode sair numa limpeza futura. */
 .btn-shine {
-  background: linear-gradient(90deg, var(--primary-lo), var(--primary-hi), var(--primary), var(--primary-hi), var(--primary-lo));
-  background-size: 200% auto;
-  animation: em-shine 5s linear infinite;
+  background: var(--green-text);
+  animation: none;
 }
 .btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
 .btn-secondary:hover { border-color: var(--border-2); background: var(--surface-3); transform: translateY(-1px); }
 .btn-ghost { color: var(--text); }
-.btn-ghost:hover { color: var(--primary); }
+.btn-ghost:hover { color: var(--green-text); }
 .btn-lg { padding: 16px 28px; font-size: 16px; }
 .btn-block { width: 100%; }
 
@@ -303,8 +312,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-links { flex: 1; display: flex; gap: 30px; justify-content: center; }
 .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-/* Peso 500, não 450: a Geist tinha o 450 e a Poppins não. Deixar o 450 aqui
-   faria o navegador arredondar sozinho, sem controle nosso sobre para que lado. */
+
 /* O letter-spacing saiu junto com o uppercase: os 0.04em existiam para abrir a
    caixa alta, que precisa de mais respiro entre letras para não fechar. Em
    caixa mista esse mesmo tracking deixa as palavras espaçadas demais. */
@@ -320,7 +328,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* font-weight precisa estar aqui: o .btn-primary pede 600 e, sozinho, venceria
    por vir depois no arquivo. Este seletor tem mais classes (maior
    especificidade), então o 500 abaixo vence independente da ordem. */
-.nav-right .btn { border-radius: var(--r-sm); font-size: 13px; font-weight: 500; padding: 8px 16px; box-shadow: 0 0 16px rgba(0,229,153,0.35); letter-spacing: 0; }
+.nav-right .btn { border-radius: var(--r-sm); font-size: 13px; font-weight: 500; padding: 8px 16px; box-shadow: none; letter-spacing: 0; }
 .nav-cta-ghost { font-size: 12px; color: #050A07; background: transparent; border: 1px solid rgba(5,10,7,0.22); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
 .nav-cta-ghost:hover { border-color: rgba(5,10,7,0.55); color: #050A07; }
 .nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(5,10,7,0.18); color: #050A07; }
@@ -338,20 +346,18 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
-.hero { position: relative; background: var(--bg); padding-top: calc(var(--nav-h) + 90px); padding-bottom: 90px; overflow: hidden; }
+.hero { position: relative; background: var(--bg); padding-top: calc(var(--nav-h) + 50px); padding-bottom: 70px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
    altura mínima fixa nesse ponto sobraria como espaço vazio embaixo do
    conteúdo em vez de ajudar. */
-@media (min-width: 981px) {
-  /* min-height sozinho não centraliza nada: em fluxo normal de bloco, a
-     sobra de altura vira espaço morto abaixo do conteúdo, antes do
-     padding-bottom. flex + justify-content:center distribui essa sobra em
-     volta do .wrap, então quando o conteúdo é mais curto que 886px ele fica
-     centralizado na caixa, não colado no topo com vazio embaixo. */
-  .hero { min-height: 886px; display: flex; flex-direction: column; justify-content: center; }
-}
+/* Sem min-height. Aqui existiu um min-height: 886px, medido do hero do
+   gohighlevel.com, com flex e justify-content: center para distribuir a sobra.
+   O hero de lá é bem mais cheio que este: o conteúdo daqui mede 415px, então
+   sobravam 281px que a centralização espalhava em volta, e mexer no padding não
+   mudava nada na tela. Sem o min-height, a altura volta a ser conteúdo mais
+   padding, e os valores de padding voltam a valer literalmente. */
 .section-dotgrid { position: relative; }
 .section-bg-fx { position: absolute; inset: 0; pointer-events: none; z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); }
 .section-bg-fx .hero-glow { top: -30%; }
@@ -489,7 +495,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
    12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
    largo. Forçar caixa quadrada nele achataria o desenho. */
-.hero-badge-ico { width: 12px; height: 18px; color: var(--primary); flex-shrink: 0; }
+.hero-badge-ico { width: 12px; height: 18px; color: var(--green-text); flex-shrink: 0; }
 /* Variante da home: raio no lugar da cápsula, texto em branco cheio e borda de
    2px. Fica escopada porque as pills de planos, política e termo ainda usam a
    cápsula .tag, e a borda grossa competiria com ela.
@@ -514,27 +520,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
 .hero h1 { font-size: clamp(28px, 4vw, 48px); letter-spacing: normal; line-height: 1.05; font-weight: 600; color: var(--text); }
-.em { color: var(--primary); }
-/* O h1 do hero saiu do efeito de brilho e usa verde chapado. Precisa zerar as
-   três propriedades que o efeito deixava ligadas, não basta trocar a cor: o
-   background-clip: text recortava o texto no degrade e o
-   -webkit-text-fill-color: transparent vence qualquer color. Sem desligar os
-   dois, a cor nova não apareceria. */
-.hero h1 .em {
-  background: none;
-  color: rgb(0, 184, 115);
-  -webkit-text-fill-color: rgb(0, 184, 115);
-  animation: none;
-}
-/* O brilho continua nos demais títulos do site, que usam .em-shine-text. */
+.em { color: var(--green-text); }
+/* O efeito de brilho saiu: era um degradê animado que passava pelos verdes
+   claros da marca, ilegível sobre branco. Virou verde chapado, o mesmo do .em. */
 .em-shine-text {
-  background: linear-gradient(90deg, var(--primary-lo), var(--primary-hi), var(--primary), var(--primary-hi), var(--primary-lo));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: em-shine 5s linear infinite;
+  color: var(--green-text);
+  -webkit-text-fill-color: var(--green-text);
 }
 
 @keyframes em-shine {
@@ -553,10 +544,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    seletor sendo mais específico. O botão do hero deixou de ser cápsula e
    passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
 .hero .hero-actions .btn { font-size: 15px; border-radius: var(--r-sm) !important; }
-.hero-actions .btn-primary:hover { box-shadow: 0 0 0 1px var(--primary), 0 12px 40px var(--glow); }
+.hero-actions .btn-primary:hover { box-shadow: none; }
 .hero-actions .btn-secondary { border: 1px solid #00e599; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
-.hero-note svg { width: 15px; height: 15px; color: var(--primary); }
+.hero-note svg { width: 15px; height: 15px; color: var(--green-text); }
 
 .hero.va { text-align: center; }
 .hero.va .hero-sub { margin-left: auto; margin-right: auto; }
@@ -582,9 +573,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-inner { position: relative; }
 
 /* ---------- App mockup ---------- */
-/* Ilha escura. Os mockups são print da interface do produto, que é escura. Em
-   vez de reescrever as 32 regras de .mockup/.mk-* e as dezenas de var(--...)
-   que o mockups.js injeta inline, o container redefine os tokens localmente. */
+/* Ilha escura. Os mockups são print da interface do produto, que é escura. O
+   container redefine os tokens localmente, então o CSS e o mockups.js seguem
+   pedindo var(--surface) e recebem o valor escuro. */
 .mockup, .feature-visual {
   --bg: var(--dark-bg);
   --bg-deep: var(--dark-bg-deep);
@@ -599,7 +590,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .mockup {
   position: relative; border-radius: var(--r-lg);
   background: var(--surface); border: 1px solid var(--border-2);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.25), 0 0 80px var(--glow-soft);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
   overflow: hidden;
 }
 .mockup-glow { position: absolute; top: -40%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, var(--glow) 0%, transparent 65%); opacity: 0.3; pointer-events: none; }
@@ -637,7 +628,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
 .metric { padding: 40px 32px; border-right: 1px solid var(--border); position: relative; }
 .metric:last-child { border-right: none; }
-.metric .v { font-size: 52px; font-weight: 600; letter-spacing: -0.05em; line-height: 1; color: var(--primary); }
+.metric .v { font-size: 52px; font-weight: 600; letter-spacing: -0.05em; line-height: 1; color: var(--green-text); }
 .metric .l { font-size: 14px; color: var(--text-muted); margin-top: 12px; letter-spacing: -0.01em; }
 
 /* ---------- Features ---------- */
@@ -658,7 +649,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text { padding: 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
-.feature-icon { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 24px; box-shadow: inset 0 0 20px var(--glow-soft); flex-shrink: 0; }
+.feature-icon { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); margin-bottom: 24px; box-shadow: none; flex-shrink: 0; }
 .feature-icon svg { width: 20px; height: 20px; }
 .feature-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .feature-heading .feature-icon { margin-bottom: 0; align-self: center; }
@@ -667,7 +658,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
-.feature-list li svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
+.feature-list li svg { width: 20px; height: 20px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
 .feature-visual { border-radius: 0; background: var(--surface); overflow: hidden; position: relative; align-self: stretch; display: flex; }
 .feature-visual > * { flex: 1; min-width: 0; }
 
@@ -687,7 +678,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 #recursos .h2 {
   display: inline-block;
   font-weight: 700;
-  line-height: 52px;
+  /* Proporção, não pixel fixo. Estava em 52px, que dava a razão certa nos 40px
+     do desktop, mas não acompanhava a fonte: no mobile o .h2 cai para 32px e
+     os mesmos 52px viravam razão 1.63, muito mais solto que o resto do site.
+     Em proporção a entrelinha encolhe junto (38.4px em 32px, 48px em 40px). */
+  line-height: 1.2;
   background: linear-gradient(90deg, rgb(3, 16, 29) 0.13%, rgb(149, 141, 141) 109.5%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -715,8 +710,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
 .step { position: relative; padding: 28px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
 .step:hover { border-color: var(--border-active); transform: translateY(-3px); }
-.step-num { font-family: var(--mono); font-size: 13px; color: var(--primary); margin-bottom: 18px; letter-spacing: 0.1em; }
-.step-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 18px; }
+.step-num { font-family: var(--mono); font-size: 13px; color: var(--green-text); margin-bottom: 18px; letter-spacing: 0.1em; }
+.step-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--green-text); margin-bottom: 18px; }
 .step-icon svg { width: 22px; height: 22px; }
 .step h3 { font-size: 19px; letter-spacing: -0.02em; margin-bottom: 8px; font-weight: 700; }
 .step p { font-size: 16px; color: var(--text-muted); line-height: 1.55; }
@@ -761,11 +756,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
 .bcard { flex: 0 0 calc((100% - 40px) / 3); border-radius: var(--r-lg); background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 18px; min-height: 412px; position: relative; overflow: hidden; }.bcard .b-num { font-family: var(--mono); font-size: 12px; color: #166534; letter-spacing: 0.1em; position: relative; }
-.bcard .b-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); position: relative; box-shadow: inset 0 0 20px var(--glow-soft); }
+.bcard .b-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); position: relative; box-shadow: none; }
 .bcard .b-icon svg { width: 24px; height: 24px; }
 .bcard h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.2; position: relative; margin-top: auto; font-weight: 700; }
 .carousel-arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: flex; align-items: center; justify-content: center; transition: all .15s; }
-.carousel-arrow:hover { border-color: var(--border-active); color: var(--primary); transform: translateY(-2px); }
+.carousel-arrow:hover { border-color: var(--border-active); color: var(--green-text); transform: translateY(-2px); }
 .carousel-arrow svg { width: 20px; height: 20px; }
 .carousel-dots { display: flex; gap: 8px; align-items: center; }
 .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-2); transition: all .2s; cursor: pointer; }
@@ -795,7 +790,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   padding: 28px;
 }
 .seg-card:hover { border-color: var(--border-active); background: var(--surface-2); transform: translateY(-3px); }
-.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); box-shadow: inset 0 0 20px var(--glow-soft); flex-shrink: 0; }
+.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
 .seg-card .seg-icon svg { width: 24px; height: 24px; }
 .seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; color: var(--text); }
 .seg-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
@@ -804,6 +799,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .seg-cta > * { position: relative; z-index: 1; }
 .seg-cta h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
 .seg-cta p { font-size: 14px; color: var(--text-muted); max-width: 220px; }
+
+/* Nenhum efeito verde de fundo no site: glows, blobs, tints e grades saem de
+   cena e as seções ficam no branco chapado. As regras originais continuam
+   abaixo para histórico, mas estas as desligam em um lugar só, sem precisar
+   mexer no HTML de 4 páginas. */
+.hero-glow, .hero-side-l, .hero-side-r, .mesh-blob,
+.impl-blob, .impl-bg-grid, .demo-side-l, .demo-side-r,
+.cta-final-glow, .cta-final-grid, .mockup-glow, .fcard .fc-glow,
+.tint-left::before, .tint-right::before, .tint-center::before,
+.hero-grid, .section-dotgrid::after { display: none !important; }
 
 @media (max-width: 980px) {
   .fcards { grid-template-columns: 1fr; }
@@ -821,13 +826,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .compare-table { width: 100%; border-collapse: collapse; }
 .compare-table th, .compare-table td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--border); }
 .compare-table thead th { background: var(--surface-2); font-size: 13px; font-weight: 500; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
-.compare-table thead th.us { color: var(--primary); }
+.compare-table thead th.us { color: var(--green-text); }
 .compare-table tbody td { font-size: 15px; }
 .compare-table tbody td:first-child { color: var(--text-muted); }
 .compare-table .col-us { background: rgba(0,229,153,0.05); }
 .compare-table td.center { text-align: center; }
 .compare-table td svg { width: 20px; height: 20px; margin: 0 auto; }
-.chk { color: var(--primary); }
+.chk { color: var(--green-text); }
 .no { color: var(--text-subtle); }
 
 /* ---------- Testimonials ---------- */
@@ -863,20 +868,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .pcard .pprice .amt { font-size: 48px; font-weight: 600; letter-spacing: -0.04em; }
 .pcard .pprice .per { font-size: 15px; color: var(--text-subtle); }
 .pcard .pprice .pperiod { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(0,229,153,0.16); color: #166534; letter-spacing: 0.02em; margin-left: auto; }
-.pcard .pprice-savings { font-size: 14px; color: var(--primary); display: flex; align-items: baseline; gap: 6px; }
+.pcard .pprice-savings { font-size: 14px; color: var(--green-text); display: flex; align-items: baseline; gap: 6px; }
 .pcard .pprice-savings:empty { display: none; }
 .pcard .pprice-savings s { color: var(--text-subtle); text-decoration-color: var(--text-subtle); }
 .pcard .pprice-recurring { font-size: 13.5px; color: var(--text-subtle); min-height: 16px; }
 .pcard .pfeats { display: flex; flex-direction: column; gap: 13px; }
 .pcard .pfeats li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; color: var(--text-muted); list-style: none; line-height: 1.45; }
-.pcard .pfeats li svg { width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
+.pcard .pfeats li svg { width: 18px; height: 18px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
 .pcard .pfeats li b { color: var(--text); font-weight: 600; }
 
 /* ---------- FAQ ---------- */
 .faq { max-width: 800px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 20px; padding: 24px 0; text-align: left; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; }
-.faq-q .ico { width: 24px; height: 24px; flex-shrink: 0; color: var(--primary); transition: transform .25s; }
+.faq-q .ico { width: 24px; height: 24px; flex-shrink: 0; color: var(--green-text); transition: transform .25s; }
 .faq-item.open .faq-q .ico { transform: rotate(45deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
 .faq-a-inner { padding-bottom: 24px; font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 680px; }
@@ -1006,7 +1011,7 @@ select.demo-select:invalid { color: #374151; }
 .impl-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
 .impl-section-text { display: flex; flex-direction: column; }
 .impl-section-text .h2 { margin-bottom: 20px; }
-.impl-section-sub { font-size: 18px; font-weight: 500; color: var(--primary); line-height: 1.4; margin-bottom: 20px; }
+.impl-section-sub { font-size: 18px; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
 .impl-section-description { font-size: 17px; line-height: 1.4; color: var(--text-muted); margin-bottom: 24px; }
 .impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(0, 229, 153, 0.06); border: 1px solid rgba(0, 229, 153, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .impl-section-footer p { font-size: 14px; font-weight: 500; color: #D1D5DB; margin: 0; }
@@ -1015,7 +1020,7 @@ select.demo-select:invalid { color: #374151; }
 .impl-card { padding: 28px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
 .impl-card:hover { border-color: var(--border-active); transform: translateY(-2px); }
 .impl-card-content { display: flex; gap: 20px; align-items: center; }
-.impl-card-icon { width: 52px; height: 52px; min-width: 52px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); box-shadow: inset 0 0 20px var(--glow-soft); flex-shrink: 0; }
+.impl-card-icon { width: 52px; height: 52px; min-width: 52px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
 .impl-card-icon svg { width: 20px; height: 20px; }
 .impl-card-text { flex: 1; }
 .impl-card-title { font-size: 22px; font-weight: 600; color: var(--text); margin: 0 0 8px 0; letter-spacing: -0.035em; line-height: 1.05; }
@@ -1096,7 +1101,7 @@ select.demo-select:invalid { color: #374151; }
 .tl-body { padding-top: 8px; padding-bottom: 80px; }
 .tl-body-last { padding-bottom: 0; }
 .tl-cta-mobile { display: none; }
-.tl-title { font-size: 25px; font-weight: 600; color: var(--primary); letter-spacing: -0.025em; margin-bottom: 8px; line-height: 1.2; }
+.tl-title { font-size: 25px; font-weight: 600; color: var(--green-text); letter-spacing: -0.025em; margin-bottom: 8px; line-height: 1.2; }
 .tl-desc { font-size: 15px; color: #555; line-height: 1.6; }
 
 /* ---------- Impl right column ---------- */
@@ -1121,7 +1126,7 @@ select.demo-select:invalid { color: #374151; }
   font-family: var(--mono);
   font-size: 16px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--green-text);
   letter-spacing: 0.06em;
   flex-shrink: 0;
   min-width: 28px;
@@ -1283,7 +1288,7 @@ select.demo-select:invalid { color: #374151; }
 .legal-toc nav { display: flex; flex-direction: column; gap: 2px; }
 .legal-toc nav a { font-size: 13.5px; color: var(--text-muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--border); transition: color .15s, border-color .15s; text-decoration: none; line-height: 1.4; }
 .legal-toc nav a:hover { color: var(--text); border-left-color: rgba(0,229,153,0.4); }
-.legal-toc nav a.active { color: var(--primary); border-left-color: var(--primary); font-weight: 500; }
+.legal-toc nav a.active { color: var(--green-text); border-left-color: var(--green-text); font-weight: 500; }
 
 .legal-content { min-width: 0; }
 
@@ -1306,7 +1311,7 @@ select.demo-select:invalid { color: #374151; }
   .legal-toc { position: static; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--r-lg); padding: 24px; margin-bottom: 48px; }
   .legal-toc nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
   .legal-toc nav a { padding: 6px 12px; border-left: none; border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; font-size: 13px; }
-  .legal-toc nav a.active { background: rgba(0,229,153,0.1); border-color: var(--primary); }
+  .legal-toc nav a.active { background: rgba(0,229,153,0.1); border-color: var(--green-text); }
 }
 
 @media (max-width: 560px) {
