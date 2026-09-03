@@ -1277,18 +1277,14 @@ select.demo-select:invalid { color: #374151; }
      centralizada na altura do texto. flex-shrink evita que ela esprema quando
      o parágrafo é longo. */
   .feature-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  /* Fundo verde bem claro, derivado do próprio --green-text a 12% em vez de um
-     hex novo, para acompanhar a cor se ela mudar. O border-radius fecha o
-     círculo em volta do desenho, que já é circular e fica um pouco menor que a
-     caixa, deixando um anel de respiro. */
-  .feature-arrow {
-    display: flex; flex-shrink: 0; color: var(--green-text);
-    background: rgba(0, 184, 115, 0.12); border-radius: 50%;
-  }
-  /* Traço de 1px pelo CSS, não pelo atributo do SVG: assim fica num lugar só,
-     em vez de repetido nos 4 cards. O círculo e os paths não declaram
-     stroke-width próprio, então herdam este valor. */
+  .feature-arrow { display: flex; flex-shrink: 0; color: var(--green-text); }
+  /* Traço pelo CSS, não pelo atributo do SVG: fica num lugar só, em vez de
+     repetido nos 4 cards. O valor é medido no sistema do viewBox (24x24) e o
+     ícone renderiza a 40px, então cada unidade aparece ~1.67x maior na tela.
+     O círculo externo leva um traço menor que a seta de dentro, por ser um
+     elemento próprio dentro do SVG. */
   .feature-arrow svg { width: 40px; height: 40px; stroke-width: 1; }
+  .feature-arrow svg circle { stroke-width: 0.6; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
