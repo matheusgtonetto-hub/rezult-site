@@ -518,9 +518,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-badge-ia {
   color: #fff;
   padding: 8px 14px;
-  /* Só a largura: a cor da borda continua vindo da regra base (#00e59940, o
-     verde da marca a 25%). O verde cheio foi testado aqui e descartado. */
   border-width: 2px;
+  /* Mesmo verde do botão, cheio. A regra base usa #00e59940, que é o neon da
+     marca a 25% e some contra os 2px daqui. Usa o token, não o hex repetido,
+     para borda e botão andarem juntos numa troca futura. */
+  border-color: var(--green-text);
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
@@ -563,11 +565,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    seletor sendo mais específico. O botão do hero deixou de ser cápsula e
    passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
 .hero .hero-actions .btn { font-size: 15px; border-radius: var(--r-sm) !important; }
-/* O botão do hero usa o verde neon da marca (--primary), não o --green-text
-   mais fechado dos demais botões do site. Fica escopado no .hero: o neon só se
-   sustenta sobre o fundo escuro daqui, nas seções claras ele estoura.
-   O degradê animado com anel e glow que existiu aqui foi testado e descartado. */
-.hero .hero-actions .btn-primary { background: var(--primary); color: #000; }
+/* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
+   igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
+   sem sombra). Já foram testados e descartados aqui o degradê animado com anel
+   e glow, e o verde neon com texto preto. */
 .hero-actions .btn-secondary { border: 1px solid #00e599; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--green-text); }
