@@ -272,7 +272,10 @@ wirePricingToggle("priceToggle");
       const nP = map(itemCenter, mid + 60, mid - 60);
       if (num) {
         num.style.transition = "none";
-        num.style.color = `rgba(0, 229, 153, ${0.2 + 0.8 * nP})`;
+        // Verde escuro, não o verde da marca: a numeração vive sobre fundo
+        // branco, e o #00E599 rende 1.66:1 de contraste ali, ilegível mesmo em
+        // opacidade cheia. Começa em 0.3 porque 0.2 sobre branco não aparece.
+        num.style.color = `rgba(22, 101, 52, ${0.3 + 0.7 * nP})`;
         num.style.transform = `scale(${0.90 + 0.10 * nP})`;
       }
 
