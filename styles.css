@@ -21,31 +21,20 @@
      --bg-deep também é branco de propósito: as seções alternadas deixaram de
      ser um tom diferente, o site inteiro é a mesma base branca e quem separa
      as seções agora é a borda de 1px e o cinza dos cards. */
-  --bg: #FFFFFF;
-  --bg-deep: #FFFFFF;
-  --surface: #F6F6F6;
-  --surface-2: #EFEFEF;
-  --surface-3: #E7E7E7;
-  --border: rgba(0, 0, 0, 0.12);
-  --border-2: rgba(0, 0, 0, 0.07);
-  --border-active: rgba(0, 229, 153, 0.55);
+  --bg: #05080A;
+  --bg-deep: #02040A;
+  --surface: #0C1115;
+  --surface-2: #131A1E;
+  --surface-3: #1B2429;
+  --border: rgba(255, 255, 255, 0.25);
+  --border-2: rgba(255, 255, 255, 0.14);
+  --border-active: rgba(0, 229, 153, 0.45);
 
   /* Text */
-  --text: #000000;
-  --text-muted: #575757;
-  --text-subtle: rgba(0, 0, 0, 0.45);
+  --text: #F4F6F4;
+  --text-muted: #D1D1D1;
+  --text-subtle: rgba(244, 246, 244, 0.38);
 
-  /* Ilha escura: valores que as superfícies que continuam escuras usam para
-     redefinir os tokens acima localmente (mockups do produto e topo do hero).
-     Ficam aqui para existir um lugar só com o tema escuro antigo. */
-  --dark-bg: #05080A;
-  --dark-bg-deep: #02040A;
-  --dark-surface: #0C1115;
-  --dark-surface-2: #131A1E;
-  --dark-border: rgba(255, 255, 255, 0.25);
-  --dark-text: #F4F6F4;
-  --dark-text-muted: #D1D1D1;
-  --dark-text-subtle: rgba(244, 246, 244, 0.38);
 
   /* Semantic (data only) */
   --blue: #3B82F6;
@@ -118,7 +107,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 ::selection { background: rgba(0, 229, 153, 0.3); }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 5px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-active); }
 
 /* ---------- Layout helpers ---------- */
@@ -199,12 +188,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   white-space: nowrap;
 }
 .btn svg { width: 17px; height: 17px; }
-/* Sombra neutra no lugar do halo verde. O glow de 30px em var(--glow) lia como
-   brilho sobre fundo escuro; sobre branco vira uma auréola esverdeada em volta
-   do botão. A sombra abaixo é a mesma proporção usada no CTA do site de
-   referência (deslocada para baixo e com spread negativo, some nas laterais). */
-.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 1px var(--primary), 0 10px 15px -10px rgba(0,0,0,0.43); font-weight: 600; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--primary), 0 14px 20px -12px rgba(0,0,0,0.5); }
+.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 1px var(--primary), 0 8px 30px var(--glow); font-weight: 600; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--primary), 0 12px 40px var(--glow); }
 .btn-shine {
   background: linear-gradient(90deg, var(--primary-lo), var(--primary-hi), var(--primary), var(--primary-hi), var(--primary-lo));
   background-size: 200% auto;
@@ -246,14 +231,6 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      invisivel, sentido justamente em celular. */
   background: #050A07;
   box-shadow: none;
-  /* Ilha escura: a barra continua escura com o site claro, como a do
-     gohighlevel.com, que também fica sobre a parte escura do degrade do hero.
-     Sem redefinir os tokens aqui, a borda do botão-sanduíche viria no preto
-     translúcido de --border e sumiria contra o fundo da própria barra. */
-  --border: var(--dark-border);
-  --border-2: var(--dark-border);
-  --text: var(--dark-text);
-  --surface-2: var(--dark-surface-2);
   transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
               border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
 }
@@ -348,11 +325,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
-/* Preto, com os efeitos de fundo de volta (grade de pontos, glows e blobs no
-   .hero-bg). Precisa declarar --dark-bg explicitamente: antes o hero não tinha
-   fundo próprio e herdava o --bg do body, mas desde que o site virou claro esse
-   token é branco. */
-.hero { position: relative; background: var(--dark-bg); padding-top: calc(var(--nav-h) + 90px); padding-bottom: 90px; overflow: hidden; }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 90px); padding-bottom: 90px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -491,26 +464,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    cápsula verde com padding próprio, e por isso o lado esquerdo vinha menor
    (8px contra 14px); com um ícone solto no lugar, aquele recuo deixaria o raio
    grudado na borda. */
-/* Ilha escura (as quatro do site: navbar, este texto do hero, os mockups e o
-   menu do celular): o texto do hero fica sobre a metade de cima do degrade,
-   que continua escura,
-   então aqui dentro os tokens seguem valendo os valores escuros. Sem isto, a
-   pill viria com o cinza claro de --surface-2 e a nota de rodapé com o
-   --text-subtle preto, ambos ilegíveis sobre o verde escuro. */
-/* Ilha escura. O hero voltou a ser preto enquanto o resto do site é claro,
-   então aqui dentro os tokens seguem valendo os valores escuros. Sem isto, a
-   pill viria com o cinza claro de --surface-2 e a nota de rodapé com o
-   --text-subtle preto, ambos ilegíveis sobre o fundo escuro.
-   As quatro ilhas escuras do site: navbar, este texto do hero, os mockups e o
-   menu do celular. */
-.hero-text {
-  --surface: var(--dark-surface);
-  --surface-2: var(--dark-surface-2);
-  --border: var(--dark-border);
-  --text: var(--dark-text);
-  --text-muted: var(--dark-text-muted);
-  --text-subtle: var(--dark-text-subtle);
-}
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 7px 14px; border-radius: 100px;
@@ -616,27 +569,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-inner { position: relative; }
 
 /* ---------- App mockup ---------- */
-/* Ilha escura. Os mockups são print da interface do produto, que é escura, e
-   continuam escuros mesmo com o site claro. Em vez de reescrever as 32 regras
-   de .mockup/.mk-* e as dezenas de var(--...) que o mockups.js injeta inline,
-   o container redefine os mesmos tokens localmente: o CSS lá dentro continua
-   pedindo var(--surface) e recebe o valor escuro pela cascata. Trocar o tema
-   do site de novo não exige tocar em nada disso. */
-.mockup, .feature-visual {
-  --bg: var(--dark-bg);
-  --bg-deep: var(--dark-bg-deep);
-  --surface: var(--dark-surface);
-  --surface-2: var(--dark-surface-2);
-  --border: var(--dark-border);
-  --text: var(--dark-text);
-  --text-muted: var(--dark-text-muted);
-  --text-subtle: var(--dark-text-subtle);
-  color: var(--dark-text);
-}
 .mockup {
   position: relative; border-radius: var(--r-lg);
   background: var(--surface); border: 1px solid var(--border-2);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.25), 0 0 80px var(--glow-soft);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04), 0 0 80px var(--glow-soft);
   overflow: hidden;
 }
 .mockup-glow { position: absolute; top: -40%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, var(--glow) 0%, transparent 65%); opacity: 0.3; pointer-events: none; }
@@ -678,10 +614,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .metric .l { font-size: 14px; color: var(--text-muted); margin-top: 12px; letter-spacing: -0.01em; }
 
 /* ---------- Features ---------- */
-/* Borda no lugar do glow verde: o box-shadow de 60px em rgba(0,229,153,0.14)
-   funcionava como halo sobre fundo escuro, mas sobre branco vira uma mancha
-   esverdeada em volta do card. No claro quem define o card é a borda. */
-.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 50px; background: #fff; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 40px; position: relative; box-shadow: none; }
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 50px; background: var(--surface); border-radius: var(--r-lg); padding: 40px; position: relative; box-shadow: 0 0 60px rgba(0,229,153,0.14); }
 .feature-row::before { content: ''; position: absolute; top: -1px; left: 40px; width: 30px; height: 2px; background: var(--primary); border-radius: 1px; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
@@ -696,6 +629,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
 .feature-visual { border-radius: var(--r-lg); background: var(--surface); overflow: hidden; position: relative; }
+
 
 /* As regras específicas de #recursos que existiam aqui saíram: elas escureciam
    o texto dessa seção quando ela era a única clara do site. Agora o site
@@ -824,7 +758,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
 /* ---------- Testimonials ---------- */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 35px 28px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border-2); display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.tcard { padding: 35px 28px; border-radius: var(--r-lg); background: #fff; border: none; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
 .tcard .quote { font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
@@ -843,7 +777,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .price-toggle button.active .save { background: rgba(4,20,13,0.2); color: var(--on-primary); }
 
 .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
-.pcard { padding: 32px; border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; gap: 24px; position: relative; transition: border-color .2s, transform .2s; text-align: left; }
+.pcard { padding: 32px; border-radius: var(--r-xl); background: var(--surface); border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 24px; position: relative; transition: border-color .2s, transform .2s; text-align: left; }
 .pcard:hover { transform: translateY(-4px); border-color: var(--border-active); }
 .pcard.featured { border-color: var(--border-active); background: linear-gradient(180deg, rgba(0,229,153,0.06), var(--surface) 40%); box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 60px var(--glow-soft); }
 .pcard.featured::before { content: "Mais popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--on-primary); font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 100px; letter-spacing: 0.04em; white-space: nowrap; }
@@ -1125,12 +1059,9 @@ select.demo-select:invalid { color: #374151; }
    cobrir também o recorte de cima e a barra de gestos embaixo. O topo sai de
    --nav-h para ficar sempre 40px abaixo da navbar, e o rodapé ganha o inset de
    baixo para o último botão não encostar na barra de gestos. */
-/* Ilha escura, como os mockups: o painel do celular acompanha a navbar, que
-   continua escura, e não o corpo do site, que virou branco. Com o menu aberto
-   a barra cola no topo dele, então os dois precisam ser a mesma superfície. */
-.mobile-menu { position: fixed; inset: 0; z-index: 98; background: var(--dark-bg); padding: calc(var(--nav-h) + 40px) 32px calc(32px + env(safe-area-inset-bottom, 0px)); flex-direction: column; gap: 8px; display: none; }
+.mobile-menu { position: fixed; inset: 0; z-index: 98; background: var(--bg); padding: calc(var(--nav-h) + 40px) 32px calc(32px + env(safe-area-inset-bottom, 0px)); flex-direction: column; gap: 8px; display: none; }
 .mobile-menu.open { display: flex; }
-.mobile-menu a { font-size: 20px; padding: 16px 0; border-bottom: 1px solid var(--dark-border); color: var(--dark-text); }
+.mobile-menu a { font-size: 20px; padding: 16px 0; border-bottom: 1px solid var(--border); color: var(--text); }
 .mobile-menu .btn { margin-top: 24px; }
 
 /* ---------- Responsive ---------- */
@@ -1154,6 +1085,13 @@ select.demo-select:invalid { color: #374151; }
   .feature-row.flip .feature-text { order: 0; }
   .feature-visual { order: -1; width: 100%; min-width: 0; overflow: hidden; }
   .feature-visual > div { max-width: 100%; }
+  /* Ícone alinhado à primeira linha do título. Em tela estreita o h3 quebra em
+     2 ou 3 linhas, e o align-items: center que vale no desktop deixava o ícone
+     boiando no meio do bloco, deslocado da palavra que ele acompanha. O
+     align-self do próprio ícone também precisa ceder: ele vence o align-items
+     do pai. */
+  .feature-heading { align-items: flex-start; }
+  .feature-heading .feature-icon { align-self: flex-start; }
   .metrics { grid-template-columns: repeat(2, 1fr); }
   .metric:nth-child(2) { border-right: none; }
   .metric:nth-child(1), .metric:nth-child(2) { border-bottom: 1px solid var(--border); }
