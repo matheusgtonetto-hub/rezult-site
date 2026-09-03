@@ -1220,7 +1220,7 @@ select.demo-select:invalid { color: #374151; }
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 16px; letter-spacing: -0.01em; }
-  .h2, .cta-final h2 { font-size: 31px; letter-spacing: -0.02em; line-height: 1.1; }
+  .h2, .cta-final h2 { font-size: 32px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
@@ -1270,7 +1270,7 @@ select.demo-select:invalid { color: #374151; }
   .tl-body-last { padding-bottom: 0; }
   .tl-title { font-size: 24px; }
   .tl-desc { font-size: 16px; padding-right: 10px; }
-  .lede { font-size: 16px; }
+  .lede { font-size: 17px; }
   .tl-cta-mobile { display: none !important; }
   .mobile-only-br { display: block; }
   .desktop-only-br { display: none; }
