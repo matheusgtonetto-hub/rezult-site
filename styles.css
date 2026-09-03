@@ -677,7 +677,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    background-clip e o próprio -webkit-text-fill-color, que pintam por cima. */
 #recursos .h2 {
   display: inline-block;
-  font-weight: 700;
+  font-weight: 600;
   /* Proporção, não pixel fixo. Estava em 52px, que dava a razão certa nos 40px
      do desktop, mas não acompanhava a fonte: no mobile o .h2 cai para 32px e
      os mesmos 52px viravam razão 1.63, muito mais solto que o resto do site.
