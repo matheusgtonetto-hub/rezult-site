@@ -346,7 +346,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
-.hero { position: relative; background: var(--dark-bg); padding-top: calc(var(--nav-h) + 50px); padding-bottom: 70px; overflow: hidden; }
+.hero { position: relative; background: var(--dark-bg); padding-top: calc(var(--nav-h) + 80px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -531,7 +531,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(28px, 4vw, 46px); letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
+.hero h1 { font-size: clamp(28px, 4vw, 46px); letter-spacing: normal; line-height: 1.05; font-weight: 500; color: #fff; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
