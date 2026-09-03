@@ -565,13 +565,14 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    seletor sendo mais específico. O botão do hero deixou de ser cápsula e
    passou a ter canto de 10px; os demais .hero-actions seguem redondos. */
 .hero .hero-actions .btn { font-size: 16px; border-radius: var(--r-sm) !important; }
-/* Degradê horizontal do verde à esquerda para o branco à direita, com texto
-   preto: o branco da metade direita apagaria texto branco. O peso sobe para
-   700, um degrau acima do 600 dos demais botões. */
+/* Fundo e cor de texto vêm da regra base (.btn-primary): verde --green-text
+   chapado com texto branco. O degradê de verde para branco que existiu aqui
+   foi testado e descartado, junto com o texto preto que ele exigia.
+   Sobram o peso 700 e a Poppins, única exceção tipográfica do site, por isso
+   a fonte é carregada só nesse peso. */
 .hero .hero-actions .btn-primary {
-  background: linear-gradient(90deg, var(--green-text), #fff);
-  color: #000;
   font-weight: 700;
+  font-family: 'Poppins', sans-serif;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
@@ -1246,7 +1247,7 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  .hero h1, .page-hero h1 { font-size: 36px; letter-spacing: -0.03em; line-height: 1.07; }
+  .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
@@ -1287,7 +1288,7 @@ select.demo-select:invalid { color: #374151; }
   /* A largura daqui é o que define o tamanho do botão no celular: o .btn tem
      flex: 1 e estica para preencher este container, então padding e fonte não
      alteram a largura dele nesta faixa. */
-  .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 70%; margin-left: auto; margin-right: auto; }
+  .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 80%; margin-left: auto; margin-right: auto; }
   .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
   .hero-actions .btn-secondary { font-size: 15px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
