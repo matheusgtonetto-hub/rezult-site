@@ -689,9 +689,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text .feature-heading h3 { margin-bottom: 0; align-self: center; }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
 .feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
-/* Seta circle-arrow-right (Lucide), desenhada inline como os demais ícones do
-   site em vez de carregar a biblioteca. Só aparece no celular. */
-.feature-arrow { display: none; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
@@ -1273,18 +1270,6 @@ select.demo-select:invalid { color: #374151; }
      nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
      no rodapé. Zerada, o respiro passa a ser só o padding. */
   .feature-text p { font-size: 15px; margin-bottom: 0; }
-  /* Parágrafo e seta na mesma linha, a seta empurrada para a direita e
-     centralizada na altura do texto. flex-shrink evita que ela esprema quando
-     o parágrafo é longo. */
-  .feature-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .feature-arrow { display: flex; flex-shrink: 0; color: var(--green-text); }
-  /* Traço pelo CSS, não pelo atributo do SVG: fica num lugar só, em vez de
-     repetido nos 4 cards. O valor é medido no sistema do viewBox (24x24) e o
-     ícone renderiza a 40px, então cada unidade aparece ~1.67x maior na tela.
-     O círculo externo leva um traço menor que a seta de dentro, por ser um
-     elemento próprio dentro do SVG. */
-  .feature-arrow svg { width: 40px; height: 40px; stroke-width: 1; }
-  .feature-arrow svg circle { stroke-width: 0.6; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
