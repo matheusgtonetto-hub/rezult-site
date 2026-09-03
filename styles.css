@@ -314,6 +314,19 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
 .hero { position: relative; padding-top: calc(var(--nav-h) + 90px); padding-bottom: 90px; overflow: hidden; }
+/* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
+   (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
+   981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
+   altura mínima fixa nesse ponto sobraria como espaço vazio embaixo do
+   conteúdo em vez de ajudar. */
+@media (min-width: 981px) {
+  /* min-height sozinho não centraliza nada: em fluxo normal de bloco, a
+     sobra de altura vira espaço morto abaixo do conteúdo, antes do
+     padding-bottom. flex + justify-content:center distribui essa sobra em
+     volta do .wrap, então quando o conteúdo é mais curto que 886px ele fica
+     centralizado na caixa, não colado no topo com vazio embaixo. */
+  .hero { min-height: 886px; display: flex; flex-direction: column; justify-content: center; }
+}
 .section-dotgrid { position: relative; }
 .section-bg-fx { position: absolute; inset: 0; pointer-events: none; z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); }
 .section-bg-fx .hero-glow { top: -30%; }
@@ -333,7 +346,39 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   z-index: 0;
 }
 .section-dotgrid > *:not(.section-bg-fx) { position: relative; z-index: 1; }
-.hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }.hero-grid {
+/* Degrade vertical verde escuro -> branco, no mesmo formato do hero do
+   gohighlevel.com (ver skill gohighlevel-design-system). As posições das
+   paradas (11.84%, 27.88%, 36.97%, 47.01%, 56.81%, 69.88%, 76.79%) são as
+   mesmas medidas ao vivo no site deles; só as cores trocaram, do azul deles
+   para os tokens de verde que já existem aqui (--primary-hi/--primary/
+   --primary-lo/--bg), em vez de hex novo solto.
+
+   0deg sobe de baixo para cima: a primeira parada (11.84%) é a base do hero,
+   a última (76.79%) é o topo, e dali até 100% fica só --bg de novo, batendo
+   com a navbar e com o resto do site escuro logo acima.
+
+   A transparência na base (em vez de terminar em branco puro) deixa o
+   background-color: #fff da própria .hero-bg aparecer por trás, técnica
+   idêntica à do site de referência.
+
+   A seção seguinte (#recursos) também é branca, então a base do degrade
+   encosta nela sem emenda. Se um dia #recursos voltar a ser escura, essa
+   junção vira um corte duro e vai precisar de tratamento. */
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-color: #fff;
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 11.84%,
+    var(--primary-hi) 27.88%,
+    var(--primary) 36.97%,
+    var(--primary-lo) 47.01%,
+    #063d2c 56.81%,
+    #041d14 69.88%,
+    var(--bg) 76.79%
+  );
+}
+.hero-grid {
   position: absolute; inset: 0;
   background-image: radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px);
   background-size: 18px 18px;
@@ -581,6 +626,23 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
 .feature-visual { border-radius: var(--r-lg); background: var(--surface); overflow: hidden; position: relative; }
+
+/* ---------- #recursos em fundo branco ---------- */
+/* A seção deixou de ser escura, então tudo aqui dentro que herdava --text e
+   --text-muted (claros, feitos para fundo escuro) some sobre branco e precisa
+   de cor própria. Os tons são os mesmos que as outras seções claras do site já
+   usam (#000 no título, #444 no corpo), não tons novos inventados.
+
+   O .feature-visual continua escuro de propósito: é o mockup do produto, que é
+   escuro de verdade. Print de produto escuro dentro de card claro é o mesmo
+   arranjo que o site de referência usa no hero. */
+#recursos .h2 { color: #000; }
+#recursos .lede { color: #4b5563; }
+#recursos .feature-row { background: #f7f9f8; border: 1px solid rgba(0,0,0,0.07); box-shadow: none; }
+#recursos .feature-text h3 { color: #000; }
+#recursos .feature-text p { color: #444; }
+#recursos .feature-list li { color: #1f2937; }
+#recursos .feature-icon { background: #fff; border-color: rgba(0,0,0,0.10); box-shadow: none; }
 
 /* ---------- How it works ---------- */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
