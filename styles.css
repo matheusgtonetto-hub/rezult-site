@@ -455,7 +455,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O branco aqui não vaza para os trechos em verde: .hero h1 .em vem logo abaixo
    com especificidade maior e, além disso, pinta o texto por gradiente clipado
    com -webkit-text-fill-color: transparent, que ignora color. */
-.hero h1 { font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.02em; line-height: 1.05; font-weight: 500; color: #fff; }
+/* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
+   tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
+.hero h1 { font-size: clamp(28px, 4vw, 48px); letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
 .em { color: var(--primary); }
 .hero h1 .em, .em-shine-text {
   background: linear-gradient(90deg, var(--primary-lo), var(--primary-hi), var(--primary), var(--primary-hi), var(--primary-lo));
@@ -1032,6 +1034,10 @@ select.demo-select:invalid { color: #374151; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
   .hero h1, .page-hero h1 { font-size: 39px; letter-spacing: -0.03em; line-height: 1.07; }
+  /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
+     o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
+     com o aperto, que não foi pedido para elas. */
+  .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 17px; letter-spacing: -0.01em; }
   .h2, .cta-final h2 { font-size: 37px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
