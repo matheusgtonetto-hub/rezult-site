@@ -48,7 +48,7 @@
   --r-xl: 28px;
 
   /* Layout */
-  --maxw: 1300px;
+  --maxw: 1200px;
   /* Altura real da navbar, e é isso que o nome promete. Vinha desencontrada da
      barra (84px na versão flutuante, 68px depois), o que embutia um erro fixo em
      todo calc() derivado. Com o valor verdadeiro, cada consumidor soma abaixo
@@ -67,7 +67,7 @@
      alguém for mexer nisso de novo por causa daquela tira: já foi tentado com
      padding env(), fundo opaco e pseudo-elemento. Nenhum funciona, e não é
      defeito do site. */
-  --nav-h: calc(60px + env(safe-area-inset-top, 0px));
+  --nav-h: calc(70px + env(safe-area-inset-top, 0px));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -197,9 +197,9 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  /* Com box-sizing border-box, a faixa útil é sempre 60px: o padding só empurra
+  /* Com box-sizing border-box, a faixa útil é sempre 70px: o padding só empurra
      logo e botões para baixo do recorte quando ele existe. No Safari em
-     navegação normal o env() vale 0 e isto vira height: 60px, padding: 0. */
+     navegação normal o env() vale 0 e isto vira height: 70px, padding: 0. */
   height: var(--nav-h);
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
@@ -227,7 +227,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 }
 /* Rolou 12px: a barra descola do topo e vira um cartão flutuante.
 
-   Ela continua fixed e do mesmo tamanho útil (60px); o que muda é que ganha
+   Ela continua fixed e do mesmo tamanho útil (70px); o que muda é que ganha
    uma margem em volta, cantos e sombra. A largura sai de 100% para o mesmo
    --maxw do .wrap, então no estado flutuante a barra e o conteúdo da página
    passam a ter exatamente a mesma caixa — é isso que faz o cartão parecer
@@ -242,7 +242,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
    branco some em cima dele. O destaque vem do recorte e da sombra. */
 .nav.scrolled {
   top: calc(env(safe-area-inset-top, 0px) + 12px);
-  height: 60px;
+  height: 70px;
   padding-top: 0;
   width: min(var(--maxw), calc(100% - 32px));
   margin-inline: auto;
@@ -275,8 +275,8 @@ body.menu-aberto .nav {
 }
 body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Sem override de max-width/padding: a barra vai de ponta a ponta, mas o
-   conteúdo segue o .wrap global (max-width 1300px, centralizado), senão logo e
-   botões grudariam nas bordas da tela em monitor largo. */
+   conteúdo segue o --maxw do .wrap global, centralizado, senão logo e botões
+   grudariam nas bordas da tela em monitor largo. */
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .nav-left { display: flex; align-items: center; flex-shrink: 0; }
 .nav-links { flex: 1; display: flex; gap: 30px; justify-content: center; }
@@ -292,7 +292,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O radius dos dois botões da navbar é o mesmo --r-sm (10px) do CTA do hero:
    desde que o botão do hero deixou de ser cápsula, um par de pílulas aqui em
    cima destoaria do único botão que a página realmente quer que se clique. */
-.nav-right .btn { border-radius: var(--r-sm); font-size: 13px; padding: 8px 16px; box-shadow: 0 0 16px rgba(0,229,153,0.35); letter-spacing: 0; }
+/* font-weight precisa estar aqui: o .btn-primary pede 600 e, sozinho, venceria
+   por vir depois no arquivo. Este seletor tem mais classes (maior
+   especificidade), então o 500 abaixo vence independente da ordem. */
+.nav-right .btn { border-radius: var(--r-sm); font-size: 13px; font-weight: 500; padding: 8px 16px; box-shadow: 0 0 16px rgba(0,229,153,0.35); letter-spacing: 0; }
 .nav-cta-ghost { font-size: 12px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
 .nav-cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
 .nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid var(--border); }
@@ -310,7 +313,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 35px); padding-bottom: 90px; overflow: hidden; }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 90px); padding-bottom: 90px; overflow: hidden; }
 .section-dotgrid { position: relative; }
 .section-bg-fx { position: absolute; inset: 0; pointer-events: none; z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); mask-image: linear-gradient(to bottom, #000 0%, transparent 60%); }
 .section-bg-fx .hero-glow { top: -30%; }
@@ -416,7 +419,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   35%      { transform: translate(-25px, -55px) scale(1.05); }
   68%      { transform: translate(45px,  35px)  scale(0.95); }
 }
-.hero .wrap { position: relative; z-index: 1; max-width: 1220px; }
+/* Sem max-width próprio: o hero segue o --maxw do .wrap global, como o resto
+   do site. Tinha 1220px, mais estreito que todas as outras seções — o z-index
+   e o position seguem, são o que empilha o conteúdo acima
+   do fundo animado do hero. */
+.hero .wrap { position: relative; z-index: 1; }
 /* O padding é simétrico desde que a etiqueta "GANHE" saiu daqui. Ela era uma
    cápsula verde com padding próprio, e por isso o lado esquerdo vinha menor
    (8px contra 14px); com um ícone solto no lugar, aquele recuo deixaria o raio
@@ -637,21 +644,37 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .carousel-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; }
 
 /* ---------- Client segments grid ---------- */
-.seg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.seg-card { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 3; border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
-.seg-card:hover { border-color: var(--border-active); transform: translateY(-3px); }
-.seg-card image-slot { width: 100%; height: 100%; display: block; }
-.seg-card .seg-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,8,10,0.55) 0%, rgba(5,8,10,0.15) 40%, rgba(5,8,10,0.85) 100%); pointer-events: none; z-index: 2; }
-.seg-card .seg-label { position: absolute; top: 18px; left: 18px; z-index: 3; font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: rgba(0,229,153,0.18); border: 1px solid var(--border-active); backdrop-filter: blur(10px); padding: 7px 13px; border-radius: 100px; }
-.seg-card .seg-foot { position: absolute; bottom: 18px; left: 18px; right: 18px; z-index: 3; display: flex; align-items: center; justify-content: space-between; }
-.seg-card .seg-foot .t { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #fff; }
-.seg-card .seg-foot .arrow { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; color: #fff; }
-.seg-card .seg-foot .arrow svg { width: 16px; height: 16px; }
-.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 3; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0,229,153,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; gap: 18px; }
+/* Cartão de ícone + título + descrição, no lugar da foto de fundo com legenda
+   em cápsula que era o design anterior. O tile do ícone repete de propósito os
+   valores de .bcard .b-icon (mesmo tamanho, radius, superfície e glow interno)
+   — é o mesmo vocabulário visual que a seção de Suporte já usa duas dobras
+   abaixo, então as duas passam a ler como uma família em vez de dois sistemas
+   soltos.
+
+   7 segmentos + o card final = 8, por isso a grade é 4 colunas (2 linhas
+   parelhas) e não mais 3. Os cards não têm mais aspect-ratio fixo: com título
+   e descrição de tamanhos variados, uma caixa 4:3 rígida cortaria texto longo
+   e sobraria vazio no texto curto — melhor deixar a altura nascer do
+   conteúdo, e a própria grade estica cada linha para bater com o card mais
+   alto dela. O card final acompanha, pelo mesmo motivo. */
+.seg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.seg-card {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  border: 1px solid var(--border-2); background: var(--surface);
+  transition: border-color .2s, transform .2s, background .2s;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 28px;
+}
+.seg-card:hover { border-color: var(--border-active); background: var(--surface-2); transform: translateY(-3px); }
+.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); box-shadow: inset 0 0 20px var(--glow-soft); flex-shrink: 0; }
+.seg-card .seg-icon svg { width: 24px; height: 24px; }
+.seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; color: var(--text); }
+.seg-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0,229,153,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
 .seg-cta .seg-cta-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 75%); mask-image: radial-gradient(ellipse at center, #000, transparent 75%); opacity: 0.5; }
 .seg-cta > * { position: relative; z-index: 1; }
-.seg-cta h3 { font-size: 24px; letter-spacing: -0.03em; line-height: 1.1; font-weight: 700; }
-.seg-cta p { font-size: 14px; color: var(--text-muted); max-width: 240px; }
+.seg-cta h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
+.seg-cta p { font-size: 14px; color: var(--text-muted); max-width: 220px; }
 
 @media (max-width: 980px) {
   .fcards { grid-template-columns: 1fr; }
@@ -731,7 +754,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
-#demo .wrap, #demo-planos .wrap { max-width: 1100px; }
 .demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
