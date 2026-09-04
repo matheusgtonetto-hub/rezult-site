@@ -1466,7 +1466,7 @@ select.demo-select:invalid { color: #374151; }
   border-radius: 0.75rem;
   border: none;
   outline: none;
-  padding: 10px 16px;
+  padding: 10px 23px;
   min-height: 44px;
   min-width: 102px;
   font-family: inherit;
@@ -1513,10 +1513,10 @@ select.demo-select:invalid { color: #374151; }
 .btn-pontos-inner {
   z-index: 2; gap: 6px; position: relative; width: 100%;
   color: #fff; display: inline-flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 500; line-height: 1.5;
+  font-size: 16px; font-weight: 500; line-height: 1.5;
   transition: color 0.2s ease-in-out;
 }
-.btn-pontos-icon { width: 16px; height: 16px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
+.btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
 .btn-pontos:hover .btn-pontos-icon { transform: translateX(2px); }
 .btn-pontos:hover .btn-pontos-icon path { animation: dash 0.8s linear forwards; }
 @keyframes dash {
