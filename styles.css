@@ -699,8 +699,15 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text { padding: 120px 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
-.feature-heading { margin-bottom: 10px; }
-.feature-text .feature-heading h3 { margin-bottom: 0; }
+/* Só o desenho, sem a caixa: saíram fundo, borda e radius. A largura fixa de
+   40px saiu junto — sem moldura visível ela viraria 10px de vazio de cada lado
+   do SVG de 20px, e o gap de 16px do .feature-heading pareceria maior do que é.
+   Agora a caixa encolhe no ícone e o gap conta a partir do próprio desenho. */
+.feature-icon { display: flex; align-items: center; justify-content: center; color: var(--green-text); margin-bottom: 24px; flex-shrink: 0; }
+.feature-icon svg { width: 26px; height: 26px; }
+.feature-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.feature-text .feature-heading h3 { margin-bottom: 0; align-self: center; }
+.feature-heading .feature-icon { margin-bottom: 0; align-self: center; color: var(--hl-fg, var(--green-text)); }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
 /* Tema de cor do card: definido no .feature-heading e lido pela palavra em destaque. */
 .tema-verde   { --hl-fg: #067A4B; --hl-bg: #DFF6EC; }
