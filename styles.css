@@ -175,7 +175,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--primary);
   flex-shrink: 0;
 }
-.section-head { max-width: 900px; margin-bottom: 40px; }
+.section-head { max-width: 900px; margin-bottom: 45px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
 .section-sub { font-size: 18px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
@@ -696,7 +696,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    altura cheia do card; com center ela ficaria centralizada e sobraria faixa
    de fundo em cima e embaixo. */
 .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 0; position: relative; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.14); }
-.feature-text { padding: 40px; align-self: center; }
+.feature-text { padding: 120px 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
 .feature-heading { margin-bottom: 10px; }
@@ -710,6 +710,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
+/* Seta circle-arrow-right (Lucide), desenhada inline como os demais ícones do
+   site em vez de carregar a biblioteca. Só aparece no celular. */
+.feature-arrow { display: none; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
@@ -1260,7 +1263,7 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .hero-glow,
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
-  .feature-text { padding: 35px 24px; }
+  .feature-text { padding: 45px 24px; }
   /* Sombra mais forte no celular. A camada difusa quase dobra de opacidade e
      sobe o deslocamento; a de contato escurece junto, senão o card parece
      flutuar sem tocar a superfície. */
@@ -1321,6 +1324,18 @@ select.demo-select:invalid { color: #374151; }
      nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
      no rodapé. Zerada, o respiro passa a ser só o padding. */
   .feature-text p { font-size: 15px; margin-bottom: 0; }
+  /* Parágrafo e seta na mesma linha, a seta empurrada para a direita e
+     centralizada na altura do texto. flex-shrink evita que ela esprema quando
+     o parágrafo é longo. */
+  .feature-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .feature-arrow { display: flex; flex-shrink: 0; color: var(--green-text); }
+  /* Traço pelo CSS, não pelo atributo do SVG: fica num lugar só, em vez de
+     repetido nos 4 cards. O valor é medido no sistema do viewBox (24x24) e o
+     ícone renderiza a 40px, então cada unidade aparece ~1.67x maior na tela.
+     O círculo externo leva um traço menor que a seta de dentro, por ser um
+     elemento próprio dentro do SVG. */
+  .feature-arrow svg { width: 40px; height: 40px; stroke-width: 1; }
+  .feature-arrow svg circle { stroke-width: 0.6; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
