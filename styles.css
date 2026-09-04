@@ -247,11 +247,13 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      mesmo dia, porque destoava do resto do site, que é escuro de ponta a
      ponta. Ficou o fundo cheio, com a emenda como custo aceito.
 
-     O backdrop-filter saiu junto do rgba: ele desfoca o que passa por tras, e
-     com fundo opaco esse desfoque fica 100% coberto. Era custo de GPU
-     invisivel, sentido justamente em celular. */
-  background: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+     O backdrop-filter voltou junto com o rgba: com fundo translúcido ele tem o
+     que desfocar, e é o que impede o conteúdo de passar nítido por trás da
+     barra. Enquanto o fundo era opaco ele ficava 100% coberto, custo de GPU
+     invisível, e por isso tinha sido removido daqui. */
+  background: rgba(5, 10, 7, 0.90);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   box-shadow: none;
   transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
               border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
@@ -278,8 +280,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   width: min(var(--maxw), calc(100% - 32px));
   margin-inline: auto;
   border-radius: var(--r-md);
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 /* O .wrap já reserva 32px de respiro nas laterais para o conteúdo não grudar
    na borda da tela. Flutuando, quem dá esse respiro é a própria margem do
@@ -316,8 +318,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O letter-spacing saiu junto com o uppercase: os 0.04em existiam para abrir a
    caixa alta, que precisa de mais respiro entre letras para não fechar. Em
    caixa mista esse mesmo tracking deixa as palavras espaçadas demais. */
-.nav-links a { font-size: 16px; color: rgba(5, 10, 7, 0.72); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
-.nav-links a:hover { color: #050A07; }
+.nav-links a { font-size: 16px; color: rgba(244, 246, 244, 0.80); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
+.nav-links a:hover { color: #fff; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 /* Sem font-weight aqui, de propósito. Este seletor já teve um 500 para devolver
    o Medium só ao botão da navbar; agora que ele é SemiBold como os outros, o
@@ -329,9 +331,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    por vir depois no arquivo. Este seletor tem mais classes (maior
    especificidade), então o 500 abaixo vence independente da ordem. */
 .nav-right .btn { border-radius: var(--r-sm); font-size: 13px; font-weight: 500; padding: 8px 16px; box-shadow: none; letter-spacing: 0; }
-.nav-cta-ghost { font-size: 12px; color: #050A07; background: transparent; border: 1px solid rgba(5,10,7,0.22); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
-.nav-cta-ghost:hover { border-color: rgba(5,10,7,0.55); color: #050A07; }
-.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(5,10,7,0.18); color: #050A07; }
+.nav-cta-ghost { font-size: 12px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
+.nav-cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(255,255,255,0.25); color: #fff; }
 
 /* ---------- Logo ---------- */
 .logo { display: inline-flex; align-items: center; }
