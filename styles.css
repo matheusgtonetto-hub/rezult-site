@@ -535,7 +535,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(28px, 4vw, 46px); letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
+.hero h1 { font-size: clamp(28px, 4vw, 46px); font-family: 'Poppins', sans-serif; letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -554,8 +554,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-/* Poppins só neste subtítulo. O resto do site é Geist, então a fonte é
-   carregada apenas no peso 400, que é o único usado aqui. */
+/* Poppins no título e neste subtítulo, as duas únicas exceções do site, que é
+   Geist no resto. Por isso a fonte é carregada só nos pesos 600 (título) e
+   400 (subtítulo). */
 .hero-sub { font-size: 17px; font-family: 'Poppins', sans-serif; color: #D6DAD8; line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
@@ -688,7 +689,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-row.flip .feature-text { order: 2; }
 .feature-icon { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); margin-bottom: 24px; box-shadow: none; flex-shrink: 0; }
 .feature-icon svg { width: 20px; height: 20px; }
-.feature-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.feature-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 5px; }
 .feature-heading .feature-icon { margin-bottom: 0; align-self: center; }
 .feature-text .feature-heading h3 { margin-bottom: 0; align-self: center; }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
@@ -724,7 +725,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    o .h2 cai para 32px. */
 #recursos .h2 {
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.07;
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -1209,7 +1210,7 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .hero-glow,
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
-  .feature-text { padding: 35px 24px; }
+  .feature-text { padding: 25px 24px; }
   /* Empilhado: texto em cima, mockup embaixo. O order: -1 que existia no
      .feature-visual puxava o mockup para o topo; sem ele os dois seguem a
      ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
@@ -1254,7 +1255,7 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  .hero h1, .page-hero h1 { font-size: 34px; letter-spacing: -0.03em; line-height: 1.07; }
+  .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
