@@ -533,7 +533,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(28px, 4vw, 46px); letter-spacing: normal; line-height: 1.05; font-weight: 500; color: #fff; }
+/* Poppins só neste título. O resto do site é Geist, então a fonte é carregada
+   apenas no peso 600, que é o único usado aqui. */
+.hero h1 { font-size: clamp(28px, 4vw, 46px); font-family: 'Poppins', sans-serif; letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -722,16 +724,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   font-weight: 600;
   line-height: 1.1;
 }
-/* Mesmo degradê nos títulos dos cards. Aqui não precisa de inline-block: o h3
-   vive dentro do .feature-heading, que é flex, e item de flex já encolhe até o
-   conteúdo. O degradê percorre o texto sem ajuste extra. */
-#recursos .feature-text h3 {
-  background: linear-gradient(90deg, rgb(3, 16, 29) 0.13%, rgb(149, 141, 141) 109.5%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
+/* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
+   com o background foram embora o background-clip e o
+   -webkit-text-fill-color: transparent, que existiam só para o degradê
+   aparecer e, deixados para trás, apagariam os títulos. */
 
 /* As regras específicas de #recursos que existiam aqui saíram: elas escureciam
    o texto dessa seção quando ela era a única clara do site. Agora o site
