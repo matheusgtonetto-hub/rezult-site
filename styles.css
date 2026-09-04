@@ -251,7 +251,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      que desfocar, e é o que impede o conteúdo de passar nítido por trás da
      barra. Enquanto o fundo era opaco ele ficava 100% coberto, custo de GPU
      invisível, e por isso tinha sido removido daqui. */
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: none;
