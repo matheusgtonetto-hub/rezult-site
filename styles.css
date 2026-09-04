@@ -587,10 +587,22 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    chapado com texto branco. Já foram testados e descartados aqui o degradê de
    verde para branco (com o texto preto que ele exigia) e a Poppins, que era a
    única exceção tipográfica do site. */
+/* Só o botão do hero sai do neon: o "Teste Grátis" da navbar e os demais CTAs
+   do site seguem em --primary com o glow. Este verde é bem mais fechado, então
+   o texto vai a branco (4,2:1) e não ao --on-primary quase preto que o neon
+   exige. box-shadow: none precisa estar escrito: sem ele o botão herdaria o
+   anel e o halo verdes de .btn-primary. */
 .hero .hero-actions .btn-primary {
   font-weight: 600;
   /* Sem o aperto de -0.01em que o .btn base aplica. */
   letter-spacing: 0;
+  background: rgb(18, 140, 105);
+  color: #fff;
+  box-shadow: none;
+}
+.hero .hero-actions .btn-primary:hover {
+  background: rgb(14, 112, 84);
+  box-shadow: none;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
@@ -712,9 +724,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Tema de cor do card: declarado no .feature-text para alcançar os três que o
    usam — o ícone, a palavra em destaque no título e a seta do rodapé. */
 .tema-verde   { --hl-fg: #067A4B; --hl-bg: #DFF6EC; }
-.tema-laranja { --hl-fg: #C2410C; --hl-bg: #FDEBE0; }
-.tema-azul    { --hl-fg: #1D4ED8; --hl-bg: #E3EAFD; }
-.tema-roxo    { --hl-fg: #6D28D9; --hl-bg: #EEE7FB; }
+.tema-laranja { --hl-fg: #EA580C; --hl-bg: #FEF0E6; }
+.tema-azul    { --hl-fg: #0284C7; --hl-bg: #E6F4FE; }
+.tema-roxo    { --hl-fg: #7C3AED; --hl-bg: #F3EDFE; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
