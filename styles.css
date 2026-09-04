@@ -247,13 +247,10 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      mesmo dia, porque destoava do resto do site, que é escuro de ponta a
      ponta. Ficou o fundo cheio, com a emenda como custo aceito.
 
-     O backdrop-filter voltou junto com o rgba: com fundo translúcido ele tem o
-     que desfocar, e é o que impede o conteúdo de passar nítido por trás da
-     barra. Enquanto o fundo era opaco ele ficava 100% coberto, custo de GPU
-     invisível, e por isso tinha sido removido daqui. */
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+     O backdrop-filter sai sempre que o fundo volta a ser opaco: sem
+     transparência ele não tem o que desfocar e fica 100% coberto, custo de GPU
+     invisível, sentido justamente em celular. */
+  background: #fff;
   box-shadow: none;
   transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
               border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
