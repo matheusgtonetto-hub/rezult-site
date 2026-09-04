@@ -1210,7 +1210,7 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .hero-glow,
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
-  .feature-text { padding: 25px 24px; }
+  .feature-text { padding: 30px 24px; }
   /* Empilhado: texto em cima, mockup embaixo. O order: -1 que existia no
      .feature-visual puxava o mockup para o topo; sem ele os dois seguem a
      ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
@@ -1261,7 +1261,7 @@ select.demo-select:invalid { color: #374151; }
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 17px; letter-spacing: 0; }
-  .h2, .cta-final h2 { font-size: 32px; letter-spacing: -0.02em; line-height: 1.1; }
+  .h2, .cta-final h2 { font-size: 34px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
