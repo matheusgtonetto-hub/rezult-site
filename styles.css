@@ -709,7 +709,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text .feature-heading h3 { margin-bottom: 0; align-self: center; }
 .feature-heading .feature-icon { margin-bottom: 0; align-self: center; color: var(--hl-fg, var(--green-text)); }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
-/* Tema de cor do card: definido no .feature-heading e lido pela palavra em destaque. */
+/* Tema de cor do card: declarado no .feature-text para alcançar os três que o
+   usam — o ícone, a palavra em destaque no título e a seta do rodapé. */
 .tema-verde   { --hl-fg: #067A4B; --hl-bg: #DFF6EC; }
 .tema-laranja { --hl-fg: #C2410C; --hl-bg: #FDEBE0; }
 .tema-azul    { --hl-fg: #1D4ED8; --hl-bg: #E3EAFD; }
@@ -718,8 +719,24 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
 /* Seta circle-arrow-right (Lucide), desenhada inline como os demais ícones do
-   site em vez de carregar a biblioteca. Só aparece no celular. */
-.feature-arrow { display: none; }
+   site em vez de carregar a biblioteca.
+
+   Parágrafo e seta na mesma linha, a seta empurrada para a direita pelo
+   space-between e centralizada na altura do texto. flex-shrink evita que ela
+   esprema quando o parágrafo é longo. O respiro de baixo sai do <p> e vai para
+   o .feature-foot: com align-items: center o flex centraliza a caixa de margem,
+   e a margem no parágrafo empurraria a seta uns 12px para baixo do centro
+   óptico do texto. */
+.feature-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.feature-foot p { margin-bottom: 0; }
+.feature-arrow { display: flex; flex-shrink: 0; color: var(--hl-fg, var(--green-text)); }
+/* Traço pelo CSS, não pelo atributo do SVG: fica num lugar só, em vez de
+   repetido nos 4 cards. O valor é medido no sistema do viewBox (24x24) e o
+   ícone renderiza a 40px, então cada unidade aparece ~1.67x maior na tela.
+   O círculo externo leva um traço menor que a seta de dentro, por ser um
+   elemento próprio dentro do SVG. */
+.feature-arrow svg { width: 40px; height: 40px; stroke-width: 1; }
+.feature-arrow svg circle { stroke-width: 0.6; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
@@ -1067,14 +1084,14 @@ select.demo-select:invalid { color: #374151; }
   z-index: -1;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(90px);
+  filter: blur(70px);
 }
 /* Superior direita: a maior, é ela que dá o tom. */
 .hero-mockup-wrap::before {
   top: -32%; right: -28%;
   width: 100%; height: 105%;
   background: radial-gradient(circle, var(--primary) 0%, var(--primary) 18%, transparent 80%);
-  opacity: 0.65;
+  opacity: 0.45;
 }
 /* Inferior esquerda: menor e mais fechada, no verde escuro, para o brilho não
    ficar simétrico e chapado. */
@@ -1082,7 +1099,7 @@ select.demo-select:invalid { color: #374151; }
   bottom: -28%; left: -30%;
   width: 85%; height: 90%;
   background: radial-gradient(circle, var(--primary-lo) 0%, var(--primary-lo) 15%, transparent 80%);
-  opacity: 0.50;
+  opacity: 0.45;
 }
 .hero-mockup-img { width: 100%; height: auto; display: block; transform-origin: center bottom; will-change: transform; position: relative; }
 
@@ -1253,6 +1270,14 @@ select.demo-select:invalid { color: #374151; }
   .nav-links, .nav-cta-ghost { display: none; }
   .nav-burger { display: flex; }
   .hero.vb .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+  /* Os glows são medidos em % da imagem, e a imagem passa a ocupar a largura
+     inteira aqui. Com isso eles cobrem uma fatia bem maior da tela do que no
+     desktop, onde a imagem é só uma das duas colunas — mesma opacidade, leitura
+     muito mais forte. Compensa com menos opacidade e blur menor. */
+  .hero-mockup-wrap::before { opacity: 0.26; }
+  .hero-mockup-wrap::after { opacity: 0.26; }
+  .hero-mockup-wrap::before,
+  .hero-mockup-wrap::after { filter: blur(50px); }
   .hero.vb .hero-text { align-items: center; text-align: center; }
   .hero.vb .hero-sub { margin-left: auto; margin-right: auto; }
   .hero.vb .hero-actions { justify-content: center; }
@@ -1331,18 +1356,7 @@ select.demo-select:invalid { color: #374151; }
      nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
      no rodapé. Zerada, o respiro passa a ser só o padding. */
   .feature-text p { font-size: 15px; margin-bottom: 0; }
-  /* Parágrafo e seta na mesma linha, a seta empurrada para a direita e
-     centralizada na altura do texto. flex-shrink evita que ela esprema quando
-     o parágrafo é longo. */
-  .feature-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .feature-arrow { display: flex; flex-shrink: 0; color: var(--green-text); }
-  /* Traço pelo CSS, não pelo atributo do SVG: fica num lugar só, em vez de
-     repetido nos 4 cards. O valor é medido no sistema do viewBox (24x24) e o
-     ícone renderiza a 40px, então cada unidade aparece ~1.67x maior na tela.
-     O círculo externo leva um traço menor que a seta de dentro, por ser um
-     elemento próprio dentro do SVG. */
-  .feature-arrow svg { width: 40px; height: 40px; stroke-width: 1; }
-  .feature-arrow svg circle { stroke-width: 0.6; }
+  .feature-foot { margin-bottom: 0; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
