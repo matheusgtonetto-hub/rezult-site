@@ -1466,7 +1466,7 @@ select.demo-select:invalid { color: #374151; }
   border-radius: 0.75rem;
   border: none;
   outline: none;
-  padding: 12px 23px;
+  padding: 10px 23px;
   min-height: 44px;
   min-width: 102px;
   font-family: inherit;
@@ -1535,7 +1535,9 @@ select.demo-select:invalid { color: #374151; }
    altura útil, e os 44px de min-height mais o padding de 23px do hero deixariam
    o CTA dominando a linha. Fonte, padding e radius voltam aos valores que o
    .nav-right .btn já usava. */
-.nav-right .btn-pontos { min-height: 34px; min-width: 0; padding: 6px 16px; border-radius: var(--r-sm); text-decoration: none; }
+.nav-right .btn-pontos { min-height: 34px; min-width: 0; padding: 6px 10px; border-radius: var(--r-sm); text-decoration: none; }
 .nav-right .btn-pontos::before { border-radius: calc(var(--r-sm) - 1px); }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
-.nav-right .btn-pontos-inner { font-size: 13px; }
+.nav-right .btn-pontos-inner { font-size: 14px; }
+/* Escopado no hero para o botão da navbar seguir no 500 da regra base. */
+.hero-actions .btn-pontos-inner { font-weight: 400; }
