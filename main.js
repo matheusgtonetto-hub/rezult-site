@@ -57,7 +57,9 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     const icoContent = t.img
       ? `<img src="${t.img}" alt="${t.nm}" />`
       : `<svg viewBox="0 0 24 24" fill="none" stroke="${t.c}" stroke-width="1.8">${t.svg}</svg>`;
-    return `<div class="mq-item" style="--accent:${t.c}"><span class="ico"${icoStyle}>${icoContent}</span><span class="nm">${t.nm}</span></div>`;
+    // Sem o nome escrito ao lado, o logo passa a ser a única identificação:
+    // aria-label devolve esse nome para leitor de tela e para o img sem alt.
+    return `<div class="mq-item"><span class="ico" role="img" aria-label="${t.nm}"${icoStyle}>${icoContent}</span></div>`;
   };
   const half = Math.ceil(tools.length / 2);
   const seq1 = tools.slice(0, half).concat(tools.slice(0, half));

@@ -842,11 +842,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .marquee-track.marquee-reverse { animation-name: marquee-reverse; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marquee-reverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.mq-item { display: flex; align-items: center; gap: 14px; padding: 10px 20px; border-radius: var(--r-md); white-space: nowrap; flex-shrink: 0; border: 1.5px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, var(--accent) 0%, var(--accent) 35%, transparent 80%) border-box; }
+/* A borda colorida era um truque de dois backgrounds: um em padding-box para
+   o miolo e um degradê da cor da marca em border-box, aparecendo pela borda
+   transparente. Saiu inteiro; agora é uma borda de 1px de verdade. */
+.mq-item { display: flex; align-items: center; padding: 10px 20px; border-radius: 15px; white-space: nowrap; flex-shrink: 0; border: 1px solid var(--border); background: #fff; }
 .mq-item .ico { padding: 0; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
 .mq-item .ico svg { width: 30px; height: 30px; }
 .mq-item .ico img { width: 30px; height: 30px; object-fit: contain; border-radius: 6px; }
-.mq-item .nm { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; } }
 
 /* ---------- Benefits carousel ---------- */
@@ -1140,8 +1142,6 @@ select.demo-select:invalid { color: #374151; }
 .impl-card-desc { font-size: 15px; line-height: 1.4; color: var(--text-muted); margin: 0; }
 
 /* ---------- Seção Integrações (fundo claro) ---------- */
-.tint-center .mq-item { background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, var(--accent) 0%, var(--accent) 35%, transparent 80%) border-box; }
-.tint-center .mq-item .nm { color: #111; }
 
 /* ---------- Seções "Escale seus resultados" (fundo branco) ---------- */
 #implementacao::before { opacity: 0; }
