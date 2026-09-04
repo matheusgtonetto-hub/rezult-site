@@ -586,7 +586,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Poppins no título e neste subtítulo, as duas únicas exceções do site, que é
    Geist no resto. Por isso a fonte é carregada só nos pesos 600 (título) e
    400 (subtítulo). */
-.hero-sub { font-size: 24px; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--text-muted); line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-size: 24px; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
