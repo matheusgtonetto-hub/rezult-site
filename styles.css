@@ -1220,7 +1220,7 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .hero-glow,
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
-  .feature-text { padding: 30px 24px; }
+  .feature-text { padding: 35px 24px; }
   /* Sombra mais forte no celular. A camada difusa quase dobra de opacidade e
      sobe o deslocamento; a de contato escurece junto, senão o card parece
      flutuar sem tocar a superfície. */
