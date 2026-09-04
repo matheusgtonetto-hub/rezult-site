@@ -564,7 +564,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(38px, 4.2vw, 50px); letter-spacing: normal; line-height: 1.05; font-weight: 800; }
+.hero h1 { font-size: clamp(38px, 4.2vw, 50px); letter-spacing: normal; line-height: 1.05; font-weight: 700; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1346,7 +1346,7 @@ select.demo-select:invalid { color: #374151; }
   /* A margem de 24px separava o parágrafo da lista de checks, que fica oculta
      nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
      no rodapé. Zerada, o respiro passa a ser só o padding. */
-  .feature-text p { font-size: 15px; margin-bottom: 0; }
+  .feature-text p { margin-bottom: 0; }
   .feature-foot { margin-bottom: 0; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
