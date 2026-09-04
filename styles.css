@@ -251,7 +251,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
      que desfocar, e é o que impede o conteúdo de passar nítido por trás da
      barra. Enquanto o fundo era opaco ele ficava 100% coberto, custo de GPU
      invisível, e por isso tinha sido removido daqui. */
-  background: rgba(5, 10, 7, 0.90);
+  background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: none;
@@ -280,8 +280,8 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
   width: min(var(--maxw), calc(100% - 32px));
   margin-inline: auto;
   border-radius: var(--r-md);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 /* O .wrap já reserva 32px de respiro nas laterais para o conteúdo não grudar
    na borda da tela. Flutuando, quem dá esse respiro é a própria margem do
@@ -318,8 +318,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O letter-spacing saiu junto com o uppercase: os 0.04em existiam para abrir a
    caixa alta, que precisa de mais respiro entre letras para não fechar. Em
    caixa mista esse mesmo tracking deixa as palavras espaçadas demais. */
-.nav-links a { font-size: 16px; color: rgba(244, 246, 244, 0.80); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
-.nav-links a:hover { color: #fff; }
+.nav-links a { font-size: 16px; color: rgba(5, 10, 7, 0.72); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
+.nav-links a:hover { color: #050A07; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 /* Sem font-weight aqui, de propósito. Este seletor já teve um 500 para devolver
    o Medium só ao botão da navbar; agora que ele é SemiBold como os outros, o
@@ -331,9 +331,15 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    por vir depois no arquivo. Este seletor tem mais classes (maior
    especificidade), então o 500 abaixo vence independente da ordem. */
 .nav-right .btn { border-radius: var(--r-sm); font-size: 13px; font-weight: 500; padding: 8px 16px; box-shadow: none; letter-spacing: 0; }
-.nav-cta-ghost { font-size: 12px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
-.nav-cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
-.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(255,255,255,0.25); color: #fff; }
+/* Laranja só com a barra flutuante: colada no topo o botão segue verde e muda
+   quando o usuário rola. O tom é fechado (#EA580C) e não um laranja aberto:
+   com texto branco ele rende 3.5:1, enquanto um laranja mais claro cairia
+   abaixo de 3:1 e o texto ficaria lavado. */
+.nav.scrolled .nav-right .btn-primary { background: #EA580C; }
+.nav.scrolled .nav-right .btn-primary:hover { background: #C2410C; }
+.nav-cta-ghost { font-size: 12px; color: #050A07; background: transparent; border: 1px solid rgba(5,10,7,0.22); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
+.nav-cta-ghost:hover { border-color: rgba(5,10,7,0.55); color: #050A07; }
+.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(5,10,7,0.18); color: #050A07; }
 
 /* ---------- Logo ---------- */
 .logo { display: inline-flex; align-items: center; }
@@ -535,7 +541,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(28px, 4vw, 46px); font-family: 'Poppins', sans-serif; letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
+.hero h1 { font-size: clamp(28px, 4vw, 46px); letter-spacing: normal; line-height: 1.05; font-weight: 600; color: #fff; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
