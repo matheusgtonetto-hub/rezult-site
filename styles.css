@@ -336,7 +336,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .nav.scrolled .nav-right .btn-primary:hover { background: #C2410C; }
 .nav-cta-ghost { font-size: 12px; color: #050A07; background: transparent; border: 1px solid rgba(5,10,7,0.22); border-radius: var(--r-sm); padding: 8px 16px; transition: border-color .15s, color .15s; font-weight: 500; }
 .nav-cta-ghost:hover { border-color: rgba(5,10,7,0.55); color: #050A07; }
-.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(5,10,7,0.18); color: #050A07; }
+.nav-burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border: none; background: none; color: #050A07; }
 
 /* ---------- Logo ---------- */
 .logo { display: inline-flex; align-items: center; }
@@ -696,6 +696,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-heading .feature-icon { margin-bottom: 0; align-self: center; }
 .feature-text .feature-heading h3 { margin-bottom: 0; align-self: center; }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
+/* Palavra em destaque no titulo do card: texto na cor + fundo no tom claro dela.
+   box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
+.hl { padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hl-verde  { color: #067A4B; background: #DFF6EC; }
+.hl-laranja { color: #C2410C; background: #FDEBE0; }
+.hl-azul   { color: #1D4ED8; background: #E3EAFD; }
+.hl-roxo   { color: #6D28D9; background: #EEE7FB; }
 .feature-text p { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
