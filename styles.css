@@ -184,7 +184,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
 .section-sub { font-size: 18px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
-h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
+/* Preto esverdeado dos títulos, em vez do #000 puro do body. */
+h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: #07100D; }
 .h2 { font-size: 40px; font-family: 'Poppins', sans-serif; margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
@@ -557,7 +558,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(38px, 4.2vw, 50px); letter-spacing: normal; line-height: 1.05; font-weight: 800; color: #2B302E; }
+.hero h1 { font-size: clamp(38px, 4.2vw, 50px); letter-spacing: normal; line-height: 1.05; font-weight: 800; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -579,7 +580,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Poppins no título e neste subtítulo, as duas únicas exceções do site, que é
    Geist no resto. Por isso a fonte é carregada só nos pesos 600 (título) e
    400 (subtítulo). */
-.hero-sub { font-size: 24px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-size: 24px; font-family: 'Poppins', sans-serif; color: #66736E; line-height: 1.5; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
@@ -609,8 +610,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   color: #fff;
   box-shadow: none;
 }
+/* Hover só do hero, um passo mais escuro que o da navbar (--green-cta-hover,
+   #009A60). Se os dois tiverem que andar juntos, é trocar por aquele token. */
 .hero .hero-actions .btn-primary:hover {
-  background: var(--green-cta-hover);
+  background: #008A58;
   box-shadow: none;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
@@ -891,7 +894,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .seg-card:hover { border-color: var(--border-active); background: var(--surface-2); transform: translateY(-3px); }
 .seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
 .seg-card .seg-icon svg { width: 24px; height: 24px; }
-.seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; color: var(--text); }
+.seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; }
 .seg-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
 .seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0,229,153,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
 .seg-cta .seg-cta-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 75%); mask-image: radial-gradient(ellipse at center, #000, transparent 75%); opacity: 0.5; }
@@ -1005,7 +1008,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
-.cta-final h2 { font-size: 40px; letter-spacing: -0.025em; line-height: 1.02; color: #000; }
+.cta-final h2 { font-size: 40px; letter-spacing: -0.025em; line-height: 1.02; }
 #demo .btn-primary { box-shadow: none; }
 #demo .btn-primary:hover { box-shadow: none; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.01em; margin: 28px auto 36px; max-width: 600px; }
@@ -1138,7 +1141,7 @@ select.demo-select:invalid { color: #374151; }
 #implementacao::before { opacity: 0; }
 #implementacao .impl-blob { display: none; }
 #implementacao h3,
-#entregaveis h3 { color: #000; }
+#entregaveis h3 { color: #07100D; }
 #implementacao .impl-section-description { color: #444; }
 #implementacao .impl-section-footer { background: rgba(0,229,153,0.08); border-color: rgba(0,229,153,0.25); }
 #implementacao .impl-section-footer p { color: #222; }
@@ -1153,7 +1156,7 @@ select.demo-select:invalid { color: #374151; }
 #entregaveis .hero-actions .btn,
 .tl-cta-mobile.hero-actions .btn { padding: 12px 20px; font-size: 14px; }
 #implementacao .hero-actions .btn { padding: 14px 30px; font-size: 16px; }
-#entregaveis h3.tl-title { color: #000; }
+#entregaveis h3.tl-title { color: #07100D; }
 .impl-pill-desktop::before,
 .impl-pill-mobile .eyebrow::before { background: #00E599; }
 
@@ -1411,7 +1414,7 @@ select.demo-select:invalid { color: #374151; }
 
 .legal-section { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(0,0,0,0.07); }
 .legal-section:last-child { border-bottom: none; margin-bottom: 0; }
-.legal-section h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: #000; margin-bottom: 20px; line-height: 1.3; }
+.legal-section h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: #07100D; margin-bottom: 20px; line-height: 1.3; }
 .legal-section p { font-size: 15.5px; line-height: 1.75; color: #444; margin-bottom: 14px; }
 .legal-section p:last-child { margin-bottom: 0; }
 .legal-section ul { margin: 18px 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
