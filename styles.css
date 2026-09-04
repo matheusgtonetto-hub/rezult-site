@@ -724,6 +724,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    a razão certa nos 40px do desktop mas não acompanhava a fonte, e no mobile
    o .h2 cai para 32px. */
 #recursos .h2 {
+  /* Geist aqui, contra a Poppins que a regra .h2 aplica nos demais títulos de
+     seção. Aponta para o token, não para o nome da fonte, para acompanhar se a
+     família do site mudar. */
+  font-family: var(--sans);
   font-weight: 600;
   line-height: 1.1;
 }
