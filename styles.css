@@ -1215,6 +1215,10 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
   .feature-text { padding: 30px 24px; }
+  /* Sombra mais forte no celular. A camada difusa quase dobra de opacidade e
+     sobe o deslocamento; a de contato escurece junto, senão o card parece
+     flutuar sem tocar a superfície. */
+  .feature-row { box-shadow: 0 2px 6px rgba(0,0,0,0.10), 0 16px 36px rgba(0,0,0,0.26); }
   /* Empilhado: texto em cima, mockup embaixo. O order: -1 que existia no
      .feature-visual puxava o mockup para o topo; sem ele os dois seguem a
      ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
