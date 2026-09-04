@@ -725,7 +725,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    o .h2 cai para 32px. */
 #recursos .h2 {
   font-weight: 600;
-  line-height: 1.07;
+  line-height: 1.1;
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
