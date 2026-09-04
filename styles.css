@@ -541,7 +541,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    conteúdo: os 2px de borda a deixam 2px mais alta que a versão de 1px. É o
    esperado — os 8px de padding vertical são pedido anterior e ficam de pé. */
 .hero-badge-ia {
-  color: var(--text);
+  /* Verde bem escuro. Com este fundo o texto precisa ir a branco: o
+     var(--text) anterior era quase preto e sumiria (1,3:1). Em branco dá
+     14,5:1. A borda e o ícone seguem em --green-text, que sobre o escuro passa
+     a funcionar como acento, e não mais como contorno sobre transparente. */
+  background: #04301F;
+  color: #fff;
   padding: 8px 14px;
   border-width: 2px;
   /* Mesmo verde do botão, cheio. A regra base usa #00e59940, que é o neon da
