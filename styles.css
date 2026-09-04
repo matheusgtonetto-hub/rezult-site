@@ -179,7 +179,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head.center .eyebrow { justify-content: center; }
 .section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
-.h2 { font-size: 40px; margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
+.h2 { font-size: 40px; font-family: 'Poppins', sans-serif; margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
@@ -187,7 +187,7 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; }
 @media (max-width: 768px) {
   .h2 { line-height: 1.0; }
 }
-.lede { font-size: 16px; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
+.lede { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
 .text-grad { color: var(--green-text); }
 
 /* ---------- Buttons ---------- */
@@ -1261,7 +1261,7 @@ select.demo-select:invalid { color: #374151; }
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 17px; letter-spacing: 0; }
-  .h2, .cta-final h2 { font-size: 28px; letter-spacing: -0.02em; line-height: 1.1; }
+  .h2, .cta-final h2 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
