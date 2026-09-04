@@ -588,20 +588,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    verde para branco (com o texto preto que ele exigia) e a Poppins, que era a
    única exceção tipográfica do site. */
 /* Só o botão do hero sai do neon: o "Teste Grátis" da navbar e os demais CTAs
-   do site seguem em --primary com o glow. Este verde é bem mais fechado, então
-   o texto vai a branco (4,2:1) e não ao --on-primary quase preto que o neon
-   exige. box-shadow: none precisa estar escrito: sem ele o botão herdaria o
-   anel e o halo verdes de .btn-primary. */
+   do site seguem em --primary com o glow. O texto vai a branco (5,1:1 sobre
+   este azul) e não ao --on-primary quase preto que o neon exige. box-shadow:
+   none precisa estar escrito: sem ele o botão herdaria o anel e o halo verdes
+   de .btn-primary. */
 .hero .hero-actions .btn-primary {
   font-weight: 600;
   /* Sem o aperto de -0.01em que o .btn base aplica. */
   letter-spacing: 0;
-  background: rgb(18, 140, 105);
+  background: #2563EB;
   color: #fff;
   box-shadow: none;
 }
 .hero .hero-actions .btn-primary:hover {
-  background: rgb(14, 112, 84);
+  background: #1D4ED8;
   box-shadow: none;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
