@@ -245,51 +245,6 @@ wirePricingToggle("priceToggle");
   io.observe(metrics);
 })();
 
-// ---- Entregáveis timeline — scroll-driven animation (reversível) ----
-(function () {
-  const items = document.querySelectorAll("#entregaveis .tl-item");
-  if (!items.length) return;
-
-  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function map(v, inA, inB) { return clamp01((v - inA) / (inB - inA)); }
-
-  function tick() {
-    const vh = window.innerHeight;
-    const mid = vh * 0.5;
-    items.forEach(item => {
-      const rect = item.getBoundingClientRect();
-      const num  = item.querySelector(".tl-num");
-      const fill = item.querySelector(".tl-line-fill");
-
-      // Centro do item em relação à viewport
-      const itemCenter = rect.top + item.offsetHeight / 2;
-
-      // Número: só ilumina quando o centro do item cruza o meio da tela
-      const nP = map(itemCenter, mid + 60, mid - 60);
-      if (num) {
-        num.style.transition = "none";
-        // Verde escuro, não o verde da marca: a numeração vive sobre fundo
-        // branco, e o #00E599 rende 1.66:1 de contraste ali, ilegível mesmo em
-        // opacidade cheia. Começa em 0.3 porque 0.2 sobre branco não aparece.
-        num.style.color = `rgba(22, 101, 52, ${0.3 + 0.7 * nP})`;
-        num.style.transform = `scale(${0.90 + 0.10 * nP})`;
-      }
-
-      // Linha: começa a preencher quando o centro cruza o meio,
-      // completa conforme o item sobe para o terço superior
-      if (fill) {
-        const lP = map(itemCenter, mid, vh * 0.15);
-        fill.style.transition = "none";
-        fill.style.height = (lP * 100) + "%";
-      }
-    });
-  }
-
-  window.addEventListener("scroll", tick, { passive: true });
-  window.addEventListener("resize", tick);
-  tick();
-})();
-
 // ---- Hero mockup scroll rotation ----
 (function () {
   const img = document.querySelector('.hero-mockup-img');
