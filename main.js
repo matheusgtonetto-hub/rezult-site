@@ -61,19 +61,13 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     // aria-label devolve esse nome para leitor de tela e para o img sem alt.
     return `<div class="mq-item"><span class="ico" role="img" aria-label="${t.nm}"${icoStyle}>${icoContent}</span></div>`;
   };
-  const half = Math.ceil(tools.length / 2);
-  const seq1 = tools.slice(0, half).concat(tools.slice(0, half));
-  const seq2 = tools.slice(half).concat(tools.slice(half));
-
-  const track1 = document.createElement("div");
-  track1.className = "marquee-track";
-  track1.innerHTML = seq1.map(itemHTML).join("");
-  mq.appendChild(track1);
-
-  const track2 = document.createElement("div");
-  track2.className = "marquee-track marquee-reverse";
-  track2.innerHTML = seq2.map(itemHTML).join("");
-  mq.appendChild(track2);
+  // Estático: uma faixa só, cada ferramenta aparecendo uma vez. As duas faixas
+  // que rolavam em sentidos opostos precisavam da lista duplicada para o loop
+  // não mostrar buraco; paradas, a duplicata viraria logo repetido na tela.
+  const track = document.createElement("div");
+  track.className = "marquee-track";
+  track.innerHTML = tools.map(itemHTML).join("");
+  mq.appendChild(track);
 })();
 
 // ---- Benefits carousel ----

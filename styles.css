@@ -29,11 +29,12 @@
      título preto e corpo em #575757, que é o cinza de texto medido no site
      deles. O verde da marca não muda, ele ocupa o lugar que o azul ocupa lá.
 
-     --bg-deep também é branco de propósito: as seções alternadas deixaram de
-     ser um tom diferente, o site inteiro é a mesma base branca e quem separa
-     as seções agora é a borda de 1px e o cinza dos cards. */
-  --bg: #FFFFFF;
-  --bg-deep: #FFFFFF;
+     --bg-deep tem o mesmo valor de --bg de propósito: as seções alternadas
+     deixaram de ser um tom diferente, o site inteiro é a mesma base e quem
+     separa as seções agora é a borda de 1px e o branco dos cards. Segue como
+     token separado porque três seções ainda o referenciam pelo nome. */
+  --bg: #FBFBFB;
+  --bg-deep: #FBFBFB;
   --surface: #F6F6F6;
   --surface-2: #EFEFEF;
   --surface-3: #E7E7E7;
@@ -368,10 +369,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
-/* Cinza claro no topo abrindo para branco na base. Fecha em #fff antes dos
-   100%, para o degradê terminar dentro da própria hero e a emenda com a seção
-   seguinte, que é branca, ficar invisível. */
-.hero { position: relative; background: linear-gradient(180deg, #F1F2F1 0%, #FFFFFF 80%); padding-top: calc(var(--nav-h) + 80px); padding-bottom: 100px; overflow: hidden; }
+/* Sem fundo próprio: herda o --bg do body, que é o #FBFBFB do site inteiro. */
+.hero { position: relative; padding-top: calc(var(--nav-h) + 80px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -715,7 +714,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    align-items passou de center para stretch para a coluna do mockup ter a
    altura cheia do card; com center ela ficaria centralizada e sobraria faixa
    de fundo em cima e embaixo. */
-.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FFFFFF; border: 2px solid var(--border-2); border-radius: 30px; padding: 0; position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05); }
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FFFFFF; border: 2px solid var(--border-2); border-radius: 25px; padding: 0; position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05); }
 .feature-text { padding: 120px 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
@@ -827,11 +826,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .fcard p { font-size: 14.5px; color: var(--text-muted); line-height: 1.55; }
 
 /* ---------- Marquee ---------- */
-.marquee { position: relative; overflow: hidden; padding: 16px 0; display: flex; flex-direction: column; gap: 14px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-.marquee-track { display: flex; gap: 20px; width: max-content; animation: marquee 10s linear infinite; }
-.marquee-track.marquee-reverse { animation-name: marquee-reverse; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes marquee-reverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.marquee { position: relative; padding: 16px 32px; }
+.marquee-track { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 /* A borda colorida era um truque de dois backgrounds: um em padding-box para
    o miolo e um degradê da cor da marca em border-box, aparecendo pela borda
    transparente. Saiu inteiro; agora é uma borda de 1px de verdade. */
@@ -839,7 +835,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .mq-item .ico { padding: 0; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
 .mq-item .ico svg { width: 30px; height: 30px; }
 .mq-item .ico img { width: 30px; height: 30px; object-fit: contain; border-radius: 6px; }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; } }
 
 /* ---------- Benefits carousel ---------- */
 .carousel { position: relative; }
@@ -884,13 +879,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .seg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .seg-card {
   position: relative; border-radius: var(--r-lg); overflow: hidden;
-  border: 1px solid var(--border-2); background: var(--surface);
+  border: 1px solid var(--border-2); background: #FFFFFF;
   transition: border-color .2s, transform .2s, background .2s;
   display: flex; flex-direction: column; align-items: flex-start;
   padding: 28px;
 }
 .seg-card:hover { border-color: var(--border-active); background: var(--surface-2); transform: translateY(-3px); }
-.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
+/* Fundo verde bem claro derivado do próprio --green-text a 12%, em vez de um
+   hex claro novo: acompanha a cor da marca numa troca futura. A borda cinza
+   saiu — sobre o verde ela cortava a peça em duas cores sem necessidade. */
+.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); border: none; display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
 .seg-card .seg-icon svg { width: 24px; height: 24px; }
 .seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; }
 .seg-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
