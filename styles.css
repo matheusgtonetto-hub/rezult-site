@@ -1529,3 +1529,55 @@ select.demo-select:invalid { color: #374151; }
 .nav-right .btn-pontos::before { border-radius: calc(var(--r-sm) - 1px); }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
+
+/* ---------- Agentes de IA ---------- */
+/* Zigue-zague, não grade: os cinco primeiros são etapas de um funil e a ordem
+   entre eles é informação. O <ol> mantém a sequência explícita para leitor de
+   tela, que não enxerga a linha. */
+.ag-fluxo { list-style: none; max-width: 940px; margin: 0 auto; }
+.ag-linha { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; }
+.ag-linha.esq .ag-card { grid-column: 1; }
+.ag-linha.dir .ag-card { grid-column: 2; }
+.ag-linha.centro .ag-card { grid-column: 1 / -1; max-width: 520px; margin: 0 auto; }
+
+.ag-card { background: #FFFFFF; border: 2px solid var(--border-2); border-radius: var(--r-lg); padding: 26px 28px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05); }
+.ag-num { display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--green-text); margin-bottom: 10px; }
+.ag-card h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.ag-promessa { font-size: 17px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-top: 8px; }
+.ag-como { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 15px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; }
+
+/* O CRM sai do fluxo: é a camada por baixo das cinco etapas, não a sexta.
+   Centralizado e no verde da marca diluído para a quebra de padrão ser lida. */
+.ag-linha.centro .ag-card { border-color: rgba(0, 184, 115, 0.28); background: rgba(0, 184, 115, 0.06); box-shadow: none; }
+
+/* A linha que entrelaça os cards é feita de dois quartos de círculo em
+   sequência, formando um S. Cada arco é uma borda com border-radius 100% num
+   canto: o primeiro sai vertical e chega horizontal, o segundo sai horizontal
+   e chega vertical. Sem SVG, sem altura fixa no JS. */
+.ag-liga { grid-column: 1 / -1; position: relative; height: 76px; }
+/* Verde da marca nas ligações: elas são o fio condutor do funil, e o cinza
+   da borda dos cards as deixava quase invisíveis contra o fundo. */
+.ag-liga::before, .ag-liga::after { content: ''; position: absolute; }
+
+/* Esquerda para a direita: desce em 25%, cruza, desce em 75%. */
+.liga-ed::before { left: 25%; width: 25%; top: 0; height: 50%; border-left: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-left-radius: 100%; }
+.liga-ed::after  { left: 50%; width: 25%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-right: 2px solid var(--green-text); border-top-right-radius: 100%; }
+
+/* Direita para a esquerda: o mesmo S espelhado. */
+.liga-de::before { left: 50%; width: 25%; top: 0; height: 50%; border-right: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-right-radius: 100%; }
+.liga-de::after  { left: 25%; width: 25%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-left: 2px solid var(--green-text); border-top-left-radius: 100%; }
+
+/* Última etapa até o card central: mesmo S, metade do percurso. */
+.liga-ec::before { left: 25%; width: 12.5%; top: 0; height: 50%; border-left: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-left-radius: 100%; }
+.liga-ec::after  { left: 37.5%; width: 12.5%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-right: 2px solid var(--green-text); border-top-right-radius: 100%; }
+
+@media (max-width: 860px) {
+  /* Sem lados no celular: os cards empilham e o S vira uma linha reta. */
+  .ag-linha, .ag-linha.esq, .ag-linha.dir { grid-template-columns: 1fr; }
+  .ag-linha .ag-card { grid-column: 1; }
+  .ag-linha.centro .ag-card { max-width: none; }
+  .ag-liga { height: 36px; }
+  .ag-liga::before { left: 50%; width: 0; top: 0; height: 100%; border: none; border-left: 2px solid var(--green-text); border-radius: 0; }
+  .ag-liga::after { display: none; }
+  .ag-card { padding: 22px 20px; }
+}
