@@ -715,7 +715,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    align-items passou de center para stretch para a coluna do mockup ter a
    altura cheia do card; com center ela ficaria centralizada e sobraria faixa
    de fundo em cima e embaixo. */
-.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FBFBFB; border: 2px solid var(--border-2); border-radius: 30px; padding: 0; position: relative; overflow: hidden; }
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FBFBFB; border: 2px solid var(--border-2); border-radius: 30px; padding: 0; position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05); }
 .feature-text { padding: 120px 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
@@ -1275,7 +1275,7 @@ select.demo-select:invalid { color: #374151; }
      mantém os efeitos. */
   .page-hero .hero-glow,
   .page-hero .mesh-blob { display: none; }
-  .feature-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; padding: 0; }
+  .feature-row { grid-template-columns: 1fr; gap: 0; padding: 0; }
   .feature-text { padding: 45px 24px; }
   /* Sombra mais forte no celular. A camada difusa quase dobra de opacidade e
      sobe o deslocamento; a de contato escurece junto, senão o card parece
