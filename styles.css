@@ -189,7 +189,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--primary);
   flex-shrink: 0;
 }
-.section-head { max-width: 900px; margin-bottom: 20px; }
+.section-head { max-width: 900px; margin-bottom: 40px; }
 /* No desktop o respiro abaixo do título de seção é maior. Fica num min-width
    em vez de mudar a regra base: assim o celular segue nos 35px sem precisar de
    um segundo override desfazendo o valor. */
