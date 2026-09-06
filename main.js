@@ -327,26 +327,23 @@ document.querySelectorAll(".faq-item").forEach(item => {
 })();
 
 // ---- Esteira de cases (hero) ----
-// Anda sozinha para a esquerda e aceita arrasto e scroll lateral ao mesmo tempo.
-// As duas coisas escrevem no mesmo scrollLeft, por isso nunca disputam eixo.
+// Anda sozinha para a esquerda, sem parar nunca: não pausa no hover, não pausa
+// depois de um scroll e não respeita prefers-reduced-motion. Foi decisão de
+// produto, e a mesma vale para a esteira de depoimentos lá embaixo (CSS).
 //
-// Regra que faz o conjunto funcionar: o reposicionamento que fecha o ciclo
-// (normalizar) só roda quando NÃO há gesto em andamento. Mexer no scrollLeft no
-// meio de um gesto mata a inércia do trackpad e trava a rolagem.
+// A única cessão é enquanto o dedo ou o botão do mouse está pressionado. Isso
+// não é preferência: o avanço escreve em scrollLeft a cada quadro, e escrever
+// nele durante o gesto anula o arrasto do usuário. Solta, volta na hora.
 (function () {
   const esteira = document.querySelector(".hero-cases");
   const linha = esteira && esteira.querySelector(".cases-linha");
   if (!esteira || !linha) return;
   const pontos = Array.from(document.querySelectorAll(".cases-ponto"));
 
-  const CONJUNTOS = 3;            // precisa bater com o HTML gerado
-  const VELOCIDADE = 38;          // px por segundo
-  const PAUSA = 1200;             // ms de quietude antes de voltar a andar
-  const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const CONJUNTOS = 3;   // precisa bater com o HTML gerado
+  const VELOCIDADE = 38; // px por segundo
 
-  let sobre = false;
-  let arrastando = false;
-  let paradoAte = 0;
+  let segurando = false;
   let ultimoQuadro = 0;
   let xInicial = 0;
   let scrollInicial = 0;
@@ -387,46 +384,39 @@ document.querySelectorAll(".faq-item").forEach(item => {
   function quadro(agora) {
     const dt = ultimoQuadro ? (agora - ultimoQuadro) / 1000 : 0;
     ultimoQuadro = agora;
-    const emGesto = arrastando || agora <= paradoAte;
-    if (!emGesto) normalizar();
-    // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a esteira
-    // daria um salto proporcional ao tempo em que ficou escondida.
-    if (!emGesto && !sobre && !semMovimento.matches && dt > 0 && dt < 0.1) {
-      esteira.scrollLeft += VELOCIDADE * dt;
+    if (!segurando) {
+      normalizar();
+      // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a
+      // esteira daria um salto proporcional ao tempo em que ficou escondida.
+      if (dt > 0 && dt < 0.1) esteira.scrollLeft += VELOCIDADE * dt;
     }
     marcarPonto();
     requestAnimationFrame(quadro);
   }
   requestAnimationFrame(quadro);
 
-  // Só entrada humana adia o avanço. O evento "scroll" fica de fora de
-  // propósito: o próprio avanço automático dispara scroll, e usá-lo aqui
-  // criaria um laço em que a esteira se pausa sozinha para sempre.
-  const adiar = () => { paradoAte = performance.now() + PAUSA; };
-  esteira.addEventListener("wheel", adiar, { passive: true });
-  esteira.addEventListener("touchstart", adiar, { passive: true });
-  esteira.addEventListener("touchmove", adiar, { passive: true });
-  esteira.addEventListener("mouseenter", () => { sobre = true; });
-  esteira.addEventListener("mouseleave", () => { sobre = false; });
+  // Dedo encostado na tela: cede o controle até soltar.
+  esteira.addEventListener("touchstart", () => { segurando = true; }, { passive: true });
+  esteira.addEventListener("touchend", () => { segurando = false; }, { passive: true });
+  esteira.addEventListener("touchcancel", () => { segurando = false; }, { passive: true });
 
   // Arrasto com o mouse. Dedo e trackpad já rolam nativamente; isto é para quem
   // usa mouse de roda, que sozinho não rola na horizontal.
   esteira.addEventListener("pointerdown", e => {
     if (e.pointerType === "touch") return;
-    arrastando = true;
+    segurando = true;
     xInicial = e.clientX;
     scrollInicial = esteira.scrollLeft;
     esteira.classList.add("arrastando");
     esteira.setPointerCapture(e.pointerId);
   });
   esteira.addEventListener("pointermove", e => {
-    if (!arrastando) return;
+    if (!segurando || e.pointerType === "touch") return;
     esteira.scrollLeft = scrollInicial - (e.clientX - xInicial);
   });
   function soltar(e) {
-    if (!arrastando) return;
-    arrastando = false;
-    paradoAte = performance.now() + PAUSA;
+    if (!segurando) return;
+    segurando = false;
     esteira.classList.remove("arrastando");
     if (e.pointerId != null && esteira.hasPointerCapture(e.pointerId)) {
       esteira.releasePointerCapture(e.pointerId);
@@ -439,10 +429,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
 
   pontos.forEach((ponto, i) => {
     ponto.addEventListener("click", () => {
-      esteira.scrollTo({ left: larguraConjunto() + i * larguraCard(), behavior: "smooth" });
-      // Segura o normalizar enquanto a rolagem suave acontece: mexer no
-      // scrollLeft no meio dela cancelaria a animação do navegador.
-      paradoAte = performance.now() + PAUSA;
+      esteira.scrollLeft = larguraConjunto() + i * larguraCard();
     });
   });
 })();

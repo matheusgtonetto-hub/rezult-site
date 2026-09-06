@@ -1849,9 +1849,6 @@ select.demo-select:invalid { color: #374151; }
 .dep-linha.dir { animation: dep-dir 47s linear infinite; }
 @keyframes dep-esq { from { transform: translateX(0); }      to { transform: translateX(-50%); } }
 @keyframes dep-dir { from { transform: translateX(-50%); }   to { transform: translateX(0); } }
-/* Pausa só a faixa sob o mouse, não as duas: parar a de baixo enquanto se lê a
-   de cima congela a seção inteira sem motivo. */
-.dep-linha:hover { animation-play-state: paused; }
 /* Largura e altura fixas. A largura já era fixa; a altura precisa ser também
    porque as duas faixas são containers flex separados: dentro de cada uma o
    flex já iguala os cards pelo mais alto, mas nada faz a faixa de cima bater
@@ -1865,12 +1862,10 @@ select.demo-select:invalid { color: #374151; }
    planos.html, onde nada se move, o efeito continua valendo. */
 .dep-esteira .tcard:hover { transform: none; }
 
-@media (prefers-reduced-motion: reduce) {
-  .dep-linha { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
-  .dep-esteira { -webkit-mask-image: none; mask-image: none; }
-  /* Sem movimento, a cópia viraria depoimento repetido na tela. */
-  .dep-linha .tcard[aria-hidden="true"] { display: none; }
-}
+/* Sem bloco de prefers-reduced-motion: por decisão do produto a faixa roda
+   sempre, inclusive para quem pede menos movimento no sistema. Era esta regra
+   que deixava os depoimentos estáticos em máquinas com "Reduzir movimento"
+   ligado no macOS. */
 @media (max-width: 560px) {
   .dep-esteira .tcard { width: 300px; height: 290px; }
   .dep-linha { gap: 14px; }
