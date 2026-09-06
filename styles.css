@@ -1568,7 +1568,23 @@ select.demo-select:invalid { color: #374151; }
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
 .ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
 .ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
-.ag-aba.ativa { border-color: var(--primary); color: #FFFFFF; background: var(--primary); box-shadow: 0 6px 20px rgba(0, 184, 115, 0.28); }
+/* A aba ativa recebe o mesmo tratamento do botão do hero: o verde com clarão
+   subindo da base, as duas camadas internas e os pontinhos. Os valores são os
+   mesmos do .btn-pontos; o que muda é o radius, que aqui é 8px. */
+.ag-aba { position: relative; overflow: hidden; }
+.ag-aba .btn-pontos-wrap { display: none; }
+.ag-aba-txt { position: relative; z-index: 2; }
+.ag-aba.ativa {
+  border-color: transparent;
+  color: #FFFFFF;
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%),
+              linear-gradient(0deg, #059669, #059669);
+  box-shadow: 0 6px 20px rgba(0, 184, 115, 0.28);
+}
+.ag-aba.ativa .btn-pontos-wrap { display: block; }
+.ag-aba.ativa::before, .ag-aba.ativa::after { content: ''; position: absolute; z-index: 0; }
+.ag-aba.ativa::before { inset: 1px; border-radius: 7px; background: linear-gradient(177.95deg, rgba(255, 255, 255, 0.19) 0%, rgba(255, 255, 255, 0) 100%); }
+.ag-aba.ativa::after { inset: 2px; border-radius: 6px; background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%), linear-gradient(0deg, #059669, #059669); }
 
 .ag-painel { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 44px; }
 /* [hidden] perde para o display do .ag-painel, então precisa reafirmar. */
