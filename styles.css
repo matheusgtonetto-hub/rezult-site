@@ -1594,7 +1594,7 @@ select.demo-select:invalid { color: #374151; }
 .ag-icone svg { width: 24px; height: 24px; }
 .ag-eyebrow { display: block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
 .ag-painel h3 { font-size: 30px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
-.ag-painel .ag-desc { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
+.ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
 /* Duas colunas na lista, como no modelo. columns e não grid: os itens fluem e
    preenchem as colunas sozinhos, sem precisar dividir a lista na marra. */
