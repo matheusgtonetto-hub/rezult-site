@@ -325,3 +325,124 @@ document.querySelectorAll(".faq-item").forEach(item => {
     });
   });
 })();
+
+// ---- Esteira de cases (hero) ----
+// Anda sozinha para a esquerda e aceita arrasto e scroll lateral ao mesmo tempo.
+// As duas coisas escrevem no mesmo scrollLeft, por isso nunca disputam eixo.
+//
+// Regra que faz o conjunto funcionar: o reposicionamento que fecha o ciclo
+// (normalizar) só roda quando NÃO há gesto em andamento. Mexer no scrollLeft no
+// meio de um gesto mata a inércia do trackpad e trava a rolagem.
+(function () {
+  const esteira = document.querySelector(".hero-cases");
+  const linha = esteira && esteira.querySelector(".cases-linha");
+  if (!esteira || !linha) return;
+  const pontos = Array.from(document.querySelectorAll(".cases-ponto"));
+
+  const CONJUNTOS = 3;            // precisa bater com o HTML gerado
+  const VELOCIDADE = 38;          // px por segundo
+  const PAUSA = 1200;             // ms de quietude antes de voltar a andar
+  const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  let sobre = false;
+  let arrastando = false;
+  let paradoAte = 0;
+  let ultimoQuadro = 0;
+  let xInicial = 0;
+  let scrollInicial = 0;
+  let pontoAtual = -1;
+
+  const larguraConjunto = () => linha.scrollWidth / CONJUNTOS;
+  // Medido do DOM em vez de constante: no celular o card e a margem mudam.
+  const larguraCard = () => {
+    const [a, b] = linha.children;
+    return b ? b.offsetLeft - a.offsetLeft : 320;
+  };
+
+  // Começa no conjunto do meio. Partindo de zero o usuário bateria numa parede
+  // ao arrastar para a esquerda, porque scrollLeft não fica negativo.
+  esteira.scrollLeft = larguraConjunto();
+
+  // O conteúdo se repete a cada conjunto, então somar ou subtrair um conjunto
+  // recoloca o scroll no card equivalente sem que nada mude na tela.
+  function normalizar() {
+    const c = larguraConjunto();
+    if (c <= 0) return;
+    if (esteira.scrollLeft > c * 1.5) esteira.scrollLeft -= c;
+    else if (esteira.scrollLeft < c * 0.5) esteira.scrollLeft += c;
+  }
+
+  function marcarPonto() {
+    if (!pontos.length) return;
+    const i = Math.round(esteira.scrollLeft / larguraCard()) % pontos.length;
+    if (i === pontoAtual) return;
+    pontoAtual = i;
+    pontos.forEach((p, n) => {
+      p.classList.toggle("ativo", n === i);
+      if (n === i) p.setAttribute("aria-current", "true");
+      else p.removeAttribute("aria-current");
+    });
+  }
+
+  function quadro(agora) {
+    const dt = ultimoQuadro ? (agora - ultimoQuadro) / 1000 : 0;
+    ultimoQuadro = agora;
+    const emGesto = arrastando || agora <= paradoAte;
+    if (!emGesto) normalizar();
+    // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a esteira
+    // daria um salto proporcional ao tempo em que ficou escondida.
+    if (!emGesto && !sobre && !semMovimento.matches && dt > 0 && dt < 0.1) {
+      esteira.scrollLeft += VELOCIDADE * dt;
+    }
+    marcarPonto();
+    requestAnimationFrame(quadro);
+  }
+  requestAnimationFrame(quadro);
+
+  // Só entrada humana adia o avanço. O evento "scroll" fica de fora de
+  // propósito: o próprio avanço automático dispara scroll, e usá-lo aqui
+  // criaria um laço em que a esteira se pausa sozinha para sempre.
+  const adiar = () => { paradoAte = performance.now() + PAUSA; };
+  esteira.addEventListener("wheel", adiar, { passive: true });
+  esteira.addEventListener("touchstart", adiar, { passive: true });
+  esteira.addEventListener("touchmove", adiar, { passive: true });
+  esteira.addEventListener("mouseenter", () => { sobre = true; });
+  esteira.addEventListener("mouseleave", () => { sobre = false; });
+
+  // Arrasto com o mouse. Dedo e trackpad já rolam nativamente; isto é para quem
+  // usa mouse de roda, que sozinho não rola na horizontal.
+  esteira.addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch") return;
+    arrastando = true;
+    xInicial = e.clientX;
+    scrollInicial = esteira.scrollLeft;
+    esteira.classList.add("arrastando");
+    esteira.setPointerCapture(e.pointerId);
+  });
+  esteira.addEventListener("pointermove", e => {
+    if (!arrastando) return;
+    esteira.scrollLeft = scrollInicial - (e.clientX - xInicial);
+  });
+  function soltar(e) {
+    if (!arrastando) return;
+    arrastando = false;
+    paradoAte = performance.now() + PAUSA;
+    esteira.classList.remove("arrastando");
+    if (e.pointerId != null && esteira.hasPointerCapture(e.pointerId)) {
+      esteira.releasePointerCapture(e.pointerId);
+    }
+  }
+  esteira.addEventListener("pointerup", soltar);
+  esteira.addEventListener("pointercancel", soltar);
+  // A imagem do card é arrastável por padrão e sequestraria o gesto.
+  esteira.addEventListener("dragstart", e => e.preventDefault());
+
+  pontos.forEach((ponto, i) => {
+    ponto.addEventListener("click", () => {
+      esteira.scrollTo({ left: larguraConjunto() + i * larguraCard(), behavior: "smooth" });
+      // Segura o normalizar enquanto a rolagem suave acontece: mexer no
+      // scrollLeft no meio dela cancelaria a animação do navegador.
+      paradoAte = performance.now() + PAUSA;
+    });
+  });
+})();
