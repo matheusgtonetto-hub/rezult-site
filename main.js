@@ -185,8 +185,12 @@ function wirePricingToggle(toggleId) {
         const months = period === "anual" ? 12 : 6;
         const total = parseInt(period === "anual" ? pp.dataset.atotal : pp.dataset.stotal);
         const savings = m * months - total;
-        const fullPrice = m * months;
-        savingsEl.innerHTML = `<s>${brl(fullPrice)}</s> Economize ${brl(savings)}`;
+        // Risca a MENSALIDADE cheia, não o total do ciclo. As duas linhas ficam
+        // na mesma unidade (R$ 237 riscado, R$ 202/mês abaixo) e a comparação
+        // se lê sem conta nenhuma. O total do ciclo continua na linha de
+        // cobrança logo abaixo, onde há espaço para dizer o que ele é.
+        // Mesmo critério do OfertaDeContratacao do app.
+        savingsEl.innerHTML = `<s>${brl(m)}</s> Economize ${brl(savings)}`;
         recurringEl.textContent = `Cobrança ${period} de ${brl(total)}`;
       });
     });
@@ -286,3 +290,38 @@ document.querySelectorAll(".faq-item").forEach(item => {
     }
   });
 });
+
+// ---- Abas dos agentes de IA ----
+(function () {
+  const abas = Array.from(document.querySelectorAll(".ag-abas .ag-aba"));
+  if (!abas.length) return;
+  const paineis = abas.map(a => document.getElementById(a.getAttribute("aria-controls")));
+
+  function mostrar(indice, focar) {
+    abas.forEach((aba, i) => {
+      const ativa = i === indice;
+      aba.classList.toggle("ativa", ativa);
+      aba.setAttribute("aria-selected", ativa ? "true" : "false");
+      // Só a aba ativa fica na ordem de tabulação: dentro de um tablist quem
+      // navega entre as abas são as setas, não o Tab. O Tab sai do grupo.
+      aba.tabIndex = ativa ? 0 : -1;
+      paineis[i].hidden = !ativa;
+      paineis[i].classList.toggle("ativo", ativa);
+    });
+    if (focar) abas[indice].focus();
+  }
+
+  abas.forEach((aba, i) => {
+    aba.addEventListener("click", () => mostrar(i, false));
+    aba.addEventListener("keydown", e => {
+      const passo = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (passo) {
+        e.preventDefault();
+        mostrar((i + passo + abas.length) % abas.length, true);
+      } else if (e.key === "Home" || e.key === "End") {
+        e.preventDefault();
+        mostrar(e.key === "Home" ? 0 : abas.length - 1, true);
+      }
+    });
+  });
+})();

@@ -4,24 +4,27 @@
    ============================================================ */
 
 :root {
-  /* Brand */
-  --primary: #00E599;
-  --primary-hi: #5CFFC0;
-  --primary-lo: #00B87A;
+  /* Brand — o verde neon saiu do site. Ele rendia 1.66:1 de contraste sobre
+     branco e, com a virada para fundo claro, não sobrou lugar onde
+     funcionasse. Ficou um verde só, o #00B873, que era o antigo --green-text. */
+  --primary: #00B873;
+  --primary-hi: #33CC96;
+  --primary-lo: #009A60;
   --on-primary: #04140D;
-  /* Verde de texto: o --primary (#00E599) rende 1.66:1 sobre branco. Este é
-     o tom escolhido para tudo que é texto ou ícone em verde. */
-  --green-text: rgb(0, 184, 115);
-  --glow: rgba(0, 229, 153, 0.45);
-  --glow-btn: rgba(0, 229, 153, 0.55);
-  /* Verde dos CTAs do hero e da navbar, distinto do --primary neon que os
-     demais botões do site usam. Aponta para --green-text, que já é
-     rgb(0, 184, 115), em vez de repetir o valor. */
+  /* Aponta para --primary: os dois são o mesmo verde desde a saída do neon, e
+     um alias evita que saiam de sincronia numa troca futura. */
+  --green-text: var(--primary);
+  --glow: rgba(0, 184, 115, 0.45);
+  --glow-btn: rgba(0, 184, 115, 0.55);
+  /* Verde dos CTAs do hero e da navbar. */
   /* Preto esverdeado dos títulos, e agora também do fundo da pill do hero. */
+  /* Vermelho dos preços riscados, o mesmo --red do app. Marca o que a
+     pessoa NÃO vai pagar. */
+  --red: #EF4444;
   --ink: #07100D;
   --green-cta: var(--green-text);
   --green-cta-hover: #009A60;
-  --glow-soft: rgba(0, 229, 153, 0.18);
+  --glow-soft: rgba(0, 184, 115, 0.18);
 
   /* Surfaces
      Tema claro desde 2026-09-03, no padrão do gohighlevel.com (ver a skill
@@ -40,7 +43,7 @@
   --surface-3: #E7E7E7;
   --border: rgba(0, 0, 0, 0.12);
   --border-2: rgba(0, 0, 0, 0.07);
-  --border-active: rgba(0, 229, 153, 0.55);
+  --border-active: rgba(0, 184, 115, 0.55);
 
   /* Text */
   --text: #000000;
@@ -67,10 +70,13 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Geist no site inteiro. A Poppins entrou em 2026-09-02 e foi revertida no
+  /* Geist nos títulos, Inter no resto. A Poppins entrou em 2026-09-02 e foi revertida no
      dia seguinte. A Geist Mono segue como voz dos rótulos, dos números e das
      etiquetas em caixa alta. */
-  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* --sans é o texto corrido do site; --display é a fonte dos títulos.
+     Regra: título em Geist, todo o resto em Inter. */
+  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --display: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', ui-monospace, monospace;
 
   /* Radius */
@@ -127,7 +133,7 @@ body::after {
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-::selection { background: rgba(0, 229, 153, 0.3); }
+::selection { background: rgba(0, 184, 115, 0.3); }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 5px; }
@@ -138,11 +144,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section { padding: 120px 0; position: relative; }
 
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,153,0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(0,229,153,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 184, 115,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(0, 184, 115,0); }
 }
 .online-indicator { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-.online-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: #00E599; animation: pulse-dot 1.8s ease-in-out infinite; flex-shrink: 0; }
+.online-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: #00B873; animation: pulse-dot 1.8s ease-in-out infinite; flex-shrink: 0; }
 .online-indicator span { font-size: 13px; font-weight: 500; color: #fff; letter-spacing: 0.02em; }
 .section-sm { padding: 80px 0; }
 
@@ -157,10 +163,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
   z-index: 0;
 }
-.tint-left::before   { background: radial-gradient(ellipse 55% 70% at 0% 50%,   rgba(0,229,153,0.055) 0%, transparent 70%); }
-.tint-right::before  { background: radial-gradient(ellipse 55% 70% at 100% 40%,  rgba(0,229,153,0.055) 0%, transparent 70%); }
-.tint-center::before { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0,229,153,0.05)  0%, transparent 70%); }
-.tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(0,229,153,0.04)  0%, transparent 65%); }
+.tint-left::before   { background: radial-gradient(ellipse 55% 70% at 0% 50%,   rgba(0, 184, 115,0.055) 0%, transparent 70%); }
+.tint-right::before  { background: radial-gradient(ellipse 55% 70% at 100% 40%,  rgba(0, 184, 115,0.055) 0%, transparent 70%); }
+.tint-center::before { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0, 184, 115,0.05)  0%, transparent 70%); }
+.tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(0, 184, 115,0.04)  0%, transparent 65%); }
 
 .eyebrow {
   font-size: 12px;
@@ -183,19 +189,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--primary);
   flex-shrink: 0;
 }
-.section-head { max-width: 900px; margin-bottom: 35px; }
+.section-head { max-width: 900px; margin-bottom: 30px; }
 /* No desktop o respiro abaixo do título de seção é maior. Fica num min-width
    em vez de mudar a regra base: assim o celular segue nos 35px sem precisar de
    um segundo override desfazendo o valor. */
 @media (min-width: 981px) {
-  .section-head { margin-bottom: 55px; }
+  .section-head { margin-bottom: 50px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
-.section-sub { font-size: 18px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
+.section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
-h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: var(--ink); }
-.h2 { font-size: 40px; font-family: 'Poppins', sans-serif; margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: var(--ink); }
+.h2 { font-size: 40px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
@@ -203,7 +209,27 @@ h1, h2, h3 { letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: 
 @media (max-width: 768px) {
   .h2 { line-height: 1.0; }
 }
-.lede { font-size: 16px; font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
+/* Degradê no texto: o fundo é pintado atrás das letras e recortado por elas.
+   Precisa das três declarações juntas — background-clip: text sozinho não apaga
+   a cor do texto, e -webkit-text-fill-color vence qualquer color.
+
+   display: inline-block é o que faz o degradê medir só a palavra. Como span
+   inline, a caixa de fundo se estende pelo espaço da linha e o verde escuro
+   ficaria espremido no comecinho.
+
+   Dois verdes: o #059669 do botão do hero à esquerda, cheio, abrindo para o
+   --green-text da marca a 90% de opacidade à direita. O alfa deixa o branco da
+   página aparecer por trás das letras, clareando a ponta. Vai como rgba escrito
+   à mão porque --green-text é um rgb() fechado e não aceita alfa por cima. */
+.grad-verde {
+  display: inline-block;
+  background: linear-gradient(90deg, #059669 0%, rgba(0, 184, 115, 0.9) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.lede { font-size: 16px; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
 .text-grad { color: var(--green-text); }
 
 /* ---------- Buttons ---------- */
@@ -435,7 +461,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   width: 420px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%);
   filter: blur(80px);
   pointer-events: none;
   animation: meshFloat2 28s ease-in-out infinite;
@@ -447,7 +473,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   width: 420px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%);
   filter: blur(80px);
   pointer-events: none;
   animation: meshFloat2 28s ease-in-out infinite;
@@ -514,7 +540,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 7px 14px; border-radius: 100px;
-  background: transparent; border: 1px solid #00e59940;
+  background: transparent; border: 1px solid #00B87340;
   font-size: 14px; font-weight: 500; color: var(--text-muted); margin-bottom: 25px;
 }
 /* O verde vem para o ícone: era a cápsula que dava o acento de cor da pill, e
@@ -539,7 +565,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   color: var(--ink);
   padding: 8px 14px;
   border-width: 2px;
-  /* Mesmo verde do botão, cheio. A regra base usa #00e59940, que é o neon da
+  /* Mesmo verde do botão, cheio. A regra base usa #00B87340, que é o neon da
      marca a 25% e some contra os 2px daqui. Usa o token, não o hex repetido,
      para borda e botão andarem juntos numa troca futura. */
   border-color: var(--green-text);
@@ -572,10 +598,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-/* Poppins no título e neste subtítulo, as duas únicas exceções do site, que é
-   Geist no resto. Por isso a fonte é carregada só nos pesos 600 (título) e
-   400 (subtítulo). */
-.hero-sub { font-size: 24px; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-size: 24px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
@@ -590,8 +613,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero .hero-actions .btn { font-size: 16px; border-radius: var(--r-sm) !important; }
 /* Fundo e cor de texto vêm da regra base (.btn-primary): verde --green-text
    chapado com texto branco. Já foram testados e descartados aqui o degradê de
-   verde para branco (com o texto preto que ele exigia) e a Poppins, que era a
-   única exceção tipográfica do site. */
+   verde para branco (com o texto preto que ele exigia). */
 /* Só o botão do hero sai do neon: o "Teste Grátis" da navbar e os demais CTAs
    do site seguem em --primary com o glow. Este verde é bem mais fechado, então
    o texto vai a branco (4,2:1) e não ao --on-primary quase preto que o neon
@@ -615,7 +637,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
    sem sombra). Já foram testados e descartados aqui o degradê animado com anel
    e glow, e o verde neon com texto preto. */
-.hero-actions .btn-secondary { border: 1px solid #00e599; }
+.hero-actions .btn-secondary { border: 1px solid #00B873; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--green-text); }
 
@@ -671,7 +693,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .mk-rail { width: 52px; background: var(--bg-deep); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 12px 0; gap: 4px; flex-shrink: 0; }
 .mk-rail .mk-logo { width: 30px; height: 30px; border-radius: 9px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: var(--on-primary); letter-spacing: -0.04em; margin-bottom: 10px; }
 .mk-rail .mk-nav { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--text-subtle); }
-.mk-rail .mk-nav.on { background: rgba(0,229,153,0.14); color: var(--primary); }
+.mk-rail .mk-nav.on { background: rgba(0, 184, 115,0.14); color: var(--primary); }
 .mk-rail .mk-nav svg { width: 17px; height: 17px; }
 .mk-main { flex: 1; padding: 16px; min-width: 0; }
 .mk-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
@@ -736,7 +758,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .tema-roxo    { --hl-fg: #7C3AED; --hl-bg: #F3EDFE; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .feature-text .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.feature-text p { font-size: 16px; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
+.feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
 /* Seta circle-arrow-right (Lucide), desenhada inline como os demais ícones do
    site em vez de carregar a biblioteca.
 
@@ -786,10 +808,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    a razão certa nos 40px do desktop mas não acompanhava a fonte, e no mobile
    o .h2 cai para 32px. */
 #recursos .h2 {
-  /* Geist aqui, contra a Poppins que a regra .h2 aplica nos demais títulos de
-     seção. Aponta para o token, não para o nome da fonte, para acompanhar se a
-     família do site mudar. */
-  font-family: var(--sans);
   font-weight: 600;
   line-height: 1.1;
 }
@@ -892,7 +910,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .seg-card .seg-icon svg { width: 24px; height: 24px; }
 .seg-card h3 { margin-top: 18px; font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; }
 .seg-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
-.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0,229,153,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
+.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0, 184, 115,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
 .seg-cta .seg-cta-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 75%); mask-image: radial-gradient(ellipse at center, #000, transparent 75%); opacity: 0.5; }
 .seg-cta > * { position: relative; z-index: 1; }
 .seg-cta h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
@@ -932,48 +950,57 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .compare-table thead th.us { color: var(--green-text); }
 .compare-table tbody td { font-size: 15px; }
 .compare-table tbody td:first-child { color: var(--text-muted); }
-.compare-table .col-us { background: rgba(0,229,153,0.05); }
+.compare-table .col-us { background: rgba(0, 184, 115,0.05); }
 .compare-table td.center { text-align: center; }
 .compare-table td svg { width: 20px; height: 20px; margin: 0 auto; }
 .chk { color: var(--green-text); }
 .no { color: var(--text-subtle); }
 
 /* ---------- Testimonials ---------- */
+/* Grade de 3 colunas — usada só em planos.html; na home os depoimentos
+   viraram esteira (.dep-esteira). */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 35px 28px; border-radius: var(--r-lg); background: #FFFFFF; border: 2px solid var(--border-2); display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.tcard { padding: 25px; border-radius: var(--r-lg); background: #FFFFFF; border: 2px solid var(--border-2); display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
-.tcard .quote { font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
+.tcard .quote { font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
 .tcard .who { display: flex; align-items: center; gap: 12px; }
 .tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; object-fit: cover; }
-.tcard .who .nm { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
-.tcard .who .rl { font-size: 14px; color: #666; }
-.tcard .stars { display: flex; gap: 2px; color: #F59E0B; }
-.tcard .stars svg { width: 19px; height: 19px; }
+.tcard .who .nm { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
+.tcard .who .rl { font-size: 12px; color: #666; }
+.tcard .stars { display: flex; gap: 1px; color: #F59E0B; }
+.tcard .stars svg { width: 23px; height: 23px; }
 
 /* ---------- Pricing ---------- */
-.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 229, 153, 0.20); margin: 0 auto 56px; }
+.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 184, 115, 0.20); margin: 0 auto 56px; }
 .price-toggle button { font-size: 14px; font-weight: 500; padding: 9px 9px; border-radius: 100px; color: var(--text-muted); transition: all .15s; display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
-.price-toggle button.active { background: var(--primary); color: var(--on-primary); font-weight: 600; }
-.price-toggle .save { font-size: 10px; padding: 2px 5px; border-radius: 100px; background: rgba(0,229,153,0.16); color: #166534; letter-spacing: 0.02em; }
-.price-toggle button.active .save { background: rgba(4,20,13,0.2); color: var(--on-primary); }
+.price-toggle button.active { background: var(--primary); color: #FFFFFF; font-weight: 600; }
+.price-toggle .save { font-size: 10px; padding: 2px 5px; border-radius: 100px; background: rgba(0, 184, 115,0.16); color: #166534; letter-spacing: 0.02em; }
+.price-toggle button.active .save { background: rgba(255,255,255,0.22); color: #FFFFFF; }
 
 .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
-.pcard { padding: 32px; border-radius: var(--r-xl); background: #FFFFFF; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 24px; position: relative; transition: border-color .2s, transform .2s; text-align: left; }
+.pcard { padding: 32px; border-radius: var(--r-xl); background: #FFFFFF; border: 2px solid var(--border-2); display: flex; flex-direction: column; gap: 24px; position: relative; transition: border-color .2s, transform .2s; text-align: left; }
 .pcard:hover { transform: translateY(-4px); border-color: var(--border-active); }
-.pcard.featured { border-color: var(--border-active); background: #FFFFFF; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.12); }
-.pcard.featured::before { content: "Mais popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--on-primary); font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 100px; letter-spacing: 0.04em; white-space: nowrap; }
-.pcard .pname { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+/* Sombra verde e discreta: é o único card com sombra, então ela é o que
+   diferencia o plano em destaque. Em preto, marcava demais; no verde da marca e
+   com opacidade baixa, vira um halo em vez de peso. */
+.pcard.featured { border-color: var(--border-active); background: #FFFFFF; box-shadow: 0 2px 6px rgba(0, 184, 115, 0.10), 0 16px 40px rgba(0, 184, 115, 0.14); }
+/* O selo sai de cima da borda e passa a acompanhar o nome do plano. Vira
+   ::after do .pname para ficar na mesma linha do texto: como pseudo-elemento do
+   próprio título, ele herda a linha em vez de precisar de posicionamento. Sem
+   fundo, o verde do texto é o que o distingue. */
+.pcard.featured .pname::after { content: "MAIS ESCOLHIDO"; display: inline-block; margin-left: 12px; padding: 5px 12px; border: 1px solid var(--primary); border-radius: 100px; color: var(--primary); font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; vertical-align: middle; }
+.pcard .pname { font-size: 25px; font-weight: 600; letter-spacing: -0.02em; }
 .pcard .pdesc { font-size: 15px; color: var(--text-muted); margin-top: 4px; }
 .pcard .price-block { display: flex; flex-direction: column; gap: 4px; }
 .pcard .pprice { display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
 .pcard .pprice .cur { font-size: 20px; font-weight: 500; color: var(--text-muted); }
 .pcard .pprice .amt { font-size: 48px; font-weight: 600; letter-spacing: -0.04em; }
 .pcard .pprice .per { font-size: 15px; color: var(--text-subtle); }
-.pcard .pprice .pperiod { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(0,229,153,0.16); color: #166534; letter-spacing: 0.02em; margin-left: auto; }
-.pcard .pprice-savings { font-size: 14px; color: var(--green-text); display: flex; align-items: baseline; gap: 6px; }
+.pcard .pprice .pperiod { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(0, 184, 115,0.16); color: #166534; letter-spacing: 0.02em; margin-left: auto; }
+.pcard .pprice-savings { font-size: 14px; font-weight: 500; color: var(--green-text); display: flex; align-items: baseline; gap: 6px; }
 .pcard .pprice-savings:empty { display: none; }
-.pcard .pprice-savings s { color: var(--text-subtle); text-decoration-color: var(--text-subtle); }
+.pcard .pprice-savings s { color: var(--red); text-decoration-color: var(--red); font-weight: 600; font-size: 16px; }
 .pcard .pprice-recurring { font-size: 13.5px; color: var(--text-subtle); min-height: 16px; }
 /* O .btn-pontos é inline-flex e encolhe no texto; dentro do card ele precisa
    ocupar a linha inteira, papel que o .btn-block fazia no botão anterior. */
@@ -982,6 +1009,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .pcard .pfeats li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; color: var(--text-muted); list-style: none; line-height: 1.45; }
 .pcard .pfeats li svg { width: 18px; height: 18px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
 .pcard .pfeats li b { color: var(--text); font-weight: 600; }
+/* O primeiro item é o limite que define o plano (membros): sai maior que os
+   demais e o número recebe o degradê verde. Mesma regra do app. */
+.pcard .pfeats li:first-child { font-size: 17px; }
+.pcard .pfeats li:first-child b { font-weight: 700; }
 
 /* ---------- FAQ ---------- */
 .faq { max-width: 800px; margin: 0 auto; }
@@ -994,16 +1025,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
-.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
-.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,229,153,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .demo-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 12px; }
 .demo-trust li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #374151; font-weight: 500; }
-.demo-trust li svg { flex-shrink: 0; color: #00E599; }
+.demo-trust li svg { flex-shrink: 0; color: #00B873; }
 .demo-split .cta-final { max-width: 100%; margin: 0; }
 .demo-split-left > p { font-weight: 400; line-height: 1.3; }
 .demo-trust li { font-weight: 400; line-height: 1.3; }
-.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 48px 24px; text-align: left; background: #fff; border: 1px solid #00E599; max-width: 480px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.12); }
+.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 48px 24px; text-align: left; background: #fff; border: 1px solid #00B873; max-width: 480px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.12); }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
@@ -1021,14 +1052,14 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .demo-label { font-size: 13px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
 .demo-input { width: 100%; padding: 10px 14px; border: 1px solid #9ca3af; border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; -webkit-appearance: none; appearance: none; }
 .demo-select { padding-right: 36px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-.demo-input:focus { border-color: #00E599; box-shadow: 0 0 0 3px rgba(0,229,153,0.15); background: #fff; }
+.demo-input:focus { border-color: #00B873; box-shadow: 0 0 0 3px rgba(0, 184, 115,0.15); background: #fff; }
 input.demo-input:not(:placeholder-shown) { background-color: #fefce8; }
 select.demo-select.has-value { background-color: #fefce8; }
 .demo-input::placeholder { color: #374151; }
 select.demo-select:invalid { color: #374151; }
 .demo-submit { width: 100%; margin-top: 20px; border-radius: 9999px !important; justify-content: center; }
 .demo-success { display: none; flex-direction: column; align-items: center; gap: 8px; padding: 32px 0 8px; color: #111; }
-.demo-success svg { width: 40px; height: 40px; color: #00E599; margin-bottom: 4px; }
+.demo-success svg { width: 40px; height: 40px; color: #00B873; margin-bottom: 4px; }
 .demo-success strong { font-size: 20px; font-weight: 600; }
 .demo-success span { font-size: 15px; color: #6b7280; }
 
@@ -1050,7 +1081,7 @@ select.demo-select:invalid { color: #374151; }
 .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 300px; }
 .footer-brand-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 .footer-brand-actions .btn { border-radius: 9999px; }
-.footer-brand-actions .btn-secondary { border: 1px solid #00e599; }
+.footer-brand-actions .btn-secondary { border: 1px solid #00B873; }
 .footer-col h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 18px; }
 .footer-col a { display: block; font-size: 14.5px; color: var(--text-muted); margin-bottom: 12px; transition: color .15s; }
 .footer-col a:hover { color: var(--primary); }
@@ -1102,24 +1133,24 @@ select.demo-select:invalid { color: #374151; }
 .page-hero .hero-bg { inset: 0 0 auto 0; height: 1080px; }
 .page-hero .wrap { position: relative; z-index: 1; }
 .page-hero h1 { font-size: 48px; letter-spacing: -0.02em; line-height: 1; }
-.page-hero p { font-size: clamp(18px, 2.2vw, 22px); font-family: 'Poppins', sans-serif; color: var(--text-muted); line-height: 1.3; letter-spacing: -0.01em; max-width: 600px; margin: 15px auto 0; }
+.page-hero p { font-size: clamp(18px, 2.2vw, 22px); color: var(--text-muted); line-height: 1.3; letter-spacing: -0.01em; max-width: 600px; margin: 15px auto 0; }
 
 /* ---------- Implementação Gratuita ---------- */
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(20px); } }
 
 .impl-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.impl-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,229,153,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,153,0.03) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.6; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); }
+.impl-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 184, 115,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 184, 115,0.03) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.6; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); }
 .impl-blob { position: absolute; border-radius: 50%; filter: blur(100px); }
-.impl-blob-1 { top: -200px; right: -150px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,229,153,0.12) 0%, transparent 65%); animation: float 20s ease-in-out infinite; }
-.impl-blob-2 { bottom: -250px; left: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,229,153,0.08) 0%, transparent 70%); filter: blur(110px); animation: float 25s ease-in-out infinite reverse; }
-.impl-blob-3 { top: 50%; left: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,153,0.05) 0%, transparent 75%); filter: blur(90px); animation: float 30s ease-in-out infinite; }
+.impl-blob-1 { top: -200px; right: -150px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0, 184, 115,0.12) 0%, transparent 65%); animation: float 20s ease-in-out infinite; }
+.impl-blob-2 { bottom: -250px; left: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0, 184, 115,0.08) 0%, transparent 70%); filter: blur(110px); animation: float 25s ease-in-out infinite reverse; }
+.impl-blob-3 { top: 50%; left: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 184, 115,0.05) 0%, transparent 75%); filter: blur(90px); animation: float 30s ease-in-out infinite; }
 
 .impl-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
 .impl-section-text { display: flex; flex-direction: column; }
 .impl-section-text .h2 { margin-bottom: 20px; }
-.impl-section-sub { font-size: 18px; font-family: 'Poppins', sans-serif; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
-.impl-section-description { font-size: 17px; font-family: 'Poppins', sans-serif; line-height: 1.4; color: var(--text-muted); margin-bottom: 24px; }
-.impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(0, 229, 153, 0.06); border: 1px solid rgba(0, 229, 153, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.impl-section-sub { font-size: 18px; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
+.impl-section-description { font-size: 17px; line-height: 1.4; color: var(--text-muted); margin-bottom: 24px; }
+.impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(0, 184, 115, 0.06); border: 1px solid rgba(0, 184, 115, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .impl-section-footer p { font-size: 14px; font-weight: 500; color: #D1D5DB; margin: 0; }
 
 .impl-cards { display: grid; grid-template-columns: 1fr; gap: 24px; }
@@ -1140,13 +1171,13 @@ select.demo-select:invalid { color: #374151; }
 #implementacao h3,
 #entregaveis h3 { color: var(--ink); }
 #implementacao .impl-section-description { color: #444; }
-#implementacao .impl-section-footer { background: rgba(0,229,153,0.08); border-color: rgba(0,229,153,0.25); }
+#implementacao .impl-section-footer { background: rgba(0, 184, 115,0.08); border-color: rgba(0, 184, 115,0.25); }
 #implementacao .impl-section-footer p { color: #222; }
 #entregaveis .impl-card { background: #fff; border-color: rgba(0,0,0,0.08); }
 #entregaveis .impl-card-title { color: #000; }
 #entregaveis .impl-card-desc { color: #444; }
-#entregaveis .btn-secondary { background: #fff; color: #111; border: 1px solid #00e599; }
-#implementacao .btn-secondary { background: #fff; color: #111; border: 1px solid #00e599; }
+#entregaveis .btn-secondary { background: #fff; color: #111; border: 1px solid #00B873; }
+#implementacao .btn-secondary { background: #fff; color: #111; border: 1px solid #00B873; }
 #implementacao .hero-actions,
 #entregaveis .hero-actions,
 .tl-cta-mobile.hero-actions { flex-wrap: nowrap; }
@@ -1155,7 +1186,7 @@ select.demo-select:invalid { color: #374151; }
 #implementacao .hero-actions .btn { padding: 14px 30px; font-size: 16px; }
 #entregaveis h3.tl-title { color: var(--ink); }
 .impl-pill-desktop::before,
-.impl-pill-mobile .eyebrow::before { background: #00E599; }
+.impl-pill-mobile .eyebrow::before { background: #00B873; }
 
 /* ---------- Entregáveis — título sticky ---------- */
 .impl-entregaveis-left {
@@ -1403,7 +1434,7 @@ select.demo-select:invalid { color: #374151; }
 .legal-toc h2 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; font-family: var(--mono); }
 .legal-toc nav { display: flex; flex-direction: column; gap: 2px; }
 .legal-toc nav a { font-size: 13.5px; color: var(--text-muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--border); transition: color .15s, border-color .15s; text-decoration: none; line-height: 1.4; }
-.legal-toc nav a:hover { color: var(--text); border-left-color: rgba(0,229,153,0.4); }
+.legal-toc nav a:hover { color: var(--text); border-left-color: rgba(0, 184, 115,0.4); }
 .legal-toc nav a.active { color: var(--green-text); border-left-color: var(--green-text); font-weight: 500; }
 
 .legal-content { min-width: 0; }
@@ -1418,7 +1449,7 @@ select.demo-select:invalid { color: #374151; }
 .legal-section ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
 .legal-section ul li strong { color: #111; }
 
-.legal-note { background: rgba(0,229,153,0.05); border: 1px solid rgba(0,229,153,0.2); border-radius: var(--r-md); padding: 18px 22px; margin-top: 24px; }
+.legal-note { background: rgba(0, 184, 115,0.05); border: 1px solid rgba(0, 184, 115,0.2); border-radius: var(--r-md); padding: 18px 22px; margin-top: 24px; }
 .legal-note p { font-size: 14px; color: #555; margin-bottom: 0; }
 .legal-note p strong { color: #111; }
 
@@ -1427,7 +1458,7 @@ select.demo-select:invalid { color: #374151; }
   .legal-toc { position: static; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--r-lg); padding: 24px; margin-bottom: 48px; }
   .legal-toc nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
   .legal-toc nav a { padding: 6px 12px; border-left: none; border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; font-size: 13px; }
-  .legal-toc nav a.active { background: rgba(0,229,153,0.1); border-color: var(--green-text); }
+  .legal-toc nav a.active { background: rgba(0, 184, 115,0.1); border-color: var(--green-text); }
 }
 
 @media (max-width: 560px) {
@@ -1459,7 +1490,7 @@ select.demo-select:invalid { color: #374151; }
   padding: 10px 23px;
   min-height: 44px;
   min-width: 102px;
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-family: inherit;
 }
 .btn-pontos::before,
 .btn-pontos::after { content: ""; position: absolute; transition: all 0.5s ease-in-out; z-index: 0; }
@@ -1530,54 +1561,87 @@ select.demo-select:invalid { color: #374151; }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
 
+
 /* ---------- Agentes de IA ---------- */
-/* Zigue-zague, não grade: os cinco primeiros são etapas de um funil e a ordem
-   entre eles é informação. O <ol> mantém a sequência explícita para leitor de
-   tela, que não enxerga a linha. */
-.ag-fluxo { list-style: none; max-width: 940px; margin: 0 auto; }
-.ag-linha { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; }
-.ag-linha.esq .ag-card { grid-column: 1; }
-.ag-linha.dir .ag-card { grid-column: 2; }
-.ag-linha.centro .ag-card { grid-column: 1 / -1; max-width: 520px; margin: 0 auto; }
+/* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
+   demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
+.ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+.ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
+.ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
+.ag-aba.ativa { border-color: var(--primary); color: #FFFFFF; background: var(--primary); box-shadow: 0 6px 20px rgba(0, 184, 115, 0.28); }
 
-.ag-card { background: #FFFFFF; border: 2px solid var(--border-2); border-radius: var(--r-lg); padding: 26px 28px; box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05); }
-.ag-num { display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--green-text); margin-bottom: 10px; }
-.ag-card h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
-.ag-promessa { font-size: 17px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-top: 8px; }
-.ag-como { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 15px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; }
+.ag-painel { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 44px; }
+/* [hidden] perde para o display do .ag-painel, então precisa reafirmar. */
+.ag-painel[hidden] { display: none; }
 
-/* O CRM sai do fluxo: é a camada por baixo das cinco etapas, não a sexta.
-   Centralizado e no verde da marca diluído para a quebra de padrão ser lida. */
-.ag-linha.centro .ag-card { border-color: rgba(0, 184, 115, 0.28); background: rgba(0, 184, 115, 0.06); box-shadow: none; }
+.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); color: var(--primary); margin-bottom: 18px; }
+.ag-icone svg { width: 24px; height: 24px; }
+.ag-eyebrow { display: block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+.ag-painel h3 { font-size: 30px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
+.ag-painel .ag-desc { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
-/* A linha que entrelaça os cards é feita de dois quartos de círculo em
-   sequência, formando um S. Cada arco é uma borda com border-radius 100% num
-   canto: o primeiro sai vertical e chega horizontal, o segundo sai horizontal
-   e chega vertical. Sem SVG, sem altura fixa no JS. */
-.ag-liga { grid-column: 1 / -1; position: relative; height: 76px; }
-/* Verde da marca nas ligações: elas são o fio condutor do funil, e o cinza
-   da borda dos cards as deixava quase invisíveis contra o fundo. */
-.ag-liga::before, .ag-liga::after { content: ''; position: absolute; }
+/* Duas colunas na lista, como no modelo. columns e não grid: os itens fluem e
+   preenchem as colunas sozinhos, sem precisar dividir a lista na marra. */
+.ag-lista { columns: 2; column-gap: 28px; margin-top: 26px; list-style: none; }
+.ag-lista li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 11px; break-inside: avoid; }
+.ag-lista li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+.ag-cta { margin-top: 28px; }
+.ag-cta .btn-pontos-inner { font-size: 15px; }
 
-/* Esquerda para a direita: desce em 25%, cruza, desce em 75%. */
-.liga-ed::before { left: 25%; width: 25%; top: 0; height: 50%; border-left: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-left-radius: 100%; }
-.liga-ed::after  { left: 50%; width: 25%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-right: 2px solid var(--green-text); border-top-right-radius: 100%; }
+.ag-painel-img { border-radius: var(--r-md); overflow: hidden; }
+.ag-painel-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-/* Direita para a esquerda: o mesmo S espelhado. */
-.liga-de::before { left: 50%; width: 25%; top: 0; height: 50%; border-right: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-right-radius: 100%; }
-.liga-de::after  { left: 25%; width: 25%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-left: 2px solid var(--green-text); border-top-left-radius: 100%; }
+@media (max-width: 980px) {
+  .ag-painel { grid-template-columns: 1fr; gap: 28px; padding: 28px 24px; }
+  /* A ilustração vai para cima do texto, como nos demais blocos do site. */
+  .ag-painel-img { order: -1; }
+  .ag-painel h3 { font-size: 24px; }
+  .ag-abas { gap: 8px; margin-bottom: 28px; }
+  .ag-aba { padding: 9px 16px; font-size: 14px; }
+}
+@media (max-width: 560px) {
+  .ag-lista { columns: 1; }
+}
 
-/* Última etapa até o card central: mesmo S, metade do percurso. */
-.liga-ec::before { left: 25%; width: 12.5%; top: 0; height: 50%; border-left: 2px solid var(--green-text); border-bottom: 2px solid var(--green-text); border-bottom-left-radius: 100%; }
-.liga-ec::after  { left: 37.5%; width: 12.5%; top: 50%; height: 50%; border-top: 2px solid var(--green-text); border-right: 2px solid var(--green-text); border-top-right-radius: 100%; }
+/* ---------- Esteira de depoimentos ---------- */
+/* Duas faixas rolando em sentidos opostos. A máscara nas laterais dissolve os
+   cards que entram e saem, senão eles apareceriam cortados na borda da tela. */
+/* O padding vertical existe por causa do hover: o card sobe 3px, e o overflow
+   hidden recorta na borda da caixa de padding, não na do conteúdo. Sem ele o
+   topo do card ficava cortado. A margem negativa devolve o espaço, para a
+   seção não crescer por conta disso. */
+.dep-esteira { display: flex; flex-direction: column; gap: 20px; overflow: hidden; padding: 8px 0; margin: -8px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.dep-linha { display: flex; gap: 20px; width: max-content; }
+/* A lista está duplicada no HTML, então -50% chega exatamente onde a cópia
+   começa e o reinício é invisível. */
+.dep-linha.esq { animation: dep-esq 40s linear infinite; }
+.dep-linha.dir { animation: dep-dir 47s linear infinite; }
+@keyframes dep-esq { from { transform: translateX(0); }      to { transform: translateX(-50%); } }
+@keyframes dep-dir { from { transform: translateX(-50%); }   to { transform: translateX(0); } }
+/* Pausa só a faixa sob o mouse, não as duas: parar a de baixo enquanto se lê a
+   de cima congela a seção inteira sem motivo. */
+.dep-linha:hover { animation-play-state: paused; }
+/* Largura e altura fixas. A largura já era fixa; a altura precisa ser também
+   porque as duas faixas são containers flex separados: dentro de cada uma o
+   flex já iguala os cards pelo mais alto, mas nada faz a faixa de cima bater
+   com a de baixo. Os 290px cabem a citação mais longa (5 linhas a 15px) mais
+   estrelas, autor e padding. Se um depoimento novo for maior que isso, este
+   número precisa subir junto. */
+.dep-esteira .tcard { width: 350px; height: 265px; padding: 22px; gap: 16px; flex-shrink: 0; }
+/* Dentro da esteira o card não sobe no hover. O translateY de 3px tira a borda
+   de baixo do card de debaixo do cursor: o hover cai, o card volta, o hover
+   volta, e com transition no transform isso vira oscilação. Na grade de
+   planos.html, onde nada se move, o efeito continua valendo. */
+.dep-esteira .tcard:hover { transform: none; }
 
-@media (max-width: 860px) {
-  /* Sem lados no celular: os cards empilham e o S vira uma linha reta. */
-  .ag-linha, .ag-linha.esq, .ag-linha.dir { grid-template-columns: 1fr; }
-  .ag-linha .ag-card { grid-column: 1; }
-  .ag-linha.centro .ag-card { max-width: none; }
-  .ag-liga { height: 36px; }
-  .ag-liga::before { left: 50%; width: 0; top: 0; height: 100%; border: none; border-left: 2px solid var(--green-text); border-radius: 0; }
-  .ag-liga::after { display: none; }
-  .ag-card { padding: 22px 20px; }
+@media (prefers-reduced-motion: reduce) {
+  .dep-linha { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .dep-esteira { -webkit-mask-image: none; mask-image: none; }
+  /* Sem movimento, a cópia viraria depoimento repetido na tela. */
+  .dep-linha .tcard[aria-hidden="true"] { display: none; }
+}
+@media (max-width: 560px) {
+  .dep-esteira .tcard { width: 300px; height: 290px; }
+  .dep-linha { gap: 14px; }
+  .dep-esteira { gap: 14px; }
 }
