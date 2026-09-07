@@ -217,13 +217,17 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height:
    inline, a caixa de fundo se estende pelo espaço da linha e o verde escuro
    ficaria espremido no comecinho.
 
-   Dois verdes: o #059669 do botão do hero à esquerda, cheio, abrindo para o
-   --green-text da marca a 90% de opacidade à direita. O alfa deixa o branco da
-   página aparecer por trás das letras, clareando a ponta. Vai como rgba escrito
-   à mão porque --green-text é um rgb() fechado e não aceita alfa por cima. */
+   Dois verdes: o #047857 à esquerda, cheio, abrindo para o --green-text da
+   marca a 90% de opacidade à direita. O alfa deixa o branco da página aparecer
+   por trás das letras, clareando a ponta. Vai como rgba escrito à mão porque
+   --green-text é um rgb() fechado e não aceita alfa por cima.
+
+   A ponta escura era o #059669 do botão do hero. Passou para #047857, um degrau
+   abaixo, para o começo do degradê abrir com mais contraste contra o claro do
+   fim. Não é token do site de propósito: é cor de degradê, não cor de marca. */
 .grad-verde {
   display: inline-block;
-  background: linear-gradient(90deg, #059669 0%, rgba(0, 184, 115, 0.9) 100%);
+  background: linear-gradient(90deg, #047857 0%, rgba(0, 184, 115, 0.9) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
