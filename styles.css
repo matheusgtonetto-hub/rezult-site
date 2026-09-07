@@ -1682,7 +1682,7 @@ select.demo-select:invalid { color: #374151; }
 .btn-pontos-inner {
   z-index: 2; gap: 6px; position: relative; width: 100%;
   color: #fff; display: inline-flex; align-items: center; justify-content: center;
-  font-size: 16px; font-weight: 500; line-height: 1.5;
+  font-size: 15px; font-weight: 500; line-height: 1.5;
   transition: color 0.2s ease-in-out;
 }
 .btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
@@ -1716,36 +1716,80 @@ select.demo-select:invalid { color: #374151; }
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
 .ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
 .ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
-/* A aba ativa recebe o mesmo tratamento do botão do hero: o verde com clarão
-   subindo da base, as duas camadas internas e os pontinhos. Os valores são os
-   mesmos do .btn-pontos; o que muda é o radius, que aqui é 8px. */
+/* A aba ativa é verde chapado, o mesmo --primary da etiqueta com o nome do
+   agente dentro do painel. Aqui morava o tratamento inteiro do .btn-pontos: o
+   verde com clarão subindo da base, duas camadas internas em ::before/::after e
+   os pontinhos animados. Saiu tudo. O efeito de botão pertence ao CTA, que é
+   uma ação; a aba é um seletor de estado, e competir com o CTA na mesma tela
+   tirava a hierarquia dos dois.
+   Os pontinhos continuam no HTML dentro de .btn-pontos-wrap, escondidos: o
+   markup é o mesmo do CTA e foi mantido para não divergirem. */
 .ag-aba { position: relative; overflow: hidden; }
 .ag-aba .btn-pontos-wrap { display: none; }
 .ag-aba-txt { position: relative; z-index: 2; }
 .ag-aba.ativa {
   border-color: transparent;
   color: #FFFFFF;
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%),
-              linear-gradient(0deg, #059669, #059669);
-  box-shadow: 0 6px 20px rgba(0, 184, 115, 0.28);
+  /* #047857 e não --primary: com branco por cima, o verde da marca dá 2,3:1 e
+     reprova no mínimo de 4,5:1. Este verde sobe para 5,5:1. Mesmo valor da
+     etiqueta com o nome do agente, para os dois lerem como um par. */
+  background: #047857;
 }
-.ag-aba.ativa .btn-pontos-wrap { display: block; }
-.ag-aba.ativa::before, .ag-aba.ativa::after { content: ''; position: absolute; z-index: 0; }
-.ag-aba.ativa::before { inset: 1px; border-radius: 7px; background: linear-gradient(177.95deg, rgba(255, 255, 255, 0.19) 0%, rgba(255, 255, 255, 0) 100%); }
-.ag-aba.ativa::after { inset: 2px; border-radius: 6px; background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%), linear-gradient(0deg, #059669, #059669); }
 
-.ag-painel { display: block; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 44px; }
+/* position + overflow existem por causa do light sweep abaixo: o ::before é
+   posicionado contra este elemento, e o overflow recorta a faixa de luz no
+   contorno arredondado do card. */
+.ag-painel { position: relative; overflow: hidden; display: block; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 44px; }
+
+/* Light sweep. Faixa de luz diagonal que atravessa o card de tempos em tempos.
+   O verde entra a 10% em vez de branco puro: sobre o #FBFBFB do card, branco a
+   90% muda quatro unidades de brilho e não aparece. O tom da marca a 10% é o
+   que faz a passagem ser percebida como luz, e não como sujeira.
+   O blur de 8px tira a borda dura das duas pontas do degradê, que sem ele
+   leriam como duas linhas viajando em vez de um brilho só. */
+.ag-painel::before {
+  content: '';
+  position: absolute; z-index: 0;
+  top: -25%; bottom: -25%; left: 0;
+  width: 55%;
+  pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(0, 184, 115, 0) 0%,
+    rgba(0, 184, 115, 0.06) 35%,
+    rgba(0, 184, 115, 0.13) 50%,
+    rgba(0, 184, 115, 0.06) 65%,
+    rgba(0, 184, 115, 0) 100%);
+  filter: blur(8px);
+  animation: ag-sweep 7s ease-in-out infinite;
+}
+/* A luz cruza em 45% do ciclo e fica parada fora do card no resto: sem essa
+   folga a passagem vira estrobo e cansa em segundos. */
+@keyframes ag-sweep {
+  0%        { transform: translateX(-130%); }
+  45%, 100% { transform: translateX(320%); }
+}
+/* O conteúdo precisa de position própria para empilhar acima do ::before.
+   Sem isto o texto continua no fluxo normal e a faixa passa por cima dele. */
+.ag-painel-txt { position: relative; z-index: 1; }
 /* [hidden] perde para o display do .ag-painel, então precisa reafirmar. */
 .ag-painel[hidden] { display: none; }
 
 /* Ícone e nome do agente na mesma linha. */
 .ag-painel-cab { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); color: var(--primary); flex-shrink: 0; }
-.ag-icone svg { width: 24px; height: 24px; }
 /* O h3 é o nome do agente e o h4 é a promessa. O h4 sai maior de propósito:
    a hierarquia de leitura não é a mesma da hierarquia de marcação, e quem
    vende é a promessa, não o cargo. */
-.ag-painel-cab h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--primary); }
+/* O nome do agente vira etiqueta. Continua sendo h3 no HTML, porque a hierarquia
+   de cabeçalhos da página depende dele; só a aparência mudou.
+   Mesma receita da pílula "MAIS ESCOLHIDO" dos planos: mono, 12px, caixa alta e
+   0.04em de tracking. Caixa alta sem tracking fecha as letras e vira bloco. */
+.ag-painel-cab h3 {
+  display: inline-flex; align-items: center;
+  padding: 7px 14px; border-radius: 100px;
+  background: #047857; color: #FFFFFF;
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.2;
+}
 .ag-painel h4 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
 .ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
