@@ -1847,6 +1847,9 @@ select.demo-select:invalid { color: #374151; }
    começa e o reinício é invisível. */
 .dep-linha.esq { animation: dep-esq 40s linear infinite; }
 .dep-linha.dir { animation: dep-dir 47s linear infinite; }
+/* Pausa só a faixa sob o mouse, não as duas: parar a de baixo enquanto se lê a
+   de cima congela a seção inteira sem motivo. */
+.dep-linha:hover { animation-play-state: paused; }
 @keyframes dep-esq { from { transform: translateX(0); }      to { transform: translateX(-50%); } }
 @keyframes dep-dir { from { transform: translateX(-50%); }   to { transform: translateX(0); } }
 /* Largura e altura fixas. A largura já era fixa; a altura precisa ser também

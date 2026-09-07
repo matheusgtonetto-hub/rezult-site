@@ -327,22 +327,26 @@ document.querySelectorAll(".faq-item").forEach(item => {
 })();
 
 // ---- Esteira de cases (hero) ----
-// Anda sozinha para a esquerda, sem parar nunca: não pausa no hover, não pausa
-// depois de um scroll e não respeita prefers-reduced-motion. Foi decisão de
-// produto, e a mesma vale para a esteira de depoimentos lá embaixo (CSS).
+// Anda sozinha para a esquerda e para enquanto o usuário está em cima dela,
+// igual à esteira de depoimentos (que faz o mesmo por CSS, com :hover). Aqui
+// precisa ser em JS porque o avanço é feito em scrollLeft, não em animação.
 //
-// A única cessão é enquanto o dedo ou o botão do mouse está pressionado. Isso
-// não é preferência: o avanço escreve em scrollLeft a cada quadro, e escrever
-// nele durante o gesto anula o arrasto do usuário. Solta, volta na hora.
+// Não respeita prefers-reduced-motion, por decisão de produto: era essa regra
+// que deixava as faixas estáticas em máquina com "Reduzir movimento" ligado.
 (function () {
   const esteira = document.querySelector(".hero-cases");
   const linha = esteira && esteira.querySelector(".cases-linha");
   if (!esteira || !linha) return;
   const pontos = Array.from(document.querySelectorAll(".cases-ponto"));
 
-  const CONJUNTOS = 3;   // precisa bater com o HTML gerado
-  const VELOCIDADE = 38; // px por segundo
+  const CONJUNTOS = 3;    // precisa bater com o HTML gerado
+  const VELOCIDADE = 38;  // px por segundo
+  // Só depois do toque, para a inércia do dedo terminar. Sem esta folga o
+  // avanço volta a escrever em scrollLeft no meio do deslize e mata o impulso.
+  const INERCIA = 600;    // ms
 
+  let sobre = false;
+  let inerciaAte = 0;
   let segurando = false;
   let ultimoQuadro = 0;
   let xInicial = 0;
@@ -384,8 +388,11 @@ document.querySelectorAll(".faq-item").forEach(item => {
   function quadro(agora) {
     const dt = ultimoQuadro ? (agora - ultimoQuadro) / 1000 : 0;
     ultimoQuadro = agora;
-    if (!segurando) {
-      normalizar();
+    const emGesto = segurando || agora <= inerciaAte;
+    // O reposicionamento que fecha o ciclo nunca roda durante um gesto: mexer
+    // em scrollLeft no meio dele cancela a inércia e trava a rolagem.
+    if (!emGesto) normalizar();
+    if (!emGesto && !sobre) {
       // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a
       // esteira daria um salto proporcional ao tempo em que ficou escondida.
       if (dt > 0 && dt < 0.1) esteira.scrollLeft += VELOCIDADE * dt;
@@ -395,10 +402,17 @@ document.querySelectorAll(".faq-item").forEach(item => {
   }
   requestAnimationFrame(quadro);
 
-  // Dedo encostado na tela: cede o controle até soltar.
+  // Mouse em cima: para, igual ao :hover dos depoimentos. Sai, volta a andar.
+  esteira.addEventListener("mouseenter", () => { sobre = true; });
+  esteira.addEventListener("mouseleave", () => { sobre = false; });
+
+  // Dedo encostado na tela: cede o controle até soltar, mais a folga de inércia.
+  const soltarDedo = () => { segurando = false; inerciaAte = performance.now() + INERCIA; };
   esteira.addEventListener("touchstart", () => { segurando = true; }, { passive: true });
-  esteira.addEventListener("touchend", () => { segurando = false; }, { passive: true });
-  esteira.addEventListener("touchcancel", () => { segurando = false; }, { passive: true });
+  esteira.addEventListener("touchend", soltarDedo, { passive: true });
+  esteira.addEventListener("touchcancel", soltarDedo, { passive: true });
+  // Trackpad e roda horizontal também são gesto: mesma folga de inércia.
+  esteira.addEventListener("wheel", () => { inerciaAte = performance.now() + INERCIA; }, { passive: true });
 
   // Arrasto com o mouse. Dedo e trackpad já rolam nativamente; isto é para quem
   // usa mouse de roda, que sozinho não rola na horizontal.
