@@ -249,6 +249,31 @@ wirePricingToggle("priceToggle");
   io.observe(metrics);
 })();
 
+// ---- Hero mockup scroll rotation ----
+(function () {
+  const img = document.querySelector('.hero-mockup-img');
+  if (!img || window.innerWidth > 768) return;
+
+  const scrollRange = 500;
+  let ticking = false;
+
+  function update() {
+    if (window.innerWidth > 768) { img.style.transform = ''; return; }
+    const startAngle = -35;
+    const progress = Math.min(window.scrollY / scrollRange, 1);
+    const eased = 1 - Math.pow(1 - progress, 2);
+    const angle = startAngle * (1 - eased);
+    img.style.transform = `perspective(1400px) rotateX(${angle}deg)`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
+})();
+
 // ---- FAQ accordion ----
 document.querySelectorAll(".faq-item").forEach(item => {
   const q = item.querySelector(".faq-q");
@@ -420,154 +445,5 @@ document.querySelectorAll(".faq-item").forEach(item => {
     ponto.addEventListener("click", () => {
       esteira.scrollLeft = larguraConjunto() + i * larguraCard();
     });
-  });
-})();
-
-// ---- Captura de intenção (hero) ----
-// O campo do hero não constrói nada aqui. Ele guarda o que a pessoa escreveu e
-// leva o texto até o cadastro, onde a operação é montada de verdade.
-//
-// Duas linhas de chips, com trabalhos diferentes:
-//   abas (acima)  → trocam o contexto: placeholder + casos da linha de baixo
-//   casos (abaixo) → escrevem a frase pronta dentro do campo
-//
-// Por que cookie e não localStorage: o site é rezultcrm.com e o app é
-// app.rezultcrm.com. localStorage é preso à origem exata e não cruza
-// subdomínio; cookie com domain no domínio pai cruza. Query string funcionaria,
-// mas deixaria a frase inteira exposta na URL do cadastro.
-(function () {
-  const form = document.getElementById("heroMonta");
-  const campo = document.getElementById("montaTexto");
-  if (!form || !campo) return;
-
-  const abas = Array.from(document.querySelectorAll(".monta-aba"));
-  const grupos = abas.map(a => document.getElementById(a.getAttribute("aria-controls")));
-
-  const DESTINO = "https://app.rezultcrm.com/register";
-  const VALIDADE = 1800; // 30 min: tempo de cadastrar, não de voltar amanhã
-
-  // Segmento do chip usado. Fica vazio quando a pessoa escreve do zero: mandar
-  // um rótulo que não corresponde ao texto é pior para o gerador que não mandar.
-  let segmento = "";
-
-  // Em localhost e no preview da Vercel o domínio pai não existe, e um cookie
-  // com domain=.rezultcrm.com seria descartado em silêncio pelo navegador.
-  function guardar(nome, valor) {
-    const emProducao = location.hostname.endsWith("rezultcrm.com");
-    const dominio = emProducao ? "; domain=.rezultcrm.com" : "";
-    const seguro = location.protocol === "https:" ? "; secure" : "";
-    document.cookie = `${nome}=${encodeURIComponent(valor)}${dominio}` +
-                      `; max-age=${VALIDADE}; path=/; samesite=lax${seguro}`;
-  }
-
-  // Fade nas pontas só quando há conteúdo escondido de verdade. Um mask fixo
-  // apagava as bordas no desktop, onde as cinco abas cabem inteiras e não há
-  // nada ao lado para anunciar.
-  function marcarTransbordo(el) {
-    if (!el) return;
-    const sobra = el.scrollWidth - el.clientWidth;
-    // A folga de 2px absorve o arredondamento subpixel do layout: sem ela, uma
-    // fileira que cabe por 0,4px acenderia o fade como se transbordasse.
-    el.classList.toggle("tem-antes", el.scrollLeft > 2);
-    el.classList.toggle("tem-mais", sobra > 2 && el.scrollLeft < sobra - 2);
-  }
-
-  function conferirFileiras() {
-    marcarTransbordo(document.querySelector(".monta-abas"));
-    marcarTransbordo(grupos.find(g => !g.hidden));
-  }
-
-  // Altura acompanhando o conteúdo. Zerar antes de medir é obrigatório: o
-  // scrollHeight de um elemento já esticado devolve a altura atual, não a que o
-  // texto precisa, e o campo só cresceria, nunca encolheria ao apagar.
-  function ajustarAltura() {
-    campo.style.height = "auto";
-    campo.style.height = campo.scrollHeight + "px";
-  }
-
-  function escrever(texto, seg) {
-    campo.value = texto;
-    segmento = seg;
-    ajustarAltura();
-    campo.focus();
-    // Cursor no fim: sem isto ele fica no começo da frase que acabou de
-    // aparecer e quem tenta completar acaba digitando no lugar errado.
-    campo.setSelectionRange(texto.length, texto.length);
-  }
-
-  function ligarCasos(grupo) {
-    grupo.querySelectorAll(".monta-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        escrever(chip.dataset.texto || "", grupo.id.replace("casos-", ""));
-      });
-    });
-  }
-  grupos.forEach(ligarCasos);
-
-  function trocarAba(indice, focar) {
-    abas.forEach((aba, i) => {
-      const ativa = i === indice;
-      aba.classList.toggle("ativa", ativa);
-      aba.setAttribute("aria-selected", ativa ? "true" : "false");
-      aba.tabIndex = ativa ? 0 : -1;
-      grupos[i].hidden = !ativa;
-    });
-    // O grupo visível mudou, e com ele a largura da fileira de baixo.
-    conferirFileiras();
-    // Só o texto de exemplo muda. O que a pessoa já escreveu fica: trocar de
-    // aba é explorar, não recomeçar, e apagar o que ela digitou seria hostil.
-    campo.placeholder = abas[indice].dataset.placeholder || campo.placeholder;
-    if (focar) abas[indice].focus();
-  }
-
-  abas.forEach((aba, i) => {
-    aba.addEventListener("click", () => trocarAba(i, false));
-    aba.addEventListener("keydown", e => {
-      const passo = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-      if (passo) { e.preventDefault(); trocarAba((i + passo + abas.length) % abas.length, true); }
-      else if (e.key === "Home" || e.key === "End") {
-        e.preventDefault(); trocarAba(e.key === "Home" ? 0 : abas.length - 1, true);
-      }
-    });
-  });
-  if (abas.length) campo.placeholder = abas[0].dataset.placeholder || campo.placeholder;
-  ajustarAltura();
-  conferirFileiras();
-  // A largura muda quantas linhas o texto ocupa e se as fileiras transbordam,
-  // então os dois precisam ser remedidos ao girar o celular ou redimensionar.
-  window.addEventListener("resize", () => { ajustarAltura(); conferirFileiras(); }, { passive: true });
-  document.querySelector(".monta-abas")
-    ?.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true });
-  grupos.forEach(g => g.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true }));
-
-  campo.addEventListener("input", () => { segmento = ""; ajustarAltura(); });
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const texto = campo.value.trim();
-    if (!texto) { campo.focus(); return; }
-
-    guardar("rz_intent", texto);
-    if (segmento) guardar("rz_segmento", segmento);
-
-    // Evento de intenção para a Meta. Sem isto a campanha só tem PageView e o
-    // algoritmo não tem o que otimizar além de tráfego.
-    if (typeof fbq === "function") {
-      fbq("track", "InitiateCheckout", {
-        content_name: segmento || "livre",
-        content_category: "captura_intencao",
-      });
-    }
-
-    window.location.href = DESTINO;
-  });
-
-  // Enter envia, Shift+Enter quebra linha. Num textarea o padrão é o contrário,
-  // e quem escreve uma frase e aperta Enter espera enviar, não pular linha.
-  campo.addEventListener("keydown", e => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      form.requestSubmit();
-    }
   });
 })();

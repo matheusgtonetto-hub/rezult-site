@@ -7,6 +7,9 @@
 <meta name="description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#08120e" />
+<!-- Variante de teste A/B. O canonical aponta para a home de propósito: é a
+     recomendação do Google para teste A/B, e evita que as duas URLs compitam
+     entre si na busca como conteúdo duplicado. -->
 <link rel="canonical" href="https://rezultcrm.com/" />
 <link rel="manifest" href="/site.webmanifest" />
 <meta property="og:type" content="website" />
@@ -14,7 +17,7 @@
 <meta property="og:site_name" content="Rezult CRM" />
 <meta property="og:title" content="CRM de Vendas com Pipeline, WhatsApp e IA | Rezult CRM" />
 <meta property="og:description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
-<meta property="og:url" content="https://rezultcrm.com/" />
+<meta property="og:url" content="https://rezultcrm.com/crm" />
 <meta property="og:image" content="https://rezultcrm.com/rezult-pipeline.png" />
 <meta property="og:image:width" content="1800" />
 <meta property="og:image:height" content="1080" />
@@ -27,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="crm.css" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -111,12 +114,12 @@ fbq('track','PageView');
 <nav class="nav" id="nav">
   <div class="wrap">
     <div class="nav-left">
-      <a href="index.html" class="logo">
+      <a href="crm.html" class="logo">
         <img src="logo-rezult.png" alt="Rezult CRM" width="1080" height="1080">
       </a>
     </div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="crm.html">Home</a>
       <a href="planos.html">Planos</a>
     </div>
     <div class="nav-right">
@@ -144,7 +147,7 @@ fbq('track','PageView');
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
+  <a href="crm.html">Home</a>
   <a href="planos.html">Planos</a>
   <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Teste Grátis</a>
 </div>
@@ -158,103 +161,28 @@ fbq('track','PageView');
           <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
           <span>Potencialize seu negócio com IA</span>
         </div>
-        <h1 class="reveal" data-d="1">Construa seu time comercial de agentes de IA</h1>
-        <p class="hero-sub reveal" data-d="2">Eles atendem no WhatsApp, qualificam, agendam, fazem follow-up e preenchem o CRM por você, <strong>sem precisar contratar para crescer.</strong></p>
-        <div class="monta-abas reveal" data-d="3" role="tablist" aria-label="Segmento do seu negócio">
-          <button type="button" class="monta-aba ativa" role="tab" id="aba-clinica"
-                  aria-selected="true" aria-controls="casos-clinica" tabindex="0"
-                  data-segmento="clinica" data-placeholder="Ex: quero que a IA responda quem chama no WhatsApp, descubra o procedimento e agende a avaliação.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
-            Clínica
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-imobiliaria"
-                  aria-selected="false" aria-controls="casos-imobiliaria" tabindex="-1"
-                  data-segmento="imobiliaria" data-placeholder="Ex: quero que a IA atenda quem vem dos portais, descubra o perfil do imóvel e agende a visita.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/></svg>
-            Imobiliária
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-agencia"
-                  aria-selected="false" aria-controls="casos-agencia" tabindex="-1"
-                  data-segmento="agencia" data-placeholder="Ex: quero que a IA qualifique os leads de anúncio e marque a reunião de diagnóstico.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-            Agência
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-consultoria"
-                  aria-selected="false" aria-controls="casos-consultoria" tabindex="-1"
-                  data-segmento="consultoria" data-placeholder="Ex: quero que a IA atenda quem vem do meu conteúdo e agende uma call só se fizer sentido.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Consultoria
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-infoproduto"
-                  aria-selected="false" aria-controls="casos-infoproduto" tabindex="-1"
-                  data-segmento="infoproduto" data-placeholder="Ex: quero que a IA atenda o volume de lançamento, tire dúvidas e recupere quem não comprou.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/><path d="M2 10 12 5l10 5-10 5z"/></svg>
-            Infoproduto
-          </button>
+        <h1 class="reveal" data-d="1">A <span class="em">nova geração</span> de <span class="em">CRM</span> com <span class="em">Whatsapp</span> e <span class="em">Agentes</span> de <span class="em">IA.</span></h1>
+        <p class="hero-sub reveal" data-d="2">Rezult atende no WhatsApp, qualifica, agenda reuniões, follow-ups, vende e organiza todo o CRM com anotações detalhadas para você.</p>
+        <div class="hero-actions reveal" data-d="3">
+          <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+            <div class="btn-pontos-wrap" aria-hidden="true">
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            </div>
+            <span class="btn-pontos-inner">Começar 7 Dias Grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
         </div>
-
-        <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
-          <label class="visualmente-oculto" for="montaTexto">O que você quer automatizar no seu comercial?</label>
-          <textarea id="montaTexto" class="monta-campo" rows="2" maxlength="600"
-                    placeholder="O que você quer automatizar no seu comercial?"></textarea>
-          <div class="monta-pe">
-            <span class="monta-nota">Sem cartão de crédito</span>
-            <button type="submit" class="btn-pontos monta-cta">
-              <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-              </div>
-              <span class="btn-pontos-inner">Construir<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-            </button>
-          </div>
-        </form>
-
-        <div class="monta-chips reveal" data-d="5">
-          <span class="monta-chips-rotulo">Experimente<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-          <div class="monta-casos" id="casos-clinica" role="tabpanel"
-               aria-labelledby="aba-clinica">
-            <button type="button" class="monta-chip" data-texto="Tenho uma clínica e os pacientes chamam no WhatsApp a qualquer hora. Quero que a IA responda na hora, inclusive fora do horário e no fim de semana.">Atender pacientes</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra qual procedimento a pessoa procura, se é convênio ou particular, e separe quem já está pronto para marcar.">Qualificar interesse</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA agende a avaliação direto na agenda do profissional certo e confirme com o paciente no dia anterior.">Agendar avaliações</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada conversa vire um registro no CRM, com o procedimento, o convênio e o histórico anotados, sem a recepção digitar nada.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-imobiliaria" role="tabpanel"
-               aria-labelledby="aba-imobiliaria" hidden>
-            <button type="button" class="monta-chip" data-texto="Meus leads chegam pelos portais e pelo Instagram. Quero que a IA responda em segundos, antes de a pessoa falar com outra imobiliária.">Atender interessados</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra a região, o valor que a pessoa pode pagar e se vai financiar, antes de ocupar a agenda de um corretor.">Qualificar o perfil</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA marque a visita direto na agenda do corretor daquela região e confirme com o cliente antes do horário.">Agendar visitas</button>
-            <button type="button" class="monta-chip" data-texto="Quero o perfil do imóvel procurado, o orçamento e o resumo da conversa registrados no CRM automaticamente.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-agencia" role="tabpanel"
-               aria-labelledby="aba-agencia" hidden>
-            <button type="button" class="monta-chip" data-texto="Recebo leads de anúncio no WhatsApp o dia inteiro. Quero que a IA atenda todos na hora, sem depender de alguém estar disponível.">Atender leads de anúncio</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra o segmento, o faturamento e a verba disponível, e me passe só quem vale uma reunião.">Qualificar orçamento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA conduza a conversa até marcar a reunião de diagnóstico na minha agenda, com o contexto do lead já anotado.">Agendar diagnóstico</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada lead entre no funil com origem, campanha e resumo da conversa já preenchidos, sem ninguém digitar.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-consultoria" role="tabpanel"
-               aria-labelledby="aba-consultoria" hidden>
-            <button type="button" class="monta-chip" data-texto="Recebo mensagens de quem acompanha meu conteúdo. Quero que a IA atenda todo mundo, mesmo quando eu estou em reunião.">Atender quem chega</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra o tamanho da operação, o problema principal e a urgência antes de qualquer conversa comigo.">Qualificar o momento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA marque a call comigo apenas quando o perfil fizer sentido, e recuse com educação quem ainda não está no momento.">Agendar call</button>
-            <button type="button" class="monta-chip" data-texto="Quero o histórico de cada conversa organizado no CRM, com o contexto da empresa e o estágio em que a pessoa parou.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-infoproduto" role="tabpanel"
-               aria-labelledby="aba-infoproduto" hidden>
-            <button type="button" class="monta-chip" data-texto="No lançamento chega mensagem demais e o time não dá conta. Quero que a IA atenda todo mundo na hora, sem deixar ninguém na fila.">Atender no lançamento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA tire as dúvidas sobre o curso, entenda o momento do aluno e identifique quem está perto de comprar.">Qualificar interesse</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA agende as sessões de mentoria e as calls de venda do alto ticket direto na minha agenda.">Agendar mentoria</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada conversa vire registro no CRM, com origem, objeção e estágio, para eu saber onde as vendas travam.">Operar o CRM</button>
-          </div>
-        </div>
+      </div>
+      <div class="hero-mockup-wrap" id="mockupSlotA">
+        <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
       </div>
     </div>
   </div>
@@ -535,8 +463,7 @@ fbq('track','PageView');
 <section class="section" id="recursos" style="background: #FBFBFB; padding: 90px 0px; overflow: hidden;">
   <div class="wrap" style="padding: 0px 20px">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px">
-      <h2 class="h2">A <span class="grad-verde">solução completa</span> para o crescimento do seu negócio</h2>
-      <p class="lede">Todas as ferramentas que você precisa em uma plataforma alimentada por IA</p>
+      <h2 class="h2">A <span class="grad-verde">solução completa</span> para o seu comercial</h2>
     </div>
 
     <!-- Feature 1: WhatsApp -->
@@ -633,7 +560,7 @@ fbq('track','PageView');
 <section class="section" id="agentes" style="background: #FFFFFF; padding: 100px 0px">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Conheça sua <span class="grad-verde">nova equipe</span></h2>
+      <h2 class="h2">Conheça os <span class="grad-verde">novos membros</span> do seu time</h2>
       <p class="lede">Cada um cuida de uma etapa do seu funil. Escolha abaixo para ver o que ele faz na sua operação.</p>
     </div>
 
@@ -1314,7 +1241,7 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="logo">
+        <a href="crm.html" class="logo">
           <img src="logo-rodape.png" alt="Rezult CRM" width="350" height="100">
         </a>
         <p>O CRM com automações, WhatsApp e agentes de IA para empresas que vendem de verdade.</p>
@@ -1354,7 +1281,7 @@ fbq('track','PageView');
 </footer>
 
 <script src="mockups.js"></script>
-<script src="main.js"></script>
+<script src="crm.js"></script>
 <script>
   const demoForm = document.getElementById("demoForm");
   const demoSuccess = document.getElementById("demoSuccess");
@@ -1387,6 +1314,18 @@ fbq('track','PageView');
         e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
       }
     });
+  }
+</script>
+<script type="module">
+  import { animate, inView } from "https://esm.sh/motion@12.42.2";
+
+  // Float na imagem da hero — desktop e tablet apenas
+  const heroImg = document.getElementById("hero-img");
+  if (heroImg && window.matchMedia("(min-width: 768px)").matches) {
+    animate(heroImg,
+      { y: [0, -14, 0] },
+      { duration: 4, easing: "ease-in-out", repeat: Infinity, delay: 1.5 }
+    );
   }
 </script>
 </body>
