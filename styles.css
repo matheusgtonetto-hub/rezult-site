@@ -1159,13 +1159,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
      descontam o padding do .wrap (32 de cada lado) mais o do .section-head
      (12 de cada lado). O seletor com id vence o `.h2 { font-size: 30px }` do
      breakpoint de 560px sem precisar de !important. */
-  font-size: min(36px, calc((100vw - 88px) / 15.1));
+  font-size: min(36px, calc((100vw - 88px) / 14.4));
 }
 /* A linha de apoio abaixo do título acompanha a mesma cor -- título e lede
    lêem como um bloco só, igual à dupla h1/subheadline da hero.
    Mesma lógica de tamanho, para a linha mais longa ("Todas as ferramentas que
    você precisa em", 40 caracteres) não quebrar em três. */
-#recursos .lede { color: var(--verde-titulo); font-size: min(16px, calc((100vw - 88px) / 21.6)); }
+#recursos .lede { color: var(--verde-titulo); font-size: min(16px, calc((100vw - 88px) / 20.6)); }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
    -webkit-text-fill-color: transparent, que existiam só para o degradê
@@ -2017,8 +2017,25 @@ select.demo-select:invalid { color: #374151; }
 /* Três linhas fixas no título e duas na lede, por <br>. O corpo encolhe para a
    linha mais longa de cada um caber: 28 caracteres no título e 36 na lede.
    Mesmos 88px de desconto e mesma lógica do #recursos. */
-#agentes .h2 { font-size: min(36px, calc((100vw - 88px) / 15.1)); }
-#agentes .lede { font-size: min(16px, calc((100vw - 88px) / 19.4)); }
+#agentes .h2 { font-size: min(36px, calc((100vw - 88px) / 14.4)); }
+#agentes .lede { font-size: min(16px, calc((100vw - 88px) / 18.5)); }
+
+/* Mesmo acerto que o h1 e o subtítulo da hero receberam, agora nos títulos e
+   nas linhas de apoio das seções 2 e 3.
+   As fórmulas acima descontam 88px: 32px de cada lado do .wrap mais 12px de
+   cada lado do .section-head. No celular o .wrap cai para 22px, então o
+   desconto certo é 68px, e sem este bloco 20px de largura ficariam parados.
+
+   O bloco vem DEPOIS das regras de #agentes de propósito. As duas têm a mesma
+   especificidade (id + classe), então quem vence é a que aparece por último no
+   arquivo; posto lá em cima, junto das outras regras de 560px, ele perderia
+   para a linha 2021 e não faria nada. */
+@media (max-width: 560px) {
+  #recursos .h2   { font-size: min(36px, calc((100vw - 68px) / 14.4)); }
+  #recursos .lede { font-size: min(16px, calc((100vw - 68px) / 20.6)); }
+  #agentes .h2    { font-size: min(36px, calc((100vw - 68px) / 14.4)); }
+  #agentes .lede  { font-size: min(16px, calc((100vw - 68px) / 18.5)); }
+}
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
 /* Quebra forçada depois do 4º botão: 4 em cima, 3 embaixo, como pedido.
    Um item de largura total no meio de uma linha flex empurra o resto para a
