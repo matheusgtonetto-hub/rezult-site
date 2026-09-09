@@ -499,11 +499,28 @@ document.querySelectorAll(".faq-item").forEach(item => {
     campo.setSelectionRange(texto.length, texto.length);
   }
 
-  casos?.querySelectorAll(".monta-chip").forEach(chip => {
+  const chips = Array.from(casos ? casos.querySelectorAll(".monta-chip") : []);
+
+  function marcarChip(escolhido) {
+    chips.forEach(c => {
+      const ativo = c === escolhido;
+      c.classList.toggle("ativo", ativo);
+      c.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+  }
+
+  chips.forEach(chip => {
     chip.addEventListener("click", () => {
       escrever(chip.dataset.texto || "", chip.dataset.slug || "");
+      marcarChip(chip);
     });
   });
+
+  // Quem manda no estado inicial é o HTML: o campo já vem com o texto de um dos
+  // chips, e é esse chip que carrega a classe `ativo`. Ler o slug daqui em vez
+  // de escrevê-lo à mão evita que os dois se separem — sem isso, um envio sem
+  // nenhum clique mandaria "livre" para um texto que veio de um chip.
+  segmento = chips.find(c => c.classList.contains("ativo"))?.dataset.slug || "";
 
   ajustarAltura();
   conferirFileiras();
@@ -512,7 +529,9 @@ document.querySelectorAll(".faq-item").forEach(item => {
   window.addEventListener("resize", () => { ajustarAltura(); conferirFileiras(); }, { passive: true });
   casos?.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true });
 
-  campo.addEventListener("input", () => { segmento = ""; ajustarAltura(); });
+  // Digitou: o texto deixou de ser o do chip, então a marcação sai junto com o
+  // segmento. Manter o chip aceso apontaria para uma frase que já não está lá.
+  campo.addEventListener("input", () => { segmento = ""; marcarChip(null); ajustarAltura(); });
 
   form.addEventListener("submit", e => {
     e.preventDefault();

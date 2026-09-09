@@ -635,7 +635,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
      e o texto dentro do campo herdaria isso. Cartão centralizado na coluna,
      conteúdo alinhado à esquerda. */
   text-align: left;
-  width: 100%; max-width: 750px; margin: 13px auto 0;
+  /* 40px no topo: era o margin-top da pergunta que ficava aqui em cima (e das
+     abas antes dela). Com a pergunta dentro do campo, o cartao herda o respiro,
+     senao ele encostaria na subheadline. */
+  width: 100%; max-width: 750px; margin: 40px auto 0;
   background: #FFFFFF;
   border: 1px solid var(--border-2);
   border-radius: 20px;
@@ -714,24 +717,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* currentColor no <svg>: a seta acompanha o branco do texto. */
 .monta-cta svg { width: 16px; height: 16px; }
 
-/* Linha de cima: a pergunta que o campo responde.
-   Aqui existiam cinco abas de segmento (clínica, imobiliária, agência...) que
-   trocavam o placeholder e os chips de baixo. Saíram: os chips passaram a
-   nomear a TAREFA a automatizar, que vale para qualquer segmento, e o contexto
-   do negócio quem dá é a própria frase que a pessoa escreve.
-
-   É um <label for="montaTexto">, e não um parágrafo: a pergunta é o rótulo do
-   campo, e como <label> ela também leva o foco ao campo quando clicada. */
-.monta-pergunta {
-  display: block;
-  margin-top: 40px;   /* o mesmo respiro que as abas tinham */
-  font-family: var(--display);
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--ink);
-  cursor: pointer;
-}
-
 /* Linha de baixo: escreve no campo. */
 /* nowrap em toda a linha: o rótulo fica fixo e os casos rolam de lado quando
    não cabem, em vez de quebrarem em duas fileiras. Numa fileira só a leitura é
@@ -778,6 +763,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   cursor: pointer; transition: border-color .2s, background .2s, color .2s;
 }
 .monta-chip:hover { border-color: rgba(0, 184, 115, 0.45); color: #047857; }
+/* O chip que escreveu o que está no campo. Um deles já nasce marcado, porque o
+   campo nasce preenchido -- sem isso o texto pareceria ter vindo do nada.
+   Fundo verde a 10% e não chapado: o botão do cartão logo acima é o verde cheio
+   da página, e um chip chapado disputaria a ação com ele. O peso sobe de 300
+   para 500, que é o que sustenta a seleção quando o fundo é tão claro. */
+.monta-chip.ativo {
+  border-color: rgba(0, 184, 115, 0.45);
+  background: rgba(0, 184, 115, 0.10);
+  color: #047857; font-weight: 500;
+}
 .monta-chip:focus-visible { outline: 2px solid var(--green-text); outline-offset: 2px; }
 
 /* Rótulo só para leitor de tela. O placeholder some quando a pessoa digita, e
@@ -1422,7 +1417,6 @@ select.demo-select:invalid { color: #374151; }
 .hero-actions { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .46s both; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 /* A cascata de entrada terminava no mockup; agora termina no construtor. */
-.monta-pergunta { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .46s both; }
 .hero-monta  { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .54s both; }
 .monta-chips { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .62s both; }
 
@@ -1660,7 +1654,7 @@ select.demo-select:invalid { color: #374151; }
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
   /* Cartão colado nas laterais e mais compacto. */
-  .hero-monta { margin-top: 13px; border-radius: 18px; }
+  .hero-monta { margin-top: 25px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
   /* O pé fica em linha, com o botão à direita. Era coluna, porque lado a lado o
      botão espremia a nota "Sem cartão de crédito" a ponto de ela quebrar em
