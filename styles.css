@@ -1151,21 +1151,22 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.1;
-  /* Mesmo verde do h1 da hero. Escopado à seção, e não ao .h2 global: os
-     outros títulos de seção ficam no --ink padrão. */
-  color: var(--verde-titulo);
+  /* Mesmo preto dos demais títulos de seção (ex.: "Nunca usou IA no seu
+     negócio?"), que herdam --text do body. Declarado aqui porque a regra
+     precisa existir na seção de qualquer forma pelo font-size. */
+  color: var(--text);
   /* Duas linhas fixas por <br>, e o corpo encolhe para a mais longa
-     ("operação comercial rodar 24h", 28 caracteres) caber sempre. Os 88px
-     descontam o padding do .wrap (32 de cada lado) mais o do .section-head
-     (12 de cada lado). O seletor com id vence o `.h2 { font-size: 30px }` do
-     breakpoint de 560px sem precisar de !important. */
-  font-size: min(36px, calc((100vw - 64px) / 14.3));
+     ("sua operação comercial.", 11.56 em medidos na Geist) caber sempre. Os
+     64px descontam o padding lateral do .wrap (32 de cada lado). O seletor com
+     id vence o `.h2 { font-size: 30px }` do breakpoint de 560px sem precisar
+     de !important. */
+  font-size: min(36px, calc((100vw - 64px) / 11.56));
 }
-/* A linha de apoio abaixo do título acompanha a mesma cor -- título e lede
-   lêem como um bloco só, igual à dupla h1/subheadline da hero.
+/* A linha de apoio fica no cinza padrão do .lede, igual à das outras seções
+   (ex.: "Sem instalação, sem projeto de implantação.").
    Mesma lógica de tamanho, para a linha mais longa ("Todas as ferramentas que
-   você precisa em", 40 caracteres) não quebrar em três. */
-#recursos .lede { color: var(--verde-titulo); font-size: min(16px, calc((100vw - 64px) / 19.88)); }
+   você precisa", 18.19 em medidos) não quebrar em três. */
+#recursos .lede { color: var(--text-muted); font-size: min(18px, calc((100vw - 64px) / 18.19)); }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
    -webkit-text-fill-color: transparent, que existiam só para o degradê
@@ -2009,16 +2010,18 @@ select.demo-select:invalid { color: #374151; }
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
    demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
-/* Título e lede no mesmo verde do h1 da hero, igual à seção de Recursos. O
+/* Título no preto padrão e lede no cinza padrão, iguais às demais seções. O
    <span class="grad-verde"> que sublinhava "uma equipe de IA" saiu do HTML: ele
    pinta por gradiente clipado com -webkit-text-fill-color, que ignora `color`,
    e mantido teria deixado só aquele trecho fora da cor sólida do resto. */
-#agentes .h2, #agentes .lede { color: var(--verde-titulo); }
+#agentes .h2 { color: var(--text); }
+#agentes .lede { color: var(--text-muted); }
 /* Três linhas fixas no título e duas na lede, por <br>. O corpo encolhe para a
-   linha mais longa de cada um caber: 28 caracteres no título e 36 na lede.
-   Mesmos 88px de desconto e mesma lógica do #recursos. */
-#agentes .h2 { font-size: min(36px, calc((100vw - 64px) / 13.91)); }
-#agentes .lede { font-size: min(16px, calc((100vw - 64px) / 18.52)); }
+   linha mais longa de cada um caber: "mais vendedores. Precisa dar" no título
+   e "Os agentes cuidam de todas as etapas" na lede, 13.96 em e 17.93 em
+   medidos na Geist. Mesmos 64px de desconto e mesma lógica do #recursos. */
+#agentes .h2 { font-size: min(36px, calc((100vw - 64px) / 13.96)); }
+#agentes .lede { font-size: min(18px, calc((100vw - 64px) / 17.93)); }
 
 /* Mesmo acerto que o h1 e o subtítulo da hero receberam, agora nos títulos e
    nas linhas de apoio das seções 2 e 3.
@@ -2031,10 +2034,10 @@ select.demo-select:invalid { color: #374151; }
    arquivo; posto lá em cima, junto das outras regras de 560px, ele perderia
    para a linha 2021 e não faria nada. */
 @media (max-width: 560px) {
-  #recursos .h2   { font-size: min(36px, calc((100vw - 44px) / 14.3)); }
-  #recursos .lede { font-size: min(16px, calc((100vw - 44px) / 19.88)); }
-  #agentes .h2    { font-size: min(36px, calc((100vw - 44px) / 13.91)); }
-  #agentes .lede  { font-size: min(16px, calc((100vw - 44px) / 18.52)); }
+  #recursos .h2   { font-size: min(36px, calc((100vw - 44px) / 11.56)); }
+  #recursos .lede { font-size: min(18px, calc((100vw - 44px) / 18.19)); }
+  #agentes .h2    { font-size: min(36px, calc((100vw - 44px) / 13.96)); }
+  #agentes .lede  { font-size: min(18px, calc((100vw - 44px) / 17.93)); }
 }
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
 /* Quebra forçada depois do 4º botão: 4 em cima, 3 embaixo, como pedido.
