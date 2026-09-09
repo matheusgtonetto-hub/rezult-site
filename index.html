@@ -158,8 +158,8 @@ fbq('track','PageView');
           <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
           <span>Potencialize seu negócio com IA</span>
         </div>
-        <h1 class="reveal" data-d="1">Crie o seu Time Comercial de Agentes de IA</h1>
-        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp 24h e registrando tudo no CRM.</p>
+        <h1 class="reveal" data-d="1">Crie seu time Comercial de Agentes de IA</h1>
+        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp 24h, operando e registrando tudo no CRM.</p>
         <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
           <!-- Rótulo oculto, e não só o placeholder: placeholder some assim que a
                pessoa digita a primeira letra, e leitor de tela não o trata como
@@ -178,7 +178,11 @@ fbq('track','PageView');
         </form>
 
         <div class="monta-chips reveal" data-d="5">
-          <span class="monta-chips-rotulo">Selecione<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          <!-- Só a seta. Ela apontava para os chips ao lado de um rótulo que
+               dizia o mesmo; sem o texto ela continua fazendo esse trabalho.
+               Segue com aria-hidden: é sinal de direção, não conteúdo, e um
+               leitor de tela já encontra os chips como os botões que são. -->
+          <span class="monta-chips-rotulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           <div class="monta-casos">
             <button type="button" class="monta-chip ativo" aria-pressed="true" data-slug="atendimento" data-texto="Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.">Atendimento</button>
             <button type="button" class="monta-chip" aria-pressed="false" data-slug="qualificacao" data-texto="Crie um agente de qualificação para o meu negócio. O agente deve descobrir o que a pessoa procura, o orçamento e a urgência, e separar quem já está pronto para comprar.">Qualificação</button>
@@ -565,7 +569,7 @@ fbq('track','PageView');
 <section class="section" id="agentes" style="background: #FFFFFF; padding: 100px 0px">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Crie seus agentes <span class="grad-verde">em minutos</span></h2>
+      <h2 class="h2">Ative seus agentes <span class="grad-verde">em minutos</span></h2>
       <p class="lede">Cada um cuida de uma etapa do seu funil. Escolha abaixo para ver o que ele faz na sua operação.</p>
     </div>
 
