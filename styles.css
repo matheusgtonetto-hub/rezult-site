@@ -1731,7 +1731,15 @@ select.demo-select:invalid { color: #374151; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
   .page-hero h1 { font-size: 38px; letter-spacing: -0.03em; line-height: 1.07; }
-  .hero h1 { line-height: 1.07; }
+  /* O h1 ocupa o maior corpo que a formatação de duas linhas permite. A regra
+     base desconta 64px (o padding do .wrap no desktop); aqui o .wrap usa 22px
+     de cada lado, então o desconto certo é 44px, e o título ganha esses 20px de
+     largura extra em vez de desperdiçá-los.
+     O divisor também aperta: 12.3 em vez de 12.9, porque a folga cai de 8% para
+     3%. É o que significa "o maior possível" -- em troca, a margem de erro da
+     estimativa fica menor, e se a primeira linha quebrar em algum aparelho é
+     este 12.3 que sobe. */
+  .hero h1 { font-size: min(44px, calc((100vw - 44px) / 12.3)); line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
@@ -1740,9 +1748,11 @@ select.demo-select:invalid { color: #374151; }
      Ocupa a largura toda (100%, não 95%) e o corpo cresce ou encolhe para a
      primeira linha ("Agentes atendendo no WhatsApp 24h") preencher a tela.
      Aqui o desconto é de 44px, o padding real do .wrap no celular, porque o
-     pedido é justamente encostar nas bordas. Divisor 17.8: 33 caracteres a
-     ~0,50em, mais 8% de folga. */
-  .hero-sub { max-width: 100%; font-size: min(22px, calc((100vw - 44px) / 17.8)); letter-spacing: 0; }
+     pedido é justamente encostar nas bordas.
+     Teto de 18px, e não 22px: o pedido é partir de 18 e só diminuir. O divisor
+     17 (33 caracteres a ~0,50em, mais 3% de folga) faz os 18px valerem até por
+     volta de 350px de tela, encolhendo abaixo disso. */
+  .hero-sub { max-width: 100%; font-size: min(18px, calc((100vw - 44px) / 17)); letter-spacing: 0; }
   /* Cartão colado nas laterais e mais compacto. */
   .hero-monta { margin-top: 25px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
