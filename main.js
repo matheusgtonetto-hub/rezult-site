@@ -368,9 +368,9 @@ document.querySelectorAll(".faq-item").forEach(item => {
     // em scrollLeft no meio dele cancela a inércia e trava a rolagem.
     if (!emGesto) normalizar();
     if (!emGesto && !sobre) {
-      // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a
-      // esteira daria um salto proporcional ao tempo em que ficou escondida.
-      if (dt > 0 && dt < 0.1) esteira.scrollLeft += VELOCIDADE * dt;
+      // Limita intervalos longos quando a aba volta do segundo plano, sem
+      // interromper a animação em dispositivos com frames mais lentos.
+      if (dt > 0) esteira.scrollLeft += VELOCIDADE * Math.min(dt, 0.1);
     }
     marcarPonto();
     requestAnimationFrame(quadro);
