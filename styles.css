@@ -208,6 +208,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head { max-width: 900px; margin-bottom: 40px; }
 @media (min-width: 981px) {
   .section-head { margin-bottom: 50px; }
+  /* Só o título de Depoimentos, e só no desktop: os 900px da regra base valem
+     para as outras seções, e reduzir ali soltaria o título isolado num bloco
+     de texto bem mais estreito que o .h2 sozinho preencheria mal. */
+  #clientes .section-head { max-width: 700px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
@@ -592,7 +596,18 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    segunda. Se ele passar a valer para outro elemento, aí vira token. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: 44px; letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
+/* O h1 quebra em duas linhas fixas, por <br> no HTML, e o corpo encolhe para a
+   linha mais longa ("Crie seu time Comercial") caber em qualquer largura. Sem o
+   encolhimento, num celular estreito essa linha quebraria de novo e virariam
+   três, desmanchando a formatação pedida.
+
+   O divisor 12.9 é a largura da linha mais longa medida em "ems": 23 caracteres
+   a ~0,52em cada, mais 8% de folga. Se em alguma largura a linha ainda quebrar,
+   é este número que sobe; se sobrar espaço demais, é ele que desce.
+
+   Os 64px descontam o padding do .wrap (32px de cada lado). No celular o .wrap
+   cai para 22px, então sobra folga extra ali, o que é seguro. */
+.hero h1 { font-size: min(44px, calc((100vw - 64px) / 12.9)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1136,7 +1151,21 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.1;
+  /* Mesmo verde do h1 da hero. Escopado à seção, e não ao .h2 global: os
+     outros títulos de seção ficam no --ink padrão. */
+  color: var(--verde-titulo);
+  /* Duas linhas fixas por <br>, e o corpo encolhe para a mais longa
+     ("operação comercial rodar 24h", 28 caracteres) caber sempre. Os 88px
+     descontam o padding do .wrap (32 de cada lado) mais o do .section-head
+     (12 de cada lado). O seletor com id vence o `.h2 { font-size: 30px }` do
+     breakpoint de 560px sem precisar de !important. */
+  font-size: min(36px, calc((100vw - 88px) / 15.1));
 }
+/* A linha de apoio abaixo do título acompanha a mesma cor -- título e lede
+   lêem como um bloco só, igual à dupla h1/subheadline da hero.
+   Mesma lógica de tamanho, para a linha mais longa ("Todas as ferramentas que
+   você precisa em", 40 caracteres) não quebrar em três. */
+#recursos .lede { color: var(--verde-titulo); font-size: min(16px, calc((100vw - 88px) / 21.6)); }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
    -webkit-text-fill-color: transparent, que existiam só para o degradê
@@ -1298,16 +1327,25 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Grade de 3 colunas — usada só em planos.html; na home os depoimentos
    viraram esteira (.dep-esteira). */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 25px; border-radius: var(--r-lg); background: #FFFFFF; border: 2px solid var(--border-2); display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+.tcard { padding: 25px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D1D5DB; display: flex; flex-direction: column; justify-content: center; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
-.tcard .quote { font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
+.tcard .quote { font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
 .tcard .who { display: flex; align-items: center; gap: 12px; }
 .tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; object-fit: cover; }
 .tcard .who .nm { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
 .tcard .who .rl { font-size: 12px; color: #666; }
-.tcard .stars { display: flex; gap: 1px; color: #F59E0B; }
-.tcard .stars svg { width: 23px; height: 23px; }
+/* Selo do Google à direita do nome e cargo.
+   `margin-left: auto` empurra até a borda do card: encostado no texto, ele
+   mudaria de lugar em cada card conforme o comprimento do nome, e a fileira
+   ficaria desalinhada. Empurrado, os doze ficam na mesma coluna.
+   A centralização vertical entre as duas linhas vem de graça do
+   `align-items: center` que o .who já tem.
+   `display: block` tira a folga que o navegador reserva sob imagem inline, que
+   desceria o ícone alguns pixels em relação ao meio do bloco de texto. */
+.tcard .who-google { display: block; width: 18px; height: 18px; margin-left: auto; flex-shrink: 0; }
+.tcard .stars { display: flex; gap: 0; color: var(--green-text); }
+.tcard .stars svg { width: 19px; height: 19px; margin-right: -2px; }
 
 /* ---------- Pricing ---------- */
 .price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 184, 115, 0.20); margin: 0 auto 56px; }
@@ -1624,7 +1662,7 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding: 70px 0 !important; }
   .demo-split-left { text-align: center; }
   .demo-trust { display: none; }
-  .hero h1, .page-hero h1 { font-size: clamp(38px, 4vw, 46px); }
+  .page-hero h1 { font-size: clamp(38px, 4vw, 46px); }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-cta-ghost { display: none; }
@@ -1692,12 +1730,19 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  .hero h1, .page-hero h1 { font-size: 38px; letter-spacing: -0.03em; line-height: 1.07; }
+  .page-hero h1 { font-size: 38px; letter-spacing: -0.03em; line-height: 1.07; }
+  .hero h1 { line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
-  .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
+  /* Duas linhas no celular, com a quebra vinda do <br class="mobile-only-br">.
+     Ocupa a largura toda (100%, não 95%) e o corpo cresce ou encolhe para a
+     primeira linha ("Agentes atendendo no WhatsApp 24h") preencher a tela.
+     Aqui o desconto é de 44px, o padding real do .wrap no celular, porque o
+     pedido é justamente encostar nas bordas. Divisor 17.8: 33 caracteres a
+     ~0,50em, mais 8% de folga. */
+  .hero-sub { max-width: 100%; font-size: min(22px, calc((100vw - 44px) / 17.8)); letter-spacing: 0; }
   /* Cartão colado nas laterais e mais compacto. */
   .hero-monta { margin-top: 25px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
@@ -1954,7 +1999,28 @@ select.demo-select:invalid { color: #374151; }
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
    demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
+/* Título e lede no mesmo verde do h1 da hero, igual à seção de Recursos. O
+   <span class="grad-verde"> que sublinhava "uma equipe de IA" saiu do HTML: ele
+   pinta por gradiente clipado com -webkit-text-fill-color, que ignora `color`,
+   e mantido teria deixado só aquele trecho fora da cor sólida do resto. */
+#agentes .h2, #agentes .lede { color: var(--verde-titulo); }
+/* Três linhas fixas no título e duas na lede, por <br>. O corpo encolhe para a
+   linha mais longa de cada um caber: 28 caracteres no título e 36 na lede.
+   Mesmos 88px de desconto e mesma lógica do #recursos. */
+#agentes .h2 { font-size: min(36px, calc((100vw - 88px) / 15.1)); }
+#agentes .lede { font-size: min(16px, calc((100vw - 88px) / 19.4)); }
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+/* Quebra forçada depois do 4º botão: 4 em cima, 3 embaixo, como pedido.
+   Um item de largura total no meio de uma linha flex empurra o resto para a
+   próxima -- é o mesmo truque de sempre para forçar quebra sem tocar em cada
+   botão. `height: 0` porque ele não é conteúdo, só direciona o fluxo; sem
+   isto abriria um vão vazio do tamanho de uma linha entre as duas fileiras.
+   Vale sobretudo no desktop, onde os 7 rótulos cabem numa linha só e sem isto
+   ficariam 7 e 0. No celular, onde os rótulos maiores já não cabem 4 a 4, o
+   flex-wrap natural reparte de outro jeito a partir daqui -- forçar também lá
+   quebraria o meio de um rótulo torto de propósito. */
+.ag-abas-quebra { flex-basis: 100%; height: 0; }
+@media (max-width: 560px) { .ag-abas-quebra { display: none; } }
 .ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
 .ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
 /* A aba ativa é verde chapado, o mesmo --primary da etiqueta com o nome do
@@ -2044,6 +2110,36 @@ select.demo-select:invalid { color: #374151; }
 }
 @media (max-width: 560px) {
   .ag-lista { columns: 1; }
+}
+
+/* ---------- Selo de avaliação do Google ---------- */
+/* Uma linha só, acima do título da seção de depoimentos. `inline-flex` e não
+   `flex`: assim a caixa encolhe até o conteúdo e o `center` do .section-head
+   centraliza a linha inteira, em vez de esticá-la de ponta a ponta. */
+.selo-google {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-bottom: 16px;
+  font-size: 15px; color: var(--text-subtle);
+  /* Em tela estreita a linha quebra em vez de estourar a largura. */
+  flex-wrap: wrap; justify-content: center;
+}
+/* O <img> vira bloco para não carregar a folga que o navegador reserva embaixo
+   de imagem inline, que aqui desalinharia o G do resto da linha. */
+.selo-google img { display: block; width: 20px; height: 20px; }
+/* "Excelente" e "5.0" no preto dos títulos: são a informação, o resto é apoio. */
+.selo-google strong { font-weight: 600; color: var(--ink); }
+
+.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--green-text); }
+/* As estrelas ficam um ponto acima do texto para o miolo delas alinhar com a
+   altura-x das letras, e não com a linha de base. */
+.selo-estrelas svg { width: 17px; height: 17px; display: block; }
+
+.selo-sep { color: var(--border-2); }
+.selo-qtd { color: var(--text-subtle); }
+
+@media (max-width: 560px) {
+  .selo-google { font-size: 14px; gap: 7px; }
+  .selo-estrelas svg { width: 15px; height: 15px; }
 }
 
 /* ---------- Como funciona em 3 passos ---------- */
@@ -2140,7 +2236,7 @@ select.demo-select:invalid { color: #374151; }
    com a de baixo. Os 290px cabem a citação mais longa (5 linhas a 15px) mais
    estrelas, autor e padding. Se um depoimento novo for maior que isso, este
    número precisa subir junto. */
-.dep-esteira .tcard { width: 350px; height: 265px; padding: 22px; gap: 16px; flex-shrink: 0; }
+.dep-esteira .tcard { width: 370px; height: 220px; padding: 22px; gap: 16px; flex-shrink: 0; }
 /* Dentro da esteira o card não sobe no hover. O translateY de 3px tira a borda
    de baixo do card de debaixo do cursor: o hover cai, o card volta, o hover
    volta, e com transition no transform isso vira oscilação. Na grade de
@@ -2152,7 +2248,7 @@ select.demo-select:invalid { color: #374151; }
    que deixava os depoimentos estáticos em máquinas com "Reduzir movimento"
    ligado no macOS. */
 @media (max-width: 560px) {
-  .dep-esteira .tcard { width: 300px; height: 290px; }
+  .dep-esteira .tcard { width: 320px; height: 235px; }
   .dep-linha { gap: 14px; }
   .dep-esteira { gap: 14px; }
 }
