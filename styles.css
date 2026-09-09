@@ -847,6 +847,15 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-cases {
   margin-top: 100px;
   overflow-x: auto; overflow-y: hidden;
+  /* Esta linha é o que faz a esteira andar.
+     `scroll-behavior: smooth` está no html (para os links de âncora) e é uma
+     propriedade HERDADA, então chegava aqui também. Com ela, escrever em
+     scrollLeft não posiciona: vira um PEDIDO de rolagem animada. O laço escreve
+     a cada quadro, e cada escrita reinicia uma animação que a seguinte cancela
+     16ms depois -- resultado, a faixa fica parada e o arrasto com o mouse fica
+     travado. `auto` devolve a escrita instantânea, que é o que o main.js supõe.
+     A rolagem suave das âncoras continua, porque só esta caixa é excluída. */
+  scroll-behavior: auto;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
