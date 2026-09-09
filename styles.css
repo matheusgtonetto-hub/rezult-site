@@ -22,6 +22,12 @@
      pessoa NÃO vai pagar. */
   --red: #EF4444;
   --ink: #07100D;
+  /* Verde escuro do bloco de texto da hero: o h1 e a subheadline saem nele.
+     Nasceu escrito à mão no h1 e virou token quando a subheadline passou a usar
+     o mesmo verde -- é o que impede as duas de saírem de sincronia. Não é o
+     --primary: aquele é o verde de marca dos CTAs, claro demais para texto
+     corrido sobre o #FBFBFB da página. */
+  --verde-titulo: #105E48;
   --green-cta: var(--green-text);
   --green-cta-hover: #009A60;
   --glow-soft: rgba(0, 184, 115, 0.18);
@@ -581,19 +587,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
    48px fixo estouraria a largura em tela estreita — o clamp é o que faz o
    título encolher sozinho antes do primeiro breakpoint. */
-/* O branco aqui não vaza para os trechos em verde: .hero h1 .em vem logo abaixo
-   com especificidade maior e, além disso, pinta o texto por gradiente clipado
-   com -webkit-text-fill-color: transparent, que ignora color. */
+/* A cor é escrita aqui porque o h1 herdaria o --ink (#07100D) da regra global
+   h1,h2,h3. Hex direto, e não token: este verde escuro é do título da hero e de
+   mais nada — um token existiria para manter duas coisas em sincronia, e não há
+   segunda. Se ele passar a valer para outro elemento, aí vira token. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: 44px; letter-spacing: normal; line-height: 1.05; font-weight: 700; }
+.hero h1 { font-size: 44px; letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
-/* No h1 do hero as palavras destacadas também saem em branco, sem verde e sem
-   brilho. Precisa desta regra explícita: o .em acima pinta de verde direto no
-   span, e cor declarada no próprio elemento vence a herança do .hero h1, por
-   mais específico que o pai seja. */
+/* No h1 do hero as palavras destacadas saem na cor do próprio título, sem
+   destaque à parte. Precisa desta regra explícita: o .em acima pinta de verde
+   direto no span, e cor declarada no próprio elemento vence a herança do
+   .hero h1, por mais específico que o pai seja. */
 .hero h1 .em { color: inherit; }
 /* O efeito de brilho saiu: era um degradê animado que passava pelos verdes
    claros da marca, ilegível sobre branco. Virou verde chapado, o mesmo do .em. */
@@ -609,7 +616,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Inter no apoio). O subtítulo do hero fica logo abaixo do h1 e a 18px, num
    bloco centralizado: com Inter a troca de família aparecia como emenda entre
    as duas linhas. Mesma exceção já aberta em #como-funciona .lede. */
-.hero-sub { font-family: var(--display); font-size: 18px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-family: var(--display); font-size: 18px; color: var(--verde-titulo); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 /* A última frase do subtítulo é o inimigo declarado ("sem contratar mais um
    vendedor"). Ela ganha peso e o preto dos títulos para se destacar do cinza do
    resto da frase, sem virar outro parágrafo. */
@@ -667,63 +674,65 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   border-top: 1px solid var(--border-2);
 }
 .monta-nota { font-size: 14px; color: var(--text-subtle); }
-/* O .btn-pontos nasce no tamanho do CTA do hero (44px de altura, 23px de
-   padding lateral, 102px de largura mínima). Numa barra de rodapé esse tamanho
-   engorda o cartão inteiro, então aqui ele é reduzido para caber. O visual do
-   botão continua o mesmo, muda só a escala. */
+/* Botão comum do site (.btn .btn-primary), e não o .btn-pontos das outras
+   chamadas da página. Aqui ele mora dentro do cartão, a centímetros do campo de
+   texto: os pontinhos correndo no fundo puxavam o olho de volta para o botão
+   justamente enquanto a pessoa escreve. Os demais CTAs, soltos na página,
+   seguem com o efeito.
+
+   O .btn base já resolve o ícone à direita: é inline-flex com gap, e o <svg>
+   vem depois do texto no HTML.
+
+   Só a escala muda em relação ao .btn padrão, para o botão não engordar a barra
+   do rodapé do cartão. */
 .monta-cta {
-  min-width: 0; flex-shrink: 0;
-  min-height: 38px; padding: 8px 16px; border-radius: 10px;
+  flex-shrink: 0;
+  /* Sem min-height. Ele estava em 38px, e um mínimo maior que a altura natural
+     do conteúdo ignora o padding: o botão ficaria preso nos 38px por mais que o
+     padding mudasse. */
+  padding: 7px 14px;
+  /* Pílula. O valor alto é cortado pela metade da altura, então ele acompanha
+     qualquer mudança de padding sem precisar ser recalculado. */
+  border-radius: 999px;
+  /* Texto branco, contra o quase-preto que o .btn-primary usa nos outros CTAs.
+     Fica registrado que é escolha de design, não descuido: branco sobre o
+     #00B873 dá 2,59:1, abaixo dos 4,5:1 que o WCAG AA pede para texto normal
+     (o --on-primary dá 7,29:1). Se o botão precisar passar em auditoria, o
+     caminho é escurecer o fundo, não voltar o texto. */
+  color: #FFFFFF;
+  font-size: 12px; font-weight: 500; gap: 5px;
+  /* Sem brilho e sem pulo, ao contrário dos outros CTAs. O .btn-primary traz um
+     anel de 1px mais um halo verde de 30px, e sobe 2px no hover. Aqui o botão
+     mora dentro do cartão, encostado no campo de texto: o halo vazava sobre a
+     borda do cartão e o pulo mexia a barra do rodapé enquanto a pessoa digita.
+     Mesmo tratamento que .nav-right e #demo já davam ao .btn-primary. */
+  box-shadow: none;
 }
-.monta-cta .btn-pontos-inner { font-size: 14px; gap: 5px; }
-.monta-cta .btn-pontos-icon { width: 16px; height: 16px; }
+/* O hover precisa da própria regra: sem ela o .btn-primary:hover devolve o halo
+   e o translateY assim que o ponteiro encosta. */
+.monta-cta:hover { box-shadow: none; transform: none; }
+/* currentColor no <svg>: a seta acompanha o branco do texto. */
+.monta-cta svg { width: 16px; height: 16px; }
 
-/* Linha de cima: troca o contexto. Não preenche o campo, só muda o placeholder
-   e os casos da linha de baixo. Mesma divisão de trabalho da hercules.app, onde
-   as abas escolhem o tipo de software e os chips de baixo escrevem a frase. */
-/* Mesma regra da linha de baixo: fileira única com rolagem lateral. */
-.monta-abas {
-  display: flex; flex-wrap: nowrap; justify-content: safe center; gap: 11px;
-  margin-top: 40px; max-width: 100%;
-  overflow-x: auto; overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; -ms-overflow-style: none;
-  padding-bottom: 2px;
-}
-.monta-abas::-webkit-scrollbar { display: none; }
-.monta-aba {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 11px 18px; border-radius: 8px; flex-shrink: 0;
-  /* Verde no texto e na borda quando inativa. A borda vai a 35% de opacidade,
-     não chapada: um contorno verde cheio em cinco abas lado a lado vira uma
-     cerca e disputa atenção com o botão do cartão logo abaixo. */
-  border: 1px solid rgba(0, 184, 115, 0.35); background: transparent;
-  font-family: var(--display); font-size: 14px; font-weight: 300; color: #047857;
-  cursor: pointer; transition: border-color .2s, background .2s, color .2s, box-shadow .2s;
-}
-.monta-aba svg { width: 14px; height: 14px; flex-shrink: 0; }
-.monta-aba:hover { border-color: rgba(0, 184, 115, 0.65); }
-/* A ativa fica branca com sombra, sobre o #FBFBFB da página. É elevação, não
-   cor de marca: verde chapado aqui competiria com o botão do formulário logo
-   abaixo, que é a ação de verdade. */
-.monta-aba.ativa {
-  /* A ativa sobe para 500. O contraste de peso reforça a seleção sem depender
-     só do fundo branco, que é sutil sobre o #FBFBFB da página. */
-  font-weight: 500;
-  background: #FFFFFF; color: var(--ink);
-  /* Borda cinza, não transparente: sobre o #FBFBFB da página o branco da aba
-     ativa quase não se distingue, e sem contorno ela ficava definida só pela
-     sombra. O cinza fecha a forma. */
-  border-color: var(--border-2);
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-.monta-aba.ativa svg { color: #047857; }
-.monta-aba:focus-visible { outline: 2px solid var(--green-text); outline-offset: 2px; }
+/* Linha de cima: a pergunta que o campo responde.
+   Aqui existiam cinco abas de segmento (clínica, imobiliária, agência...) que
+   trocavam o placeholder e os chips de baixo. Saíram: os chips passaram a
+   nomear a TAREFA a automatizar, que vale para qualquer segmento, e o contexto
+   do negócio quem dá é a própria frase que a pessoa escreve.
 
-/* Linha de baixo: escreve no campo. Só um grupo fica visível por vez, e os
-   outros vão no HTML mesmo assim, para o conteúdo existir sem JS e não piscar
-   na primeira pintura. */
+   É um <label for="montaTexto">, e não um parágrafo: a pergunta é o rótulo do
+   campo, e como <label> ela também leva o foco ao campo quando clicada. */
+.monta-pergunta {
+  display: block;
+  margin-top: 40px;   /* o mesmo respiro que as abas tinham */
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* Linha de baixo: escreve no campo. */
 /* nowrap em toda a linha: o rótulo fica fixo e os casos rolam de lado quando
    não cabem, em vez de quebrarem em duas fileiras. Numa fileira só a leitura é
    horizontal e previsível; quebrada, a segunda linha some abaixo da dobra no
@@ -749,24 +758,19 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    .tem-antes e .tem-mais são ligadas pelo main.js medindo o transbordo real.
    Um mask fixo apagava as pontas no desktop, onde tudo cabe e não há nada
    escondido para anunciar. */
-.monta-abas.tem-antes.tem-mais,
 .monta-casos.tem-antes.tem-mais {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 28px), transparent);
   mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 28px), transparent);
 }
-.monta-abas.tem-antes:not(.tem-mais),
 .monta-casos.tem-antes:not(.tem-mais) {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px);
   mask-image: linear-gradient(90deg, transparent, #000 16px);
 }
-.monta-abas.tem-mais:not(.tem-antes),
 .monta-casos.tem-mais:not(.tem-antes) {
   -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
   mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
 }
 .monta-chip { flex-shrink: 0; }
-/* [hidden] perde para o display do próprio elemento, então precisa ser dito. */
-.monta-casos[hidden] { display: none; }
 .monta-chip {
   padding: 9px 17px; border-radius: 100px;
   border: 1px solid var(--border-2); background: #FFFFFF;
@@ -929,7 +933,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    layout de duas colunas. */
 .hero.vb .hero-inner { display: block; }
 .hero.vb .hero-text { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.hero.vb h1 { max-width: 810px; }
+.hero.vb h1 { max-width: 700px; }
 .hero.vb .hero-sub { max-width: 750px; margin-left: auto; margin-right: auto; }
 .hero.vb .hero-badge { margin-left: auto; margin-right: auto; }
 
@@ -1409,7 +1413,7 @@ select.demo-select:invalid { color: #374151; }
 .hero-actions { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .46s both; }
 .hero-note   { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .55s both; }
 /* A cascata de entrada terminava no mockup; agora termina no construtor. */
-.monta-abas  { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .46s both; }
+.monta-pergunta { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .46s both; }
 .hero-monta  { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .54s both; }
 .monta-chips { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .62s both; }
 
@@ -1646,16 +1650,20 @@ select.demo-select:invalid { color: #374151; }
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
-  /* Cartão colado nas laterais e mais compacto. O pé vira coluna: lado a lado,
-     o botão espremeria a nota "Sem cartão" a ponto de ela quebrar em duas. */
+  /* Cartão colado nas laterais e mais compacto. */
   .hero-monta { margin-top: 13px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
-  .monta-pe { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 14px; }
-  .monta-nota { text-align: center; }
+  /* O pé fica em linha, com o botão à direita. Era coluna, porque lado a lado o
+     botão espremia a nota "Sem cartão de crédito" a ponto de ela quebrar em
+     duas linhas -- a nota some aqui, então o motivo da coluna deixou de existir.
+     `flex-end` precisa estar escrito: sem a nota, o `space-between` herdado
+     deixaria o botão sozinho encostado à ESQUERDA. */
+  .monta-pe { justify-content: flex-end; padding: 12px 14px; }
+  /* A nota sai só no celular. Ali o cartão é estreito, e ela empurrava o botão
+     para uma segunda linha em troca de uma informação que a página já dá no
+     plano e no rodapé. No desktop continua. */
+  .monta-nota { display: none; }
   .monta-chip { padding: 8px 15px; font-size: 14px; }
-  .monta-abas { margin-top: 24px; gap: 8px; }
-  .monta-aba { padding: 8px 13px; font-size: 14px; gap: 6px; }
-  .monta-aba svg { width: 12px; height: 12px; }
   .monta-chips { margin-top: 15px; }
   .hero-cases { margin-top: 70px; }
   .case-card { width: 255px; height: 370px; margin-right: 14px; border-radius: 16px; }

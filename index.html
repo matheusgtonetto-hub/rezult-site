@@ -158,101 +158,32 @@ fbq('track','PageView');
           <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
           <span>Potencialize seu negócio com IA</span>
         </div>
-        <h1 class="reveal" data-d="1">Construa o seu time comercial de agentes de IA</h1>
-        <p class="hero-sub reveal" data-d="2">Eles atendem no WhatsApp, qualificam, agendam, fazem follow-up e preenchem o CRM por você, <strong>sem precisar contratar para crescer.</strong></p>
-        <div class="monta-abas reveal" data-d="3" role="tablist" aria-label="Segmento do seu negócio">
-          <button type="button" class="monta-aba ativa" role="tab" id="aba-clinica"
-                  aria-selected="true" aria-controls="casos-clinica" tabindex="0"
-                  data-segmento="clinica" data-placeholder="Ex: quero que a IA responda quem chama no WhatsApp, descubra o procedimento e agende a avaliação.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
-            Clínica
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-imobiliaria"
-                  aria-selected="false" aria-controls="casos-imobiliaria" tabindex="-1"
-                  data-segmento="imobiliaria" data-placeholder="Ex: quero que a IA atenda quem vem dos portais, descubra o perfil do imóvel e agende a visita.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/></svg>
-            Imobiliária
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-agencia"
-                  aria-selected="false" aria-controls="casos-agencia" tabindex="-1"
-                  data-segmento="agencia" data-placeholder="Ex: quero que a IA qualifique os leads de anúncio e marque a reunião de diagnóstico.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-            Agência
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-consultoria"
-                  aria-selected="false" aria-controls="casos-consultoria" tabindex="-1"
-                  data-segmento="consultoria" data-placeholder="Ex: quero que a IA atenda quem vem do meu conteúdo e agende uma call só se fizer sentido.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Consultoria
-          </button>
-          <button type="button" class="monta-aba" role="tab" id="aba-infoproduto"
-                  aria-selected="false" aria-controls="casos-infoproduto" tabindex="-1"
-                  data-segmento="infoproduto" data-placeholder="Ex: quero que a IA atenda o volume de lançamento, tire dúvidas e recupere quem não comprou.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/><path d="M2 10 12 5l10 5-10 5z"/></svg>
-            Infoproduto
-          </button>
-        </div>
+        <h1 class="reveal" data-d="1">Construa o seu Comercial de Agentes de IA</h1>
+        <p class="hero-sub reveal" data-d="2">Crie agentes personalizados para o seu negócio e venda 24h por dia.</p>
+        <label class="monta-pergunta reveal" data-d="3" for="montaTexto">O que deseja automatizar no comercial?</label>
 
         <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
-          <label class="visualmente-oculto" for="montaTexto">O que você quer automatizar no seu comercial?</label>
+          <!-- Sem rótulo oculto aqui: a pergunta acima do formulário é um
+               <label for="montaTexto"> de verdade, e dois rótulos para o mesmo
+               campo fazem o leitor de tela anunciar a pergunta duas vezes. -->
           <textarea id="montaTexto" class="monta-campo" rows="2" maxlength="600"
-                    placeholder="O que você quer automatizar no seu comercial?"></textarea>
+                    placeholder="Ex: crie um agente de vendas para o meu negócio. O agente deve atender no WhatsApp, entender o que a pessoa precisa e agendar a reunião."></textarea>
           <div class="monta-pe">
             <span class="monta-nota">Sem cartão de crédito</span>
-            <button type="submit" class="btn-pontos monta-cta">
-              <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-              </div>
-              <span class="btn-pontos-inner">Construir<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <button type="submit" class="btn btn-primary monta-cta">
+              Criar agente
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
         </form>
 
         <div class="monta-chips reveal" data-d="5">
-          <span class="monta-chips-rotulo">Experimente<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-          <div class="monta-casos" id="casos-clinica" role="tabpanel"
-               aria-labelledby="aba-clinica">
-            <button type="button" class="monta-chip" data-texto="Tenho uma clínica e os pacientes chamam no WhatsApp a qualquer hora. Quero que a IA responda na hora, inclusive fora do horário e no fim de semana.">Atender pacientes</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra qual procedimento a pessoa procura, se é convênio ou particular, e separe quem já está pronto para marcar.">Qualificar interesse</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA agende a avaliação direto na agenda do profissional certo e confirme com o paciente no dia anterior.">Agendar avaliações</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada conversa vire um registro no CRM, com o procedimento, o convênio e o histórico anotados, sem a recepção digitar nada.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-imobiliaria" role="tabpanel"
-               aria-labelledby="aba-imobiliaria" hidden>
-            <button type="button" class="monta-chip" data-texto="Meus leads chegam pelos portais e pelo Instagram. Quero que a IA responda em segundos, antes de a pessoa falar com outra imobiliária.">Atender interessados</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra a região, o valor que a pessoa pode pagar e se vai financiar, antes de ocupar a agenda de um corretor.">Qualificar o perfil</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA marque a visita direto na agenda do corretor daquela região e confirme com o cliente antes do horário.">Agendar visitas</button>
-            <button type="button" class="monta-chip" data-texto="Quero o perfil do imóvel procurado, o orçamento e o resumo da conversa registrados no CRM automaticamente.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-agencia" role="tabpanel"
-               aria-labelledby="aba-agencia" hidden>
-            <button type="button" class="monta-chip" data-texto="Recebo leads de anúncio no WhatsApp o dia inteiro. Quero que a IA atenda todos na hora, sem depender de alguém estar disponível.">Atender leads de anúncio</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra o segmento, o faturamento e a verba disponível, e me passe só quem vale uma reunião.">Qualificar orçamento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA conduza a conversa até marcar a reunião de diagnóstico na minha agenda, com o contexto do lead já anotado.">Agendar diagnóstico</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada lead entre no funil com origem, campanha e resumo da conversa já preenchidos, sem ninguém digitar.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-consultoria" role="tabpanel"
-               aria-labelledby="aba-consultoria" hidden>
-            <button type="button" class="monta-chip" data-texto="Recebo mensagens de quem acompanha meu conteúdo. Quero que a IA atenda todo mundo, mesmo quando eu estou em reunião.">Atender quem chega</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA descubra o tamanho da operação, o problema principal e a urgência antes de qualquer conversa comigo.">Qualificar o momento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA marque a call comigo apenas quando o perfil fizer sentido, e recuse com educação quem ainda não está no momento.">Agendar call</button>
-            <button type="button" class="monta-chip" data-texto="Quero o histórico de cada conversa organizado no CRM, com o contexto da empresa e o estágio em que a pessoa parou.">Operar o CRM</button>
-          </div>
-          <div class="monta-casos" id="casos-infoproduto" role="tabpanel"
-               aria-labelledby="aba-infoproduto" hidden>
-            <button type="button" class="monta-chip" data-texto="No lançamento chega mensagem demais e o time não dá conta. Quero que a IA atenda todo mundo na hora, sem deixar ninguém na fila.">Atender no lançamento</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA tire as dúvidas sobre o curso, entenda o momento do aluno e identifique quem está perto de comprar.">Qualificar interesse</button>
-            <button type="button" class="monta-chip" data-texto="Quero que a IA agende as sessões de mentoria e as calls de venda do alto ticket direto na minha agenda.">Agendar mentoria</button>
-            <button type="button" class="monta-chip" data-texto="Quero que cada conversa vire registro no CRM, com origem, objeção e estágio, para eu saber onde as vendas travam.">Operar o CRM</button>
+          <span class="monta-chips-rotulo">Sugestão<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          <div class="monta-casos">
+            <button type="button" class="monta-chip" data-slug="atendimento" data-texto="Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.">Atendimento</button>
+            <button type="button" class="monta-chip" data-slug="qualificacao" data-texto="Crie um agente de qualificação para o meu negócio. O agente deve descobrir o que a pessoa procura, o orçamento e a urgência, e separar quem já está pronto para comprar.">Qualificação</button>
+            <button type="button" class="monta-chip" data-slug="agendamentos" data-texto="Crie um agente de agendamento para o meu negócio. O agente deve marcar as reuniões na agenda da pessoa certa, confirmar com o cliente no dia anterior e remarcar quem faltar.">Agendamentos</button>
+            <button type="button" class="monta-chip" data-slug="crm" data-texto="Crie um agente de CRM para o meu negócio. O agente deve registrar cada conversa, preencher origem, resumo e estágio do negócio, e mover o card no funil sem ninguém digitar.">Preencher CRM</button>
           </div>
         </div>
       </div>
@@ -535,7 +466,7 @@ fbq('track','PageView');
 <section class="section" id="recursos" style="background: #FBFBFB; padding: 90px 0px; overflow: hidden;">
   <div class="wrap" style="padding: 0px 20px">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px">
-      <h2 class="h2"><span class="grad-verde">Uma única solução</span>, sua operação comercial com IA completa</h2>
+      <h2 class="h2"><span class="grad-verde">Uma única solução</span> para toda a sua operação comercial com IA.</h2>
       <p class="lede">Todas as ferramentas que você precisa em uma plataforma alimentada por IA</p>
     </div>
 

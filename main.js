@@ -427,9 +427,9 @@ document.querySelectorAll(".faq-item").forEach(item => {
 // O campo do hero não constrói nada aqui. Ele guarda o que a pessoa escreveu e
 // leva o texto até o cadastro, onde a operação é montada de verdade.
 //
-// Duas linhas de chips, com trabalhos diferentes:
-//   abas (acima)  → trocam o contexto: placeholder + casos da linha de baixo
-//   casos (abaixo) → escrevem a frase pronta dentro do campo
+// Os chips escrevem uma frase pronta dentro do campo, e cada um nomeia a tarefa
+// que a pessoa quer automatizar. Havia uma segunda fileira acima, de abas por
+// segmento, que trocava o placeholder e o conjunto de chips; ela saiu.
 //
 // Por que cookie e não localStorage: o site é rezultcrm.com e o app é
 // app.rezultcrm.com. localStorage é preso à origem exata e não cruza
@@ -440,14 +440,19 @@ document.querySelectorAll(".faq-item").forEach(item => {
   const campo = document.getElementById("montaTexto");
   if (!form || !campo) return;
 
-  const abas = Array.from(document.querySelectorAll(".monta-aba"));
-  const grupos = abas.map(a => document.getElementById(a.getAttribute("aria-controls")));
+  const casos = document.querySelector(".monta-casos");
 
   const DESTINO = "https://app.rezultcrm.com/register";
   const VALIDADE = 1800; // 30 min: tempo de cadastrar, não de voltar amanhã
 
-  // Segmento do chip usado. Fica vazio quando a pessoa escreve do zero: mandar
-  // um rótulo que não corresponde ao texto é pior para o gerador que não mandar.
+  // Rótulo do chip usado. Fica vazio quando a pessoa escreve do zero: mandar um
+  // rótulo que não corresponde ao texto é pior para o gerador que não mandar.
+  //
+  // Antes isto guardava o SEGMENTO (clínica, imobiliária), escolhido nas abas.
+  // As abas saíram e os chips passaram a nomear a TAREFA (atendimento,
+  // qualificação). O nome do cookie continua `rz_segmento` de propósito: quem lê
+  // do outro lado é o cadastro em app.rezultcrm.com, que não sobe junto com o
+  // site, e renomear aqui deixaria o valor sem leitor até os dois baterem.
   let segmento = "";
 
   // Em localhost e no preview da Vercel o domínio pai não existe, e um cookie
@@ -461,8 +466,8 @@ document.querySelectorAll(".faq-item").forEach(item => {
   }
 
   // Fade nas pontas só quando há conteúdo escondido de verdade. Um mask fixo
-  // apagava as bordas no desktop, onde as cinco abas cabem inteiras e não há
-  // nada ao lado para anunciar.
+  // apagava as bordas no desktop, onde os chips cabem inteiros e não há nada ao
+  // lado para anunciar.
   function marcarTransbordo(el) {
     if (!el) return;
     const sobra = el.scrollWidth - el.clientWidth;
@@ -473,8 +478,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
   }
 
   function conferirFileiras() {
-    marcarTransbordo(document.querySelector(".monta-abas"));
-    marcarTransbordo(grupos.find(g => !g.hidden));
+    marcarTransbordo(casos);
   }
 
   // Altura acompanhando o conteúdo. Zerar antes de medir é obrigatório: o
@@ -495,50 +499,18 @@ document.querySelectorAll(".faq-item").forEach(item => {
     campo.setSelectionRange(texto.length, texto.length);
   }
 
-  function ligarCasos(grupo) {
-    grupo.querySelectorAll(".monta-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        escrever(chip.dataset.texto || "", grupo.id.replace("casos-", ""));
-      });
-    });
-  }
-  grupos.forEach(ligarCasos);
-
-  function trocarAba(indice, focar) {
-    abas.forEach((aba, i) => {
-      const ativa = i === indice;
-      aba.classList.toggle("ativa", ativa);
-      aba.setAttribute("aria-selected", ativa ? "true" : "false");
-      aba.tabIndex = ativa ? 0 : -1;
-      grupos[i].hidden = !ativa;
-    });
-    // O grupo visível mudou, e com ele a largura da fileira de baixo.
-    conferirFileiras();
-    // Só o texto de exemplo muda. O que a pessoa já escreveu fica: trocar de
-    // aba é explorar, não recomeçar, e apagar o que ela digitou seria hostil.
-    campo.placeholder = abas[indice].dataset.placeholder || campo.placeholder;
-    if (focar) abas[indice].focus();
-  }
-
-  abas.forEach((aba, i) => {
-    aba.addEventListener("click", () => trocarAba(i, false));
-    aba.addEventListener("keydown", e => {
-      const passo = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-      if (passo) { e.preventDefault(); trocarAba((i + passo + abas.length) % abas.length, true); }
-      else if (e.key === "Home" || e.key === "End") {
-        e.preventDefault(); trocarAba(e.key === "Home" ? 0 : abas.length - 1, true);
-      }
+  casos?.querySelectorAll(".monta-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      escrever(chip.dataset.texto || "", chip.dataset.slug || "");
     });
   });
-  if (abas.length) campo.placeholder = abas[0].dataset.placeholder || campo.placeholder;
+
   ajustarAltura();
   conferirFileiras();
   // A largura muda quantas linhas o texto ocupa e se as fileiras transbordam,
   // então os dois precisam ser remedidos ao girar o celular ou redimensionar.
   window.addEventListener("resize", () => { ajustarAltura(); conferirFileiras(); }, { passive: true });
-  document.querySelector(".monta-abas")
-    ?.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true });
-  grupos.forEach(g => g.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true }));
+  casos?.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true });
 
   campo.addEventListener("input", () => { segmento = ""; ajustarAltura(); });
 
