@@ -1905,8 +1905,7 @@ select.demo-select:invalid { color: #374151; }
   border-color: transparent;
   color: #FFFFFF;
   /* #047857 e não --primary: com branco por cima, o verde da marca dá 2,3:1 e
-     reprova no mínimo de 4,5:1. Este verde sobe para 5,5:1. Mesmo valor da
-     etiqueta com o nome do agente, para os dois lerem como um par. */
+     reprova no mínimo de 4,5:1. Este verde sobe para 5,5:1. */
   background: #047857;
 }
 
@@ -1949,21 +1948,15 @@ select.demo-select:invalid { color: #374151; }
 .ag-painel[hidden] { display: none; }
 
 /* Ícone e nome do agente na mesma linha. */
-.ag-painel-cab { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+/* Ícone em cima, nome do agente embaixo. `align-items: flex-start` para o
+   quadrado do ícone não esticar na largura do nome. */
+.ag-painel-cab { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); color: var(--primary); flex-shrink: 0; }
+.ag-icone svg { width: 24px; height: 24px; }
 /* O h3 é o nome do agente e o h4 é a promessa. O h4 sai maior de propósito:
    a hierarquia de leitura não é a mesma da hierarquia de marcação, e quem
    vende é a promessa, não o cargo. */
-/* O nome do agente vira etiqueta. Continua sendo h3 no HTML, porque a hierarquia
-   de cabeçalhos da página depende dele; só a aparência mudou.
-   Mesma receita da pílula "MAIS ESCOLHIDO" dos planos: mono, 12px, caixa alta e
-   0.04em de tracking. Caixa alta sem tracking fecha as letras e vira bloco. */
-.ag-painel-cab h3 {
-  display: inline-flex; align-items: center;
-  padding: 7px 14px; border-radius: 100px;
-  background: #047857; color: #FFFFFF;
-  font-family: var(--mono); font-size: 12px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.2;
-}
+.ag-painel-cab h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--primary); }
 .ag-painel h4 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
 .ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
