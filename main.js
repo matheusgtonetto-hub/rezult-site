@@ -528,6 +528,14 @@ document.querySelectorAll(".faq-item").forEach(item => {
   // então os dois precisam ser remedidos ao girar o celular ou redimensionar.
   window.addEventListener("resize", () => { ajustarAltura(); conferirFileiras(); }, { passive: true });
   casos?.addEventListener("scroll", e => marcarTransbordo(e.currentTarget), { passive: true });
+  /* A seta dupla cumpriu o papel assim que a pessoa rolou: some e não volta.
+   * `once` no lugar de remover o listener na mão -- o navegador descarta o
+   * ouvinte sozinho depois do primeiro disparo.
+   * A classe vai no .monta-chips, e não no .monta-casos: é o pai que contém a
+   * seta, e é lá que o seletor do CSS a alcança. */
+  casos?.addEventListener("scroll", () => {
+    casos.closest(".monta-chips")?.classList.add("rolou");
+  }, { passive: true, once: true });
 
   // Digitou: o texto deixou de ser o do chip, então a marcação sai junto com o
   // segmento. Manter o chip aceso apontaria para uma frase que já não está lá.

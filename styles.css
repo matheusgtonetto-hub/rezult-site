@@ -76,12 +76,16 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Geist nos títulos, Inter no resto. A Poppins entrou em 2026-09-02 e foi revertida no
-     dia seguinte. A Geist Mono segue como voz dos rótulos, dos números e das
-     etiquetas em caixa alta. */
-  /* --sans é o texto corrido do site; --display é a fonte dos títulos.
-     Regra: título em Geist, todo o resto em Inter. */
-  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Geist em tudo. A Poppins entrou em 2026-09-02 e foi revertida no dia
+     seguinte; a Inter era o texto corrido e saiu agora. A Geist Mono segue como
+     voz dos rótulos, dos números e das etiquetas em caixa alta.
+
+     --sans e --display apontam para a mesma família e continuam separados de
+     propósito: os pontos de uso já distinguem corpo de título, e um token só
+     obrigaria a reescrever todos eles no dia em que voltar a haver duas fontes.
+     Enquanto forem iguais, as exceções espalhadas pelo arquivo que trocam para
+     var(--display) não mudam nada -- estão marcadas e podem sair numa limpeza. */
+  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --display: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', ui-monospace, monospace;
 
@@ -409,7 +413,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
 /* Sem fundo próprio: herda o --bg do body, que é o #FBFBFB do site inteiro. */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 80px); padding-bottom: 100px; overflow: hidden; }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 50px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -563,13 +567,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
    largo. Forçar caixa quadrada nele achataria o desenho. */
 .hero-badge-ico { width: 12px; height: 18px; color: var(--green-text); flex-shrink: 0; }
-/* Variante da home: raio no lugar da cápsula, texto em branco cheio e borda de
-   2px. Fica escopada porque as pills de planos, política e termo ainda usam a
-   cápsula .tag, e a borda grossa competiria com ela.
-
-   A pill não tem altura declarada, então borda e padding somam à altura do
-   conteúdo: os 2px de borda a deixam 2px mais alta que a versão de 1px. É o
-   esperado — os 8px de padding vertical são pedido anterior e ficam de pé. */
+/* Variante da home: raio no lugar da cápsula e fundo verde claro, sem contorno.
+   Fica escopada porque as pills de planos, política e termo usam a cápsula .tag
+   e continuam com a borda da regra base. */
 .hero-badge-ia {
   /* Verde bem claro e translúcido: é o --green-text a 10%, então acompanha a
      cor da marca numa troca futura, em vez de um hex claro fixo. Sendo rgba,
@@ -577,11 +577,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   background: rgba(0, 184, 115, 0.10);
   color: var(--ink);
   padding: 8px 14px;
-  border-width: 2px;
-  /* Mesmo verde do botão, cheio. A regra base usa #00B87340, que é o neon da
-     marca a 25% e some contra os 2px daqui. Usa o token, não o hex repetido,
-     para borda e botão andarem juntos numa troca futura. */
-  border-color: var(--green-text);
+  /* `border: 0`, e não `border-color: transparent`: a regra base declara
+     `1px solid`, e uma borda transparente continuaria ocupando 1px de cada lado,
+     deixando a pill 2px mais alta e mais larga do que o conteúdo pede. */
+  border: 0;
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
@@ -612,11 +611,47 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-/* Geist aqui é exceção deliberada à convenção do site (Geist nos títulos,
-   Inter no apoio). O subtítulo do hero fica logo abaixo do h1 e a 18px, num
-   bloco centralizado: com Inter a troca de família aparecia como emenda entre
-   as duas linhas. Mesma exceção já aberta em #como-funciona .lede. */
+/* Este var(--display) era exceção à convenção antiga (Geist nos títulos, Inter
+   no apoio): a 18px e logo abaixo do h1, a troca de família aparecia como emenda
+   entre as duas linhas. Com a Inter fora, --display e --sans são a mesma fonte e
+   a declaração virou inócua. Fica registrada, e não apagada, para o motivo
+   sobreviver caso o site volte a ter duas famílias. */
 .hero-sub { font-family: var(--display); font-size: 18px; color: var(--verde-titulo); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+/* Traço à mão sob um trecho da subheadline, no lugar de sublinhado. Sublinhado
+   corta as descidas das letras e lê como link; este é um risco de caneta.
+
+   SVG inline, e não background com data URI: assim a cor sai de `currentColor`
+   e acompanha uma troca de tema sem precisar reescrever o desenho em base64.
+
+   O desenho é reto no meio (um `L`) com um gancho curto em cada ponta (dois `Q`):
+   a esquerda desce e a direita sobe. Fazer a curva percorrer a linha inteira
+   deixaria o traço abaulado, que não é o pedido.
+
+   `preserveAspectRatio="none"` estica o desenho até a largura da frase, e o
+   `vector-effect: non-scaling-stroke` no path impede que essa esticada engorde
+   o traço junto -- sem ele, uma frase larga sairia com a linha mais grossa que
+   uma frase curta. Ele também é o que mantém os ganchos das pontas com o mesmo
+   peso do trecho reto.
+
+   `display: inline-block` é o que torna o span uma âncora de posicionamento. O
+   efeito colateral é que a frase grifada não quebra no meio: em tela estreita
+   ela desce inteira para a linha seguinte, o que aqui é desejável, porque um
+   traço partido em duas linhas ficaria torto. */
+.grifo { position: relative; display: inline-block; }
+.grifo svg {
+  position: absolute; left: 0; bottom: -0.34em;
+  width: 100%; height: 0.42em;
+  /* Mesma cor do h1: o traço é do mesmo bloco de texto, e o verde da marca
+     (--green-text) puxava mais atenção que o próprio título. */
+  color: var(--verde-titulo);
+  /* Opacidade no elemento, e não uma cor com alpha: assim o valor fica separado
+     da cor e um continua ajustável sem tocar no outro. */
+  opacity: .7;
+  /* O traço encosta na borda da caixa; sem isto as pontas arredondadas seriam
+     cortadas pelo recorte do SVG. */
+  overflow: visible;
+}
+
 /* A última frase do subtítulo é o inimigo declarado ("sem contratar mais um
    vendedor"). Ela ganha peso e o preto dos títulos para se destacar do cinza do
    resto da frase, sem virar outro parágrafo. */
@@ -722,9 +757,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    não cabem, em vez de quebrarem em duas fileiras. Numa fileira só a leitura é
    horizontal e previsível; quebrada, a segunda linha some abaixo da dobra no
    celular e o usuário nem sabe que ela existe. */
-.monta-chips { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; max-width: 100%; }
-.monta-chips-rotulo { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; font-size: 14px; color: var(--text-subtle); margin-right: 4px; }
-.monta-chips-rotulo svg { width: 14px; height: 14px; }
+.monta-chips { position: relative; display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; max-width: 100%; }
 .monta-casos {
   display: flex; flex-wrap: nowrap; gap: 10px;
   /* "safe center" centraliza quando cabe e vira alinhamento à esquerda quando
@@ -743,18 +776,26 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    .tem-antes e .tem-mais são ligadas pelo main.js medindo o transbordo real.
    Um mask fixo apagava as pontas no desktop, onde tudo cabe e não há nada
    escondido para anunciar. */
+/* As larguras do corte viraram variáveis para o celular poder alargá-las sem
+   repetir as três máscaras. */
+.monta-casos { --corte-e: 16px; --corte-d: 28px; }
 .monta-casos.tem-antes.tem-mais {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 28px), transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 28px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--corte-e), #000 calc(100% - var(--corte-d)), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 var(--corte-e), #000 calc(100% - var(--corte-d)), transparent);
 }
 .monta-casos.tem-antes:not(.tem-mais) {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px);
-  mask-image: linear-gradient(90deg, transparent, #000 16px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--corte-e));
+  mask-image: linear-gradient(90deg, transparent, #000 var(--corte-e));
 }
 .monta-casos.tem-mais:not(.tem-antes) {
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
-  mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - var(--corte-d)), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - var(--corte-d)), transparent);
 }
+/* Seta dupla que anuncia o arrasto. Some do desktop, onde os chips cabem.
+   Fica no fim da fileira, e não no começo: o que está escondido está à direita,
+   e é para lá que a seta aponta. No começo ela cairia em cima do primeiro chip,
+   que além de tudo é o que já vem selecionado. */
+.monta-dica { display: none; }
 .monta-chip { flex-shrink: 0; }
 .monta-chip {
   padding: 9px 17px; border-radius: 100px;
@@ -1403,6 +1444,10 @@ select.demo-select:invalid { color: #374151; }
 .reveal[data-d="5"] { transition-delay: .40s; }
 
 /* ---------- Hero entrance animation ---------- */
+@keyframes dica-acena {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50%      { transform: translateY(-50%) translateX(5px); }
+}
 @keyframes heroIn {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -1656,16 +1701,44 @@ select.demo-select:invalid { color: #374151; }
   /* Cartão colado nas laterais e mais compacto. */
   .hero-monta { margin-top: 25px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
-  /* O pé fica em linha, com o botão à direita. Era coluna, porque lado a lado o
-     botão espremia a nota "Sem cartão de crédito" a ponto de ela quebrar em
-     duas linhas -- a nota some aqui, então o motivo da coluna deixou de existir.
-     `flex-end` precisa estar escrito: sem a nota, o `space-between` herdado
-     deixaria o botão sozinho encostado à ESQUERDA. */
-  .monta-pe { justify-content: flex-end; padding: 12px 14px; }
-  /* A nota sai só no celular. Ali o cartão é estreito, e ela empurrava o botão
-     para uma segunda linha em troca de uma informação que a página já dá no
-     plano e no rodapé. No desktop continua. */
-  .monta-nota { display: none; }
+  /* Pé em linha, nota à esquerda e botão à direita -- o `space-between` da regra
+     base, sem sobrescrever. Aqui já houve `flex-direction: column` (com a nota
+     antiga, mais longa, quebrando em duas linhas) e depois `justify-content:
+     flex-end` (no período em que a nota não aparecia no celular). Os dois saíram:
+     o botão encolheu para 13px de texto e 7px/14px de padding, e a nota atual é
+     curta, então os dois cabem lado a lado numa tela de 360px.
+     A nota vai a 13px só aqui: é o que garante a folga se o texto crescer. */
+  .monta-pe { padding: 12px 14px; }
+  .monta-nota { font-size: 13px; }
+  /* Corte da direita mais largo no celular. Com 28px o último chip parecia
+     apenas terminar na borda; com 56px ele visivelmente se dissolve, que é o
+     que anuncia conteúdo além da dobra. Só à direita: a esquerda começa
+     encostada e não tem nada escondido até a pessoa rolar. */
+  .monta-dica {
+    display: flex; align-items: center;
+    position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    /* O véu resolve a sobreposição: em vez de a seta disputar espaço com o chip
+       que passa por baixo, o fundo da página reaparece atrás dela. Mesmo --bg do
+       body, senão apareceria um retângulo claro sobre o cinza da página. */
+    padding: 8px 2px 8px 26px;
+    background: linear-gradient(90deg, transparent, var(--bg) 55%);
+    color: var(--green-text);
+    /* Decoração: não intercepta o toque que deveria rolar a fileira. */
+    pointer-events: none;
+    opacity: .55;
+    transition: opacity .4s ease;
+    /* Acena três vezes e para. Movimento curto, e só nas setas -- a fileira em
+       si não se mexe, então a dica não atrapalha quem já está lendo os chips. */
+    animation: dica-acena 1.6s ease-in-out 1s 3;
+  }
+  .monta-dica svg { width: 15px; height: 15px; }
+  /* A segunda seta fica levemente atrás e mais fraca: sugere continuidade, em
+     vez de duas setas idênticas competindo. */
+  .monta-dica svg:last-child { margin-left: -7px; opacity: .5; }
+  /* Rolou uma vez: some e não volta. A classe é posta pelo main.js. */
+  .monta-chips.rolou .monta-dica { opacity: 0; animation: none; }
+  .monta-casos { --corte-d: 56px; }
   .monta-chip { padding: 8px 15px; font-size: 14px; }
   .monta-chips { margin-top: 15px; }
   .hero-cases { margin-top: 70px; }
@@ -1974,9 +2047,9 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Como funciona em 3 passos ---------- */
-/* Exceção ao padrão do site (título em Geist, resto em Inter): este subtítulo
-   vai em Geist por decisão de design. Escopado para os demais .lede seguirem
-   em Inter. */
+/* Mesma situação da .hero-sub: era exceção ao padrão antigo (título em Geist,
+   resto em Inter) e hoje não muda nada, porque as duas variáveis apontam para a
+   Geist. Mantida pelo mesmo motivo. */
 #como-funciona .lede { font-family: var(--display); }
 .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .passo { text-align: center; }

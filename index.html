@@ -26,7 +26,7 @@
 <meta name="twitter:image:alt" content="Tela do pipeline comercial do Rezult CRM" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
@@ -156,10 +156,13 @@ fbq('track','PageView');
       <div class="hero-text">
         <div class="hero-badge hero-badge-ia reveal">
           <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
-          <span>Potencialize seu negócio com IA</span>
+          <span>Nova geração de CRM agêntico</span>
         </div>
         <h1 class="reveal" data-d="1">Crie seu time Comercial de Agentes de IA</h1>
-        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp 24h, operando e registrando tudo no CRM.</p>
+        <!-- O traço fica DENTRO do span, e não como fundo do parágrafo: assim ele
+             mede exatamente a frase grifada, sem depender de largura fixa. O ponto
+             final fica de fora, porque a linha marca as palavras, não a pontuação. -->
+        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp, operando e <span class="grifo">registrando tudo no CRM<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 8Q14 7.2 30 7L266 7Q285 7 297 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>.</p>
         <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
           <!-- Rótulo oculto, e não só o placeholder: placeholder some assim que a
                pessoa digita a primeira letra, e leitor de tela não o trata como
@@ -169,7 +172,7 @@ fbq('track','PageView');
           <textarea id="montaTexto" class="monta-campo" rows="2" maxlength="600"
                     placeholder="O que você deseja automatizar no seu negócio?">Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.</textarea>
           <div class="monta-pe">
-            <span class="monta-nota">Sem cartão de crédito</span>
+            <span class="monta-nota">Teste grátis</span>
             <button type="submit" class="btn btn-primary monta-cta">
               Criar agente
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -178,18 +181,21 @@ fbq('track','PageView');
         </form>
 
         <div class="monta-chips reveal" data-d="5">
-          <!-- Só a seta. Ela apontava para os chips ao lado de um rótulo que
-               dizia o mesmo; sem o texto ela continua fazendo esse trabalho.
-               Segue com aria-hidden: é sinal de direção, não conteúdo, e um
-               leitor de tela já encontra os chips como os botões que são. -->
-          <span class="monta-chips-rotulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           <div class="monta-casos">
             <button type="button" class="monta-chip ativo" aria-pressed="true" data-slug="atendimento" data-texto="Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.">Atendimento</button>
             <button type="button" class="monta-chip" aria-pressed="false" data-slug="qualificacao" data-texto="Crie um agente de qualificação para o meu negócio. O agente deve descobrir o que a pessoa procura, o orçamento e a urgência, e separar quem já está pronto para comprar.">Qualificação</button>
             <button type="button" class="monta-chip" aria-pressed="false" data-slug="agendamentos" data-texto="Crie um agente de agendamento para o meu negócio. O agente deve marcar as reuniões na agenda da pessoa certa, confirmar com o cliente no dia anterior e remarcar quem faltar.">Agendamentos</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="crm" data-texto="Crie um agente de CRM para o meu negócio. O agente deve registrar cada conversa, preencher origem, resumo e estágio do negócio, e mover o card no funil sem ninguém digitar.">Preencher CRM</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="vendas" data-texto="Crie um agente de vendas para o meu negócio. O agente deve apresentar a proposta, responder as objeções mais comuns, negociar dentro do que eu autorizar e fechar a venda.">Vendas</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="crm" data-texto="Crie um agente de CRM para o meu negócio. O agente deve registrar cada conversa, preencher origem, resumo e estágio do negócio, e mover o card no funil sem ninguém digitar.">Operacional</button>
             <button type="button" class="monta-chip" aria-pressed="false" data-slug="suporte" data-texto="Crie um agente de suporte para o meu negócio. O agente deve responder as dúvidas de quem já é cliente, resolver os pedidos mais comuns sozinho e passar para uma pessoa só o que sair do padrão.">Suporte</button>
           </div>
+          <!-- Seta dupla no fim da fileira. Vai depois de .monta-casos e não
+               dentro dela: dentro, ela rolaria junto com os chips e sairia da
+               tela no primeiro arrasto, bem quando ainda precisa ser vista. -->
+          <span class="monta-dica" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </span>
         </div>
       </div>
     </div>
