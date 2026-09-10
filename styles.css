@@ -2287,6 +2287,90 @@ select.demo-select:invalid { color: #374151; }
   .dep-esteira { gap: 14px; }
 }
 
+/* ---------- Parceiro oficial da Meta ---------- */
+/* Duas colunas: o argumento à esquerda, as provas empilhadas à direita.
+   align-items: center e não start -- a coluna de texto é bem mais baixa que a
+   pilha de três cards, e alinhada no topo ela ficaria pendurada com um vão
+   grande embaixo. */
+.meta-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* Alinhado à esquerda, ao contrário das outras seções: aqui o texto divide a
+   linha com a arte, e centralizado ele perderia a borda comum com ela. */
+.meta-texto { max-width: 460px; }
+
+/* 20px em vez dos 16px do .lede base, e escopado à seção: a regra global serve
+   as outras quatro ledes da página, que continuam em 16 e 18px. */
+.meta-texto .lede { font-size: 20px; }
+
+/* O selo é o lockup oficial da Meta e é a única superfície da página onde o
+   azul da marca deles aparece. Não recolorir nem recortar: um selo de parceria
+   adulterado vale menos que selo nenhum, e o uso é regido pelas diretrizes de
+   marca da Meta. */
+/* A placa branca que segura o lockup. inline-flex para encolher até o conteúdo:
+   em block ela esticaria por toda a coluna e deixaria de ler como placa.
+
+   Borda #D9E4F3: um cinza puxado para o azul, e não o #E4E4E7 neutro. Sobre o
+   fundo azul-claro da seção, um cinza sem viés lê como sujeira -- a borda tem
+   que pertencer à mesma família de cor do que está atrás dela. É ela que
+   desenha a placa: branco sobre #F1F6FD quase não se distingue sozinho. */
+.meta-selo-caixa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Bem mais baixa que o desenho original de 86px: o padding caiu de 20 para
+     13 de cada lado e o logo de 46 para 28. A altura fecha em 54px. */
+  padding: 13px 20px;
+  /* A placa abre o bloco, então a margem é de baixo. */
+  margin: 0 0 22px;
+  border-radius: 11px;
+  background: #FFFFFF;
+  border: 1px solid #D9E4F3;
+  box-shadow: 0 1px 2px rgba(23, 61, 116, 0.05);
+}
+
+.meta-selo { display: block; width: auto; height: 28px; }
+
+/* A arte da coluna direita. O PNG tem fundo transparente, então pousa direto
+   sobre o #FBFBFB da seção sem precisar de card nem de moldura.
+
+   540px e não 400: a arte é paisagem (1448x1086) e carrega texto embutido, que
+   encolhe junto com ela. Nos 540px da coluna a frase da arte renderiza a ~37%
+   do tamanho original, o limite antes de virar textura.
+
+   height: auto junto com o width/height do HTML preserva a proporção enquanto o
+   max-width manda na largura: sem o auto, o atributo height do HTML venceria e
+   a imagem achataria. */
+.meta-arte {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Uma coluna abaixo de 900px, com o texto centralizado de novo: sozinho na
+   largura toda, alinhado à esquerda ele não teria mais com o que se alinhar. */
+@media (max-width: 900px) {
+  .meta-grade { grid-template-columns: 1fr; gap: 34px; }
+  .meta-texto { max-width: 560px; margin: 0 auto; text-align: center; }
+  .meta-selo-caixa { margin: 0 auto 22px; }
+}
+
+@media (max-width: 560px) {
+  .meta-selo-caixa { padding: 11px 16px; border-radius: 10px; margin-bottom: 16px; }
+  .meta-selo { height: 24px; }
+  /* 18px no celular: os 20px do desktop, numa coluna de tela inteira, deixam a
+     linha longa demais para leitura confortável. */
+  .meta-texto .lede { font-size: 18px; }
+  .meta-arte { max-width: 100%; }
+}
+
+
 /* ---------- Painel "WhatsApp Oficial" (ilha React) ---------- */
 /* Réplica da coluna de conversa do Multiatendimento. Os valores vieram de
    rezult-crm/src/pages/MultiatendimentoPage.tsx, para quem virar cliente
