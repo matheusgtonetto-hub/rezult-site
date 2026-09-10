@@ -6,6 +6,7 @@ import {
   LINHA,
   MS_ANTES_DE_REINICIAR,
   MS_ANTES_DE_DIGITAR,
+  PASSO_INICIAL,
   ROTEIRO,
   msDigitando,
 } from './conversa';
@@ -57,7 +58,7 @@ function IconeWhatsapp() {
   );
 }
 
-function Avatar({ nome, tamanho }) {
+function AvatarLead({ tamanho }) {
   return (
     <span
       className="pw-avatar"
@@ -65,11 +66,36 @@ function Avatar({ nome, tamanho }) {
         width: tamanho,
         height: tamanho,
         fontSize: tamanho <= 28 ? 10 : 11,
-        background: corDoNome(nome, 'cliente'),
+        background: corDoNome(LEAD, 'cliente'),
       }}
       aria-hidden="true"
     >
-      {iniciais(nome)}
+      {iniciais(LEAD)}
+    </span>
+  );
+}
+
+/* O logo da Rezult à direita das falas do agente. É um acréscimo do site, não
+ * uma cópia do CRM: no Multiatendimento só o lead tem avatar, porque lá quem
+ * responde é quem está olhando a tela. Aqui a cena precisa dizer, em cada
+ * mensagem, que do outro lado não tem ninguém digitando.
+ *
+ * logo-rezult-preto.png e não logo-rezult.png: aquele tem 1080px, fundo branco
+ * chapado (RGB, sem canal alfa) e folga em volta da marca, o que dentro de um
+ * círculo de 28px renderia um R minúsculo cercado de branco. Este tem 100px,
+ * fundo transparente e recorte justo.
+ *
+ * O caminho é relativo à página, e não ao bundle: o navegador resolve src de
+ * <img> a partir do documento, então "logo-rezult-preto.png" da raiz vale
+ * mesmo com o script servido de build/. */
+function AvatarAgente({ tamanho }) {
+  return (
+    <span
+      className="pw-avatar pw-avatar-agente"
+      style={{ width: tamanho, height: tamanho }}
+      aria-hidden="true"
+    >
+      <img src="logo-rezult-preto.png" alt="" width="100" height="100" />
     </span>
   );
 }
@@ -78,9 +104,11 @@ function Mensagem({ msg }) {
   const doAgente = msg.de === 'agente';
   const quem = doAgente ? AGENTE : LEAD;
 
+  /* Cada lado com o seu avatar, e cada um do lado de fora da sua bolha: a lead
+   * à esquerda, o robô à direita. */
   return (
     <div className={'pw-linha' + (doAgente ? ' pw-linha-agente' : '')}>
-      {!doAgente && <Avatar nome={LEAD} tamanho={28} />}
+      {!doAgente && <AvatarLead tamanho={28} />}
       <div className="pw-bloco">
         <div className="pw-quem">
           <span style={{ color: corDoNome(quem, doAgente ? 'atendente' : 'cliente') }}>{quem}</span>
@@ -88,6 +116,7 @@ function Mensagem({ msg }) {
         </div>
         <div className={'pw-bolha' + (doAgente ? ' pw-bolha-agente' : '')}>{msg.texto}</div>
       </div>
+      {doAgente && <AvatarAgente tamanho={28} />}
     </div>
   );
 }
@@ -101,7 +130,7 @@ function Digitando({ de }) {
 
   return (
     <div className={'pw-linha' + (doAgente ? ' pw-linha-agente' : '')}>
-      {!doAgente && <Avatar nome={LEAD} tamanho={28} />}
+      {!doAgente && <AvatarLead tamanho={28} />}
       <div className="pw-bloco">
         <div className={'pw-bolha pw-digitando' + (doAgente ? ' pw-bolha-agente' : '')}>
           <span className="pw-ponto" />
@@ -109,6 +138,7 @@ function Digitando({ de }) {
           <span className="pw-ponto" />
         </div>
       </div>
+      {doAgente && <AvatarAgente tamanho={28} />}
     </div>
   );
 }
@@ -117,8 +147,10 @@ export default function PainelWhatsapp() {
   const caixa = useRef(null);
   const naTela = useNaTela(caixa);
 
-  /* Quantas mensagens já entraram. A próxima a entrar é ROTEIRO[passo]. */
-  const [passo, setPasso] = useState(0);
+  /* Quantas mensagens já entraram. A próxima a entrar é ROTEIRO[passo].
+   * Começa em PASSO_INICIAL para a fala de abertura da lead já estar na tela
+   * no primeiro render, sem piscar um chat vazio antes. */
+  const [passo, setPasso] = useState(PASSO_INICIAL);
   /* Quem está digitando agora: 'lead', 'agente' ou ninguém. Era um booleano
    * quando só a agente digitava. */
   const [digitando, setDigitando] = useState(null);
@@ -142,7 +174,7 @@ export default function PainelWhatsapp() {
     if (!naTela) return undefined;
 
     if (passo >= ROTEIRO.length) {
-      const t = window.setTimeout(() => setPasso(0), MS_ANTES_DE_REINICIAR);
+      const t = window.setTimeout(() => setPasso(PASSO_INICIAL), MS_ANTES_DE_REINICIAR);
       return () => window.clearTimeout(t);
     }
 
@@ -169,7 +201,7 @@ export default function PainelWhatsapp() {
   return (
     <div className="painel-wpp" ref={caixa}>
       <header className="pw-topo">
-        <Avatar nome={LEAD} tamanho={32} />
+        <AvatarLead tamanho={32} />
         <div className="pw-topo-txt">
           <div className="pw-topo-nome">{LEAD}</div>
           <span className="pw-pill">

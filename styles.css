@@ -2313,6 +2313,20 @@ select.demo-select:invalid { color: #374151; }
   overflow: hidden;
   background: #FAFAFA;
   font-family: var(--sans);
+  /* Divisória entre o painel e a coluna de texto. Mesma #E5E5E5 da borda do
+     cabeçalho logo abaixo: as duas se encontram num canto, e um segundo tom ali
+     apareceria como emenda malfeita. O box-sizing global é border-box, então o
+     1px sai de dentro e não estoura o inset. */
+  border-left: 1px solid #E5E5E5;
+}
+
+/* Nas linhas invertidas o visual fica à ESQUERDA e o texto à direita, então a
+   divisória troca de lado. Esta linha (WhatsApp Oficial) não é flip hoje, mas
+   duas outras da página são: sem esta regra, flipar a linha jogaria a borda na
+   margem externa do card, onde ela não divide nada. */
+.feature-row.flip .painel-wpp {
+  border-left: none;
+  border-right: 1px solid #E5E5E5;
 }
 
 /* Classe posta pelo React no slot em que ele montou. No celular a
@@ -2344,6 +2358,18 @@ select.demo-select:invalid { color: #374151; }
   font-weight: 600;
   letter-spacing: -0.01em;
 }
+
+/* O avatar do agente, com o logo da marca. Círculo BRANCO e não verde: o logo é
+   preto com o corte verde, e sobre verde ele empastaria. Branco puro sobre o
+   #FAFAFA do chat quase não se distingue, então a borda é o que desenha o
+   círculo -- a mesma #E5E5E5 do cabeçalho, para não inventar um tom novo.
+   O logo ocupa 72%, deixando a folga que um avatar de iniciais teria. */
+.pw-avatar-agente {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  overflow: hidden;
+}
+.pw-avatar-agente img { width: 72%; height: 72%; object-fit: contain; }
 
 .pw-topo-txt { flex: 1; min-width: 0; }
 .pw-topo-nome {
@@ -2473,6 +2499,18 @@ select.demo-select:invalid { color: #374151; }
 @keyframes pw-ponto {
   0%, 60%, 100% { transform: translateY(0); opacity: .5; }
   30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* A .feature-row vira coluna única aqui (não em 560px). O painel deixa de estar
+   AO LADO do texto e passa a estar ABAIXO dele, então a divisória vira borda de
+   topo: uma borda lateral ali correria rente à margem do card sem separar nada. */
+@media (max-width: 980px) {
+  .painel-wpp,
+  .feature-row.flip .painel-wpp {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #E5E5E5;
+  }
 }
 
 @media (max-width: 560px) {

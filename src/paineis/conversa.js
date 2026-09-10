@@ -3,12 +3,12 @@
  * Nomes ficam aqui em cima, soltos, e não espalhados pelas falas: trocar quem
  * atende ou quem é atendido é editar duas linhas, não caçar ocorrências.
  */
-export const AGENTE = 'Sônia';
+export const AGENTE = 'Rezult Atendimento';
 export const LEAD = 'Marina Duarte';
 
 /* O rótulo da linha conectada, na pill do cabeçalho. É o que faz o card honrar
  * o "Oficial" do título: quem usa API não oficial não tem linha nomeada. */
-export const LINHA = 'WhatsApp Comercial';
+export const LINHA = 'WhatsApp Oficial';
 
 /* Quanto tempo cada turno leva, dos três pontinhos até a mensagem entrar.
  *
@@ -18,9 +18,19 @@ export const LINHA = 'WhatsApp Comercial';
  * ritmo dentro de uma conta. Mudar o ritmo passa a ser editar o número que se
  * quer mudar. */
 export const MS_POR_LADO = {
-  agente: 3000,
-  lead: 2000,
+  agente: 4000,
+  lead: 3000,
 };
+
+/* A conversa não começa vazia: a primeira fala da lead já está na tela quando o
+ * painel aparece, e a encenação parte da resposta da agente.
+ *
+ * É por isso que o passo inicial é 1 e não 0. Um painel em repouso mostrando um
+ * chat vazio não diz nada a quem só passa o olho, e a mensagem de abertura é
+ * justamente a que enuncia a dor ("a gente perde muito lead no WhatsApp") --
+ * quem lê só o primeiro quadro já entende do que a cena trata. O reinício do
+ * loop volta para cá, e não para o zero, pelo mesmo motivo. */
+export const PASSO_INICIAL = 1;
 
 export function msDigitando(de) {
   return MS_POR_LADO[de] ?? MS_POR_LADO.lead;
