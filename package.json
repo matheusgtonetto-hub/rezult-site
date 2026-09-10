@@ -2,13 +2,18 @@
   "name": "rezult-site",
   "version": "1.0.0",
   "scripts": {
-    "dev": "browser-sync start --server --files '*.html, *.css, *.js, logos/*' --port 3000",
-    "vercel-build": "echo 'site estático, sem build necessário'"
+    "dev": "browser-sync start --server --files '*.html, *.css, *.js, build/*.js, logos/*' --port 3000",
+    "dev:paineis": "vite build --watch",
+    "build": "vite build",
+    "vercel-build": "vite build"
   },
   "devDependencies": {
-    "browser-sync": "^3.0.3"
+    "@preact/preset-vite": "^2.10.6",
+    "browser-sync": "^3.0.3",
+    "vite": "^7.3.6"
   },
   "dependencies": {
-    "motion": "^12.42.2"
+    "motion": "^12.42.2",
+    "preact": "^10.29.8"
   }
 }

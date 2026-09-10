@@ -140,25 +140,6 @@ function animateAutomation() {
   run();
 }
 
-// ---- WhatsApp inbox (feature) ----
-MK.whatsapp = `
-<div style="padding:0;height:340px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:20px;">
-  <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;background:var(--surface-2);flex-shrink:0;">
-    <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00B873,#00B87A);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:600;font-size:12px;">FC</div>
-    <div style="flex:1;"><div style="font-size:13px;font-weight:600;letter-spacing:-0.01em;">Felipe Costa</div><div style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00B873;display:inline-block;"></span>online · FC Logística</div></div>
-    <span style="font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.14);color:var(--primary);padding:4px 9px;border-radius:100px;letter-spacing:0.06em;">IA ATIVA</span>
-  </div>
-  <div id="wppMsgs" style="flex:1;padding:12px 14px;display:flex;flex-direction:column;gap:7px;overflow:hidden;"></div>
-</div>`;
-
-function bubble(who, text, name) {
-  const agent = who === "agent";
-  return `<div style="align-self:${agent ? "flex-start" : "flex-end"};max-width:75%;">
-    ${name ? `<div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:var(--primary);text-transform:uppercase;margin-bottom:3px;margin-left:4px;">${name}</div>` : ""}
-    <div style="background:${agent ? "var(--surface-2)" : "var(--primary)"};color:${agent ? "var(--text)" : "var(--on-primary)"};border:${agent ? "1px solid var(--border)" : "none"};padding:9px 13px;border-radius:13px;border-top-${agent ? "left" : "right"}-radius:4px;font-size:12.5px;line-height:1.45;">${text}</div>
-  </div>`;
-}
-
 // ---- Agent config (feature) ----
 MK.agent = `
 <div id="agentMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(0,184,115,0.07), transparent 55%);">
@@ -532,94 +513,14 @@ function animateDashboards() {
   run();
 }
 
-// ---- WhatsApp chat animation ----
-function animateWpp() {
-  const container = document.getElementById("wppMsgs");
-  if (!container) return;
-
-  const TYPING_MS = 1300;
-  const steps = [
-    { type: "agent", text: "Oi Felipe! Vi que você baixou nosso material. Posso ajudar com alguma dúvida?", label: "Sofia · IA", pause: 900 },
-    { type: "lead",  text: "Sim! Quero entender a parte de WhatsApp.", pause: 700 },
-    { type: "agent", text: "Centralizamos tudo num inbox com agente IA no primeiro contato. Qual o tamanho do seu time?", label: "Sofia · IA", pause: 900 },
-    { type: "lead",  text: "Somos 24, 6 no comercial.", pause: 700 },
-    { type: "badge", text: "✦ Score atualizado: 94 · hot lead", pause: 500 },
-  ];
-
-  let idx = 0;
-  let typingEl = null;
-  let timer = null;
-
-  function fadeIn(el) {
-    el.style.opacity = "0";
-    el.style.transition = "opacity 0.3s";
-    container.appendChild(el);
-    requestAnimationFrame(() => {
-      while (container.scrollHeight > container.clientHeight && container.children.length > 1) {
-        container.removeChild(container.firstElementChild);
-      }
-      requestAnimationFrame(() => { el.style.opacity = "1"; });
-    });
-  }
-
-  function showTyping() {
-    typingEl = document.createElement("div");
-    typingEl.style.cssText = "align-self:flex-end;";
-    typingEl.innerHTML = `<div style="background:var(--primary);padding:7px 11px;border-radius:11px;border-top-right-radius:3px;display:flex;gap:4px;align-items:center;">
-      <span class="wpp-dot" style="background:rgba(255,255,255,0.7);"></span><span class="wpp-dot" style="animation-delay:.2s;background:rgba(255,255,255,0.7);"></span><span class="wpp-dot" style="animation-delay:.4s;background:rgba(255,255,255,0.7);"></span>
-    </div>`;
-    fadeIn(typingEl);
-  }
-
-  function addBubble(step) {
-    if (typingEl) { typingEl.remove(); typingEl = null; }
-    const el = document.createElement("div");
-    if (step.type === "badge") {
-      el.style.cssText = "align-self:center;font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.12);color:var(--primary);padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:0.08em;";
-      el.textContent = step.text;
-    } else {
-      const isAgent = step.type === "agent";
-      // Agent (Sofia/IA) = RIGHT side (negócio enviando); Lead = LEFT side (cliente recebendo)
-      el.style.cssText = `align-self:${isAgent ? "flex-end" : "flex-start"};max-width:78%;`;
-      el.innerHTML = `${step.label ? `<div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;color:var(--primary);text-transform:uppercase;margin-bottom:3px;text-align:right;margin-right:4px;">${step.label}</div>` : ""}
-        <div style="background:${isAgent ? "var(--primary)" : "var(--surface-2)"};color:${isAgent ? "var(--on-primary)" : "var(--text)"};border:${isAgent ? "none" : "1px solid var(--border)"};padding:7px 11px;border-radius:11px;border-top-${isAgent ? "right" : "left"}-radius:3px;font-size:11.5px;line-height:1.45;">${step.text}</div>`;
-    }
-    fadeIn(el);
-  }
-
-  function next() {
-    if (idx >= steps.length) {
-      timer = setTimeout(() => {
-        container.innerHTML = "";
-        idx = 0;
-        timer = setTimeout(next, 600);
-      }, 2000);
-      return;
-    }
-    const step = steps[idx++];
-    if (step.type === "agent") {
-      showTyping();
-      timer = setTimeout(() => {
-        addBubble(step);
-        timer = setTimeout(next, step.pause);
-      }, TYPING_MS);
-    } else {
-      addBubble(step);
-      timer = setTimeout(next, step.pause);
-    }
-  }
-
-  timer = setTimeout(next, 600);
-}
-
 // ---- Inject ----
 function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
   set("featAutomation", MK.automation);
   animateAutomation();
-  set("featWhatsapp", MK.whatsapp);
-  animateWpp();
+  // O slot #featWhatsapp saiu daqui: quem o preenche agora é a ilha React em
+  // src/paineis/, montada por build/paineis.js.
   set("featAgent", MK.agent);
   animateAgent();
   set("featIntegrations", MK.integrations);

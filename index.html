@@ -1167,6 +1167,11 @@ fbq('track','PageView');
 
 <script src="mockups.js"></script>
 <script src="main.js"></script>
+<!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
+     src/paineis/. Preenche o slot #featWhatsapp, que o mockups.js deixou de
+     ocupar. Vem depois dele para o innerHTML do injectMockups não passar por
+     cima do que o React montou. -->
+<script src="build/paineis.js" defer></script>
 <script>
   const demoForm = document.getElementById("demoForm");
   const demoSuccess = document.getElementById("demoSuccess");

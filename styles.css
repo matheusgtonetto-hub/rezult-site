@@ -1470,8 +1470,6 @@ select.demo-select:invalid { color: #374151; }
 .footer-social svg { width: 17px; height: 17px; }
 
 /* ---------- WhatsApp typing dots ---------- */
-.wpp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); display: inline-block; animation: wppDot 1.2s infinite; }
-@keyframes wppDot { 0%, 60%, 100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
 
 /* ---------- Scroll reveal ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(0.2,0.8,0.2,1), transform .7s cubic-bezier(0.2,0.8,0.2,1); }
@@ -2281,4 +2279,212 @@ select.demo-select:invalid { color: #374151; }
   .dep-esteira .tcard { width: 320px; height: 235px; }
   .dep-linha { gap: 14px; }
   .dep-esteira { gap: 14px; }
+}
+
+/* ---------- Painel "WhatsApp Oficial" (ilha React) ---------- */
+/* Réplica da coluna de conversa do Multiatendimento. Os valores vieram de
+   rezult-crm/src/pages/MultiatendimentoPage.tsx, para quem virar cliente
+   encontrar a mesma tela que viu aqui. Três desvios conscientes do original,
+   todos por causa da largura: o card ocupa metade de uma .feature-row, não a
+   tela inteira do app.
+     1. Bolha em 13px e não 14px.
+     2. maxWidth de 78% e não 65%: com o avatar comendo 36px, 65% deixava o
+        texto numa fita estreita de duas palavras por linha.
+     3. Padding simétrico no lugar de "10px 30px 10px 14px": os 30px da direita
+        no CRM reservam espaço para o botão de ação no hover, que aqui não
+        existe. */
+/* Fora do fluxo, preenchendo o .feature-visual (que já é position: relative).
+   Duas coisas de uma vez:
+
+   1. Cobre a metade inteira. O .feature-visual é uma ilha escura (redefine
+      --surface para --dark-surface lá em cima), então todo pixel descoberto
+      apareceria como um bloco preto.
+   2. Impede o card de crescer. Com o painel no fluxo, a altura da linha do
+      grid passa a ser decidida pelo conteúdo do item mais alto, e cada
+      mensagem nova empurrava o card para baixo. `overflow: hidden` não resolve
+      isso: a altura intrínseca continua contando na hora de medir a linha.
+      Fora do fluxo, a linha é medida só pela coluna de texto, e as mensagens
+      antigas somem por cima sem mexer em nada. */
+.painel-wpp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #FAFAFA;
+  font-family: var(--sans);
+}
+
+/* Classe posta pelo React no slot em que ele montou. No celular a
+   .feature-row vira coluna única e o .feature-visual perde o irmão que lhe
+   dava altura; com o painel fora do fluxo ele colapsaria para zero. A regra
+   está numa classe, e não no #featWhatsapp, para o painel poder mudar de slot
+   sem a altura do celular ficar para trás em silêncio. */
+.tem-painel-wpp { position: relative; }
+
+/* Cabeçalho: branco sobre o #FAFAFA das mensagens, como no app. */
+.pw-topo {
+  flex-shrink: 0;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.pw-avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pw-topo-txt { flex: 1; min-width: 0; }
+.pw-topo-nome {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: -0.01em;
+}
+
+/* A pill da linha conectada. É ela que honra o "Oficial" do título do card:
+   quem usa API não oficial não tem linha nomeada para mostrar. */
+.pw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 3px 8px 3px 6px;
+  background: #E1F5EE;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #128A68;
+  letter-spacing: -0.01em;
+}
+.pw-ico-wpp { flex-shrink: 0; }
+
+.pw-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: -0.01em;
+}
+.pw-status-ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #128A68;
+  animation: pw-pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes pw-pulso {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .4; transform: scale(.8); }
+}
+
+/* Coluna ancorada embaixo. Quando a conversa passa da altura do card, as
+   mensagens antigas sobem e o overflow as corta, que é o comportamento de um
+   chat de verdade. Sem medir altura e sem remover nó na mão, ao contrário do
+   animateWpp que existia aqui antes. */
+.pw-msgs {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+  background: #FAFAFA;
+}
+
+.pw-linha {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  /* `backwards` segura o estado inicial no frame em que o React insere a
+     linha: sem ele a mensagem pisca no lugar final antes de a animação rodar. */
+  animation: pw-entra .28s ease-out backwards;
+}
+.pw-linha-agente { justify-content: flex-end; }
+
+@keyframes pw-entra {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pw-bloco { max-width: 78%; min-width: 0; }
+
+.pw-quem {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+.pw-linha-agente .pw-quem { text-align: right; }
+.pw-hora { color: #AAAAAA; font-weight: 400; }
+
+.pw-bolha {
+  padding: 9px 12px;
+  border-radius: 4px 16px 16px 16px;
+  background: #FFFFFF;
+  color: #111111;
+  border: 1px solid #EEEEEE;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.pw-bolha-agente {
+  border-radius: 16px 4px 16px 16px;
+  background: #128A68;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: none;
+}
+
+.pw-digitando { display: flex; align-items: center; gap: 4px; padding: 11px 14px; }
+/* Cinza por padrão, que é a bolha branca da lead; branco só dentro da bolha
+   verde da agente. Ao contrário, os pontinhos da lead seriam brancos sobre
+   branco e ela pareceria não estar digitando nada. */
+.pw-ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  animation: pw-ponto 1.2s infinite;
+}
+.pw-bolha-agente .pw-ponto { background: rgba(255, 255, 255, 0.75); }
+.pw-ponto:nth-child(2) { animation-delay: .2s; }
+.pw-ponto:nth-child(3) { animation-delay: .4s; }
+
+@keyframes pw-ponto {
+  0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (max-width: 560px) {
+  /* A altura vai no slot, não no painel: o painel está fora do fluxo e não
+     tem de onde herdar altura quando a linha vira coluna única. */
+  .tem-painel-wpp { height: 380px; }
+  .pw-bolha { font-size: 12.5px; }
+  .pw-bloco { max-width: 82%; }
+}
+
+/* Menos movimento: o React já entrega a conversa inteira parada; aqui somem o
+   pulso do status, os pontinhos e a entrada das linhas. */
+@media (prefers-reduced-motion: reduce) {
+  .pw-status-ponto, .pw-ponto, .pw-linha { animation: none; }
 }
