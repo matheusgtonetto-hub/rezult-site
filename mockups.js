@@ -61,85 +61,6 @@ function card(name, color, val) {
   </div>`;
 }
 
-// ---- Automation flow (feature) ----
-MK.automation = `
-<div id="autoMock" style="padding:20px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 20% 20%, rgba(0,184,115,0.06), transparent 60%);">
-  <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:20px 20px;opacity:0.5;pointer-events:none;"></div>
-  <div style="position:relative;display:flex;flex-direction:column;gap:10px;">
-    <div id="autoNode0" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid rgba(0,184,115,0.25);border-radius:12px;padding:10px 14px;transition:border-color .4s,box-shadow .4s;">
-      <div style="width:34px;height:34px;border-radius:9px;background:rgba(0,184,115,0.22);display:flex;align-items:center;justify-content:center;color:#00B873;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12c1-5 4-7 6-7 3 0 5 3 6 6 1-3 3-6 6-6" stroke-linecap="round"/></svg></div>
-      <div style="flex:1;min-width:0;"><div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:#00B873;text-transform:uppercase;">GATILHO</div><div style="font-size:13px;font-weight:500;margin-top:2px;letter-spacing:-0.01em;">Lead Ad · Meta Ads</div><div style="font-size:11px;color:var(--text-subtle);">Campanha 'Logística PRO'</div></div>
-      <div id="autoStatus0" style="flex-shrink:0;"></div>
-    </div>
-    <div id="autoConn0" style="display:flex;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="1.6" style="transition:stroke .4s;"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div id="autoNode1" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:10px 14px;transition:border-color .4s,box-shadow .4s;">
-      <div style="width:34px;height:34px;border-radius:9px;background:rgba(245,158,11,0.22);display:flex;align-items:center;justify-content:center;color:#F59E0B;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18l-7 8v6l-4-2v-4L3 6z" stroke-linejoin="round"/></svg></div>
-      <div style="flex:1;min-width:0;"><div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:#F59E0B;text-transform:uppercase;">CONDIÇÃO</div><div style="font-size:13px;font-weight:500;margin-top:2px;letter-spacing:-0.01em;">Se score > 60</div><div style="font-size:11px;color:var(--text-subtle);">Qualificação por IA</div></div>
-      <div id="autoStatus1" style="flex-shrink:0;"></div>
-    </div>
-    <div id="autoConn1" style="display:flex;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="1.6" style="transition:stroke .4s;"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div id="autoNode2" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:10px 14px;transition:border-color .4s,box-shadow .4s;">
-      <div style="width:34px;height:34px;border-radius:9px;background:rgba(59,130,246,0.22);display:flex;align-items:center;justify-content:center;color:#3B82F6;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="6" width="14" height="12" rx="3"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/></svg></div>
-      <div style="flex:1;min-width:0;"><div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:#3B82F6;text-transform:uppercase;">AÇÃO</div><div style="font-size:13px;font-weight:500;margin-top:2px;letter-spacing:-0.01em;">Sofia inicia conversa</div><div style="font-size:11px;color:var(--text-subtle);">WhatsApp · template oi-traf</div></div>
-      <div id="autoStatus2" style="flex-shrink:0;"></div>
-    </div>
-  </div>
-</div>`;
-
-// ---- Automation flow animation ----
-function animateAutomation() {
-  const cfg = [
-    { color: "#00B873", runLabel: "Disparando...", doneLabel: "✓ lead capturado" },
-    { color: "#F59E0B", runLabel: "Avaliando...",  doneLabel: "✓ score 87" },
-    { color: "#3B82F6", runLabel: "Enviando...",   doneLabel: "✓ msg enviada" },
-  ];
-
-  function pill(text, color) {
-    return `<span style="font-family:var(--mono);font-size:9px;background:${color}22;color:${color};padding:4px 8px;border-radius:100px;letter-spacing:0.04em;white-space:nowrap;">${text}</span>`;
-  }
-
-  function setState(i, state) {
-    const node = document.getElementById("autoNode" + i);
-    const status = document.getElementById("autoStatus" + i);
-    if (!node || !status) return;
-    const { color, runLabel, doneLabel } = cfg[i];
-    if (state === "idle") {
-      node.style.borderColor = color + "25";
-      node.style.boxShadow = "none";
-      status.innerHTML = "";
-    } else if (state === "running") {
-      node.style.borderColor = color;
-      node.style.boxShadow = "0 0 22px " + color + "35";
-      status.innerHTML = pill(runLabel, color);
-    } else if (state === "done") {
-      node.style.borderColor = "rgba(0,184,115,0.5)";
-      node.style.boxShadow = "0 0 14px rgba(0,184,115,0.15)";
-      status.innerHTML = pill(doneLabel, "#00B873");
-    }
-  }
-
-  function setConn(i, active) {
-    const conn = document.getElementById("autoConn" + i);
-    if (!conn) return;
-    conn.querySelector("svg").style.stroke = active ? "#00B873" : "var(--text-subtle)";
-  }
-
-  function run() {
-    for (let i = 0; i < 3; i++) setState(i, "idle");
-    setConn(0, false); setConn(1, false);
-
-    setTimeout(() => setState(0, "running"), 400);
-    setTimeout(() => { setState(0, "done"); setConn(0, true); }, 1900);
-    setTimeout(() => setState(1, "running"), 2500);
-    setTimeout(() => { setState(1, "done"); setConn(1, true); }, 4100);
-    setTimeout(() => setState(2, "running"), 4700);
-    setTimeout(() => setState(2, "done"), 6300);
-    setTimeout(run, 8300);
-  }
-
-  run();
-}
-
 // ---- Agent config (feature) ----
 MK.agent = `
 <div id="agentMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(0,184,115,0.07), transparent 55%);">
@@ -327,112 +248,6 @@ function animateIntegrations() {
   setTimeout(runCall, 600);
 }
 
-// ---- Pipelines avançados (feature) ----
-MK.pipelines = `
-<div id="pipeMock" style="padding:20px;height:340px;overflow:hidden;">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-    <div style="font-size:14px;font-weight:600;letter-spacing:-0.02em;">Funil · Comercial B2B</div>
-    <div style="font-family:var(--mono);font-size:10px;color:var(--text-subtle);">5 etapas</div>
-  </div>
-  <div id="pipeCols" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;"></div>
-  <div id="pipeBanner" style="display:flex;align-items:center;gap:8px;margin-top:14px;padding:11px 14px;background:var(--surface-2);border:1px dashed var(--border-active);border-radius:10px;transition:border-color .4s,background .4s;">
-    <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,184,115,0.14);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v4m0 8v4M4 12h4m8 0h4" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg></div>
-    <span id="pipeMsg" style="font-size:11.5px;color:var(--text-muted);">Automação ativa · move pra "Proposta" ao receber resposta</span>
-  </div>
-</div>`;
-
-// ---- Pipeline animation ----
-function animatePipeline() {
-  const colsEl = document.getElementById("pipeCols");
-  const bannerEl = document.getElementById("pipeBanner");
-  const msgEl = document.getElementById("pipeMsg");
-  if (!colsEl) return;
-
-  const COLS = [
-    { name: "Novo",       color: "#3B82F6" },
-    { name: "Qualificado",color: "#00B873" },
-    { name: "Proposta",   color: "#F59E0B" },
-  ];
-
-  const INITIAL = [
-    ["Diego R.", "Patricia M.", "Lucas A."],
-    ["Felipe C.", "Marina S.", "João P."],
-    ["Bruna L."],
-  ];
-
-  const MOVES = [
-    { lead: "Diego R.",    from: 0, to: 1, msg: "Diego R. → Qualificado (resposta recebida)" },
-    { lead: "Felipe C.",   from: 1, to: 2, msg: "Felipe C. → Proposta (IA identificou interesse)" },
-    { lead: "Patricia M.", from: 0, to: 1, msg: "Patricia M. → Qualificado (score 81)" },
-  ];
-
-  let state = INITIAL.map(col => [...col]);
-  let moveIdx = 0;
-
-  function render(hlLead = null, hlToCol = -1) {
-    colsEl.innerHTML = COLS.map((col, ci) => {
-      const isHL = ci === hlToCol;
-      return `<div style="background:var(--surface-2);border:1px solid ${isHL ? col.color + "80" : "var(--border)"};border-radius:10px;padding:8px;min-height:160px;min-width:0;overflow:hidden;transition:border-color .4s,box-shadow .4s;${isHL ? "box-shadow:0 0 16px " + col.color + "25;" : ""}">
-        <div style="display:flex;align-items:center;gap:6px;padding:2px 4px 8px;">
-          <span style="width:6px;height:6px;border-radius:50%;background:${col.color};"></span>
-          <span style="font-size:10px;font-weight:600;">${col.name}</span>
-          <span style="margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--text-subtle);">${state[ci].length}</span>
-        </div>
-        ${state[ci].map(l => {
-          const isHLLead = l === hlLead && ci !== hlToCol;
-          return `<div style="background:${isHLLead ? col.color + "18" : "var(--surface)"};border:1px solid ${isHLLead ? col.color : "var(--border)"};border-radius:7px;padding:7px 8px;margin-bottom:5px;font-size:9.5px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .35s;min-width:0;overflow:hidden;">
-            <span style="width:16px;height:16px;min-width:16px;border-radius:4px;background:${col.color};display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;font-weight:700;">${l.split(" ").map(w=>w[0]).join("")}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${l}</span>
-          </div>`;
-        }).join("")}
-      </div>`;
-    }).join("");
-  }
-
-  function flashBanner(msg) {
-    if (msgEl) msgEl.textContent = msg;
-    if (bannerEl) {
-      bannerEl.style.borderColor = "#00B873";
-      bannerEl.style.background = "rgba(0,184,115,0.06)";
-      setTimeout(() => {
-        if (bannerEl) { bannerEl.style.borderColor = ""; bannerEl.style.background = ""; }
-      }, 1600);
-    }
-  }
-
-  function runMove() {
-    const move = MOVES[moveIdx % MOVES.length];
-    moveIdx++;
-
-    // 1. Highlight source lead
-    render(move.lead, -1);
-
-    setTimeout(() => {
-      // 2. Execute move
-      const fi = state[move.from].indexOf(move.lead);
-      if (fi !== -1) { state[move.from].splice(fi, 1); state[move.to].push(move.lead); }
-      render(move.lead, move.to);
-      flashBanner(move.msg);
-    }, 900);
-
-    setTimeout(() => render(), 2300);
-
-    const isLast = moveIdx % MOVES.length === 0;
-    setTimeout(() => {
-      if (isLast) {
-        state = INITIAL.map(col => [...col]);
-        render();
-        if (msgEl) msgEl.textContent = "Automação ativa · move pra \"Proposta\" ao receber resposta";
-        setTimeout(runMove, 1000);
-      } else {
-        runMove();
-      }
-    }, isLast ? 4500 : 3200);
-  }
-
-  render();
-  setTimeout(runMove, 800);
-}
-
 // ---- Dashboards completos (feature) ----
 MK.dashboards = `
 <div id="dashMock" style="padding:20px 22px;height:340px;overflow:hidden;">
@@ -517,15 +332,12 @@ function animateDashboards() {
 function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
-  set("featAutomation", MK.automation);
-  animateAutomation();
-  // O slot #featWhatsapp saiu daqui: quem o preenche agora é a ilha React em
-  // src/paineis/, montada por build/paineis.js.
+  // #featWhatsapp, #featAutomation e #featPipelines saíram daqui: quem os
+  // preenche agora são as ilhas React em src/paineis/, montadas por
+  // build/paineis.js.
   set("featAgent", MK.agent);
   animateAgent();
   set("featIntegrations", MK.integrations);
-  set("featPipelines", MK.pipelines);
-  animatePipeline();
   set("featDashboards", MK.dashboards);
   animateDashboards();
   set("demoShowcase", MK.dashboard);

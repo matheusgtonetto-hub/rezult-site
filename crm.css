@@ -198,6 +198,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head { max-width: 900px; margin-bottom: 40px; }
 @media (min-width: 981px) {
   .section-head { margin-bottom: 50px; }
+  /* Só o título de Depoimentos, e só no desktop: os 900px da regra base valem
+     para as outras seções, e reduzir ali soltaria o título isolado num bloco
+     de texto bem mais estreito que o .h2 sozinho preencheria mal. */
+  #clientes .section-head { max-width: 700px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
@@ -908,6 +912,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.1;
+  /* Duas linhas fixas por <br>, e o corpo encolhe para a mais longa
+     ("A solução completa para seu negócio") caber sempre. Ela mede 17.39 em na
+     Geist SemiBold com o letter-spacing de -0.02em do .h2, e o divisor leva 2%
+     de folga em cima disso.
+
+     O desconto é 40px, e não os 64px das fórmulas de #agentes: o .wrap desta
+     seção tem `padding: 0px 20px` inline, que vence inclusive a regra de 560px
+     onde o .wrap cai para 22px. Por ser constante, esta seção não precisa do
+     bloco de celular que #agentes precisa. */
+  font-size: min(36px, calc((100vw - 40px) / 17.74));
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -1070,16 +1084,49 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Grade de 3 colunas — usada só em planos.html; na home os depoimentos
    viraram esteira (.dep-esteira). */
 .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.tcard { padding: 25px; border-radius: var(--r-lg); background: #FFFFFF; border: 2px solid var(--border-2); display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+/* ---------- Selo de avaliação do Google ---------- */
+/* Uma linha só, acima do título da seção de depoimentos. `inline-flex` e não
+   `flex`: assim a caixa encolhe até o conteúdo e o `center` do .section-head
+   centraliza a linha inteira, em vez de esticá-la de ponta a ponta. */
+.selo-google {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-bottom: 16px;
+  font-size: 15px; color: var(--text-subtle);
+  /* Em tela estreita a linha quebra em vez de estourar a largura. */
+  flex-wrap: wrap; justify-content: center;
+}
+/* O <img> vira bloco para não carregar a folga que o navegador reserva embaixo
+   de imagem inline, que aqui desalinharia o G do resto da linha. */
+.selo-google img { display: block; width: 20px; height: 20px; }
+/* "Excelente" e "5.0" no preto dos títulos: são a informação, o resto é apoio. */
+.selo-google strong { font-weight: 600; color: var(--ink); }
+
+.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--green-text); }
+/* As estrelas ficam um ponto acima do texto para o miolo delas alinhar com a
+   altura-x das letras, e não com a linha de base. */
+.selo-estrelas svg { width: 17px; height: 17px; display: block; }
+
+.selo-sep { color: var(--border-2); }
+.selo-qtd { color: var(--text-subtle); }
+
+@media (max-width: 560px) {
+  .selo-google { font-size: 14px; gap: 7px; }
+  .selo-estrelas svg { width: 15px; height: 15px; }
+}
+
+.tcard { padding: 25px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D1D5DB; display: flex; flex-direction: column; justify-content: center; gap: 20px; transition: border-color .2s, transform .2s, box-shadow .2s; }
 .tcard:hover { border-color: rgba(0,0,0,0.18); transform: translateY(-3px); }
-.tcard .quote { font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; flex: 1; color: #1a1a1a; }
+.tcard .quote { font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; color: #1a1a1a; }
 .tcard .quote .hl { color: #111; font-weight: 700; }
 .tcard .who { display: flex; align-items: center; gap: 12px; }
 .tcard .who .av { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; flex-shrink: 0; object-fit: cover; }
 .tcard .who .nm { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #111; }
 .tcard .who .rl { font-size: 12px; color: #666; }
-.tcard .stars { display: flex; gap: 1px; color: #F59E0B; }
-.tcard .stars svg { width: 23px; height: 23px; }
+/* margin-left auto empurra o ícone para a direita e o mantém centrado nas duas
+   linhas de nome e cargo, sem precisar de posicionamento absoluto. */
+.tcard .who-google { display: block; width: 18px; height: 18px; margin-left: auto; flex-shrink: 0; }
+.tcard .stars { display: flex; gap: 0; color: var(--green-text); }
+.tcard .stars svg { width: 19px; height: 19px; margin-right: -2px; }
 
 /* ---------- Pricing ---------- */
 .price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 184, 115, 0.20); margin: 0 auto 56px; }
@@ -1876,7 +1923,7 @@ select.demo-select:invalid { color: #374151; }
    com a de baixo. Os 290px cabem a citação mais longa (5 linhas a 15px) mais
    estrelas, autor e padding. Se um depoimento novo for maior que isso, este
    número precisa subir junto. */
-.dep-esteira .tcard { width: 350px; height: 265px; padding: 22px; gap: 16px; flex-shrink: 0; }
+.dep-esteira .tcard { width: 370px; height: 220px; padding: 22px; gap: 16px; flex-shrink: 0; }
 /* Dentro da esteira o card não sobe no hover. O translateY de 3px tira a borda
    de baixo do card de debaixo do cursor: o hover cai, o card volta, o hover
    volta, e com transition no transform isso vira oscilação. Na grade de
@@ -1888,7 +1935,784 @@ select.demo-select:invalid { color: #374151; }
    que deixava os depoimentos estáticos em máquinas com "Reduzir movimento"
    ligado no macOS. */
 @media (max-width: 560px) {
-  .dep-esteira .tcard { width: 300px; height: 290px; }
+  .dep-esteira .tcard { width: 320px; height: 235px; }
   .dep-linha { gap: 14px; }
   .dep-esteira { gap: 14px; }
+}
+
+/* ---------- Painel "WhatsApp Oficial" (ilha React) ---------- */
+/* Réplica da coluna de conversa do Multiatendimento. Os valores vieram de
+   rezult-crm/src/pages/MultiatendimentoPage.tsx, para quem virar cliente
+   encontrar a mesma tela que viu aqui. Três desvios conscientes do original,
+   todos por causa da largura: o card ocupa metade de uma .feature-row, não a
+   tela inteira do app.
+     1. Bolha em 13px e não 14px.
+     2. maxWidth de 78% e não 65%: com o avatar comendo 36px, 65% deixava o
+        texto numa fita estreita de duas palavras por linha.
+     3. Padding simétrico no lugar de "10px 30px 10px 14px": os 30px da direita
+        no CRM reservam espaço para o botão de ação no hover, que aqui não
+        existe. */
+/* Fora do fluxo, preenchendo o .feature-visual (que já é position: relative).
+   Duas coisas de uma vez:
+
+   1. Cobre a metade inteira. O .feature-visual é uma ilha escura (redefine
+      --surface para --dark-surface lá em cima), então todo pixel descoberto
+      apareceria como um bloco preto.
+   2. Impede o card de crescer. Com o painel no fluxo, a altura da linha do
+      grid passa a ser decidida pelo conteúdo do item mais alto, e cada
+      mensagem nova empurrava o card para baixo. `overflow: hidden` não resolve
+      isso: a altura intrínseca continua contando na hora de medir a linha.
+      Fora do fluxo, a linha é medida só pela coluna de texto, e as mensagens
+      antigas somem por cima sem mexer em nada. */
+.painel-wpp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #FAFAFA;
+  font-family: var(--sans);
+  /* Divisória entre o painel e a coluna de texto. Mesma #E5E5E5 da borda do
+     cabeçalho logo abaixo: as duas se encontram num canto, e um segundo tom ali
+     apareceria como emenda malfeita. O box-sizing global é border-box, então o
+     1px sai de dentro e não estoura o inset. */
+  border-left: 1px solid #E5E5E5;
+}
+
+/* Nas linhas invertidas o visual fica à ESQUERDA e o texto à direita, então a
+   divisória troca de lado. Esta linha (WhatsApp Oficial) não é flip hoje, mas
+   duas outras da página são: sem esta regra, flipar a linha jogaria a borda na
+   margem externa do card, onde ela não divide nada. */
+.feature-row.flip .painel-wpp {
+  border-left: none;
+  border-right: 1px solid #E5E5E5;
+}
+
+/* Classes postas pelo React no slot em que ele montou. No celular a
+   .feature-row vira coluna única e o .feature-visual perde o irmão que lhe
+   dava altura; com o painel fora do fluxo ele colapsaria para zero. A regra
+   está numa classe, e não no #featWhatsapp, para o painel poder mudar de slot
+   sem a altura do celular ficar para trás em silêncio. */
+.tem-painel-wpp,
+.tem-painel-automacao,
+.tem-painel-pipeline { position: relative; }
+
+/* Cabeçalho: branco sobre o #FAFAFA das mensagens, como no app. */
+.pw-topo {
+  flex-shrink: 0;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.pw-avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* O avatar do agente, com o logo da marca. Círculo BRANCO e não verde: o logo é
+   preto com o corte verde, e sobre verde ele empastaria. Branco puro sobre o
+   #FAFAFA do chat quase não se distingue, então a borda é o que desenha o
+   círculo -- a mesma #E5E5E5 do cabeçalho, para não inventar um tom novo.
+   O logo ocupa 72%, deixando a folga que um avatar de iniciais teria. */
+.pw-avatar-agente {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  overflow: hidden;
+}
+.pw-avatar-agente img { width: 72%; height: 72%; object-fit: contain; }
+
+.pw-topo-txt { flex: 1; min-width: 0; }
+.pw-topo-nome {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: -0.01em;
+}
+
+/* A pill da linha conectada. É ela que honra o "Oficial" do título do card:
+   quem usa API não oficial não tem linha nomeada para mostrar. */
+.pw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 3px 8px 3px 6px;
+  background: #E1F5EE;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #128A68;
+  letter-spacing: -0.01em;
+}
+.pw-ico-wpp { flex-shrink: 0; }
+
+.pw-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: -0.01em;
+}
+.pw-status-ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #128A68;
+  animation: pw-pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes pw-pulso {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .4; transform: scale(.8); }
+}
+
+/* Coluna ancorada embaixo. Quando a conversa passa da altura do card, as
+   mensagens antigas sobem e o overflow as corta, que é o comportamento de um
+   chat de verdade. Sem medir altura e sem remover nó na mão, ao contrário do
+   animateWpp que existia aqui antes. */
+.pw-msgs {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+  background: #FAFAFA;
+}
+
+.pw-linha {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  /* `backwards` segura o estado inicial no frame em que o React insere a
+     linha: sem ele a mensagem pisca no lugar final antes de a animação rodar. */
+  animation: pw-entra .28s ease-out backwards;
+}
+.pw-linha-agente { justify-content: flex-end; }
+
+@keyframes pw-entra {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pw-bloco { max-width: 78%; min-width: 0; }
+
+.pw-quem {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+.pw-linha-agente .pw-quem { text-align: right; }
+.pw-hora { color: #AAAAAA; font-weight: 400; }
+
+.pw-bolha {
+  padding: 9px 12px;
+  border-radius: 4px 16px 16px 16px;
+  background: #FFFFFF;
+  color: #111111;
+  border: 1px solid #EEEEEE;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.pw-bolha-agente {
+  border-radius: 16px 4px 16px 16px;
+  background: #128A68;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: none;
+}
+
+.pw-digitando { display: flex; align-items: center; gap: 4px; padding: 11px 14px; }
+/* Cinza por padrão, que é a bolha branca da lead; branco só dentro da bolha
+   verde da agente. Ao contrário, os pontinhos da lead seriam brancos sobre
+   branco e ela pareceria não estar digitando nada. */
+.pw-ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  animation: pw-ponto 1.2s infinite;
+}
+.pw-bolha-agente .pw-ponto { background: rgba(255, 255, 255, 0.75); }
+.pw-ponto:nth-child(2) { animation-delay: .2s; }
+.pw-ponto:nth-child(3) { animation-delay: .4s; }
+
+@keyframes pw-ponto {
+  0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* A .feature-row vira coluna única aqui (não em 560px). O painel deixa de estar
+   AO LADO do texto e passa a estar ABAIXO dele, então a divisória vira borda de
+   topo: uma borda lateral ali correria rente à margem do card sem separar nada. */
+@media (max-width: 980px) {
+  .painel-wpp,
+  .feature-row.flip .painel-wpp {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #E5E5E5;
+  }
+}
+
+@media (max-width: 560px) {
+  /* A altura vai no slot, não no painel: o painel está fora do fluxo e não
+     tem de onde herdar altura quando a linha vira coluna única. */
+  .tem-painel-wpp { height: 380px; }
+  .tem-painel-automacao { height: 300px; }
+  .tem-painel-pipeline { height: 330px; }
+  .pw-bolha { font-size: 12.5px; }
+  .pw-bloco { max-width: 82%; }
+}
+
+/* Menos movimento: o React já entrega a conversa inteira parada; aqui somem o
+   pulso do status, os pontinhos e a entrada das linhas. */
+@media (prefers-reduced-motion: reduce) {
+  .pw-status-ponto, .pw-ponto, .pw-linha { animation: none; }
+}
+
+/* ---------- Painel "Automações Avançadas" (ilha React) ---------- */
+/* Réplica do canvas de automações. Valores de
+   rezult-crm/src/pages/AutomacoesPage.tsx: fundo pontilhado de 20px, nó branco
+   com borda #D1D5DB e raio 12, chip do gatilho em #F0FDF4/#86EFAC, chips de
+   ação em #FFF7ED/#FED7AA, operações de campos em #F0FDF4/#BBF7D0, porta de
+   saída #378ADD e linha ortogonal tracejada #CBD5E1.
+
+   Mesmas duas armadilhas do painel de WhatsApp, resolvidas do mesmo jeito: o
+   .feature-visual é ilha escura (todo pixel descoberto vira bloco preto) e um
+   filho no fluxo faria a altura da linha do grid crescer com o conteúdo. Daí o
+   position: absolute; inset: 0. */
+.painel-automacao {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  background: #FBFBFB;
+  background-image: radial-gradient(circle, #E8E8E8 1px, transparent 1px);
+  background-size: 20px 20px;
+  font-family: var(--sans);
+  border-left: 1px solid #E5E5E5;
+}
+.feature-row.flip .painel-automacao { border-left: none; border-right: 1px solid #E5E5E5; }
+
+/* O palco mede a largura disponível (é ele que o ResizeObserver observa) e
+   centra o fluxo encolhido. O padding lateral é o que impede o nó da ponta de
+   encostar na borda do card. */
+.pa-palco {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+/* A câmera recorta o enquadramento de dois nós; o fluxo, mais largo que ela,
+   desliza dentro para acompanhar a montagem. Sem o overflow aqui os nós que
+   ainda não entraram em cena vazariam pelas bordas do card. */
+.pa-camera {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+.pa-fluxo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0.05, 0.25, 1);
+}
+
+.pa-linhas { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+
+.pa-linha {
+  fill: none;
+  stroke: #CBD5E1;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 5 5;
+}
+
+/* O retângulo de corte que revela a linha. fill-box ancora o scaleX no canto
+   esquerdo do próprio retângulo, que coincide com o início do traço. */
+.pa-corte {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform .75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pa-corte-feito { transform: scaleX(1); }
+
+.pa-no {
+  position: absolute;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  /* Entra crescendo de 96%, o suficiente para ler como "apareceu agora" sem
+     virar um salto. `backwards` segura o estado inicial no frame em que o React
+     insere o nó. */
+  animation: pa-no-entra .38s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+@keyframes pa-no-entra {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pa-no-topo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 11px 8px;
+  border-bottom: 1px solid #E5E5E5;
+}
+.pa-no-ico { display: flex; width: 13px; height: 13px; flex-shrink: 0; }
+.pa-no-ico svg { width: 100%; height: 100%; }
+.pa-no-titulo {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pa-no-corpo { padding: 9px 11px 10px; }
+
+.pa-chip {
+  border-radius: 7px;
+  padding: 6px 8px;
+  animation: pa-chip-cai .3s ease-out backwards;
+}
+/* Cai de cima para dentro do nó, que é a direção de quem soltou o bloco ali. */
+@keyframes pa-chip-cai {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pa-chip-gatilho { background: #F0FDF4; border: 1px solid #86EFAC; }
+.pa-chip-titulo { font-size: 10.5px; font-weight: 600; color: #15803D; line-height: 1.25; }
+.pa-chip-desc { font-size: 9.5px; color: #4ADE80; margin-top: 2px; line-height: 1.25; }
+
+.pa-chip-campos { background: #F0FDF4; border: 1px solid #BBF7D0; }
+.pa-chip-acoes  { background: #FFF7ED; border: 1px solid #FED7AA; }
+.pa-chip-campos, .pa-chip-acoes { display: flex; align-items: center; gap: 6px; }
+
+.pa-chip-ico { display: flex; width: 11px; height: 11px; flex-shrink: 0; }
+.pa-chip-ico svg { width: 100%; height: 100%; }
+.pa-chip-txt {
+  font-size: 10.5px;
+  color: #374151;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Reserva a altura do chip que ainda vai entrar. Sem isso o nó cresceria no
+   instante em que o chip cai e sacudiria a linha já desenhada. */
+.pa-chip-vazio { height: 25px; }
+.pa-chip-vazio-alto { height: 41px; }
+
+.pa-porta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 8px;
+  padding-right: 6px;
+  font-size: 9.5px;
+  color: #6B7280;
+  line-height: 1.2;
+}
+/* Nos nós que não são o gatilho a bolinha aparece sozinha, sem rótulo: a linha
+   fica só com ela, encostada na direita. */
+.pa-porta-nua { justify-content: flex-end; min-height: 12px; }
+
+.pa-porta-ponto {
+  position: absolute;
+  right: -17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #378ADD;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.25);
+}
+
+/* A tela de seleção que abre quando a linha é solta. Versão compacta do diálogo
+   do CRM (620x480): barra lateral de categorias à esquerda, cards de opção à
+   direita. Fica acima dos nós no empilhamento, como um diálogo de verdade. */
+.pa-picker {
+  position: absolute;
+  z-index: 6;
+  width: 268px;
+  display: flex;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+  animation: pa-picker-abre .22s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+@keyframes pa-picker-abre {
+  from { opacity: 0; transform: scale(.94) translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pa-picker-lado {
+  width: 84px;
+  flex-shrink: 0;
+  border-right: 1px solid #E5E5E5;
+  padding: 9px 0;
+}
+.pa-picker-titulo {
+  padding: 0 9px 8px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #111111;
+  line-height: 1.2;
+}
+.pa-picker-cat {
+  padding: 5px 9px;
+  font-size: 9px;
+  color: #374151;
+  border-left: 2px solid transparent;
+  line-height: 1.2;
+}
+/* Categoria selecionada, no mesmo verde do CRM. */
+.pa-picker-cat-ativa {
+  background: #F0FDF4;
+  border-left-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.pa-picker-lista { flex: 1; min-width: 0; padding: 9px; display: flex; flex-direction: column; gap: 5px; }
+
+.pa-picker-op {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 7px 8px;
+  border: 1px solid #E5E5E5;
+  border-radius: 7px;
+  background: #FFFFFF;
+  transition: border-color .12s, background .12s;
+}
+/* Opção sob o ponteiro: é o estado de hover do CRM. */
+.pa-picker-op-acesa { border-color: var(--primary); background: #F0FDF4; }
+
+.pa-picker-seta { display: flex; width: 10px; height: 10px; flex-shrink: 0; margin-top: 1px; color: var(--primary); }
+.pa-picker-seta svg { width: 100%; height: 100%; }
+.pa-picker-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.pa-picker-op-titulo { font-size: 9.5px; font-weight: 600; color: #111111; line-height: 1.25; }
+.pa-picker-op-desc { font-size: 8.5px; color: #6B7280; line-height: 1.3; }
+
+/* O ponteiro que monta a automação. Dentro do .pa-fluxo, então encolhe junto
+   com o canvas: ele é parte do desenho, e não um cursor do sistema por cima.
+   A duração da transição vem inline, da mesma constante que temporiza a etapa
+   de arrasto, para a ponta da linha e o ponteiro chegarem juntos. */
+.pa-cursor {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  z-index: 5;
+  pointer-events: none;
+  transition-property: left, top;
+  transition-timing-function: cubic-bezier(0.4, 0.05, 0.25, 1);
+  animation: pa-cursor-entra .25s ease-out backwards;
+}
+
+@keyframes pa-cursor-entra {
+  from { opacity: 0; transform: translate(6px, -6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pa-cursor-seta { width: 100%; height: 100%; display: block; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)); }
+/* Encolhe no instante do clique, como um ponteiro real afunda ao pressionar. */
+.pa-cursor-pressionado .pa-cursor-seta { transform: scale(.86); transform-origin: top left; }
+
+/* Anel do clique, saindo da ponta da seta. */
+.pa-cursor-anel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  border: 2px solid #378ADD;
+  opacity: 0;
+}
+.pa-cursor-pressionado .pa-cursor-anel { animation: pa-clique .5s ease-out; }
+
+@keyframes pa-clique {
+  from { opacity: .7; transform: scale(.25); }
+  to   { opacity: 0;  transform: scale(1.25); }
+}
+
+@media (max-width: 980px) {
+  .painel-automacao,
+  .feature-row.flip .painel-automacao {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #E5E5E5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pa-no, .pa-chip, .pa-cursor, .pa-cursor-anel, .pa-picker { animation: none; }
+  .pa-corte, .pa-cursor, .pa-fluxo { transition: none; }
+}
+
+/* ---------- Painel "CRM Automatizado" (ilha React) ---------- */
+/* Réplica do kanban do Pipeline. Valores de
+   rezult-crm/src/pages/PipelinePage.tsx: card branco com borda e raio 12,
+   avatar de 32px na cor da coluna, nome em 14px/500, empresa em 12px cinza,
+   número do negócio em 10px mono, selo do agente #6D28D9 sobre #EDE9FE e tags
+   em pílula branca sobre a cor cadastrada.
+
+   Mesmas duas armadilhas dos outros painéis, resolvidas do mesmo jeito: o
+   .feature-visual é ilha escura (todo pixel descoberto vira bloco preto) e um
+   filho no fluxo faria a altura da linha do grid crescer com o conteúdo. */
+.painel-pipeline {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  background: #FBFBFB;
+  font-family: var(--sans);
+  border-left: 1px solid #E5E5E5;
+}
+.feature-row.flip .painel-pipeline { border-left: none; border-right: 1px solid #E5E5E5; }
+
+/* O padding é o respiro que impede as colunas de encostarem nas bordas do card.
+   Como o palco é quem o ResizeObserver mede, o clientWidth/clientHeight que
+   chega ao cálculo da escala já vem descontado dele.
+
+   align-items: flex-start, e não center: com o quadro centrado na vertical, um
+   padding-top de 5px não teria efeito nenhum num slot alto -- a sobra se
+   dividiria igualmente em cima e embaixo. Ancorado no topo, os 5px valem. */
+.pp-palco {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5px 16px 16px;
+}
+
+/* overflow: hidden recorta o que passa dos três lugares de cada coluna. Sem
+   ele, os cards da fila que ainda não couberam apareceriam derramados sobre o
+   rodapé do card da página. A máscara desfaz a linha de corte reta no pé,
+   sinalizando que há mais coisa embaixo em vez de parecer conteúdo cortado. */
+.pp-quadro {
+  position: relative;
+  flex-shrink: 0;
+  transform-origin: top center;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent 100%);
+}
+
+.pp-coluna {
+  position: absolute;
+  top: 0;
+  background: #FFFFFF;
+  border: 1px solid #ECECEE;
+  border-radius: 10px;
+  overflow: hidden;
+}
+/* Faixa colorida no topo da coluna, como no funil real. */
+.pp-coluna-faixa { position: absolute; left: 0; right: 0; top: 0; height: 4px; }
+
+.pp-coluna-topo { padding: 9px 9px 0; display: flex; flex-direction: column; gap: 2px; }
+.pp-coluna-linha { display: flex; align-items: center; gap: 6px; }
+.pp-coluna-ponto { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.pp-coluna-nome {
+  flex: 1;
+  min-width: 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pp-coluna-mais { display: flex; width: 12px; height: 12px; flex-shrink: 0; color: #A1A1AA; }
+.pp-coluna-mais svg { width: 100%; height: 100%; }
+.pp-coluna-resumo { font-size: 9px; color: #71717A; font-variant-numeric: tabular-nums; }
+
+/* Posição absoluta, e não empilhado dentro da coluna: mudar de etapa vira um par
+   de coordenadas novo, que o CSS anima. Dentro da coluna seria remover de um pai
+   e inserir em outro, e aí o card sumiria de um lado e apareceria no outro sem
+   trajeto nenhum. */
+.pp-card {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 8px 9px 7px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E7;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: left .62s cubic-bezier(0.4, 0.05, 0.25, 1),
+              top .62s cubic-bezier(0.4, 0.05, 0.25, 1);
+}
+
+.pp-card-topo { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.pp-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 700;
+  /* Acompanha a cor da coluna, então muda no meio do trajeto: é o sinal mais
+     barato de que o card mudou de etapa. */
+  transition: background .62s ease;
+}
+.pp-card-nome {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #18181B;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pp-card-num { font-size: 8.5px; color: #A1A1AA; flex-shrink: 0; }
+
+.pp-resp { display: flex; align-items: center; gap: 5px; margin-top: 6px; min-width: 0; }
+.pp-resp-foto {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #E4E4E7;
+  color: #71717A;
+}
+.pp-resp-foto svg { width: 9px; height: 9px; }
+.pp-resp-foto img { width: 78%; height: 78%; object-fit: contain; }
+/* Quando quem responde é o agente, o círculo fica branco com borda, que é como
+   o logo da marca foi desenhado para ser visto. */
+.pp-resp-agente .pp-resp-foto { background: #FFFFFF; border: 1px solid #E5E5E5; }
+.pp-resp-nome {
+  font-size: 9px;
+  color: #71717A;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pp-resp-agente .pp-resp-nome { color: #128A68; font-weight: 500; }
+
+.pp-valor {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #128A68;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-data { display: flex; align-items: center; gap: 4px; margin-top: 3px; font-size: 8.5px; color: #71717A; }
+.pp-data-ico { display: flex; width: 9px; height: 9px; flex-shrink: 0; }
+.pp-data-ico svg { width: 100%; height: 100%; }
+
+/* Botão do WhatsApp, encostado na direita como no card real. O margin-top auto
+   empurra ele e o rodapé para baixo, então cards com mais ou menos tags mantêm o
+   rodapé alinhado entre si. */
+/* Sem fundo nem raio: o círculo verde é desenhado dentro do próprio SVG, como
+   no WhatsAppIcon.tsx do CRM. Este elemento só posiciona. */
+.pp-wpp { align-self: flex-end; margin-top: auto; display: flex; }
+.pp-wpp svg { width: 17px; height: 17px; display: block; }
+
+/* Nada dentro do card encolhe. Sem isto, quando a soma das linhas passava da
+   altura do card por um fio, o flex comprimia todas elas -- e o botão do
+   WhatsApp, que é o único quadrado, virava um oval achatado. */
+.pp-card > * { flex-shrink: 0; }
+
+.pp-rodape {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid #F1F1F3;
+}
+/* nowrap: o card tem altura fixa, então uma tag a mais NÃO pode empurrar a
+   linha para baixo e vazar pelo pé. Se um dia entrar uma terceira, ela some
+   pela direita em vez de quebrar o card -- falha menor e mais fácil de notar. */
+.pp-tags { flex: 1; min-width: 0; display: flex; flex-wrap: nowrap; gap: 3px; overflow: hidden; }
+.pp-tag {
+  padding: 1px 5px;
+  border-radius: 100px;
+  color: #FFFFFF;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  animation: pp-entra .34s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.pp-etiqueta { display: flex; width: 11px; height: 11px; flex-shrink: 0; color: #A1A1AA; }
+.pp-etiqueta svg { width: 100%; height: 100%; }
+
+@keyframes pp-entra {
+  from { opacity: 0; transform: scale(.8); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 980px) {
+  .painel-pipeline,
+  .feature-row.flip .painel-pipeline {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #E5E5E5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-tag { animation: none; }
+  .pp-card, .pp-avatar { transition: none; }
 }
