@@ -607,7 +607,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
    Os 64px descontam o padding do .wrap (32px de cada lado). No celular o .wrap
    cai para 22px, então sobra folga extra ali, o que é seguro. */
-.hero h1 { font-size: min(44px, calc((100vw - 64px) / 12.05)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
+.hero h1 { font-size: min(44px, calc((100vw - 64px) / 13.82)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1741,7 +1741,7 @@ select.demo-select:invalid { color: #374151; }
      3%. É o que significa "o maior possível" -- em troca, a margem de erro da
      estimativa fica menor, e se a primeira linha quebrar em algum aparelho é
      este 12.3 que sobe. */
-  .hero h1 { font-size: min(44px, calc((100vw - 44px) / 12.05)); line-height: 1.07; }
+  .hero h1 { font-size: min(44px, calc((100vw - 44px) / 13.82)); line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
@@ -2018,11 +2018,11 @@ select.demo-select:invalid { color: #374151; }
 #agentes .h2 { color: var(--text); }
 #agentes .lede { color: var(--text-muted); }
 /* Três linhas fixas no título e duas na lede, por <br>. O corpo encolhe para a
-   linha mais longa de cada um caber: "mais vendedores. Precisa dar" no título
-   e "Os agentes cuidam de todas as etapas" na lede, 13.96 em e 17.93 em
+   linha mais longa de cada um caber: "Você não precisa contratar" no título
+   e "Os agentes cuidam de todas as etapas" na lede, 12.67 em e 17.57 em
    medidos na Geist. Os 64px descontam o padding lateral do .wrap, 32 de cada
    lado. */
-#agentes .h2 { font-size: min(36px, calc((100vw - 64px) / 13.96)); }
+#agentes .h2 { font-size: min(36px, calc((100vw - 64px) / 12.93)); }
 #agentes .lede { font-size: min(18px, calc((100vw - 64px) / 17.93)); }
 
 /* Mesmo acerto que o h1 e o subtítulo da hero receberam, agora nos títulos e
@@ -2040,7 +2040,7 @@ select.demo-select:invalid { color: #374151; }
    arquivo; posto lá em cima, junto das outras regras de 560px, ele perderia
    para a linha 2021 e não faria nada. */
 @media (max-width: 560px) {
-  #agentes .h2    { font-size: min(36px, calc((100vw - 44px) / 13.96)); }
+  #agentes .h2    { font-size: min(36px, calc((100vw - 44px) / 12.93)); }
   #agentes .lede  { font-size: min(18px, calc((100vw - 44px) / 17.93)); }
 }
 .ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
