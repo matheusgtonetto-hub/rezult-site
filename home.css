@@ -22,11 +22,13 @@
      pessoa NÃO vai pagar. */
   --red: #EF4444;
   --ink: #07100D;
-  /* Dourado das estrelas de avaliação, nos cards de depoimento e no selo do
-     Google. É token e não hex repetido porque os dois conjuntos aparecem na
-     mesma tela: soltos, sairiam de sincronia na primeira troca. Não usa o
-     --primary: verde é a cor da marca, dourado é a convenção universal de
-     nota, e o leitor reconhece a segunda antes de ler qualquer número. */
+  /* Dourado das estrelas de avaliação dentro dos cards de depoimento, e só
+     delas. Ali o dourado é a convenção universal de nota, reconhecida antes
+     de o leitor chegar a qualquer número.
+
+     As estrelas do selo acima do título "Nunca usou IA no seu negócio?"
+     seguem em --green-text de propósito: aquilo é um selo da marca e não a
+     nota de um cliente, então acompanha o verde e não a convenção. */
   --dourado: #F5A623;
   --green-cta: var(--green-text);
   --green-cta-hover: #009A60;
@@ -1104,7 +1106,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* "Excelente" e "5.0" no preto dos títulos: são a informação, o resto é apoio. */
 .selo-google strong { font-weight: 600; color: var(--ink); }
 
-.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--dourado); }
+.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--green-text); }
 /* As estrelas ficam um ponto acima do texto para o miolo delas alinhar com a
    altura-x das letras, e não com a linha de base. */
 .selo-estrelas svg { width: 17px; height: 17px; display: block; }
@@ -1570,6 +1572,15 @@ select.demo-select:invalid { color: #374151; }
   .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 80%; margin-left: auto; margin-right: auto; }
   .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
   .hero-actions .btn-secondary { font-size: 15px; }
+  /* A regra logo acima trava flex-wrap em nowrap e a faixa em 80% da largura,
+     e centraliza -- foi escrita quando a hero tinha um botão só. Com dois, e
+     com ambos em white-space: nowrap dentro de uma .hero que tem
+     overflow: hidden, o "Diagnóstico Comercial" sairia cortado pela borda em
+     vez de rolar. Devolvendo a largura inteira os dois cabem lado a lado em
+     tela de 375px, e o wrap cobre as telas mais estreitas que isso.
+     O alinhamento à esquerda acompanha o h1 e o subtítulo, que nesta hero
+     (.vb) não são centralizados. */
+  .hero .hero-actions { flex-wrap: wrap; justify-content: flex-start; width: 100%; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
@@ -1719,6 +1730,52 @@ select.demo-select:invalid { color: #374151; }
   .btn-pontos-point { animation: none; }
   .btn-pontos:hover .btn-pontos-icon path { animation: none; }
 }
+
+/* ═══ Link com seta: o segundo CTA do hero ════════════════════════════════
+   Ao lado do .btn-pontos, mas sem nenhuma moldura: só o texto em verde e a
+   seta. Dois botões lado a lado disputam o clique e nenhum vence; sem fundo
+   nem borda este não compete com o verde cheio, e a hierarquia se resolve
+   sozinha -- o "Teste Grátis" continua sendo a ação, este é a alternativa.
+
+   O min-height de 44px não pinta nada, é área de toque: um texto de 15px tem
+   ~23px de altura, metade do alvo mínimo que o dedo precisa. Sem ele o link
+   seria confortável no mouse e irritante no celular.
+
+   Esse min-height também é o que alinha os dois: a .hero-actions centraliza
+   pelo eixo transversal, e sem altura própria o link seria centrado pela
+   caixa do texto, não pela do botão de 44px ao lado. */
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: #047857;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: color .2s ease;
+}
+/* Parado: verde fechado. Não é o --green-text da marca (#00B873) porque
+   aquele, em texto de 15px sobre branco, dá 3,0:1 -- abaixo do mínimo de
+   4,5:1 e visivelmente lavado num link sem fundo atrás. Este #047857, que já
+   é o verde escuro do degradê da página, fica em 5,5:1.
+
+   Sob o dedo ou o cursor: preto. A troca verde → preto é mais forte que
+   qualquer clareamento de verde, e não depende de perceber matiz -- funciona
+   também para quem não separa bem verde de verde. */
+.link-seta:hover,
+.link-seta:focus-visible,
+.link-seta:active { color: var(--text); }
+/* A seta desliza no hover como a do botão verde ao lado, para os dois
+   responderem do mesmo jeito. currentColor faz ela escurecer junto com o
+   texto sem precisar de uma segunda regra. */
+.link-seta-icon {
+  width: 20px; height: 20px;
+  stroke: currentColor; fill: none;
+  transition: transform 0.3s ease;
+}
+.link-seta:hover .link-seta-icon { transform: translateX(2px); }
 
 /* O mesmo botão dos pontinhos na navbar, na escala dela: a barra tem 70px de
    altura útil, e os 44px de min-height mais o padding de 23px do hero deixariam
@@ -1981,6 +2038,28 @@ select.demo-select:invalid { color: #374151; }
 /* 20px em vez dos 16px do .lede base, e escopado à seção: a regra global serve
    as outras quatro ledes da página, que continuam em 16 e 18px. */
 .meta-texto .lede { font-size: 20px; }
+
+/* O CTA da seção, no azul da Meta e não no verde do site.
+
+   É o único botão da página que sai da cor da marca, e sai de propósito: a
+   seção inteira está emprestando credibilidade da Meta -- fundo azul-claro,
+   selo, "parceiros oficiais" em azul -- e um botão verde no meio disso
+   quebraria a conversa no exato ponto em que ela pede a ação.
+
+   #0668E1 é o mesmo hex do .meta-azul do título, então os dois andam juntos.
+   Texto branco fecha em 4,8:1 sobre ele.
+
+   Herda geometria do .btn (padding, raio, transição); aqui vão só cor, peso e
+   a altura de toque de 44px, que o .btn base não garante com seus 8px de
+   padding vertical. */
+.btn-meta {
+  background: #0668E1;
+  color: #fff;
+  font-weight: 600;
+  min-height: 44px;
+  margin-top: 28px;
+}
+.btn-meta:hover { background: #0553B8; transform: translateY(-1px); }
 
 /* O selo é o lockup oficial da Meta e é a única superfície da página onde o
    azul da marca deles aparece. Não recolorir nem recortar: um selo de parceria

@@ -22,11 +22,13 @@
      pessoa NÃO vai pagar. */
   --red: #EF4444;
   --ink: #07100D;
-  /* Dourado das estrelas de avaliação, nos cards de depoimento e no selo do
-     Google. É token e não hex repetido porque os dois conjuntos aparecem na
-     mesma tela: soltos, sairiam de sincronia na primeira troca. Não usa o
-     --primary: verde é a cor da marca, dourado é a convenção universal de
-     nota, e o leitor reconhece a segunda antes de ler qualquer número. */
+  /* Dourado das estrelas de avaliação dentro dos cards de depoimento, e só
+     delas. Ali o dourado é a convenção universal de nota, reconhecida antes
+     de o leitor chegar a qualquer número.
+
+     As estrelas do selo acima do título "Nunca usou IA no seu negócio?"
+     seguem em --green-text de propósito: aquilo é um selo da marca e não a
+     nota de um cliente, então acompanha o verde e não a convenção. */
   --dourado: #F5A623;
   /* Verde escuro do bloco de texto da hero: o h1 e a subheadline saem nele.
      Nasceu escrito à mão no h1 e virou token quando a subheadline passou a usar
@@ -2163,7 +2165,7 @@ select.demo-select:invalid { color: #374151; }
 /* "Excelente" e "5.0" no preto dos títulos: são a informação, o resto é apoio. */
 .selo-google strong { font-weight: 600; color: var(--ink); }
 
-.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--dourado); }
+.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--green-text); }
 /* As estrelas ficam um ponto acima do texto para o miolo delas alinhar com a
    altura-x das letras, e não com a linha de base. */
 .selo-estrelas svg { width: 17px; height: 17px; display: block; }
