@@ -22,6 +22,12 @@
      pessoa NÃO vai pagar. */
   --red: #EF4444;
   --ink: #07100D;
+  /* Dourado das estrelas de avaliação, nos cards de depoimento e no selo do
+     Google. É token e não hex repetido porque os dois conjuntos aparecem na
+     mesma tela: soltos, sairiam de sincronia na primeira troca. Não usa o
+     --primary: verde é a cor da marca, dourado é a convenção universal de
+     nota, e o leitor reconhece a segunda antes de ler qualquer número. */
+  --dourado: #F5A623;
   --green-cta: var(--green-text);
   --green-cta-hover: #009A60;
   --glow-soft: rgba(0, 184, 115, 0.18);
@@ -213,7 +219,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
 h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: var(--ink); }
-.h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
+.h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.2; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
@@ -415,7 +421,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
 /* Sem fundo próprio: herda o --bg do body, que é o #FBFBFB do site inteiro. */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 50px); padding-bottom: 100px; overflow: hidden; }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 70px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -593,7 +599,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(38px, 4.2vw, 50px); letter-spacing: normal; line-height: 1.05; font-weight: 700; }
+.hero h1 { font-size: clamp(38px, 4.2vw, 44px); letter-spacing: normal; line-height: 1.05; font-weight: 700; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -675,7 +681,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    scrollLeft, a esteira anda sozinha e o arrasto é o mesmo scroll — as duas
    coisas convivem na mesma propriedade. Ver main.js, bloco "Esteira de cases". */
 .hero-cases {
-  margin-top: 100px;
+  margin-top: 130px;
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
@@ -1098,7 +1104,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* "Excelente" e "5.0" no preto dos títulos: são a informação, o resto é apoio. */
 .selo-google strong { font-weight: 600; color: var(--ink); }
 
-.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--green-text); }
+.selo-estrelas { display: inline-flex; align-items: center; gap: 2px; color: var(--dourado); }
 /* As estrelas ficam um ponto acima do texto para o miolo delas alinhar com a
    altura-x das letras, e não com a linha de base. */
 .selo-estrelas svg { width: 17px; height: 17px; display: block; }
@@ -1122,7 +1128,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* margin-left auto empurra o ícone para a direita e o mantém centrado nas duas
    linhas de nome e cargo, sem precisar de posicionamento absoluto. */
 .tcard .who-google { display: block; width: 18px; height: 18px; margin-left: auto; flex-shrink: 0; }
-.tcard .stars { display: flex; gap: 0; color: var(--green-text); }
+.tcard .stars { display: flex; gap: 0; color: var(--dourado); }
 .tcard .stars svg { width: 19px; height: 19px; margin-right: -2px; }
 
 /* ---------- Pricing ---------- */
@@ -1508,13 +1514,13 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  .hero h1, .page-hero h1 { font-size: 38px; letter-spacing: -0.03em; line-height: 1.07; }
+  .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
   .hero h1 { letter-spacing: normal; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
-  .hero-cases { margin-top: 70px; }
+  .hero-cases { margin-top: 100px; }
   .case-card { width: 255px; height: 370px; margin-right: 14px; border-radius: 16px; }
   .case-info { padding: 18px; }
   .case-empresa { font-size: 22px; }
@@ -1952,6 +1958,25 @@ select.demo-select:invalid { color: #374151; }
 /* Alinhado à esquerda, ao contrário das outras seções: aqui o texto divide a
    linha com a arte, e centralizado ele perderia a borda comum com ela. */
 .meta-texto { max-width: 460px; }
+
+/* O azul da Meta, #0668E1, e não o --blue do site (#3B82F6, que aliás não é
+   usado em lugar nenhum). Numa seção sobre a parceria, com o selo deles logo
+   acima, o destaque tem que ser a cor da marca a que ele se refere.
+
+   O tom mais fechado também resolve legibilidade: sobre o #F1F6FD do fundo, o
+   #3B82F6 dá 3.4:1 e este dá 4.7:1. Os dois passam no critério de texto
+   grande, mas a margem aqui é confortável em vez de raspar o mínimo. */
+.meta-azul { color: #0668E1; }
+
+/* Sem line-height aqui: a seção usa o 1.2 do .h2 global. A regra chegou a ter
+   1.3 quando o global era 1.1 e o título de três linhas ficava colado; com o
+   global já em 1.2, repetir o valor só criaria mais um número para manter em
+   sincronia.
+
+   A margem de baixo continua sobrescrita: os 10px do padrão faziam o subtítulo
+   parecer a quarta linha do título em vez de um bloco separado. O .lede não tem
+   margem de topo, então este número é o vão inteiro. */
+.meta-texto .h2 { margin-bottom: 20px; }
 
 /* 20px em vez dos 16px do .lede base, e escopado à seção: a regra global serve
    as outras quatro ledes da página, que continuam em 16 e 18px. */

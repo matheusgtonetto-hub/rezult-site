@@ -315,7 +315,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
   const pontos = Array.from(document.querySelectorAll(".cases-ponto"));
 
   const CONJUNTOS = 3;    // precisa bater com o HTML gerado
-  const VELOCIDADE = 38;  // px por segundo
+  const VELOCIDADE = 43;  // px por segundo
   // Só depois do toque, para a inércia do dedo terminar. Sem esta folga o
   // avanço volta a escrever em scrollLeft no meio do deslize e mata o impulso.
   const INERCIA = 600;    // ms
