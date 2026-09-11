@@ -601,7 +601,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* letter-spacing: normal precisa estar escrito. Apagar a declaração não zera o
    tracking: o título cairia na regra global h1,h2,h3, que aperta -0.025em. */
-.hero h1 { font-size: clamp(38px, 4.2vw, 44px); letter-spacing: normal; line-height: 1.05; font-weight: 700; }
+.hero h1 { font-size: clamp(38px, 4.2vw, 42px); letter-spacing: normal; line-height: 1.2; font-weight: 700; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1516,7 +1516,26 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  .hero h1, .page-hero h1 { font-size: 35px; letter-spacing: -0.03em; line-height: 1.07; }
+  /* Tipo fluido: o h1 ocupa a largura toda em qualquer celular, nas três linhas
+     que os <br class="mobile-only-br"> fixam.
+
+       Nova geração de CRM com
+       WhatsApp, Automações
+       e Agentes de IA
+
+     O divisor 13.52 é medido, não estimado: a linha mais larga ("Nova geração
+     de CRM com") tem 13.252em no Geist Bold com letter-spacing zero, medida nas
+     larguras de avanço do TTF, mais 2% de folga. O 44px desconta o padding
+     lateral de 22px do .wrap nesta faixa. Assim o texto encosta nas margens sem
+     estourar, de 320px até 560px.
+
+     Teto de 38px porque é onde começa o clamp da faixa de 561-980px. Sem ele a
+     fórmula chegaria a 38.2px aos 560px e a fonte DIMINUIRIA ao cruzar para
+     561px. Com o teto, a passagem é contínua, e some de quebra o degrau que
+     existia aqui desde quando este valor era fixo.
+
+     Mexer no texto do h1 obriga a remedir: o divisor vale para ESTAS palavras. */
+  .hero h1, .page-hero h1 { font-size: min(38px, calc((100vw - 44px) / 13.52)); letter-spacing: -0.03em; line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
