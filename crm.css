@@ -70,12 +70,17 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Geist nos títulos, Inter no resto. A Poppins entrou em 2026-09-02 e foi revertida no
-     dia seguinte. A Geist Mono segue como voz dos rótulos, dos números e das
-     etiquetas em caixa alta. */
-  /* --sans é o texto corrido do site; --display é a fonte dos títulos.
-     Regra: título em Geist, todo o resto em Inter. */
-  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Geist em tudo. A Poppins entrou em 2026-09-02 e foi revertida no dia
+     seguinte; a Inter era o corpo do texto e saiu agora, para esta página ficar
+     igual ao index. A Geist Mono segue como voz dos rótulos, dos números e das
+     etiquetas em caixa alta.
+
+     --sans e --display continuam separados de propósito: os pontos de uso já
+     distinguem corpo de título, e um token só obrigaria a reescrever todos eles
+     no dia em que voltar a haver duas fontes. Enquanto forem iguais, as
+     exceções espalhadas pelo arquivo que trocam para var(--display) não mudam
+     nada -- estão marcadas e podem sair numa limpeza. */
+  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --display: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Geist Mono', ui-monospace, monospace;
 
@@ -241,6 +246,9 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height:
   color: transparent;
 }
 .lede { font-size: 16px; color: var(--text-muted); line-height: 1.4; letter-spacing: -0.01em; }
+/* 18px em vez dos 16px da regra acima, escopado à seção de agentes: a regra
+   global serve as outras ledes da página e não deve mudar junto. */
+#agentes .lede { font-size: 18px; }
 .text-grad { color: var(--green-text); }
 
 /* ---------- Buttons ---------- */
@@ -561,13 +569,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
    largo. Forçar caixa quadrada nele achataria o desenho. */
 .hero-badge-ico { width: 12px; height: 18px; color: var(--green-text); flex-shrink: 0; }
-/* Variante da home: raio no lugar da cápsula, texto em branco cheio e borda de
-   2px. Fica escopada porque as pills de planos, política e termo ainda usam a
-   cápsula .tag, e a borda grossa competiria com ela.
-
-   A pill não tem altura declarada, então borda e padding somam à altura do
-   conteúdo: os 2px de borda a deixam 2px mais alta que a versão de 1px. É o
-   esperado — os 8px de padding vertical são pedido anterior e ficam de pé. */
+/* Variante da home: raio no lugar da cápsula e fundo verde claro, sem contorno.
+   Fica escopada porque as pills de planos, política e termo usam a cápsula .tag
+   e continuam com a borda da regra base. */
 .hero-badge-ia {
   /* Verde bem claro e translúcido: é o --green-text a 10%, então acompanha a
      cor da marca numa troca futura, em vez de um hex claro fixo. Sendo rgba,
@@ -575,11 +579,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   background: rgba(0, 184, 115, 0.10);
   color: var(--ink);
   padding: 8px 14px;
-  border-width: 2px;
-  /* Mesmo verde do botão, cheio. A regra base usa #00B87340, que é o neon da
-     marca a 25% e some contra os 2px daqui. Usa o token, não o hex repetido,
-     para borda e botão andarem juntos numa troca futura. */
-  border-color: var(--green-text);
+  /* `border: 0`, e não `border-color: transparent`: a regra base declara
+     `1px solid`, e uma borda transparente continuaria ocupando 1px de cada lado,
+     deixando a pill 2px mais alta e mais larga do que o conteúdo pede. */
+  border: 0;
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
@@ -609,7 +612,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-.hero-sub { font-size: 24px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-size: 20px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
@@ -909,19 +912,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    A entrelinha fica em proporção, não em pixel fixo: estava em 52px, que dava
    a razão certa nos 40px do desktop mas não acompanhava a fonte, e no mobile
    o .h2 cai para 32px. */
+/* Sem font-size aqui: a fórmula de corpo fluido que existia neste bloco servia
+   para segurar as duas linhas fixas do <br>. Sem o <br> o título quebra sozinho
+   onde couber, e a fórmula só encolheria o texto à toa nas telas médias. Abaixo
+   de 560px ele passa a usar os 30px do .h2, como os títulos das outras seções. */
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.1;
-  /* Duas linhas fixas por <br>, e o corpo encolhe para a mais longa
-     ("A solução completa para seu negócio") caber sempre. Ela mede 17.39 em na
-     Geist SemiBold com o letter-spacing de -0.02em do .h2, e o divisor leva 2%
-     de folga em cima disso.
-
-     O desconto é 40px, e não os 64px das fórmulas de #agentes: o .wrap desta
-     seção tem `padding: 0px 20px` inline, que vence inclusive a regra de 560px
-     onde o .wrap cai para 22px. Por ser constante, esta seção não precisa do
-     bloco de celular que #agentes precisa. */
-  font-size: min(36px, calc((100vw - 40px) / 17.74));
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -1830,10 +1827,10 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Como funciona em 3 passos ---------- */
-/* Exceção ao padrão do site (título em Geist, resto em Inter): este subtítulo
-   vai em Geist por decisão de design. Escopado para os demais .lede seguirem
-   em Inter. */
-#como-funciona .lede { font-family: var(--display); }
+/* Mesma situação da .hero-sub: era exceção ao padrão antigo (título em Geist,
+   resto em Inter) e hoje não muda nada, porque as duas variáveis apontam para a
+   Geist. Mantida pelo mesmo motivo. */
+#como-funciona .lede { font-family: var(--display); font-size: 18px; }
 .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .passo { text-align: center; }
 /* A arte fica numa caixa de proporção fixa para as três alinharem, mesmo que os
@@ -1939,6 +1936,90 @@ select.demo-select:invalid { color: #374151; }
   .dep-linha { gap: 14px; }
   .dep-esteira { gap: 14px; }
 }
+
+/* ---------- Parceiro oficial da Meta ---------- */
+/* Duas colunas: o argumento à esquerda, as provas empilhadas à direita.
+   align-items: center e não start -- a coluna de texto é bem mais baixa que a
+   pilha de três cards, e alinhada no topo ela ficaria pendurada com um vão
+   grande embaixo. */
+.meta-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* Alinhado à esquerda, ao contrário das outras seções: aqui o texto divide a
+   linha com a arte, e centralizado ele perderia a borda comum com ela. */
+.meta-texto { max-width: 460px; }
+
+/* 20px em vez dos 16px do .lede base, e escopado à seção: a regra global serve
+   as outras quatro ledes da página, que continuam em 16 e 18px. */
+.meta-texto .lede { font-size: 20px; }
+
+/* O selo é o lockup oficial da Meta e é a única superfície da página onde o
+   azul da marca deles aparece. Não recolorir nem recortar: um selo de parceria
+   adulterado vale menos que selo nenhum, e o uso é regido pelas diretrizes de
+   marca da Meta. */
+/* A placa branca que segura o lockup. inline-flex para encolher até o conteúdo:
+   em block ela esticaria por toda a coluna e deixaria de ler como placa.
+
+   Borda #D9E4F3: um cinza puxado para o azul, e não o #E4E4E7 neutro. Sobre o
+   fundo azul-claro da seção, um cinza sem viés lê como sujeira -- a borda tem
+   que pertencer à mesma família de cor do que está atrás dela. É ela que
+   desenha a placa: branco sobre #F1F6FD quase não se distingue sozinho. */
+.meta-selo-caixa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Bem mais baixa que o desenho original de 86px: o padding caiu de 20 para
+     13 de cada lado e o logo de 46 para 28. A altura fecha em 54px. */
+  padding: 13px 20px;
+  /* A placa abre o bloco, então a margem é de baixo. */
+  margin: 0 0 22px;
+  border-radius: 11px;
+  background: #FFFFFF;
+  border: 1px solid #D9E4F3;
+  box-shadow: 0 1px 2px rgba(23, 61, 116, 0.05);
+}
+
+.meta-selo { display: block; width: auto; height: 28px; }
+
+/* A arte da coluna direita. O PNG tem fundo transparente, então pousa direto
+   sobre o #FBFBFB da seção sem precisar de card nem de moldura.
+
+   540px e não 400: a arte é paisagem (1448x1086) e carrega texto embutido, que
+   encolhe junto com ela. Nos 540px da coluna a frase da arte renderiza a ~37%
+   do tamanho original, o limite antes de virar textura.
+
+   height: auto junto com o width/height do HTML preserva a proporção enquanto o
+   max-width manda na largura: sem o auto, o atributo height do HTML venceria e
+   a imagem achataria. */
+.meta-arte {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Uma coluna abaixo de 900px, com o texto centralizado de novo: sozinho na
+   largura toda, alinhado à esquerda ele não teria mais com o que se alinhar. */
+@media (max-width: 900px) {
+  .meta-grade { grid-template-columns: 1fr; gap: 34px; }
+  .meta-texto { max-width: 560px; margin: 0 auto; text-align: center; }
+  .meta-selo-caixa { margin: 0 auto 22px; }
+}
+
+@media (max-width: 560px) {
+  .meta-selo-caixa { padding: 11px 16px; border-radius: 10px; margin-bottom: 16px; }
+  .meta-selo { height: 24px; }
+  /* 18px no celular: os 20px do desktop, numa coluna de tela inteira, deixam a
+     linha longa demais para leitura confortável. */
+  .meta-texto .lede { font-size: 18px; }
+  .meta-arte { max-width: 100%; }
+}
+
 
 /* ---------- Painel "WhatsApp Oficial" (ilha React) ---------- */
 /* Réplica da coluna de conversa do Multiatendimento. Os valores vieram de

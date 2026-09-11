@@ -607,7 +607,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
    Os 64px descontam o padding do .wrap (32px de cada lado). No celular o .wrap
    cai para 22px, então sobra folga extra ali, o que é seguro. */
-.hero h1 { font-size: min(44px, calc((100vw - 64px) / 13.82)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
+.hero h1 { font-size: min(44px, calc((100vw - 64px) / 16.01)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1148,19 +1148,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    A entrelinha fica em proporção, não em pixel fixo: estava em 52px, que dava
    a razão certa nos 40px do desktop mas não acompanhava a fonte, e no mobile
    o .h2 cai para 32px. */
+/* Sem font-size aqui: a fórmula de corpo fluido que existia neste bloco servia
+   para segurar as duas linhas fixas do <br>. Sem o <br> o título quebra sozinho
+   onde couber, e a fórmula só encolheria o texto à toa nas telas médias. Abaixo
+   de 560px ele passa a usar os 30px do .h2, como os títulos das outras seções. */
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.1;
-  /* Duas linhas fixas por <br>, e o corpo encolhe para a mais longa
-     ("A solução completa para seu negócio") caber sempre. Ela mede 17.39 em na
-     Geist SemiBold com o letter-spacing de -0.02em do .h2, e o divisor leva 2%
-     de folga em cima disso.
-
-     O desconto é 40px, e não os 64px das fórmulas de #agentes: o .wrap desta
-     seção tem `padding: 0px 20px` inline, que vence inclusive a regra de 560px
-     onde o .wrap cai para 22px. Por ser constante, esta seção não precisa do
-     bloco de celular que #agentes precisa. */
-  font-size: min(36px, calc((100vw - 40px) / 17.74));
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -1741,7 +1735,7 @@ select.demo-select:invalid { color: #374151; }
      3%. É o que significa "o maior possível" -- em troca, a margem de erro da
      estimativa fica menor, e se a primeira linha quebrar em algum aparelho é
      este 12.3 que sobe. */
-  .hero h1 { font-size: min(44px, calc((100vw - 44px) / 13.82)); line-height: 1.07; }
+  .hero h1 { font-size: min(44px, calc((100vw - 44px) / 16.01)); line-height: 1.07; }
   /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
      o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
      com o aperto, que não foi pedido para elas. */
