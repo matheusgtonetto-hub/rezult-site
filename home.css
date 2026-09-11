@@ -2101,6 +2101,51 @@ select.demo-select:invalid { color: #374151; }
   .stack-fecho { font-size: 17px; }
 }
 
+
+/* ═══ Linha de prova da hero e rótulo da esteira ══════════════════════════
+   A prova vivia na 5ª e na 8ª dobra. Subiu porque o cético não passa da
+   primeira linha sem ela. Fica logo abaixo da reversão de risco, menor que
+   ela: é confirmação, não argumento. */
+.hero-prova {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-subtle);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hero-prova strong { color: var(--text-muted); font-weight: 600; }
+.hero-prova-estrelas { color: var(--dourado); letter-spacing: 1px; font-size: 13px; }
+.hero-prova-sep { color: var(--border); }
+
+/* A esteira era uma fileira de logos sem legenda, e logo sem legenda o leitor
+   lê como decoração de rodapé. O rótulo diz o que ele está vendo. */
+.cases-rotulo {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin: 0 0 20px;
+  padding: 0 32px;
+}
+
+/* O segundo parágrafo do mecanismo, menor que o primeiro: um define, o outro
+   detalha. Mesmo tamanho os dois competiriam. */
+.lede-2 { font-size: 16px; margin-top: 12px; }
+
+@media (max-width: 980px) {
+  .hero-prova { justify-content: center; }
+  .cases-rotulo { text-align: center; }
+}
+@media (max-width: 560px) {
+  .hero-prova { font-size: 13px; gap: 4px; }
+  .hero-prova-sep { display: none; }
+  .cases-rotulo { padding: 0 22px; font-size: 12px; }
+}
+
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
    demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
