@@ -7,9 +7,6 @@
 <meta name="description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#08120e" />
-<!-- Variante de teste A/B. O canonical aponta para a home de propósito: é a
-     recomendação do Google para teste A/B, e evita que as duas URLs compitam
-     entre si na busca como conteúdo duplicado. -->
 <link rel="canonical" href="https://rezultcrm.com/" />
 <link rel="manifest" href="/site.webmanifest" />
 <meta property="og:type" content="website" />
@@ -17,7 +14,7 @@
 <meta property="og:site_name" content="Rezult CRM" />
 <meta property="og:title" content="CRM de Vendas com Pipeline, WhatsApp e IA | Rezult CRM" />
 <meta property="og:description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
-<meta property="og:url" content="https://rezultcrm.com/crm" />
+<meta property="og:url" content="https://rezultcrm.com/agentes" />
 <meta property="og:image" content="https://rezultcrm.com/rezult-pipeline.png" />
 <meta property="og:image:width" content="1800" />
 <meta property="og:image:height" content="1080" />
@@ -30,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="crm.css" />
+<link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -114,12 +111,12 @@ fbq('track','PageView');
 <nav class="nav" id="nav">
   <div class="wrap">
     <div class="nav-left">
-      <a href="crm.html" class="logo">
+      <a href="index.html" class="logo">
         <img src="logo-rezult.png" alt="Rezult CRM" width="1080" height="1080">
       </a>
     </div>
     <div class="nav-links">
-      <a href="crm.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="planos.html">Planos</a>
     </div>
     <div class="nav-right">
@@ -147,7 +144,7 @@ fbq('track','PageView');
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="crm.html">Home</a>
+  <a href="index.html">Home</a>
   <a href="planos.html">Planos</a>
   <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Teste Grátis</a>
 </div>
@@ -159,30 +156,47 @@ fbq('track','PageView');
       <div class="hero-text">
         <div class="hero-badge hero-badge-ia reveal">
           <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
-          <span>Potencialize seu negócio com IA</span>
+          <span>Nova geração de CRM agêntico</span>
         </div>
-        <h1 class="reveal" data-d="1">A <span class="em">nova geração</span> de <span class="em">CRM</span> com <span class="em">Whatsapp</span> e <span class="em">Agentes</span> de <span class="em">IA.</span></h1>
-        <p class="hero-sub reveal" data-d="2">Rezult atende no WhatsApp, qualifica, agenda reuniões, follow-ups, vende e organiza todo o CRM com anotações detalhadas para você.</p>
-        <div class="hero-actions reveal" data-d="3">
-          <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-            <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            </div>
-            <span class="btn-pontos-inner">Começar 7 Dias Grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-          </a>
+        <h1 class="reveal" data-d="1">Crie um time de agentes<br>para atender 24h no WhatsApp.</h1>
+        <!-- O traço fica DENTRO do span, e não como fundo do parágrafo: assim ele
+             mede exatamente a frase grifada, sem depender de largura fixa. O ponto
+             final fica de fora, porque a linha marca as palavras, não a pontuação. -->
+        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp 24h<br class="mobile-only-br"> e <span class="grifo">registrando tudo no CRM<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 8Q14 7.2 30 7L266 7Q285 7 297 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>.</p>
+        <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
+          <!-- Rótulo oculto, e não só o placeholder: placeholder some assim que a
+               pessoa digita a primeira letra, e leitor de tela não o trata como
+               nome do campo. O <label> garante que a pergunta continue sendo
+               anunciada, e some da tela porque ela já está dentro do campo. -->
+          <label class="visualmente-oculto" for="montaTexto">O que você deseja automatizar no seu negócio?</label>
+          <textarea id="montaTexto" class="monta-campo" rows="2" maxlength="600"
+                    placeholder="O que você deseja automatizar no seu negócio?">Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.</textarea>
+          <div class="monta-pe">
+            <span class="monta-nota">Teste grátis</span>
+            <button type="submit" class="btn btn-primary monta-cta">
+              Criar agente
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="monta-chips reveal" data-d="5">
+          <div class="monta-casos">
+            <button type="button" class="monta-chip ativo" aria-pressed="true" data-slug="atendimento" data-texto="Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.">Atendimento</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="qualificacao" data-texto="Crie um agente de qualificação para o meu negócio. O agente deve descobrir o que a pessoa procura, o orçamento e a urgência, e separar quem já está pronto para comprar.">Qualificação</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="agendamentos" data-texto="Crie um agente de agendamento para o meu negócio. O agente deve marcar as reuniões na agenda da pessoa certa, confirmar com o cliente no dia anterior e remarcar quem faltar.">Agendamentos</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="vendas" data-texto="Crie um agente de vendas para o meu negócio. O agente deve apresentar a proposta, responder as objeções mais comuns, negociar dentro do que eu autorizar e fechar a venda.">Vendas</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="crm" data-texto="Crie um agente de CRM para o meu negócio. O agente deve registrar cada conversa, preencher origem, resumo e estágio do negócio, e mover o card no funil sem ninguém digitar.">Operacional</button>
+            <button type="button" class="monta-chip" aria-pressed="false" data-slug="suporte" data-texto="Crie um agente de suporte para o meu negócio. O agente deve responder as dúvidas de quem já é cliente, resolver os pedidos mais comuns sozinho e passar para uma pessoa só o que sair do padrão.">Suporte</button>
+          </div>
+          <!-- Seta dupla no fim da fileira. Vai depois de .monta-casos e não
+               dentro dela: dentro, ela rolaria junto com os chips e sairia da
+               tela no primeiro arrasto, bem quando ainda precisa ser vista. -->
+          <span class="monta-dica" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </span>
         </div>
-      </div>
-      <div class="hero-mockup-wrap" id="mockupSlotA">
-        <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
       </div>
     </div>
   </div>
@@ -559,23 +573,27 @@ fbq('track','PageView');
 <!-- DOBRA · AGENTES DE IA -->
 <section class="section" id="agentes" style="background: #FFFFFF; padding: 100px 0px">
   <div class="wrap">
-    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Crie seus agentes <span class="grad-verde">em minutos</span></h2>
-      <p class="lede">Tenha um agente cuidando de cada etapa do seu processo comercial</p>
+    <div class="section-head center reveal" style="max-width: 760px;">
+      <h2 class="h2">Você não precisa contratar<br>mais pessoas. Precisa dar<br>uma equipe de IA para eles.</h2>
+      <p class="lede">Os agentes cuidam de todas as etapas<br>do seu processo comercial.</p>
     </div>
 
       <div class="ag-abas" role="tablist" aria-label="Agentes de IA">
-        <button class="ag-aba ativa" type="button" role="tab" id="ag-t0" aria-controls="ag-p0" aria-selected="true" tabindex="0"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Atendente</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t1" aria-controls="ag-p1" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">SDR</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t2" aria-controls="ag-p2" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Closer</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t3" aria-controls="ag-p3" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Pós-venda</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t4" aria-controls="ag-p4" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Operacional</span></button>
+        <button class="ag-aba ativa" type="button" role="tab" id="ag-t0" aria-controls="ag-p0" aria-selected="true" tabindex="0"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Atendimento</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t1" aria-controls="ag-p1" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Qualificação</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t2" aria-controls="ag-p2" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Agendamentos</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t3" aria-controls="ag-p3" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Vendas</span></button>
+        <span class="ag-abas-quebra" aria-hidden="true"></span>
+        <button class="ag-aba" type="button" role="tab" id="ag-t4" aria-controls="ag-p4" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Suporte</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t5" aria-controls="ag-p5" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Pós-vendas</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t6" aria-controls="ag-p6" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Operacional</span></button>
       </div>
 
       <div class="ag-painel ativo" id="ag-p0" role="tabpanel" aria-labelledby="ag-t0">
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Atendente</h3>
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+            <h3>Agente de Atendimento</h3>
           </div>
           <h4>Responde em segundos, a qualquer hora.</h4>
           <p class="ag-desc">Ninguém espera até segunda-feira para ser atendido. O agente assume a conversa no minuto em que ela começa.</p>
@@ -596,7 +614,8 @@ fbq('track','PageView');
       <div class="ag-painel" id="ag-p1" role="tabpanel" aria-labelledby="ag-t1" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente SDR</h3>
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></span>
+            <h3>Agente de Qualificação</h3>
           </div>
           <h4>Descobre quem está pronto para comprar.</h4>
           <p class="ag-desc">Cada contato é analisado assim que chega, sem depender de alguém livre para fazer na mão.</p>
@@ -617,7 +636,30 @@ fbq('track','PageView');
       <div class="ag-painel" id="ag-p2" role="tabpanel" aria-labelledby="ag-t2" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Closer</h3>
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+            <h3>Agente de Agendamento</h3>
+          </div>
+          <h4>A agenda do time sempre atualizada.</h4>
+          <p class="ag-desc">Marca, confirma e reagenda sozinho, na disponibilidade real de cada profissional.</p>
+          <ul class="ag-lista">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sincroniza com o Google Agenda automaticamente</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Respeita o horário de cada profissional ou unidade</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirma o compromisso um dia antes</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reagenda sozinho quando o cliente pede</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Avisa o time sobre furos e cancelamentos</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reduz falta com lembrete por WhatsApp</li>
+          </ul>
+          <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
+            <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
+            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <div class="ag-painel" id="ag-p3" role="tabpanel" aria-labelledby="ag-t3" hidden>
+        <div class="ag-painel-txt">
+          <div class="ag-painel-cab">
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+            <h3>Agente de Vendas</h3>
           </div>
           <h4>Conduz a negociação até o fechamento.</h4>
           <p class="ag-desc">Segue a conversa do primeiro contato até a decisão, sem perder o timing.</p>
@@ -635,10 +677,33 @@ fbq('track','PageView');
           </a>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p3" role="tabpanel" aria-labelledby="ag-t3" hidden>
+      <div class="ag-painel" id="ag-p4" role="tabpanel" aria-labelledby="ag-t4" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente de Pós-venda</h3>
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span>
+            <h3>Agente de Suporte</h3>
+          </div>
+          <h4>Resolve o comum sozinho, sem fila de espera.</h4>
+          <p class="ag-desc">Tira dúvida, resolve pedido simples e só chama um humano quando o caso foge do padrão.</p>
+          <ul class="ag-lista">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Base de conhecimento com as respostas da sua operação</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Resolve as dúvidas mais comuns sem esperar</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Abre e acompanha chamados no CRM</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Escala para um humano quando o caso é complexo</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Histórico completo de cada atendimento</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Funciona no mesmo número que já atende</li>
+          </ul>
+          <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
+            <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
+            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <div class="ag-painel" id="ag-p5" role="tabpanel" aria-labelledby="ag-t5" hidden>
+        <div class="ag-painel-txt">
+          <div class="ag-painel-cab">
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+            <h3>Agente de Pós-vendas</h3>
           </div>
           <h4>O cliente não some depois da compra.</h4>
           <p class="ag-desc">Acompanha, tira dúvidas e devolve para um humano quando precisa.</p>
@@ -656,9 +721,10 @@ fbq('track','PageView');
           </a>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p4" role="tabpanel" aria-labelledby="ag-t4" hidden>
+      <div class="ag-painel" id="ag-p6" role="tabpanel" aria-labelledby="ag-t6" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
+            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 9v11"/></svg></span>
             <h3>Agente Operacional</h3>
           </div>
           <h4>Seu time nunca mais preenche CRM na mão.</h4>
@@ -677,7 +743,7 @@ fbq('track','PageView');
           </a>
         </div>
       </div>
-  </div>
+    </div>
 </section>
 
 <!-- DOBRA · PROVAS SOCIAIS -->
@@ -1026,159 +1092,11 @@ fbq('track','PageView');
   </div>
 </section>
 
-<!-- DOBRA · PREÇO -->
-<section class="section" id="precos" style="background: #FBFBFB; padding: 100px 0px">
-  <div class="wrap">
-    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Planos para o momento <span class="grad-verde">do seu negócio</span></h2>
-      <p class="lede">Comece com 7 dias grátis, sem cartão de crédito.</p>
-    </div>
-
-    <!-- id priceTogglePreview: o wirePricingToggle do main.js já espera este id.
-         O seletor atualiza todos os .amt da página, e como esta é a única grade
-         de preços da home, não há conflito. -->
-    <div class="price-toggle" id="priceTogglePreview">
-      <button class="active" data-period="mensal">Mensal</button>
-      <button data-period="semestral">Semestral <span class="save">-15%</span></button>
-      <button data-period="anual">Anual <span class="save">-30%</span></button>
-    </div>
-
-    <div class="pgrid">
-      <div class="pcard">
-        <div>
-          <div class="pname">Silver</div>
-          <div class="pdesc">Perfeito para pequenas equipes</div>
-        </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="237" data-stotal="1209" data-atotal="1989">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="237" data-s="202" data-a="166">237</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
-        </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">4 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>8 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 pipelines</b> com até 8 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
-      </div>
-
-      <div class="pcard featured">
-        <div>
-          <div class="pname">Platinum</div>
-          <div class="pdesc">Pensado para quem está crescendo</div>
-        </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="399" data-stotal="2035" data-atotal="3352">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="399" data-s="339" data-a="279">399</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
-        </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">15 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>100 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>10 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 pipelines</b> com até 15 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
-      </div>
-
-      <div class="pcard">
-        <div>
-          <div class="pname">Emerald</div>
-          <div class="pdesc">Ideal para empresas em escala</div>
-        </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="747" data-stotal="3810" data-atotal="6272">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="747" data-s="635" data-a="523">747</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
-        </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">Usuários ilimitados</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Leads ilimitados</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Automações ilimitadas</b></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Conexões ilimitadas</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Pipelines ilimitadas</b> com até 25 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Integrações ilimitadas</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 36px;">
-      <a href="planos.html" class="btn btn-ghost">Comparar os planos em detalhe</a>
-    </div>
-  </div>
-</section>
-
 <!-- DOBRA 06 · BENEFÍCIOS -->
 <section class="section tint-left" id="beneficios" style="padding: 100px 0px">
   <div class="wrap">
     <div class="section-head center reveal">
-      <h2 class="h2"><span class="grad-verde">E não para por aí,</span><br class="mobile-only-br"> você também terá...</h2>
+      <h2 class="h2">Suporte próximo<br class="mobile-only-br"> <span class="grad-verde">do seu time</span></h2>
     </div>
     <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;" id="ben-grid">
       <div class="bcard">
@@ -1196,80 +1114,6 @@ fbq('track','PageView');
         <div class="b-num">03</div>
         <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l5-5 4 4 8-9M14 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Time focado no crescimento dos seus resultados</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- DOBRA 08 · AGENDE UMA DEMO -->
-<section class="section" id="demo" style="background: #FBFBFB; position: relative; overflow: hidden;">
-  <div class="demo-side-l"></div>
-  <div class="demo-side-r"></div>
-  <div class="wrap">
-    <div class="demo-split">
-      <div class="demo-split-left reveal">
-
-        <h2 class="h2" id="demo-heading" style="color:#000; margin-top:16px;">Agendar <span class="em em-shine-text">demonstração</span></h2>
-        <p style="font-size:17px; color:#4b5563; margin-top:16px; max-width:420px;">Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
-        <ul class="demo-trust">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Implementação gratuita incluída</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Suporte via Meet e WhatsApp</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sem fidelidade ou multa de cancelamento</li>
-        </ul>
-      </div>
-      <div class="demo-split-right reveal" data-d="1">
-    <div class="cta-final">
-      <div class="cta-final-grid"></div>
-      <div class="cta-final-glow"></div>
-      <form class="demo-form" id="demoForm">
-        <div class="demo-form-row">
-          <div class="demo-field">
-            <input class="demo-input" type="text" id="demo-nome" name="nome" placeholder="Nome completo" required>
-          </div>
-          <div class="demo-field">
-            <input class="demo-input" type="email" id="demo-email" name="email" placeholder="E-mail" required>
-          </div>
-        </div>
-        <div class="demo-form-row">
-          <div class="demo-field">
-            <input class="demo-input" type="tel" id="demo-whatsapp" name="whatsapp" placeholder="Seu WhatsApp" required>
-          </div>
-          <div class="demo-field">
-            <input class="demo-input" type="text" id="demo-site" name="site" placeholder="Site ou Instagram da empresa">
-          </div>
-        </div>
-        <div class="demo-field">
-          <select class="demo-input demo-select" id="demo-segmento" name="segmento" required>
-            <option value="" disabled selected>Qual o segmento da empresa?</option>
-            <option value="varejo">Varejo</option>
-            <option value="servicos">Serviços</option>
-            <option value="tecnologia">Tecnologia</option>
-            <option value="saude">Saúde</option>
-            <option value="educacao">Educação</option>
-            <option value="imobiliario">Imobiliário</option>
-            <option value="financeiro">Financeiro</option>
-            <option value="industria">Indústria</option>
-            <option value="outro">Outro</option>
-          </select>
-        </div>
-        <div class="demo-field">
-          <select class="demo-input demo-select" id="demo-time" name="time_size" required>
-            <option value="" disabled selected>Tamanho do time comercial</option>
-            <option value="1-5">1 a 5 pessoas</option>
-            <option value="6-15">6 a 15 pessoas</option>
-            <option value="16-30">16 a 30 pessoas</option>
-            <option value="30+">Mais de 30 pessoas</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg demo-submit btn-shine">Agendar demonstração</button>
-      </form>
-      <div class="demo-success" id="demoSuccess">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <strong>Solicitação enviada!</strong>
-        <span>Nosso time entrará em contato em breve.</span>
-      </div>
-    </div>
       </div>
     </div>
   </div>
@@ -1315,12 +1159,12 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="crm.html" class="logo">
+        <a href="index.html" class="logo">
           <img src="logo-rodape.png" alt="Rezult CRM" width="350" height="100">
         </a>
         <p>O CRM com automações, WhatsApp e agentes de IA para empresas que vendem de verdade.</p>
         <div class="footer-brand-actions">
-          <a href="#demo" class="btn btn-primary">Agendar demo</a>
+          <a href="planos.html#demo-planos" class="btn btn-primary">Agendar demo</a>
           <a href="planos.html" class="btn btn-secondary">Ver planos</a>
         </div>
       </div>
@@ -1328,7 +1172,7 @@ fbq('track','PageView');
         <h3>Produto</h3>
         <a href="#recursos">Recursos</a>
         <a href="planos.html">Planos</a>
-        <a href="#produto">Demo</a>
+        <a href="planos.html#demo-planos">Demo</a>
       </div>
       <div class="footer-col">
         <h3>Empresa</h3>
@@ -1355,11 +1199,11 @@ fbq('track','PageView');
 </footer>
 
 <script src="mockups.js"></script>
-<script src="crm.js"></script>
+<script src="main.js"></script>
 <!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
-     src/paineis/. Preenchem #featWhatsapp, #featAutomation e #featPipelines,
-     que o mockups.js deixou de ocupar. Vem depois dele para o innerHTML do
-     injectMockups não passar por cima do que o React montou. -->
+     src/paineis/. Preenche o slot #featWhatsapp, que o mockups.js deixou de
+     ocupar. Vem depois dele para o innerHTML do injectMockups não passar por
+     cima do que o React montou. -->
 <script src="build/paineis.js" defer></script>
 <script>
   const demoForm = document.getElementById("demoForm");
@@ -1393,18 +1237,6 @@ fbq('track','PageView');
         e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
       }
     });
-  }
-</script>
-<script type="module">
-  import { animate, inView } from "https://esm.sh/motion@12.42.2";
-
-  // Float na imagem da hero — desktop e tablet apenas
-  const heroImg = document.getElementById("hero-img");
-  if (heroImg && window.matchMedia("(min-width: 768px)").matches) {
-    animate(heroImg,
-      { y: [0, -14, 0] },
-      { duration: 4, easing: "ease-in-out", repeat: Infinity, delay: 1.5 }
-    );
   }
 </script>
 </body>

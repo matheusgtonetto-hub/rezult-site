@@ -1,5 +1,12 @@
 {
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/crm",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }
