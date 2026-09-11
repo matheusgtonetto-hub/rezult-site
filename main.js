@@ -320,7 +320,6 @@ document.querySelectorAll(".faq-item").forEach(item => {
   // avanço volta a escrever em scrollLeft no meio do deslize e mata o impulso.
   const INERCIA = 600;    // ms
 
-  let sobre = false;
   let inerciaAte = 0;
   let segurando = false;
   let ultimoQuadro = 0;
@@ -367,7 +366,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
     // O reposicionamento que fecha o ciclo nunca roda durante um gesto: mexer
     // em scrollLeft no meio dele cancela a inércia e trava a rolagem.
     if (!emGesto) normalizar();
-    if (!emGesto && !sobre) {
+    if (!emGesto) {
       // Limita intervalos longos quando a aba volta do segundo plano, sem
       // interromper a animação em dispositivos com frames mais lentos.
       if (dt > 0) esteira.scrollLeft += VELOCIDADE * Math.min(dt, 0.1);
@@ -377,9 +376,10 @@ document.querySelectorAll(".faq-item").forEach(item => {
   }
   requestAnimationFrame(quadro);
 
-  // Mouse em cima: para, igual ao :hover dos depoimentos. Sai, volta a andar.
-  esteira.addEventListener("mouseenter", () => { sobre = true; });
-  esteira.addEventListener("mouseleave", () => { sobre = false; });
+  // Sem pausa no hover, ao contrario do :hover dos depoimentos: a esteira e
+  // decorativa e deve andar sempre. Passar o mouse por cima nao e intencao de
+  // parar, e quem so atravessa a tela com o cursor via a faixa congelar sem
+  // ter pedido nada.
 
   // Dedo encostado na tela: cede o controle até soltar, mais a folga de inércia.
   const soltarDedo = () => { segurando = false; inerciaAte = performance.now() + INERCIA; };
