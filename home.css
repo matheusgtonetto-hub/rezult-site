@@ -2215,6 +2215,71 @@ select.demo-select:invalid { color: #374151; }
   .inclusos-itens { grid-template-columns: 1fr; gap: 12px; }
 }
 
+
+/* ═══ Prova colada na promessa ════════════════════════════════════════════
+   Os 12 depoimentos viviam todos numa esteira na dobra 5, enquanto #recursos
+   prometia quatro blocos com zero prova ao lado. Prova em bloco é vitrine;
+   prova ao lado da promessa é conversão. Onze foram colar no que cada um prova.
+
+   Citação discreta: barra verde à esquerda, sem card, sem foto, sem estrela. O
+   peso aqui é da frase e do nome, e um card completo competiria com o bloco que
+   a citação está ali para sustentar. */
+.prova-inline {
+  margin: 22px 0 0;
+  padding: 0 0 0 16px;
+  border-left: 2px solid var(--green-text);
+}
+.prova-inline p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  font-style: italic;
+}
+/* O .hl vem dos depoimentos originais: destacava o trecho com o número. */
+.prova-inline p .hl { color: var(--text); font-weight: 600; font-style: normal; }
+.prova-inline cite {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--text-subtle);
+}
+.prova-inline cite strong { color: var(--text-muted); font-weight: 600; }
+
+/* A que sobrou na #clientes: mesma família, escala de manchete. É o resultado
+   que dá nome ao h2 da seção, então ela carrega a dobra sozinha. */
+.prova-destaque {
+  max-width: 720px;
+  margin: 36px auto 0;
+  padding: 0;
+  text-align: center;
+  border: none;
+}
+.prova-destaque p {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text);
+  font-style: italic;
+}
+.prova-destaque p .hl { font-weight: 700; font-style: normal; }
+.prova-destaque cite {
+  display: block;
+  margin-top: 16px;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--text-subtle);
+}
+.prova-destaque cite strong { color: var(--text-muted); font-weight: 600; }
+
+@media (max-width: 560px) {
+  .prova-inline { margin-top: 18px; padding-left: 13px; }
+  .prova-inline p { font-size: 14px; }
+  .prova-destaque p { font-size: 18px; }
+  .prova-destaque { margin-top: 28px; }
+}
+
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
    demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
