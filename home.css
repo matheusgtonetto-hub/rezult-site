@@ -415,7 +415,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
 /* Sem fundo próprio: herda o --bg do body, que é o #FBFBFB do site inteiro. */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 80px); padding-bottom: 100px; overflow: hidden; }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 50px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
@@ -597,10 +597,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
-/* No h1 do hero as palavras destacadas também saem em branco, sem verde e sem
-   brilho. Precisa desta regra explícita: o .em acima pinta de verde direto no
-   span, e cor declarada no próprio elemento vence a herança do .hero h1, por
-   mais específico que o pai seja. */
+/* No h1 do hero as palavras destacadas NÃO saem em verde: o título inteiro fica
+   na cor de texto padrão. Precisa desta regra explícita: o .em acima pinta de
+   verde direto no span, e cor declarada no próprio elemento vence a herança do
+   .hero h1, por mais específico que o pai seja. */
 .hero h1 .em { color: inherit; }
 /* O efeito de brilho saiu: era um degradê animado que passava pelos verdes
    claros da marca, ilegível sobre branco. Virou verde chapado, o mesmo do .em. */
@@ -614,7 +614,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 }
 .hero-sub { font-size: 20px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
-.hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
+.hero-actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
    nas seções de implementação e entregáveis, que têm tamanhos próprios de
    botão (16px e 14px, mais abaixo). Sem o .hero na frente, este 15px passaria
