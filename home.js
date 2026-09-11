@@ -274,23 +274,6 @@ wirePricingToggle("priceToggle");
   update();
 })();
 
-// ---- FAQ accordion ----
-document.querySelectorAll(".faq-item").forEach(item => {
-  const q = item.querySelector(".faq-q");
-  const a = item.querySelector(".faq-a");
-  q.addEventListener("click", () => {
-    const open = item.classList.contains("open");
-    document.querySelectorAll(".faq-item").forEach(i => {
-      i.classList.remove("open");
-      i.querySelector(".faq-a").style.maxHeight = null;
-    });
-    if (!open) {
-      item.classList.add("open");
-      a.style.maxHeight = a.scrollHeight + "px";
-    }
-  });
-});
-
 // ---- Abas dos agentes de IA ----
 (function () {
   const abas = Array.from(document.querySelectorAll(".ag-abas .ag-aba"));

@@ -1447,7 +1447,12 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding: 70px 0 !important; }
   .demo-split-left { text-align: center; }
   .demo-trust { display: none; }
-  .hero h1, .page-hero h1 { font-size: clamp(38px, 4vw, 46px); }
+  /* Teto alinhado com os 42px do desktop. Ficava em 46px, ou seja, o título
+     ENCOLHIA conforme a tela crescia ao cruzar os 980px. Com a manchete curta
+     antiga a diferença passava; com 86 caracteres ela vira quatro linhas
+     infladas no tablet. O mínimo desce de 38px para 30px para encontrar o teto
+     do bloco de 560px e a passagem entre as faixas ficar contínua. */
+  .hero h1, .page-hero h1 { font-size: clamp(30px, 4vw, 42px); }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-cta-ghost { display: none; }
@@ -1516,30 +1521,20 @@ select.demo-select:invalid { color: #374151; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo .wrap { padding: 0 30px; }
   #clientes { padding-bottom: 70px !important; }
-  /* Tipo fluido: o h1 ocupa a largura toda em qualquer celular, nas três linhas
-     que os <br class="mobile-only-br"> fixam.
+  /* A manchete anterior tinha 58 caracteres e cabia em três linhas fixas, com
+     um divisor medido no TTF para encostar nas margens. A atual tem 86, e o
+     mesmo método a esmagaria para 18px num aparelho de 320px -- tamanho de
+     texto corrido, não de manchete.
 
-       Nova geração de CRM com
-       WhatsApp, Automações
-       e Agentes de IA
+     Então aqui a quebra volta a ser natural e o tamanho passa a ser clamp. Dá
+     de 24px a 30px conforme a tela, em 3 a 4 linhas, e sobrevive a uma troca de
+     texto sem precisar de nova medição no arquivo da fonte. Menos exato,
+     bem mais robusto: era brittle demais amarrar a folha de estilo às palavras
+     exatas de um h1 que muda toda semana.
 
-     O divisor 13.52 é medido, não estimado: a linha mais larga ("Nova geração
-     de CRM com") tem 13.252em no Geist Bold com letter-spacing zero, medida nas
-     larguras de avanço do TTF, mais 2% de folga. O 44px desconta o padding
-     lateral de 22px do .wrap nesta faixa. Assim o texto encosta nas margens sem
-     estourar, de 320px até 560px.
-
-     Teto de 38px porque é onde começa o clamp da faixa de 561-980px. Sem ele a
-     fórmula chegaria a 38.2px aos 560px e a fonte DIMINUIRIA ao cruzar para
-     561px. Com o teto, a passagem é contínua, e some de quebra o degrau que
-     existia aqui desde quando este valor era fixo.
-
-     Mexer no texto do h1 obriga a remedir: o divisor vale para ESTAS palavras. */
-  .hero h1, .page-hero h1 { font-size: min(38px, calc((100vw - 44px) / 13.52)); letter-spacing: -0.03em; line-height: 1.07; }
-  /* O tracking do hero fica solto também aqui: sem esta linha, abaixo de 560px
-     o título voltaria a apertar -0.03em. A .page-hero das outras páginas segue
-     com o aperto, que não foi pedido para elas. */
-  .hero h1 { letter-spacing: normal; }
+     text-wrap: balance distribui as linhas em vez de deixar a última órfã.
+     Onde não houver suporte, o navegador simplesmente ignora. */
+  .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
   .hero-cases { margin-top: 100px; }
   .case-card { width: 255px; height: 370px; margin-right: 14px; border-radius: 16px; }
@@ -1591,15 +1586,19 @@ select.demo-select:invalid { color: #374151; }
   .hero-actions { flex-direction: row; flex-wrap: nowrap; justify-content: center; width: 80%; margin-left: auto; margin-right: auto; }
   .hero-actions .btn { flex: 1; text-align: center; justify-content: center; }
   .hero-actions .btn-secondary { font-size: 15px; }
-  /* A regra logo acima trava flex-wrap em nowrap e a faixa em 80% da largura,
-     e centraliza -- foi escrita quando a hero tinha um botão só. Com dois, e
-     com ambos em white-space: nowrap dentro de uma .hero que tem
-     overflow: hidden, o "Diagnóstico Comercial" sairia cortado pela borda em
-     vez de rolar. Devolvendo a largura inteira os dois cabem lado a lado em
-     tela de 375px, e o wrap cobre as telas mais estreitas que isso.
-     O alinhamento à esquerda acompanha o h1 e o subtítulo, que nesta hero
-     (.vb) não são centralizados. */
-  .hero .hero-actions { flex-wrap: wrap; justify-content: flex-start; width: 100%; }
+  /* No celular os dois CTAs empilham, o link abaixo do botão.
+
+     A regra logo acima trava flex-wrap em nowrap e a faixa em 80% da largura --
+     foi escrita quando a hero tinha um botão só. Com dois lado a lado, e ambos
+     em white-space: nowrap dentro de uma .hero que tem overflow: hidden, o
+     segundo sairia cortado pela borda em vez de rolar. Empilhados, o problema
+     deixa de existir e cada um fica com a linha inteira para si.
+
+     align-items: center porque nesta faixa a hero É centralizada: a regra de
+     980px aplica align-items: center e text-align: center no .hero.vb
+     .hero-text. Uma versão anterior desta regra usava flex-start, e os botões
+     ficavam à esquerda enquanto o h1 e o subtítulo estavam centrados. */
+  .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 5px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
@@ -1805,6 +1804,302 @@ select.demo-select:invalid { color: #374151; }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
 
+
+
+/* ═══ Seção "perdendo vendas" · a auditoria em quatro perguntas ═══════════
+   Grid de 2x2 no desktop, coluna única no celular. Não são cards soltos: são
+   os quatro passos de uma auditoria que o leitor faz nos dados dele, então o
+   número tem peso visual e a pergunta vem grande o bastante para ser lida de
+   relance, não escaneada.
+
+   Sem borda nem sombra: card com moldura leria como "feature", e estas não
+   são features, são perguntas. O que separa um item do outro é o espaço. */
+.auditoria {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 40px;
+  max-width: 900px;
+  margin: 52px auto 0;
+}
+.auditoria-item { display: flex; gap: 16px; align-items: flex-start; }
+/* O número é âncora de sequência, não decoração: fica em verde e em mono para
+   ler como índice, e alinhado ao topo da pergunta. */
+.auditoria-num {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-text);
+  flex-shrink: 0;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+.auditoria-item p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+/* O <strong> carrega a parte da pergunta que dói. Vai ao --text cheio para
+   destacar sem precisar de outra cor. */
+.auditoria-item strong { color: var(--text); font-weight: 600; }
+
+/* O fecho é a virada: até aqui o leitor respondia, agora recebe o diagnóstico.
+   Centralizado e maior que as perguntas, com respiro grande antes. */
+.auditoria-fecho {
+  text-align: center;
+  max-width: 680px;
+  margin: 56px auto 0;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.auditoria-fecho strong { color: var(--text); font-weight: 600; }
+
+@media (max-width: 860px) {
+  .auditoria { grid-template-columns: 1fr; gap: 26px; max-width: 560px; }
+}
+@media (max-width: 560px) {
+  .auditoria { margin-top: 40px; }
+  .auditoria-item p { font-size: 17px; }
+  .auditoria-fecho { font-size: 18px; margin-top: 40px; }
+}
+
+
+/* ═══ Seção de implantação assistida ══════════════════════════════════════
+   Duas colunas: o argumento à esquerda com o CTA, a lista do que o time faz à
+   direita. A lista fica ao lado e não abaixo porque ela É a prova do argumento;
+   empilhada, o leitor decide antes de ver o que está incluso. */
+.implanta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.implanta-texto { max-width: 480px; }
+.implanta-texto .lede { font-size: 18px; margin-top: 18px; }
+.implanta-cta { margin-top: 30px; }
+
+.implanta-itens { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
+.implanta-itens li { display: flex; gap: 14px; align-items: flex-start; }
+/* O check vem em cápsula verde clara em vez de solto: sem o fundo ele some
+   contra o branco da seção quando a lista fica longa. */
+.implanta-ico {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #E1F5EE;
+  color: var(--green-text);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.implanta-ico svg { width: 14px; height: 14px; }
+.implanta-itens strong { display: block; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.implanta-itens span { font-size: 15px; line-height: 1.5; color: var(--text-muted); }
+
+@media (max-width: 980px) {
+  /* Empilha, e o texto centraliza para acompanhar o resto da página nesta
+     faixa. A lista NÃO centraliza: item de lista centrado perde a leitura em
+     coluna, o olho não acha onde cada um começa. */
+  .implanta { grid-template-columns: 1fr; gap: 44px; }
+  .implanta-texto { max-width: 640px; margin: 0 auto; text-align: center; }
+  .implanta-itens { max-width: 520px; margin: 0 auto; }
+}
+@media (max-width: 560px) {
+  .implanta-texto .lede { font-size: 17px; }
+  .implanta-cta { width: 100%; text-align: center; justify-content: center; }
+}
+
+
+/* ═══ Seção "para quem é" · os oito segmentos ═════════════════════════════
+   Grid de 4 colunas que desce para 2 e depois 1. Cartões discretos, com borda
+   e sem sombra: a função é o leitor achar o dele em três segundos e seguir,
+   não admirar o cartão.
+
+   O <em> é a amarra com a prova: nomeia um cliente real daquele segmento, dos
+   depoimentos logo acima. Quatro dos oito têm. Os outros quatro ficam sem, de
+   propósito -- inventar nome para fechar a simetria destruiria o valor dos
+   quatro verdadeiros. */
+.segmentos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.segmento {
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-md);
+  background: #FBFBFB;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .2s ease, background .2s ease;
+}
+.segmento:hover { border-color: var(--border-active); background: #fff; }
+.segmento strong { font-size: 16px; font-weight: 600; color: var(--text); }
+.segmento span { font-size: 14px; line-height: 1.45; color: var(--text-muted); }
+/* A referência ao cliente real fica no pé do cartão, menor e em verde: é
+   assinatura de prova, não título. margin-top: auto alinha todas no rodapé da
+   linha, mesmo quando a descrição acima tem alturas diferentes. */
+.segmento em {
+  margin-top: auto;
+  padding-top: 10px;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green-text);
+}
+
+@media (max-width: 980px) { .segmentos { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) {
+  .segmentos { grid-template-columns: 1fr; gap: 12px; margin-top: 36px; }
+  .segmento { padding: 18px; }
+}
+
+
+/* ═══ CTA final ═══════════════════════════════════════════════════════════
+   Coluna única centrada e estreita. Aqui o leitor já decidiu ou não decidiu:
+   a função é tirar o último grama de risco, não apresentar nada novo. Por isso
+   nenhuma arte, nenhuma coluna lateral, nada que divida a atenção com o botão.
+
+   A lista fica alinhada à esquerda dentro do bloco centrado. Item de reversão
+   de risco centralizado o olho não consegue varrer: ele precisa de uma margem
+   fixa de onde começar cada linha. */
+.fechamento { max-width: 620px; margin: 0 auto; text-align: center; }
+.fechamento .lede { font-size: 18px; margin-top: 18px; }
+
+.fechamento-itens {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* O check vem como ::before em vez de SVG por item: são seis linhas, e seis
+   SVGs idênticos no HTML seria repetição sem ganho. */
+.fechamento-itens li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.fechamento-itens li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 6px;
+  width: 16px; height: 16px;
+  background: var(--green-text);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.fechamento-itens strong { color: var(--text); font-weight: 600; }
+
+.fechamento-cta { margin-top: 40px; }
+/* A nota do desconto fica depois do botão, menor e discreta: ela é o prazo que
+   empurra a decisão, não a razão da decisão. */
+.fechamento-nota {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-subtle);
+}
+
+@media (max-width: 560px) {
+  .fechamento .lede { font-size: 17px; }
+  .fechamento-itens { margin-top: 30px; }
+  .fechamento-itens li { font-size: 15px; padding-left: 26px; }
+  .fechamento-cta { width: 100%; }
+}
+
+
+/* ═══ Stack de valor · ancoragem antes do preço ═══════════════════════════
+   Fica entre o título da seção e os planos porque é ela que estabelece a régua:
+   quem lê R$ 237 depois de somar R$ 3.486 lê um número diferente de quem lê
+   R$ 237 sozinho. Ancoragem só funciona antes, nunca depois.
+
+   Desenho deliberadamente sóbrio: sem gradiente, sem selo, sem "economize
+   93%". A conta é forte por si, e enfeite em cima de comparação de preço é o
+   que faz o leitor desconfiar dela. */
+.stack {
+  max-width: 640px;
+  margin: 44px auto 0;
+  padding: 28px 32px;
+  background: #fff;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+}
+.stack-titulo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  margin: 0 0 18px;
+  text-align: center;
+}
+.stack-itens { list-style: none; margin: 0; padding: 0; }
+.stack-itens li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-2);
+}
+.stack-item { font-size: 16px; color: var(--text); line-height: 1.4; }
+/* A qualificação de escopo vem embaixo do item, menor: é ela que impede a
+   comparação de virar enganosa, então não pode sumir, mas também não compete
+   com o nome do item. */
+.stack-item em {
+  display: block;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+/* tabular-nums alinha os dígitos na vertical: sem isso o R$ 989 e o R$ 2.000
+   dançam na coluna e a soma perde a cara de conta. */
+.stack-valor {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.stack-valor i { font-style: normal; font-weight: 400; font-size: 13px; color: var(--text-subtle); }
+
+.stack-total { border-bottom: none; padding-top: 16px; margin-top: 4px; border-top: 2px solid var(--border); }
+.stack-total .stack-item { font-weight: 600; }
+.stack-total .stack-valor { color: var(--text); font-size: 18px; }
+
+.stack-fecho {
+  text-align: center;
+  margin: 22px 0 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.stack-fecho strong { color: var(--green-text); font-weight: 600; }
+
+/* As fontes não são letra miúda escondida: são o que torna a comparação
+   verificável, e comparação com concorrente nomeado só se sustenta se qualquer
+   um puder conferir. Por isso ficam legíveis e com link que abre. */
+.stack-fontes {
+  margin: 20px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-subtle);
+  text-align: center;
+}
+.stack-fontes a { color: var(--text-muted); text-decoration: underline; }
+.stack-fontes a:hover { color: var(--green-text); }
+
+@media (max-width: 560px) {
+  .stack { padding: 22px 18px; margin-top: 34px; }
+  .stack-itens li { flex-direction: column; gap: 4px; align-items: flex-start; }
+  .stack-valor { font-size: 15px; }
+  .stack-fecho { font-size: 17px; }
+}
 
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
