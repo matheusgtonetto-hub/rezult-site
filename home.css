@@ -2280,6 +2280,67 @@ select.demo-select:invalid { color: #374151; }
   .prova-destaque { margin-top: 28px; }
 }
 
+
+/* ═══ "Você decide quanto o Rezult faz sozinho" · o controle de volume ═════
+   Três degraus de adoção em linha, com a intensidade crescendo da esquerda
+   para a direita. A ordem visual importa tanto quanto a textual: o leitor que
+   se assustou com os cinco agentes entra pela esquerda e vê que existe um
+   primeiro passo pequeno.
+
+   Numeração NÃO é 01/02/03: não é sequência obrigatória, é escolha. Por isso
+   "Começo · Meio · Tudo" e não números, que sugeririam que se percorre os três. */
+.volume {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+.volume-passo {
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  background: #FBFBFB;
+  padding: 26px 24px;
+}
+/* O terceiro degrau ganha a borda verde: é para onde a página inteira empurra,
+   e o leitor precisa ver que o topo existe mesmo quando escolhe o primeiro. */
+.volume-passo:last-child { border-color: var(--border-active); background: #fff; }
+.volume-nivel {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-text);
+  margin-bottom: 12px;
+}
+.volume-passo h3 { font-size: 18px; font-weight: 600; line-height: 1.25; margin: 0 0 10px; }
+.volume-passo p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); }
+
+/* A frase de controle: é ela que responde ao medo real do dono de PME, que não
+   é ser substituído, é perder a mão. Centrada e isolada para ser lida. */
+.volume-fecho {
+  margin: 32px auto 0;
+  max-width: 620px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text);
+  font-weight: 500;
+}
+.volume-cta { display: flex; justify-content: center; margin-top: 28px; }
+
+@media (max-width: 860px) {
+  .volume { grid-template-columns: 1fr; gap: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
+}
+@media (max-width: 560px) {
+  .volume { margin-top: 34px; }
+  .volume-passo { padding: 20px 18px; }
+  .volume-passo p { font-size: 14px; }
+  .volume-fecho { font-size: 16px; margin-top: 26px; }
+  .volume-cta a { width: 100%; }
+}
+
 /* ---------- Agentes de IA ---------- */
 /* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
    demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
