@@ -1069,37 +1069,25 @@ fbq('track','PageView');
       <div class="feature-visual reveal" data-d="1" id="featPipelines"></div>
     </div>
   </div>
-</section>
 
-<section class="section" id="parceiro-meta" style="background: #F1F6FD; padding: 90px 0px">
-  <div class="wrap">
-    <div class="meta-grade">
-      <div class="meta-texto reveal">
-        <!-- O selo numa placa branca, acima do título. width/height reservam o
-             espaço antes de o PNG carregar: sem eles a placa nasce sem altura e
-             empurra o título quando a imagem chega. -->
-        <span class="meta-selo-caixa">
-          <img class="meta-selo" src="meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
-        </span>
-        <h2 class="h2">Somos <span class="meta-azul">parceiros oficiais</span> da Meta para WhatsApp API</h2>
-        <p class="lede">O Rezult é uma solução aprovada pela Meta para operar o WhatsApp Business API com segurança, desempenho e tranquilidade para o seu negócio.</p>
-        <a href="https://app.rezultcrm.com/register" class="btn btn-meta">Começar os 7 dias grátis</a>
-      </div>
+  <!-- FAIXA META ------------------------------------------------------------
+       Era secao inteira (dobra 8): uma tela com um selo, um paragrafo e um CTA
+       que competia com o dos precos a uma dobra de distancia. O Georgi: "nao e
+       secao, e faixa. Uma tela inteira com um selo queima uma dobra."
 
-      <!-- width/height reservam a proporção antes de o PNG carregar. Sem eles a
-           coluna nasce sem altura e o layout salta quando a imagem chega, que é
-           pior aqui do que em qualquer outro lugar da página: são 1448x1086, a
-           imagem mais pesada do site.
-           O alt descreve o SELO e o texto embutidos na arte, e não a cena: para
-           quem usa leitor de tela, é isso que a imagem informa. -->
-      <img class="meta-arte" src="nova-meta-wpp.png"
-           alt="Rezult CRM aberto num notebook, com o selo Meta Business Partner e a frase: empresa certificada pela Meta para implementar o WhatsApp Business de forma oficial, segura e profissional"
-           width="1448" height="1086" loading="lazy" decoding="async">
+       O selo subiu para a pill da hero na parte 1. Aqui fica so a garantia
+       tecnica, ancorada no rodape das features -- que e onde a duvida "meu
+       numero vai ser banido?" nasce, ao ler sobre WhatsApp.
+       A arte grande (nova-meta-wpp.png, 1,97 MB) saiu da pagina. -->
+  <div class="faixa-meta">
+    <div class="wrap">
+      <img class="faixa-meta-selo" src="meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
+      <p><strong>Parceiro oficial da Meta.</strong> O Rezult é uma solução aprovada para operar o WhatsApp Business API: conexão oficial, homologada, com o número da sua própria empresa.</p>
     </div>
   </div>
+
 </section>
 
-<!-- DOBRA · PREÇO -->
 <section class="section" id="precos" style="background: #FBFBFB; padding: 100px 0px">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
@@ -1287,53 +1275,39 @@ fbq('track','PageView');
     </div>
 
     <div style="text-align: center; margin-top: 36px;">
+      <!-- FUSAO DE #beneficios ----------------------------------------------
+           Eram tres cards numa secao propria no fim da pagina. O Georgi:
+           "soltos no fim sao decoracao, colados ao preco sao conversao". Este e
+           o ponto exato em que o leitor calculou R$ 237 e esta procurando o que
+           vai dar errado.
+
+           A migracao da base entrou aqui: ela so aparecia nas dobras 11 e 12,
+           tarde demais para servir de redutor de risco na hora do preco.
+
+           "Time focado no crescimento dos seus resultados" foi CORTADO. Hopkins:
+           fluff, nao e verificavel e nao e promessa. Nenhuma frase que o
+           concorrente tambem poderia escrever tem direito a ocupar espaco aqui.
+           Nao foi substituido: dois itens concretos vendem mais que tres com um
+           vazio.
+
+           Nao vai dentro dos cards: os itens sao iguais nos tres planos, e
+           repetidos tres vezes diluem a diferenca entre Silver, Platinum e
+           Emerald. -->
+      <div class="inclusos reveal">
+        <p class="inclusos-titulo">Em qualquer plano, sem custo extra</p>
+        <ul class="inclusos-itens">
+          <li><strong>Nós migramos sua base.</strong> Leads, tags e histórico do seu CRM atual. De 48 a 72 horas na maioria dos casos, 7 dias no máximo.</li>
+          <li><strong>Suporte com gente de verdade.</strong> Chat das 9h às 22h, incluindo sábados das 14h às 21h. Meet de segunda a sexta, das 10h às 18h.</li>
+          <li><strong>Comunidade no WhatsApp e no Discord</strong>, com quem já roda a operação dentro do Rezult.</li>
+          <li><strong>7 dias grátis, sem cartão. Depois, 30 dias de garantia. Sem fidelidade.</strong></li>
+        </ul>
+      </div>
+
       <a href="planos.html" class="btn btn-ghost">Comparar os planos em detalhe</a>
     </div>
   </div>
 </section>
 
-<!-- DOBRA 06 · BENEFÍCIOS -->
-<section class="section tint-left" id="beneficios" style="padding: 100px 0px">
-  <div class="wrap">
-    <div class="section-head center reveal">
-      <h2 class="h2"><span class="grad-verde">Sua empresa também terá...</span></h2>
-    </div>
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;" id="ben-grid">
-      <div class="bcard">
-        <div class="b-num">01</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 10l5 3-5 3v-6z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
-        <h3 style="margin-bottom:8px;">Suporte humanizado, com atendimento via Meet</h3>
-        <p style="font-size:15px;font-weight:400;color:var(--text-muted);line-height:1.5;margin:0;">Chat ativo das 9h às 22h (incluindo sábados das 14h às 21h) e Meet de seg - das 10 às 18h</p>
-      </div>
-      <div class="bcard">
-        <div class="b-num">02</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" stroke-linecap="round"/><circle cx="17" cy="9" r="2"/><path d="M16 14c2.5 0 4 1.5 4 4" stroke-linecap="round"/></svg></div>
-        <h3>Comunidade no WhatsApp e Discord</h3>
-      </div>
-      <div class="bcard">
-        <div class="b-num">03</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l5-5 4 4 8-9M14 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Time focado no crescimento dos seus resultados</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- DOBRA · IMPLANTACAO ASSISTIDA -------------------------------------------
-     O Makepeace elevou esta secao de "secao de meio de pagina" para peca
-     central da oferta, e o argumento e direto: o medo do dono de PME nao e o
-     preco, e o inferno de trocar de CRM na frente do time. Isto elimina o
-     inferno.
-
-     O SLA e real e confirmado pela operacao: 48 a 72h em bases pequenas, 7 dias
-     como teto nas grandes. Numero prometido aqui e numero que o time honra --
-     oferta que a operacao nao entrega e a forma mais cara de queimar midia.
-
-     O CTA esta em href="#" ate a agenda do Cal.com entrar. NAO subir campanha
-     apontando para ca antes disso. -->
 <section class="section" id="implantacao" style="background: #FFFFFF; padding: 90px 0px">
   <div class="wrap">
     <div class="implanta">
