@@ -2439,6 +2439,7 @@ select.demo-select:invalid { color: #374151; }
   text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.2;
 }
 .ag-painel h4 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
+.ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
 /* Duas colunas na lista, como no modelo. columns e não grid: os itens fluem e
    preenchem as colunas sozinhos, sem precisar dividir a lista na marra. */
