@@ -1532,9 +1532,17 @@ select.demo-select:invalid { color: #374151; }
      bem mais robusto: era brittle demais amarrar a folha de estilo às palavras
      exatas de um h1 que muda toda semana.
 
-     text-wrap: balance distribui as linhas em vez de deixar a última órfã.
-     Onde não houver suporte, o navegador simplesmente ignora. */
-  .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance; }
+     A quebra em quatro linhas do h1 da home nao sai nem do wrap natural
+     (que puxa "e" e "so" para a linha de cima) nem de text-wrap: balance
+     (que iguala as quatro e tira o degrau do final). Ela e explicita, com
+     <br class="mobile-only-br"> no markup, o mesmo padrao ja usado nos h2
+     de #perdendo-vendas e #clientes. Por isso balance sai daqui: com as
+     quebras fixadas ele nao tem o que distribuir e so atrapalharia se um
+     segmento passasse de uma linha. */
+  .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
+  /* As paginas internas nao tem quebra fixada no markup, entao elas
+     seguem com balance para nao deixar a ultima linha orfa. */
+  .page-hero h1 { text-wrap: balance; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
   .hero-cases { margin-top: 100px; }
   .case-card { width: 255px; height: 370px; margin-right: 14px; border-radius: 16px; }
