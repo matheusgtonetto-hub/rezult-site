@@ -213,8 +213,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .section-head { margin-bottom: 50px; }
   /* Só o título de Depoimentos, e só no desktop: os 900px da regra base valem
      para as outras seções, e reduzir ali soltaria o título isolado num bloco
-     de texto bem mais estreito que o .h2 sozinho preencheria mal. */
-  #clientes .section-head { max-width: 700px; }
+     de texto bem mais estreito que o .h2 sozinho preencheria mal.
+
+     Era 700px, medido para o título curto anterior ("De 40 para 120 reuniões
+     por mês"). O título novo tem 40,29em e não cabe: em 700px ele quebrava em
+     três linhas, e a do meio ficava com 8,35em contra 19,25em da primeira,
+     porque .grad-verde é inline-block e o trecho verde não parte. Como bloco
+     indivisível de 12,28em, ele descia inteiro e deixava o buraco.
+     760px foi medido com fontTools sobre o Geist-Bold: dá duas linhas de
+     20,45em e 19,64em, com o verde inteiro na segunda. É o mesmo 760px que
+     #operacao, #ate-onde e #como-funciona já usam inline. */
+  #clientes .section-head { max-width: 760px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
