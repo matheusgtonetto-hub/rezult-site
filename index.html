@@ -1086,22 +1086,63 @@ fbq('track','PageView');
     </div>
   </div>
 
-  <!-- FAIXA META ------------------------------------------------------------
-       Era secao inteira (dobra 8): uma tela com um selo, um paragrafo e um CTA
-       que competia com o dos precos a uma dobra de distancia. O Georgi: "nao e
-       secao, e faixa. Uma tela inteira com um selo queima uma dobra."
+</section>
 
-       O selo subiu para a pill da hero na parte 1. Aqui fica so a garantia
-       tecnica, ancorada no rodape das features -- que e onde a duvida "meu
-       numero vai ser banido?" nasce, ao ler sobre WhatsApp.
-       A arte grande (nova-meta-wpp.png, 1,97 MB) saiu da pagina. -->
-  <div class="faixa-meta">
-    <div class="wrap">
-      <img class="faixa-meta-selo" src="meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
-      <p><strong>Parceiro oficial da Meta.</strong> O Rezult é uma solução aprovada para operar o WhatsApp Business API: conexão oficial, homologada, com o número da sua própria empresa.</p>
+
+<!-- DOBRA · PARCEIRO META ------------------------------------------------------
+     Esta secao ja existiu, foi dissolvida em faixa no commit cc08c05 ("nao e
+     secao, e faixa -- uma tela inteira com um selo queima uma dobra") e volta
+     agora por dado, nao por gosto.
+
+     Biblioteca de Anuncios da Meta, Brasil, coleta de 2026-09-12: o anuncio com
+     MAIS IMPRESSOES e MAIS LONGEVIDADE de toda a categoria "agente de IA +
+     WhatsApp" -- primeiro lugar no ranking, 305 dias no ar, replicado em
+     espanhol por mais 209 -- e da WhatChimp e diz:
+
+       "Enviar mensagens em massa no WhatsApp SEM TOMAR BAN. API oficial.
+        Verified Meta Business Partner."
+
+     Ou seja: a dor numero um da categoria no Brasil nao e demora no
+     atendimento, e MEDO DE PERDER O NUMERO. O argumento que estava no rodape da
+     dobra de recursos, em letra pequena, e a mensagem de maior alcance do
+     mercado em que o Rezult compete.
+
+     Manchete pelo angulo do Makepeace ("nada disso e gambiarra em cima do
+     WhatsApp"), que ele propos por instinto antes de existir o dado.
+
+     Posicao: depois das quatro pecas e antes do "3 passos". Objecao nao aparece
+     enquanto a pessoa aprende o que o produto faz -- aparece depois que ela
+     quer o produto e antes de perguntar o preco.
+     Efeito colateral: quebra os tres fundos #FBFBFB seguidos que a mudanca de
+     ordem de hoje tinha criado.
+     Analise completa em Megabrain: outputs/spy/ads/ -->
+<section class="section" id="parceiro-meta" style="background: #F1F6FD; padding: 90px 0px">
+  <div class="wrap">
+    <div class="meta-grade">
+      <div class="meta-texto reveal">
+        <!-- O selo numa placa branca, acima do título. width/height reservam o
+             espaço antes de o PNG carregar: sem eles a placa nasce sem altura e
+             empurra o título quando a imagem chega. -->
+        <span class="meta-selo-caixa">
+          <img class="meta-selo" src="meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
+        </span>
+        <h2 class="h2">Nada disso é gambiarra. <span class="meta-azul">É a API oficial da Meta.</span></h2>
+        <p class="lede">O Rezult opera o WhatsApp Business API homologado, com o número da sua própria empresa. Nada de API não oficial pendurada num celular, que é o que derruba número.</p>
+        <a href="https://app.rezultcrm.com/register" class="btn btn-meta">Começar os 7 dias grátis</a>
+      </div>
+
+      <!-- width/height reservam a proporção antes de o PNG carregar. Sem eles a
+           coluna nasce sem altura e o layout salta quando a imagem chega, que é
+           pior aqui do que em qualquer outro lugar da página: são 1448x1086, a
+           imagem mais pesada do site. Por isso loading=lazy: ela está na sétima
+           dobra e não pode competir com a hero pelo primeiro carregamento.
+           O alt descreve o SELO e o texto embutidos na arte, e não a cena: para
+           quem usa leitor de tela, é isso que a imagem informa. -->
+      <img class="meta-arte" src="nova-meta-wpp.png"
+           alt="Rezult CRM aberto num notebook, com o selo Meta Business Partner e a frase: empresa certificada pela Meta para implementar o WhatsApp Business de forma oficial, segura e profissional"
+           width="1448" height="1086" loading="lazy" decoding="async">
     </div>
   </div>
-
 </section>
 
 <!-- DOBRA · COMO FUNCIONA -->
