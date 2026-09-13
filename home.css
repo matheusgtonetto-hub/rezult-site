@@ -3343,7 +3343,14 @@ select.demo-select:invalid { color: #374151; }
 }
 .pp-coluna-mais { display: flex; width: 12px; height: 12px; flex-shrink: 0; color: #A1A1AA; }
 .pp-coluna-mais svg { width: 100%; height: 100%; }
-.pp-coluna-resumo { font-size: 9px; color: #71717A; font-variant-numeric: tabular-nums; }
+/* O total por coluna e a peca mais persuasiva do painel: ele recalcula a cada
+   movimento, entao o leitor ve o dinheiro migrar de 'Novo lead' para 'Reuniao
+   agendada' sem ninguem arrastar nada. Estava em 9px cinza claro, com peso de
+   metadado. Sobe para 10px, #3F3F46 e peso 600 -- ainda subordinado ao nome da
+   etapa, mas legivel como informacao, nao como rodape.
+   Origem: sessao de copy de 2026-09-12, depois do teardown do AuditIA, que
+   mostra dinheiro em risco na landing deles como prova principal. */
+.pp-coluna-resumo { font-size: 10px; color: #3F3F46; font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* Posição absoluta, e não empilhado dentro da coluna: mudar de etapa vira um par
    de coordenadas novo, que o CSS anima. Dentro da coluna seria remover de um pai
