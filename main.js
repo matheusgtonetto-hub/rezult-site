@@ -558,7 +558,10 @@ document.querySelectorAll(".faq-item").forEach(item => {
       });
     }
 
-    window.location.href = DESTINO;
+    // Repassa UTM, fbclid e a origem para o app. Ver rastreio.js.
+    window.location.href = typeof window.rzComParametros === "function"
+      ? window.rzComParametros(DESTINO, "captura-intencao")
+      : DESTINO;
   });
 
   // Enter envia, Shift+Enter quebra linha. Num textarea o padrão é o contrário,
