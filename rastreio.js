@@ -44,6 +44,9 @@
   })();
 
   function secaoDe(el) {
+    // O menu mobile é uma div fora de qualquer seção; sem esta linha o CTA dele
+    // chegava ao app como "desconhecida".
+    if (el.closest(".mobile-menu")) return "menu-mobile";
     var alvo = el.closest("section[id], header[id]");
     if (alvo) return alvo.id;
     if (el.closest("nav")) return "nav";
