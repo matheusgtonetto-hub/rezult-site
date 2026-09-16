@@ -2945,14 +2945,17 @@ select.demo-select:invalid { color: #374151; }
     border-right: none;
     border-top: 1px solid #E5E5E5;
   }
-}
-
-@media (max-width: 560px) {
   /* A altura vai no slot, não no painel: o painel está fora do fluxo e não
-     tem de onde herdar altura quando a linha vira coluna única. */
+     tem de onde herdar altura quando a linha vira coluna única. Precisa valer
+     no MESMO breakpoint em que a coluna única começa (980px). Quando ficava só
+     em 560px, entre 561px e 980px o slot colapsava para zero e os três painéis
+     sumiam da página. */
   .tem-painel-wpp { height: 380px; }
   .tem-painel-automacao { height: 300px; }
   .tem-painel-pipeline { height: 330px; }
+}
+
+@media (max-width: 560px) {
   .pw-bolha { font-size: 12.5px; }
   .pw-bloco { max-width: 82%; }
 }
