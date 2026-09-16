@@ -586,6 +586,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
    largo. Forçar caixa quadrada nele achataria o desenho. */
 .hero-badge-ico { width: 12px; height: 18px; color: var(--green-text); flex-shrink: 0; }
+/* Ícone oficial da Meta (logos/meta.svg). 24x16 mantém a razão do viewBox,
+   287.56x191. */
+.hero-badge-meta { width: 24px; height: 16px; flex-shrink: 0; display: block; }
 /* Variante da home: raio no lugar da cápsula e fundo verde claro, sem contorno.
    Fica escopada porque as pills de planos, política e termo usam a cápsula .tag
    e continuam com a borda da regra base. */
@@ -593,8 +596,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   /* Verde bem claro e translúcido: é o --green-text a 10%, então acompanha a
      cor da marca numa troca futura, em vez de um hex claro fixo. Sendo rgba,
      o fundo da hero aparece por baixo. O texto volta ao --ink dos títulos. */
-  background: rgba(0, 184, 115, 0.10);
+  /* Fundo branco com sombra curta: a pill se destaca do cinza claro da hero
+     sem precisar de contorno, e o azul do ícone da Meta fica legível. */
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 18px -6px rgba(0, 0, 0, 0.14);
   color: var(--ink);
+  font-size: 13px;
   padding: 8px 14px;
   /* `border: 0`, e não `border-color: transparent`: a regra base declara
      `1px solid`, e uma borda transparente continuaria ocupando 1px de cada lado,

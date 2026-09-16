@@ -93,7 +93,7 @@ function Card({ card }) {
           sem inventar elemento que o CRM não tem. */}
       <div className="pp-resp">
         <span className="pp-resp-foto">
-          <img src="logo-rezult-preto.png" alt="" width="100" height="100" />
+          <img src="logos/logo-rezult-preto.png" alt="" width="100" height="100" />
         </span>
         <span className="pp-resp-nome">{AGENTE}</span>
       </div>

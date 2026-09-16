@@ -80,13 +80,13 @@ function AvatarLead({ tamanho }) {
  * responde é quem está olhando a tela. Aqui a cena precisa dizer, em cada
  * mensagem, que do outro lado não tem ninguém digitando.
  *
- * logo-rezult-preto.png e não logo-rezult.png: aquele tem 1080px, fundo branco
+ * logos/logo-rezult-preto.png e não logos/logo-rezult.png: aquele tem 1080px, fundo branco
  * chapado (RGB, sem canal alfa) e folga em volta da marca, o que dentro de um
  * círculo de 28px renderia um R minúsculo cercado de branco. Este tem 100px,
  * fundo transparente e recorte justo.
  *
  * O caminho é relativo à página, e não ao bundle: o navegador resolve src de
- * <img> a partir do documento, então "logo-rezult-preto.png" da raiz vale
+ * <img> a partir do documento, então "logos/logo-rezult-preto.png" da raiz vale
  * mesmo com o script servido de build/. */
 function AvatarAgente({ tamanho }) {
   return (
@@ -95,7 +95,7 @@ function AvatarAgente({ tamanho }) {
       style={{ width: tamanho, height: tamanho }}
       aria-hidden="true"
     >
-      <img src="logo-rezult-preto.png" alt="" width="100" height="100" />
+      <img src="logos/logo-rezult-preto.png" alt="" width="100" height="100" />
     </span>
   );
 }
