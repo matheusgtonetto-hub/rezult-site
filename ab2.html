@@ -1,34 +1,37 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-rz-variant="ab2">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>CRM de Vendas com Pipeline, WhatsApp e IA | Rezult CRM</title>
-<meta name="description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
+<title>CRM Ativo para atendimento, qualificação e follow-up | Rezult</title>
+<meta name="description" content="Atendimento, qualificação e follow-up já vêm feitos. Seu time entra para decidir e vender. Conheça o Rezult: 7 dias grátis, sem cartão." />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#08120e" />
+<!-- Variante de teste A/B. O canonical aponta para a home de propósito: é a
+     recomendação do Google para teste A/B, e evita que as duas URLs compitam
+     entre si na busca como conteúdo duplicado. -->
 <link rel="canonical" href="https://rezultcrm.com/" />
 <link rel="manifest" href="/site.webmanifest" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:site_name" content="Rezult CRM" />
-<meta property="og:title" content="CRM de Vendas com Pipeline, WhatsApp e IA | Rezult CRM" />
-<meta property="og:description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
-<meta property="og:url" content="https://rezultcrm.com/agentes" />
+<meta property="og:title" content="CRM Ativo para atendimento, qualificação e follow-up | Rezult" />
+<meta property="og:description" content="Atendimento, qualificação e follow-up já vêm feitos. Seu time entra para decidir e vender. Conheça o Rezult: 7 dias grátis, sem cartão." />
+<meta property="og:url" content="https://rezultcrm.com/ab2" />
 <meta property="og:image" content="https://rezultcrm.com/rezult-pipeline.png" />
 <meta property="og:image:width" content="1800" />
 <meta property="og:image:height" content="1080" />
 <meta property="og:image:alt" content="Tela do pipeline comercial do Rezult CRM" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="CRM de Vendas com Pipeline, WhatsApp e IA | Rezult CRM" />
-<meta name="twitter:description" content="Gerencie pipeline de vendas, atenda pelo WhatsApp e automatize fluxos comerciais com IA integrada — tudo em um só CRM." />
+<meta name="twitter:title" content="CRM Ativo para atendimento, qualificação e follow-up | Rezult" />
+<meta name="twitter:description" content="Atendimento, qualificação e follow-up já vêm feitos. Seu time entra para decidir e vender. Conheça o Rezult: 7 dias grátis, sem cartão." />
 <meta name="twitter:image" content="https://rezultcrm.com/rezult-pipeline.png" />
 <meta name="twitter:image:alt" content="Tela do pipeline comercial do Rezult CRM" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="home.css" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -57,7 +60,9 @@ fbq('track','PageView');
       "@id": "https://rezultcrm.com/#website",
       "url": "https://rezultcrm.com/",
       "name": "Rezult CRM",
-      "publisher": { "@id": "https://rezultcrm.com/#organization" }
+      "publisher": {
+        "@id": "https://rezultcrm.com/#organization"
+      }
     },
     {
       "@type": "SoftwareApplication",
@@ -66,41 +71,6 @@ fbq('track','PageView');
       "operatingSystem": "Web",
       "url": "https://rezultcrm.com/",
       "description": "CRM de vendas com pipeline, atendimento centralizado, automações e inteligência artificial integrada."
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Preciso saber programar pra usar?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Não. O Rezult foi pensado para que seu time configure automações e acompanhe a operação comercial sem depender de programação." }
-        },
-        {
-          "@type": "Question",
-          "name": "Como funciona a integração com WhatsApp?",
-          "acceptedAnswer": { "@type": "Answer", "text": "O Rezult centraliza as conversas do WhatsApp para que o time atenda com histórico, atribuição e automações no mesmo lugar." }
-        },
-        {
-          "@type": "Question",
-          "name": "Os agentes de IA respondem do meu jeito?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Os agentes podem ser configurados com o tom de voz, a base de conhecimento e as regras da sua operação." }
-        },
-        {
-          "@type": "Question",
-          "name": "Tem fidelidade ou multa de cancelamento?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Não há fidelidade nem multa de cancelamento." }
-        },
-        {
-          "@type": "Question",
-          "name": "Consigo migrar meus leads de outro CRM?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Sim. A migração dos dados da operação pode ser feita durante a implementação." }
-        },
-        {
-          "@type": "Question",
-          "name": "Quanto tempo até estar rodando?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Em geral, a operação pode começar a rodar em um dia após conectar contas, importar leads e configurar o fluxo." }
-        }
-      ]
     }
   ]
 }
@@ -112,12 +82,12 @@ fbq('track','PageView');
 <nav class="nav" id="nav">
   <div class="wrap">
     <div class="nav-left">
-      <a href="index.html" class="logo">
+      <a href="ab2.html" class="logo">
         <img src="logos/logo-rezult.png" alt="Rezult CRM" width="1080" height="1080">
       </a>
     </div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="ab2.html">Home</a>
       <a href="planos.html">Planos</a>
     </div>
     <div class="nav-right">
@@ -135,7 +105,7 @@ fbq('track','PageView');
         <i class="btn-pontos-point"></i>
         <i class="btn-pontos-point"></i>
         </div>
-        <span class="btn-pontos-inner">Teste Grátis</span>
+        <span class="btn-pontos-inner">Começar os 7 dias grátis</span>
       </a>
       <button class="nav-burger" id="burger" aria-label="Menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/><path d="M3 12h18"/><path d="M3 19h18"/></svg>
@@ -145,9 +115,9 @@ fbq('track','PageView');
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
+  <a href="ab2.html">Home</a>
   <a href="planos.html">Planos</a>
-  <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Teste Grátis</a>
+  <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Começar os 7 dias grátis</a>
 </div>
 
 <!-- HERO -->
@@ -156,54 +126,61 @@ fbq('track','PageView');
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge hero-badge-ia reveal">
-          <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
-          <span>Nova geração de CRM agêntico</span>
+          <span>CRM ATIVO</span>
         </div>
-        <h1 class="reveal" data-d="1">Crie um time de agentes<br>para atender 24h no WhatsApp.</h1>
-        <!-- O traço fica DENTRO do span, e não como fundo do parágrafo: assim ele
-             mede exatamente a frase grifada, sem depender de largura fixa. O ponto
-             final fica de fora, porque a linha marca as palavras, não a pontuação. -->
-        <p class="hero-sub reveal" data-d="2">Agentes atendendo no WhatsApp 24h<br class="mobile-only-br"> e <span class="grifo">registrando tudo no CRM<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 8Q14 7.2 30 7L266 7Q285 7 297 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>.</p>
-        <form class="hero-monta reveal" data-d="4" id="heroMonta" novalidate>
-          <!-- Rótulo oculto, e não só o placeholder: placeholder some assim que a
-               pessoa digita a primeira letra, e leitor de tela não o trata como
-               nome do campo. O <label> garante que a pergunta continue sendo
-               anunciada, e some da tela porque ela já está dentro do campo. -->
-          <label class="visualmente-oculto" for="montaTexto">O que você deseja automatizar no seu negócio?</label>
-          <textarea id="montaTexto" class="monta-campo" rows="2" maxlength="600"
-                    placeholder="O que você deseja automatizar no seu negócio?">Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.</textarea>
-          <div class="monta-pe">
-            <span class="monta-nota">Teste grátis</span>
-            <button type="submit" class="btn btn-primary monta-cta">
-              Criar agente
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-          </div>
-        </form>
-
-        <div class="monta-chips reveal" data-d="5">
-          <div class="monta-casos">
-            <button type="button" class="monta-chip ativo" aria-pressed="true" data-slug="atendimento" data-texto="Crie um agente de atendimento para o meu negócio. O agente deve responder no WhatsApp 24 horas por dia, tirar as dúvidas mais comuns e registrar cada conversa no CRM.">Atendimento</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="qualificacao" data-texto="Crie um agente de qualificação para o meu negócio. O agente deve descobrir o que a pessoa procura, o orçamento e a urgência, e separar quem já está pronto para comprar.">Qualificação</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="agendamentos" data-texto="Crie um agente de agendamento para o meu negócio. O agente deve marcar as reuniões na agenda da pessoa certa, confirmar com o cliente no dia anterior e remarcar quem faltar.">Agendamentos</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="vendas" data-texto="Crie um agente de vendas para o meu negócio. O agente deve apresentar a proposta, responder as objeções mais comuns, negociar dentro do que eu autorizar e fechar a venda.">Vendas</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="crm" data-texto="Crie um agente de CRM para o meu negócio. O agente deve registrar cada conversa, preencher origem, resumo e estágio do negócio, e mover o card no funil sem ninguém digitar.">Operacional</button>
-            <button type="button" class="monta-chip" aria-pressed="false" data-slug="suporte" data-texto="Crie um agente de suporte para o meu negócio. O agente deve responder as dúvidas de quem já é cliente, resolver os pedidos mais comuns sozinho e passar para uma pessoa só o que sair do padrão.">Suporte</button>
-          </div>
-          <!-- Seta dupla no fim da fileira. Vai depois de .monta-casos e não
-               dentro dela: dentro, ela rolaria junto com os chips e sairia da
-               tela no primeiro arrasto, bem quando ainda precisa ser vista. -->
-          <span class="monta-dica" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-          </span>
+        <h1 class="reveal" data-d="1">Atendimento, qualificação e follow-up já vêm feitos. Seu time entra para decidir e vender.</h1>
+        <p class="hero-sub reveal" data-d="2">O Rezult trabalha cada lead, registra o que aconteceu e chama sua equipe quando uma decisão precisa dela. Você briefa as funções comerciais em vez de montar um robô do zero.</p>
+        <div class="hero-actions reveal" data-d="3">
+          <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+            <div class="btn-pontos-wrap" aria-hidden="true">
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            </div>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+          <a href="https://cal.com/rezult-crm/demonstracao" class="link-seta">
+            Agendar demo
+            <svg class="link-seta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
+        <!-- Reversao de risco na hera. Ate aqui ela vivia so na secao de planos,
+             depois de sete dobras: quem abandonava na primeira nunca ficava
+             sabendo que nao precisava de cartao. Os tres itens sao fato
+             confirmado da operacao, nao promessa de copy.
+             Usa .hero-note, regra que ja existia na folha e nao tinha markup. -->
+        <p class="hero-note reveal" data-d="4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+          7 dias grátis, sem cartão. Depois, 30 dias de garantia. Sem fidelidade.
+        </p>
+        <!-- Prova dentro da primeira dobra. Vinha na 5a (selo) e na 8a (Meta):
+             o cetico de Nivel 2 nao passa da primeira linha sem prova.
+             Fica DEPOIS da reversao de risco, e nao antes, de proposito: ele le
+             promessa, le custo zero, e so entao pergunta "quem mais?". Prova
+             antes responde uma pergunta que ele ainda nao fez.
+             TODO: o 5.0 precisa virar link para a ficha do Google. Alegacao sem
+             fonte verificavel, em mercado cetico, nao e prova. -->
+        <p class="hero-prova reveal" data-d="5">
+          <span class="hero-prova-estrelas" role="img" aria-label="5 de 5 estrelas">★★★★★</span>
+          <strong>5.0 no Google</strong> · 774 avaliações
+        </p>
+      </div>
+      <div class="hero-mockup-wrap" id="mockupSlotA">
+        <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
       </div>
     </div>
   </div>
 
   <!-- Faixa de provas · esteira de cases -->
   <div class="hero-cases">
+    <p class="cases-rotulo">Operações que já rodam no Rezult</p>
     <div class="cases-linha">
       <article class="case-card">
         <img class="case-foto" src="cases/case-1.jpg" alt="" onerror="this.remove()">
@@ -474,127 +451,124 @@ fbq('track','PageView');
 </header>
 
 
-<!-- DOBRA 01 · RECURSOS -->
-<section class="section" id="recursos" style="background: #FBFBFB; padding: 90px 0px; overflow: hidden;">
-  <div class="wrap" style="padding: 0px 20px">
-    <div class="section-head center reveal" style="max-width: 760px">
-      <h2 class="h2"><span class="grad-verde">Solução completa</span> para o seu negócio crescer sem contratar</h2>
+<!-- DOBRA 02 · AGITACAO -----------------------------------------------------
+     A pagina nao tinha nenhuma. Era 100% feature e beneficio, 0% consequencia
+     de nao agir, e o leitor de trafego frio precisa sentir o custo antes de
+     ouvir a solucao.
+
+     O eixo NAO e comparativo. O briefing pedia "conversao com CRM tradicional
+     x conversao com Rezult", e esse numero nao existe: a empresa esta lancando
+     e nao tem telemetria. Em vez de inventar percentual, o leitor audita o
+     PROPRIO funil com quatro perguntas que ele responde com os dados dele.
+     A evidencia vira dele, nao nossa -- e ninguem derruba um dado que o
+     proprio prospecto coletou.
+     Quando houver telemetria real, ela entra por cima; nao substitui. -->
+<section class="section" id="perdendo-vendas" style="background: #FBFBFB; padding: 90px 0px">
+  <div class="wrap">
+    <div class="section-head center reveal" style="padding: 0 12px; max-width: 800px;">
+      <h2 class="h2">Seu negócio pode estar perdendo vendas.<br class="mobile-only-br"> <span class="grad-verde">E o CRM não vai te contar.</span></h2>
+      <p class="lede">Porque ele só sabe o que alguém teve tempo de registrar.</p>
     </div>
 
-    <!-- Feature 1: WhatsApp -->
-    <div class="feature-row">
-      <div class="feature-text reveal tema-verde">
-        <div class="feature-heading">
-          <div class="feature-icon">
-            <svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-          </div>
-          <h3><span class="hl">WhatsApp</span> Oficial</h3>
-        </div>
-        <div class="feature-foot">
-          <p>Todas as conversas num só inbox. Time inteiro atendendo, com histórico, atribuição e relatório. O lead nem percebe o que tem por trás.</p>
-          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
-        </div>
-        <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Multiatendimento com múltiplas conexões</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Respostas rápidas e templates</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Instagram e outros canais no mesmo lugar</li>
-        </ul>
+    <!-- As quatro perguntas. Numeradas porque sao uma sequencia de auditoria:
+         a ordem leva do sintoma mais visivel (lead sem resposta) ao mais caro
+         (conhecimento que sai junto com o vendedor). -->
+    <div class="auditoria reveal" data-d="1">
+      <div class="auditoria-item">
+        <span class="auditoria-num">01</span>
+        <p>Quantos leads chegaram depois das 18h no mês passado? <strong>Quantos foram respondidos naquela noite?</strong></p>
       </div>
-      <div class="feature-visual reveal" data-d="1" id="featWhatsapp"></div>
+      <div class="auditoria-item">
+        <span class="auditoria-num">02</span>
+        <p>Quantas negociações estão paradas há mais de 7 dias <strong>no seu funil agora?</strong></p>
+      </div>
+      <div class="auditoria-item">
+        <span class="auditoria-num">03</span>
+        <p>Abra três contatos no seu CRM. <strong>Quantos têm anotação da última conversa?</strong></p>
+      </div>
+      <div class="auditoria-item">
+        <span class="auditoria-num">04</span>
+        <p>Se o vendedor que mais vende sair amanhã, <strong>o que fica registrado?</strong></p>
+      </div>
     </div>
 
-    <!-- Feature 2: Agentes de IA -->
-    <div class="feature-row flip">
-      <div class="feature-text reveal tema-laranja">
-        <div class="feature-heading">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="6" width="14" height="12" rx="3"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><path d="M12 3v3" stroke-linecap="round"/></svg>
-          </div>
-          <h3><span class="hl">Agentes</span> de IA 24h</h3>
-        </div>
-        <div class="feature-foot">
-          <p>Configure uma vez e a IA responde, qualifica e agenda demo no WhatsApp — no seu tom, com sua base de conhecimento. Lead quente chega pronto pro time.</p>
-          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
-        </div>
-        <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Qualificação automática com score</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Escala pro humano na hora certa</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Aprende com seus casos de sucesso</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal" data-d="1" id="featAgent"></div>
+    <p class="auditoria-fecho reveal" data-d="2">
+      Se você não sabe responder nenhuma delas, você também não sabe quanto do que gastou em anúncio virou conversa parada.<br class="mobile-only-br">
+      Não é indisciplina do time. É <strong>um sistema que espera alguém parar de vender para responder, acompanhar e preencher.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- DOBRA 2.5 · A LARGURA ---------------------------------------------------
+     O h1 vende a cena do agendamento e vende bem. O risco que duas analises
+     independentes apontaram e o mesmo: o leitor conclui que o Rezult e "IA de
+     agendamento com CRM", quando sao cinco funcoes.
+
+     Esta dobra existe para corrigir isso IMEDIATAMENTE apos a dor, e foi
+     desenhada com teto de 60 palavras -- tem 57. O bloco seguinte (#agentes) e
+     o mais denso da pagina, e tres blocos de texto corrido em sequencia nao se
+     atravessam.
+
+     Por isso a largura vem em FLUXO e nao em prosa: largura e a coisa mais cara
+     de escrever e a mais barata de desenhar. O texto carrega so o que o
+     diagrama nao prova, que e preco.
+
+     As seis etapas batem com os cinco agentes da dobra seguinte de proposito:
+     assim o fluxo nao e ilustracao, e o MAPA do que vem a seguir.
+
+     NAO acrescentar legenda explicando o fluxo. Se ele precisar de legenda,
+     ele esta errado. -->
+<section class="section" id="operacao" style="background: #FFFFFF; padding: 80px 0px">
+  <div class="wrap">
+    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
+      <h2 class="h2">Você não monta um robô. <span class="grad-verde">Você briefa um time.</span></h2>
+      <p class="lede">Você conta como sua empresa atende, qualifica e vende. O Rezult executa o próximo passo permitido, registra o resultado e entrega à sua equipe o que exige julgamento.</p>
     </div>
 
-    <!-- Feature 3: Automações -->
-    <div class="feature-row">
-      <div class="feature-text reveal tema-azul">
-        <div class="feature-heading">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
-          </div>
-          <h3><span class="hl">Automações</span> Avançadas</h3>
-        </div>
-        <div class="feature-foot">
-          <p>Monte fluxos visuais arrastando blocos. Lead novo entrou? Dispara mensagem, move de etapa, atribui pro time — automático.</p>
-          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
-        </div>
-        <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Builder visual sem código</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Gatilhos por origem, score e comportamento</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Follow-up que não deixa lead esfriar</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal" data-d="1" id="featAutomation"></div>
-    </div>
+    <ol class="fluxo reveal" data-d="1">
+      <li class="fluxo-etapa fluxo-entrada"><span>Lead entra</span></li>
+      <li class="fluxo-etapa"><span>Responde</span></li>
+      <li class="fluxo-etapa"><span>Qualifica</span></li>
+      <li class="fluxo-etapa"><span>Faz follow-up</span></li>
+      <li class="fluxo-etapa"><span>Agenda</span></li>
+      <li class="fluxo-etapa"><span>Registra no CRM</span></li>
+    </ol>
 
-    <!-- Feature 4: Pipelines -->
-    <div class="feature-row flip">
-      <div class="feature-text reveal tema-roxo">
-        <div class="feature-heading">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></svg>
-          </div>
-          <h3><span class="hl">CRM</span> Automatizado</h3>
-        </div>
-        <div class="feature-foot">
-          <p>No Rezult cada etapa do seu funil ganha vida com kanbans inteligentes que se adaptam ao seu processo comercial.</p>
-          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
-        </div>
-        <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Múltiplos funis por time ou produto</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Movimentação automática entre etapas</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Etapas e gatilhos personalizáveis</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal" data-d="1" id="featPipelines"></div>
+    <p class="fluxo-conta reveal" data-d="2">
+      Montar isso fora do Rezult custa <strong>R$ 3.486 por mês</strong>: plataforma de WhatsApp oficial R$ 989, agente de IA R$ 497, SDR PJ R$ 2.000. No Rezult, <strong>a partir de R$ 237</strong>, e você liga só as etapas que quiser.
+    </p>
+
+    <div class="fluxo-cta reveal" data-d="2">
+      <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+        <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
+        <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
 
+
 <!-- DOBRA · AGENTES DE IA -->
 <section class="section" id="agentes" style="background: #FFFFFF; padding: 100px 0px">
   <div class="wrap">
-    <div class="section-head center reveal" style="max-width: 760px;">
-      <h2 class="h2">Você não precisa contratar<br>mais pessoas. Precisa dar<br>uma equipe de IA para eles.</h2>
-      <p class="lede">Os agentes cuidam de todas as etapas<br>do seu processo comercial.</p>
+    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
+      <h2 class="h2"><span class="grad-verde">Atendimento que vira CRM</span></h2>
+      <p class="lede">No CRM de sempre, alguém precisa parar de vender para digitar o que aconteceu. E ninguém digita. No Rezult, o registro se escreve enquanto a conversa acontece. <strong>Os outros avisam que o lead esfriou. O Rezult responde antes de esfriar.</strong></p>
+      <p class="lede lede-2">São cinco agentes, um para cada etapa do seu processo. <strong>Você liga os cinco ou liga um só.</strong> Todos alimentam o mesmo funil, sem ninguém digitar nada.</p>
     </div>
 
       <div class="ag-abas" role="tablist" aria-label="Agentes de IA">
-        <button class="ag-aba ativa" type="button" role="tab" id="ag-t0" aria-controls="ag-p0" aria-selected="true" tabindex="0"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Atendimento</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t1" aria-controls="ag-p1" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Qualificação</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t2" aria-controls="ag-p2" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Agendamentos</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t3" aria-controls="ag-p3" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Vendas</span></button>
-        <span class="ag-abas-quebra" aria-hidden="true"></span>
-        <button class="ag-aba" type="button" role="tab" id="ag-t4" aria-controls="ag-p4" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Suporte</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t5" aria-controls="ag-p5" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Pós-vendas</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t6" aria-controls="ag-p6" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Operacional</span></button>
+        <button class="ag-aba ativa" type="button" role="tab" id="ag-t0" aria-controls="ag-p0" aria-selected="true" tabindex="0"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Atendente</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t1" aria-controls="ag-p1" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">SDR</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t2" aria-controls="ag-p2" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Closer</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t3" aria-controls="ag-p3" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Pós-venda</span></button>
+        <button class="ag-aba" type="button" role="tab" id="ag-t4" aria-controls="ag-p4" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Operacional</span></button>
       </div>
 
       <div class="ag-painel ativo" id="ag-p0" role="tabpanel" aria-labelledby="ag-t0">
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
-            <h3>Agente de Atendimento</h3>
+            <h3>Agente Atendente</h3>
           </div>
           <h4>Responde em segundos, a qualquer hora.</h4>
           <p class="ag-desc">Ninguém espera até segunda-feira para ser atendido. O agente assume a conversa no minuto em que ela começa.</p>
@@ -608,15 +582,14 @@ fbq('track','PageView');
           </ul>
           <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
             <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
       <div class="ag-painel" id="ag-p1" role="tabpanel" aria-labelledby="ag-t1" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></span>
-            <h3>Agente de Qualificação</h3>
+            <h3>Agente SDR</h3>
           </div>
           <h4>Descobre quem está pronto para comprar.</h4>
           <p class="ag-desc">Cada contato é analisado assim que chega, sem depender de alguém livre para fazer na mão.</p>
@@ -630,37 +603,14 @@ fbq('track','PageView');
           </ul>
           <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
             <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
       <div class="ag-painel" id="ag-p2" role="tabpanel" aria-labelledby="ag-t2" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-            <h3>Agente de Agendamento</h3>
-          </div>
-          <h4>A agenda do time sempre atualizada.</h4>
-          <p class="ag-desc">Marca, confirma e reagenda sozinho, na disponibilidade real de cada profissional.</p>
-          <ul class="ag-lista">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sincroniza com o Google Agenda automaticamente</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Respeita o horário de cada profissional ou unidade</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirma o compromisso um dia antes</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reagenda sozinho quando o cliente pede</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Avisa o time sobre furos e cancelamentos</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reduz falta com lembrete por WhatsApp</li>
-          </ul>
-          <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
-            <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-          </a>
-        </div>
-      </div>
-      <div class="ag-painel" id="ag-p3" role="tabpanel" aria-labelledby="ag-t3" hidden>
-        <div class="ag-painel-txt">
-          <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
-            <h3>Agente de Vendas</h3>
+            <h3>Agente Closer</h3>
           </div>
           <h4>Conduz a negociação até o fechamento.</h4>
           <p class="ag-desc">Segue a conversa do primeiro contato até a decisão, sem perder o timing.</p>
@@ -674,37 +624,14 @@ fbq('track','PageView');
           </ul>
           <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
             <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p4" role="tabpanel" aria-labelledby="ag-t4" hidden>
+      <div class="ag-painel" id="ag-p3" role="tabpanel" aria-labelledby="ag-t3" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span>
-            <h3>Agente de Suporte</h3>
-          </div>
-          <h4>Resolve o comum sozinho, sem fila de espera.</h4>
-          <p class="ag-desc">Tira dúvida, resolve pedido simples e só chama um humano quando o caso foge do padrão.</p>
-          <ul class="ag-lista">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Base de conhecimento com as respostas da sua operação</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Resolve as dúvidas mais comuns sem esperar</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Abre e acompanha chamados no CRM</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Escala para um humano quando o caso é complexo</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Histórico completo de cada atendimento</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Funciona no mesmo número que já atende</li>
-          </ul>
-          <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
-            <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-          </a>
-        </div>
-      </div>
-      <div class="ag-painel" id="ag-p5" role="tabpanel" aria-labelledby="ag-t5" hidden>
-        <div class="ag-painel-txt">
-          <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-            <h3>Agente de Pós-vendas</h3>
+            <h3>Agente de Pós-venda</h3>
           </div>
           <h4>O cliente não some depois da compra.</h4>
           <p class="ag-desc">Acompanha, tira dúvidas e devolve para um humano quando precisa.</p>
@@ -718,14 +645,13 @@ fbq('track','PageView');
           </ul>
           <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
             <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p6" role="tabpanel" aria-labelledby="ag-t6" hidden>
+      <div class="ag-painel" id="ag-p4" role="tabpanel" aria-labelledby="ag-t4" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <span class="ag-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 9v11"/></svg></span>
             <h3>Agente Operacional</h3>
           </div>
           <h4>Seu time nunca mais preenche CRM na mão.</h4>
@@ -740,12 +666,67 @@ fbq('track','PageView');
           </ul>
           <a href="https://app.rezultcrm.com/register" class="btn-pontos ag-cta">
             <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
-            <span class="btn-pontos-inner">Testar 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
-    </div>
+  </div>
 </section>
+
+<!-- DOBRA 3.5 · O CONTROLE DE VOLUME ----------------------------------------
+     Vem DEPOIS dos cinco agentes, nunca antes. A regra do Makepeace: "a versao
+     grande vem primeiro, sempre. Quem mostra a opcao timida antes vende a
+     timida." O leitor se encanta com os cinco e SO ENTAO ganha a porta lateral.
+
+     O problema que este bloco resolve: a pagina prometia autonomia total e o
+     mercado tradicional lia "preciso entregar meu comercial inteiro para uma
+     IA". Nao precisa. O Rezult tambem soma ao time, e isso nao estava escrito
+     em lugar nenhum.
+
+     O medo real aqui nao e de substituicao -- quem teme ser substituido e o
+     funcionario, e o funcionario nao compra. O medo do DONO e de controle: "a
+     IA vai falar besteira com meu cliente". Por isso a ultima linha e sobre
+     poder mudar a qualquer momento.
+
+     SEM DEPOIMENTO, de proposito: as provas dos cinco agentes estao logo acima,
+     e repetir os mesmos nomes trinta centimetros depois enfraquece as duas
+     aparicoes. Este bloco e estrutura, nao vitrine. -->
+<section class="section" id="ate-onde" style="background: #FFFFFF; padding: 90px 0px">
+  <div class="wrap">
+    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
+      <h2 class="h2">Você decide <span class="grad-verde">o nível de autonomia do Rezult</span></h2>
+      <p class="lede">Nem todo negócio quer IA conversando com cliente no primeiro dia. Tudo bem. Os agentes ligam um a um, no ritmo que a sua operação aguentar.</p>
+    </div>
+
+    <div class="volume reveal" data-d="1">
+      <div class="volume-passo">
+        <span class="volume-nivel">Nível 1</span>
+        <h3>Operacional autônomo</h3>
+        <p>Seu time atende do jeito que sempre atendeu. O Rezult fica atrás, anotando cada conversa, preenchendo os campos do contato e movendo o lead de etapa. Ninguém do seu time muda de comportamento e o CRM para de ficar vazio.</p>
+      </div>
+      <div class="volume-passo">
+        <span class="volume-nivel">Nível 2</span>
+        <h3>Qualificação e Agendamento</h3>
+        <p>O Atendente responde no minuto em que a conversa começa e o SDR qualifica quem está pronto para comprar, já marcando a reunião na agenda do time. O humano entra com o lead quente e o horário fechado.</p>
+      </div>
+      <div class="volume-passo">
+        <span class="volume-nivel">Nível 3</span>
+        <h3>Fechamento e pós-venda</h3>
+        <p>Atendimento, qualificação, negociação, pós-venda e registro rodando sozinhos, 24 horas por dia. É o que os clientes desta página fazem hoje.</p>
+      </div>
+    </div>
+
+    <p class="volume-fecho reveal" data-d="2">Você muda isso a qualquer momento, e não precisa de ninguém para autorizar.</p>
+
+    <div class="volume-cta reveal" data-d="2">
+      <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+        <div class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></div>
+        <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <!-- DOBRA · PROVAS SOCIAIS -->
 <section class="section tint-center" id="clientes" style="padding: 90px 0px 80px">
@@ -758,13 +739,23 @@ fbq('track','PageView');
            As estrelas são SVG inline, e não um caractere ★: assim a cor sai de
            currentColor e o tamanho não depende da fonte instalada. -->
       <p class="selo-google">
+        <img src="logos/google-2.png" alt="Google" width="20" height="20">
         <strong>Excelente</strong>
         <span class="selo-estrelas" role="img" aria-label="5 de 5 estrelas">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
         </span>
         <strong>5.0</strong>
+        <span class="selo-sep" aria-hidden="true">|</span>
+        <span class="selo-qtd">774 avaliações</span>
       </p>
-      <h2 class="h2">Nunca usou IA no seu negócio? <span class="grad-verde">Nem nossos clientes.</span></h2>
+      <!-- Invertido a pedido do dono: o acolhimento ao mercado tradicional
+           sobe para a MANCHETE e o resultado desce para o subtitulo. A leitura
+           passa a ser "voce nao precisa entender de IA" primeiro, "e olha o que
+           da para chegar" depois, em vez do contrario.
+           O claim sobre os clientes nao terem usado IA antes foi confirmado
+           pelo dono antes de subir. -->
+      <h2 class="h2">Nenhum dos clientes abaixo tinha usado IA no negócio <span class="grad-verde">antes de entrar no Rezult.</span></h2>
+        <p class="lede">Um cliente saiu de 40 para 120 reuniões por mês. Sem contratar mais ninguém.</p>
     </div>
     <div class="dep-esteira">
       <div class="dep-linha esq">
@@ -772,7 +763,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="rafael-almeida.jpg" alt="Rafael Almeida">
             <div><div class="nm">Rafael Almeida</div><div class="rl">CEO · Tráfego360</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"A IA qualifica os leads enquanto a gente dorme. <span class="hl">Chegamos de manhã com o pipeline cheio de lead quente.</span> Mudou nosso jogo."</blockquote>
@@ -781,7 +772,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #0F766E" aria-hidden="true">CN</div>
             <div><div class="nm">Camila Nunes</div><div class="rl">Diretora · Instituto Aprova</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Matrícula não espera segunda-feira. O agente responde às 22h e no dia seguinte a secretaria já tem a reunião na agenda. <span class="hl">Dobramos as matrículas no semestre.</span>"</blockquote>
@@ -790,7 +781,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #B45309" aria-hidden="true">TB</div>
             <div><div class="nm">Thiago Barros</div><div class="rl">Fundador · Método Escala</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Lancei para 4 mil leads sendo eu e mais dois. A IA qualificou tudo e <span class="hl">sobrou para a gente só quem estava pronto para comprar.</span>"</blockquote>
@@ -799,7 +790,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="bruna-lima.jpg" alt="Bruna Lima">
             <div><div class="nm">Bruna Lima</div><div class="rl">Head de Growth · GrowthLab</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Saímos de 3 ferramentas pra uma. <span class="hl">Nosso ROAS subiu 40%</span> só por não perder lead no meio do caminho."</blockquote>
@@ -808,7 +799,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #6D28D9" aria-hidden="true">PF</div>
             <div><div class="nm">Patrícia Ferreira</div><div class="rl">Sócia · Clínica Vitalis</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"A gente perdia paciente porque ninguém respondia no fim de semana. <span class="hl">Hoje a agenda enche sozinha</span> e a recepção só confirma."</blockquote>
@@ -817,7 +808,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #1D4ED8" aria-hidden="true">MT</div>
             <div><div class="nm">Marcelo Tavares</div><div class="rl">Diretor Comercial · Grupo Âncora</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"12 unidades, 12 números de WhatsApp, <span class="hl">um só painel.</span> Vejo o funil de todas sem pedir relatório para ninguém."</blockquote>
@@ -826,7 +817,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="rafael-almeida.jpg" alt="Rafael Almeida">
             <div><div class="nm">Rafael Almeida</div><div class="rl">CEO · Tráfego360</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"A IA qualifica os leads enquanto a gente dorme. <span class="hl">Chegamos de manhã com o pipeline cheio de lead quente.</span> Mudou nosso jogo."</blockquote>
@@ -835,7 +826,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #0F766E" aria-hidden="true">CN</div>
             <div><div class="nm">Camila Nunes</div><div class="rl">Diretora · Instituto Aprova</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Matrícula não espera segunda-feira. O agente responde às 22h e no dia seguinte a secretaria já tem a reunião na agenda. <span class="hl">Dobramos as matrículas no semestre.</span>"</blockquote>
@@ -844,7 +835,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #B45309" aria-hidden="true">TB</div>
             <div><div class="nm">Thiago Barros</div><div class="rl">Fundador · Método Escala</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Lancei para 4 mil leads sendo eu e mais dois. A IA qualificou tudo e <span class="hl">sobrou para a gente só quem estava pronto para comprar.</span>"</blockquote>
@@ -853,7 +844,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="bruna-lima.jpg" alt="Bruna Lima">
             <div><div class="nm">Bruna Lima</div><div class="rl">Head de Growth · GrowthLab</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Saímos de 3 ferramentas pra uma. <span class="hl">Nosso ROAS subiu 40%</span> só por não perder lead no meio do caminho."</blockquote>
@@ -862,7 +853,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #6D28D9" aria-hidden="true">PF</div>
             <div><div class="nm">Patrícia Ferreira</div><div class="rl">Sócia · Clínica Vitalis</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"A gente perdia paciente porque ninguém respondia no fim de semana. <span class="hl">Hoje a agenda enche sozinha</span> e a recepção só confirma."</blockquote>
@@ -871,7 +862,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #1D4ED8" aria-hidden="true">MT</div>
             <div><div class="nm">Marcelo Tavares</div><div class="rl">Diretor Comercial · Grupo Âncora</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"12 unidades, 12 números de WhatsApp, <span class="hl">um só painel.</span> Vejo o funil de todas sem pedir relatório para ninguém."</blockquote>
@@ -882,7 +873,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="diego-ramos.jpg" alt="Diego Ramos">
             <div><div class="nm">Diego Ramos</div><div class="rl">Sócio · MídiaPro</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"O time de vendas finalmente para de copiar e colar mensagem. <span class="hl">Atendemos 3x mais lead</span> com a mesma equipe."</blockquote>
@@ -891,7 +882,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #BE185D" aria-hidden="true">JP</div>
             <div><div class="nm">Juliana Prado</div><div class="rl">Consultora · JP Estratégia</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Eu odiava preencher CRM e simplesmente não preenchia. <span class="hl">Agora a conversa vira anotação sozinha</span> e eu só leio antes da call."</blockquote>
@@ -900,7 +891,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #0369A1" aria-hidden="true">RS</div>
             <div><div class="nm">Rodrigo Salles</div><div class="rl">Gerente de Vendas · Nortec</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Nosso ciclo é longo e o follow-up sempre furava. O agente não esquece: <span class="hl">40% menos tempo até a proposta.</span>"</blockquote>
@@ -909,7 +900,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #047857" aria-hidden="true">AM</div>
             <div><div class="nm">Aline Moreira</div><div class="rl">Head Comercial · Studio Reforma</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"<span class="hl">Passei de 40 para 120 reuniões por mês</span> sem contratar mais ninguém para o time."</blockquote>
@@ -918,7 +909,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #C2410C" aria-hidden="true">GP</div>
             <div><div class="nm">Gustavo Pinheiro</div><div class="rl">CEO · Vetor Digital</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Testei os 7 dias sem cartão, <span class="hl">migrei a base inteira no primeiro dia</span> e não voltei mais para o CRM antigo."</blockquote>
@@ -927,7 +918,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #4338CA" aria-hidden="true">FC</div>
             <div><div class="nm">Fernanda Coelho</div><div class="rl">Gestora · Rede Sorriso</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"O time inteiro atende do mesmo lugar. <span class="hl">Acabou o "quem falou com esse cliente?"</span> no meio do expediente."</blockquote>
@@ -936,7 +927,7 @@ fbq('track','PageView');
           <div class="who">
             <img class="av" src="diego-ramos.jpg" alt="Diego Ramos">
             <div><div class="nm">Diego Ramos</div><div class="rl">Sócio · MídiaPro</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"O time de vendas finalmente para de copiar e colar mensagem. <span class="hl">Atendemos 3x mais lead</span> com a mesma equipe."</blockquote>
@@ -945,7 +936,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #BE185D" aria-hidden="true">JP</div>
             <div><div class="nm">Juliana Prado</div><div class="rl">Consultora · JP Estratégia</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Eu odiava preencher CRM e simplesmente não preenchia. <span class="hl">Agora a conversa vira anotação sozinha</span> e eu só leio antes da call."</blockquote>
@@ -954,7 +945,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #0369A1" aria-hidden="true">RS</div>
             <div><div class="nm">Rodrigo Salles</div><div class="rl">Gerente de Vendas · Nortec</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Nosso ciclo é longo e o follow-up sempre furava. O agente não esquece: <span class="hl">40% menos tempo até a proposta.</span>"</blockquote>
@@ -963,7 +954,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #047857" aria-hidden="true">AM</div>
             <div><div class="nm">Aline Moreira</div><div class="rl">Head Comercial · Studio Reforma</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"<span class="hl">Passei de 40 para 120 reuniões por mês</span> sem contratar mais ninguém para o time."</blockquote>
@@ -972,7 +963,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #C2410C" aria-hidden="true">GP</div>
             <div><div class="nm">Gustavo Pinheiro</div><div class="rl">CEO · Vetor Digital</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"Testei os 7 dias sem cartão, <span class="hl">migrei a base inteira no primeiro dia</span> e não voltei mais para o CRM antigo."</blockquote>
@@ -981,7 +972,7 @@ fbq('track','PageView');
           <div class="who">
             <div class="av" style="background: #4338CA" aria-hidden="true">FC</div>
             <div><div class="nm">Fernanda Coelho</div><div class="rl">Gestora · Rede Sorriso</div></div>
-            <img class="who-google" src="logos/logo-rezult-preto.png" alt="Rezult" width="18" height="18">
+            <img class="who-google" src="logos/google-2.png" alt="Google" width="18" height="18">
           </div>
           <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14l-5-4.5 6.5-.5L12 3z"/></svg></div>
           <blockquote class="quote">"O time inteiro atende do mesmo lugar. <span class="hl">Acabou o "quem falou com esse cliente?"</span> no meio do expediente."</blockquote>
@@ -998,6 +989,132 @@ fbq('track','PageView');
      depois que ela quer o produto. Aqui ela cai no quadro imediatamente
      anterior ao convite para começar, formando um bloco de credibilidade com a
      prova social logo acima. -->
+<section class="section" id="recursos" style="background: #FBFBFB; padding: 90px 0px; overflow: hidden;">
+  <div class="wrap" style="padding: 0px 20px">
+    <div class="section-head center reveal" style="max-width: 760px">
+      <h2 class="h2">Quatro produtos que você <span class="grad-verde">compraria separados</span></h2>
+      <p class="lede">Nenhum deles funciona sozinho. É a combinação que faz o funil se preencher sem ninguém digitar.</p>
+    </div>
+
+    <!-- Feature 1: WhatsApp -->
+    <div class="feature-row">
+      <div class="feature-text reveal tema-verde">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          </div>
+          <h3><span class="hl">WhatsApp</span> Oficial</h3>
+        </div>
+        <div class="feature-foot">
+          <p>O número da sua empresa, com o time inteiro atendendo dentro dele. O cliente vê uma conversa só; você vê quem respondeu, quando e o que ficou combinado.</p>
+          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Várias linhas e o time inteiro na mesma tela, sem celular passando de mão em mão</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Modelos aprovados pela Meta para começar conversa sem esperar o cliente falar primeiro</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Instagram e WhatsApp na mesma fila, atendidos pela mesma pessoa</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featWhatsapp"></div>
+    </div>
+
+    <!-- Feature 2: Agentes de IA -->
+    <div class="feature-row flip">
+      <div class="feature-text reveal tema-laranja">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="6" width="14" height="12" rx="3"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><path d="M12 3v3" stroke-linecap="round"/></svg>
+          </div>
+          <h3><span class="hl">Agentes</span> de IA 24h</h3>
+        </div>
+        <div class="feature-foot">
+          <p>Você conta como a sua empresa atende, qualifica e vende. Eles assumem a conversa no minuto em que ela chega e entregam o lead pronto para o seu time.</p>
+          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Faz as suas perguntas de qualificação e devolve o lead com nota e motivo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Chama uma pessoa no momento em que a conversa passa do ponto de virar venda</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Responde com os seus exemplos de resposta, não com texto genérico de robô</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featAgent"></div>
+    </div>
+
+    <!-- Feature 3: Automações -->
+    <div class="feature-row">
+      <div class="feature-text reveal tema-azul">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+          </div>
+          <h3><span class="hl">Automações</span> Avançadas</h3>
+        </div>
+        <div class="feature-foot">
+          <p>Arraste blocos e o que se repete todo dia passa a acontecer sozinho, no horário certo.</p>
+          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Monta arrastando bloco, sem uma linha de código e sem consultoria</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Dispara por origem do lead, nota da qualificação ou o que ele acabou de responder</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>O follow-up sai mesmo na sexta às 19h, quando ninguém mais vai lembrar dele</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featAutomation"></div>
+    </div>
+
+    <!-- Feature 4: Pipelines -->
+    <div class="feature-row flip">
+      <div class="feature-text reveal tema-roxo">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></svg>
+          </div>
+          <h3><span class="hl">CRM</span> Automatizado</h3>
+        </div>
+        <div class="feature-foot">
+          <p>O funil com as suas etapas, e o card andando sozinho conforme a conversa avança.</p>
+          <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 16 4-4-4-4"/></svg></span>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Um funil por time ou por produto, sem misturar o que não se parece</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>A etapa muda quando a conversa muda, não quando alguém tem tempo de arrastar</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Abra qualquer contato e encontre a última conversa registrada, com data</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featPipelines"></div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- DOBRA · PARCEIRO META ------------------------------------------------------
+     Esta secao ja existiu, foi dissolvida em faixa no commit cc08c05 ("nao e
+     secao, e faixa -- uma tela inteira com um selo queima uma dobra") e volta
+     agora por dado, nao por gosto.
+
+     Biblioteca de Anuncios da Meta, Brasil, coleta de 2026-09-12: o anuncio com
+     MAIS IMPRESSOES e MAIS LONGEVIDADE de toda a categoria "agente de IA +
+     WhatsApp" -- primeiro lugar no ranking, 305 dias no ar, replicado em
+     espanhol por mais 209 -- e da WhatChimp e diz:
+
+       "Enviar mensagens em massa no WhatsApp SEM TOMAR BAN. API oficial.
+        Verified Meta Business Partner."
+
+     Ou seja: a dor numero um da categoria no Brasil nao e demora no
+     atendimento, e MEDO DE PERDER O NUMERO. O argumento que estava no rodape da
+     dobra de recursos, em letra pequena, e a mensagem de maior alcance do
+     mercado em que o Rezult compete.
+
+     Manchete pelo angulo do Makepeace ("nada disso e gambiarra em cima do
+     WhatsApp"), que ele propos por instinto antes de existir o dado.
+
+     Posicao: depois das quatro pecas e antes do "3 passos". Objecao nao aparece
+     enquanto a pessoa aprende o que o produto faz -- aparece depois que ela
+     quer o produto e antes de perguntar o preco.
+     Efeito colateral: quebra os tres fundos #FBFBFB seguidos que a mudanca de
+     ordem de hoje tinha criado.
+     Analise completa em Megabrain: outputs/spy/ads/ -->
 <section class="section" id="parceiro-meta" style="background: #F1F6FD; padding: 90px 0px">
   <div class="wrap">
     <div class="meta-grade">
@@ -1008,14 +1125,15 @@ fbq('track','PageView');
         <span class="meta-selo-caixa">
           <img class="meta-selo" src="logos/meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
         </span>
-        <h2 class="h2">Somos parceiros oficiais da Meta para WhatsApp API</h2>
-        <p class="lede">O Rezult é uma solução aprovada pela Meta para operar o WhatsApp Business API com segurança, desempenho e tranquilidade para o seu negócio.</p>
+        <h2 class="h2">Nada disso é gambiarra. <span class="meta-azul">É a API oficial da Meta.</span></h2>
+        <p class="lede">O Rezult opera o WhatsApp Business API homologado, com o número da sua própria empresa. Nada de API não oficial pendurada num celular, que é o que derruba número.</p>
       </div>
 
       <!-- width/height reservam a proporção antes de o PNG carregar. Sem eles a
            coluna nasce sem altura e o layout salta quando a imagem chega, que é
            pior aqui do que em qualquer outro lugar da página: são 1448x1086, a
-           imagem mais pesada do site.
+           imagem mais pesada do site. Por isso loading=lazy: ela está na sétima
+           dobra e não pode competir com a hero pelo primeiro carregamento.
            O alt descreve o SELO e o texto embutidos na arte, e não a cena: para
            quem usa leitor de tela, é isso que a imagem informa. -->
       <img class="meta-arte" src="nova-meta-wpp.png"
@@ -1026,7 +1144,7 @@ fbq('track','PageView');
 </section>
 
 <!-- DOBRA · COMO FUNCIONA -->
-<section class="section" id="como-funciona" style="background: #FFFFFF; padding: 100px 0px">
+<section class="section" id="como-funciona" style="background: #FBFBFB; padding: 100px 0px">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
       <h2 class="h2"><span class="grad-verde">3 passos</span> para começar</h2>
@@ -1064,7 +1182,7 @@ fbq('track','PageView');
               <path d="M184 121h14M191 114v14" stroke="#00B873" stroke-width="3" stroke-linecap="round"/></g>
           </svg>
         </div>
-        <h3>2. Crie agentes em minutos</h3>
+        <h3>2. Ative agentes em minutos</h3>
         <p>Você define o que cada um faz, o tom que usa e até onde vai. Sem fluxograma e sem código.</p>
       </div>
       <div class="passo reveal" data-d="2">
@@ -1090,79 +1208,318 @@ fbq('track','PageView');
   </div>
 </section>
 
-<!-- DOBRA 06 · BENEFÍCIOS -->
-<section class="section tint-left" id="beneficios" style="padding: 100px 0px">
+<section class="section" id="precos" style="background: #FBFBFB; padding: 100px 0px">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <h2 class="h2">Suporte próximo<br class="mobile-only-br"> <span class="grad-verde">do seu time</span></h2>
+    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
+      <h2 class="h2">Planos para o momento <span class="grad-verde">do seu negócio</span></h2>
+      <p class="lede">Comece com 7 dias grátis, sem cartão de crédito.</p>
     </div>
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;" id="ben-grid">
-      <div class="bcard">
-        <div class="b-num">01</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 10l5 3-5 3v-6z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
-        <h3 style="margin-bottom:8px;">Suporte humanizado, com atendimento via Meet</h3>
-        <p style="font-size:15px;font-weight:400;color:var(--text-muted);line-height:1.5;margin:0;">Chat ativo das 9h às 22h (incluindo sábados das 14h às 21h) e Meet de seg - das 10 às 18h</p>
+
+      <!-- STACK DE VALOR -----------------------------------------------------
+           Ancorada no custo do substituto que o prospecto ja conhece, que e a
+           unica ancoragem honesta que existe.
+
+           CADA LINHA TEM FONTE VERIFICADA E DATADA. Nenhum valor estimado,
+           nenhum arredondado para cima. O SDR usa o PISO mais baixo entre seis
+           vagas abertas (R$ 2.000), e nao a media nem o teto: subestimar a
+           propria vantagem e o que torna o numero indefensavel de atacar.
+           As vagas sao PJ, entao nao ha encargos a somar -- o valor cheio ja e
+           o custo.
+
+           PRECO DE CONCORRENTE ENVELHECE. Se a RD ou a Agentesia mudarem de
+           tabela, esta secao passa a mentir sem ninguem ter tocado nela.
+           Revisar a cada trimestre e atualizar a data das notas. -->
+      <div class="stack reveal">
+        <p class="stack-titulo">O que custaria montar isso separado, hoje:</p>
+        <ul class="stack-itens">
+          <li>
+            <span class="stack-item">Plataforma de WhatsApp oficial <em>parceiro BSP da Meta</em></span>
+            <span class="stack-valor">R$ 989<i>/mês</i></span>
+          </li>
+          <li>
+            <span class="stack-item">Agente de IA atendendo no WhatsApp <em>só o atendimento, sem CRM</em></span>
+            <span class="stack-valor">R$ 497<i>/mês</i></span>
+          </li>
+          <li>
+            <span class="stack-item">Um SDR para responder e qualificar <em>vagas abertas, contrato PJ</em></span>
+            <span class="stack-valor">R$ 2.000<i>/mês</i></span>
+          </li>
+          <li class="stack-total">
+            <span class="stack-item">Somado</span>
+            <span class="stack-valor">R$ 3.486<i>/mês</i></span>
+          </li>
+        </ul>
+        <p class="stack-fecho">No Rezult, tudo isso <strong>a partir de R$ 237 por mês.</strong></p>
+        <p class="stack-fontes">
+          Valores públicos consultados em 11/09/2026:
+          <a href="https://www.rdstation.com/planos/conversas/" target="_blank" rel="noopener">RD Station Conversas</a>, plano Basic ·
+          <a href="https://www.agentesia.com.br/planos" target="_blank" rel="noopener">Agentesia</a>, plano START ·
+          seis vagas de SDR com salário publicado, faixa de R$ 2.000 a R$ 5.000.
+          Escopos diferem entre as ferramentas.
+        </p>
       </div>
-      <div class="bcard">
-        <div class="b-num">02</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" stroke-linecap="round"/><circle cx="17" cy="9" r="2"/><path d="M16 14c2.5 0 4 1.5 4 4" stroke-linecap="round"/></svg></div>
-        <h3>Comunidade no WhatsApp e Discord</h3>
+
+
+    <!-- id priceTogglePreview: o wirePricingToggle do main.js já espera este id.
+         O seletor atualiza todos os .amt da página, e como esta é a única grade
+         de preços da home, não há conflito. -->
+    <div class="price-toggle" id="priceTogglePreview">
+      <button class="active" data-period="mensal">Mensal</button>
+      <button data-period="semestral">Semestral <span class="save">-15%</span></button>
+      <button data-period="anual">Anual <span class="save">-30%</span></button>
+    </div>
+
+    <div class="pgrid">
+      <div class="pcard">
+        <div>
+          <div class="pname">Silver</div>
+          <div class="pdesc">Perfeito para pequenas equipes</div>
+        </div>
+        <div class="price-block">
+          <div class="pprice-savings"></div>
+          <div class="pprice" data-m="237" data-stotal="1209" data-atotal="1989">
+            <span class="cur">R$</span>
+            <span class="amt" data-m="237" data-s="202" data-a="166">237</span>
+            <span class="per">/mês</span><span class="pperiod">Mensal</span>
+          </div>
+          <div class="pprice-recurring">Cobrança mensal recorrente</div>
+        </div>
+        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+          <div class="btn-pontos-wrap" aria-hidden="true">
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+          </div>
+          <span class="btn-pontos-inner">Começar os 7 dias grátis</span>
+        </a>
+        <ul class="pfeats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">4 usuários</b> na empresa</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 mil leads</b> com controle de tags</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>8 automações</b> para interações com leads</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 conexões</b> WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 pipelines</b> com até 8 etapas</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 integrações</b> via Webhook</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
+        </ul>
       </div>
-      <div class="bcard">
-        <div class="b-num">03</div>
-        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l5-5 4 4 8-9M14 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Time focado no crescimento dos seus resultados</h3>
+
+      <div class="pcard featured">
+        <div>
+          <div class="pname">Platinum</div>
+          <div class="pdesc">Pensado para quem está crescendo</div>
+        </div>
+        <div class="price-block">
+          <div class="pprice-savings"></div>
+          <div class="pprice" data-m="399" data-stotal="2035" data-atotal="3352">
+            <span class="cur">R$</span>
+            <span class="amt" data-m="399" data-s="339" data-a="279">399</span>
+            <span class="per">/mês</span><span class="pperiod">Mensal</span>
+          </div>
+          <div class="pprice-recurring">Cobrança mensal recorrente</div>
+        </div>
+        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+          <div class="btn-pontos-wrap" aria-hidden="true">
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+          </div>
+          <span class="btn-pontos-inner">Começar os 7 dias grátis</span>
+        </a>
+        <ul class="pfeats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">15 usuários</b> na empresa</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>100 mil leads</b> com controle de tags</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 automações</b> para interações com leads</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>10 conexões</b> WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 pipelines</b> com até 15 etapas</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 integrações</b> via Webhook</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
+        </ul>
       </div>
+
+      <div class="pcard">
+        <div>
+          <div class="pname">Emerald</div>
+          <div class="pdesc">Ideal para empresas em escala</div>
+        </div>
+        <div class="price-block">
+          <div class="pprice-savings"></div>
+          <div class="pprice" data-m="747" data-stotal="3810" data-atotal="6272">
+            <span class="cur">R$</span>
+            <span class="amt" data-m="747" data-s="635" data-a="523">747</span>
+            <span class="per">/mês</span><span class="pperiod">Mensal</span>
+          </div>
+          <div class="pprice-recurring">Cobrança mensal recorrente</div>
+        </div>
+        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+          <div class="btn-pontos-wrap" aria-hidden="true">
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+            <i class="btn-pontos-point"></i>
+          </div>
+          <span class="btn-pontos-inner">Começar os 7 dias grátis</span>
+        </a>
+        <ul class="pfeats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">Usuários ilimitados</b> na empresa</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Leads ilimitados</b> com controle de tags</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Automações ilimitadas</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Conexões ilimitadas</b> WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Pipelines ilimitadas</b> com até 25 etapas</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Integrações ilimitadas</b> via Webhook</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 36px;">
+      <!-- FUSAO DE #beneficios ----------------------------------------------
+           Eram tres cards numa secao propria no fim da pagina. O Georgi:
+           "soltos no fim sao decoracao, colados ao preco sao conversao". Este e
+           o ponto exato em que o leitor calculou R$ 237 e esta procurando o que
+           vai dar errado.
+
+           A migracao da base entrou aqui: ela so aparecia nas dobras 11 e 12,
+           tarde demais para servir de redutor de risco na hora do preco.
+
+           "Time focado no crescimento dos seus resultados" foi CORTADO. Hopkins:
+           fluff, nao e verificavel e nao e promessa. Nenhuma frase que o
+           concorrente tambem poderia escrever tem direito a ocupar espaco aqui.
+           Nao foi substituido: dois itens concretos vendem mais que tres com um
+           vazio.
+
+           Nao vai dentro dos cards: os itens sao iguais nos tres planos, e
+           repetidos tres vezes diluem a diferenca entre Silver, Platinum e
+           Emerald. -->
+      <div class="inclusos reveal">
+        <p class="inclusos-titulo">Em qualquer plano, sem custo extra</p>
+        <ul class="inclusos-itens">
+          <li><strong>Nós migramos sua base.</strong> Leads, tags e histórico do seu CRM atual. De 48 a 72 horas na maioria dos casos, 7 dias no máximo.</li>
+          <li><strong>Suporte com gente de verdade.</strong> Chat aberto das 9h às 22h, e no sábado das 14h às 21h. Se precisar de tela compartilhada, Meet de segunda a sexta, das 10h às 18h.</li>
+          <li><strong>Comunidade no WhatsApp e no Discord</strong>, com quem já roda a operação dentro do Rezult.</li>
+          <li><strong>7 dias grátis, sem cartão. Depois, 30 dias de garantia. Sem fidelidade.</strong></li>
+        </ul>
+      </div>
+      <a href="planos.html" class="btn btn-ghost">Comparar os planos em detalhe</a>
     </div>
   </div>
 </section>
 
-<!-- DOBRA 09 · FAQ -->
-<section class="section tint-left" id="faq" style="background: var(--bg-deep); padding: 100px 0px 120px">
+<section class="section" id="implantacao" style="background: #FFFFFF; padding: 90px 0px">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <h2 class="h2">Dúvidas frequentes</h2>
-    </div>
-    <div class="faq reveal">
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Preciso saber programar pra usar?</button>
-        <div class="faq-a"><div class="faq-a-inner">Não. Tudo é visual — automações você monta arrastando blocos, e os agentes de IA você configura escrevendo em português. Nosso time ajuda no setup inicial no primeiro dia.</div></div>
+    <div class="implanta">
+      <div class="implanta-texto reveal">
+        <h2 class="h2">Precisa de ajuda para <span class="grad-verde">implementar o Rezult no seu negócio?</span></h2>
+        <p class="lede">Nosso time de especialistas implementa o Rezult de forma personalizada. Agende um diagnóstico comercial para entendermos o momento da sua empresa e configurarmos a ferramenta do jeito que o seu processo pede.</p>
+        <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary btn-lg implanta-cta">Agendar Diagnóstico Comercial</a>
       </div>
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Como funciona a integração com WhatsApp?</button>
-        <div class="faq-a"><div class="faq-a-inner">Você conecta seu número via WhatsApp Business. Todas as conversas ficam num inbox único, o time inteiro atende junto, e o agente de IA pode responder no primeiro contato.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Os agentes de IA respondem do meu jeito?</button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. Você define a persona, o objetivo, a base de conhecimento e quando escalar pro humano. A IA fala no seu tom e segue suas regras.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Tem fidelidade ou multa de cancelamento?</button>
-        <div class="faq-a"><div class="faq-a-inner">Nenhuma. Os planos são mensais ou anuais (com desconto), e você cancela quando quiser direto no painel. Sem letra miúda.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Consigo migrar meus leads de outro CRM?</button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. Importamos seus leads, tags e histórico de outras ferramentas. Nosso time cuida da migração pra você não perder nada.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>Quanto tempo até estar rodando?</button>
-        <div class="faq-a"><div class="faq-a-inner">Em geral 1 dia. Você conecta as contas de anúncio e o WhatsApp, importa os leads e já começa.</div></div>
-      </div>
+      <ul class="implanta-itens reveal" data-d="1">
+        <li>
+          <span class="implanta-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <div>
+            <strong>Nós migramos sua base</strong>
+            <span>Leads, tags e histórico do seu CRM atual. Em 48 a 72 horas na maioria dos casos, 7 dias no máximo.</span>
+          </div>
+        </li>
+        <li>
+          <span class="implanta-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <div>
+            <strong>Seu primeiro agente configurado com você</strong>
+            <span>No tom da sua marca e com a sua base de conhecimento, não com um modelo genérico.</span>
+          </div>
+        </li>
+        <li>
+          <span class="implanta-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <div>
+            <strong>Funil desenhado no seu processo</strong>
+            <span>As etapas que a sua operação já usa, não as que vieram no template.</span>
+          </div>
+        </li>
+        <li>
+          <span class="implanta-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <div>
+            <strong>Acompanhamento por Meet</strong>
+            <span>Gente de verdade do outro lado, até o time estar rodando sozinho.</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
+
+<!-- DOBRA FINAL · CTA ------------------------------------------------------
+     Escrita pelo Georgi e atualizada depois que a oferta fechou: ele redigiu
+     antes de existirem a garantia de 30 dias e a migracao feita pelo time.
+
+     TODO item aqui e fato confirmado pela operacao. Nenhum numero inventado,
+     nenhuma garantia que nao exista. O que NAO esta aqui e a stack de valor:
+     ela so entra quando cada linha tiver fonte, senao vira a coisa mais rapida
+     de detectar e a mais cara de perder.
+
+     Os 50% NAO aparecem na hero de proposito: desconto exposto cedo demais
+     converte conversa de valor em conversa de preco. Aqui, no fechamento, ele
+     vira prazo. -->
+<section class="section" id="cta-final" style="background: var(--bg-deep); padding: 100px 0px">
+  <div class="wrap">
+    <div class="fechamento reveal">
+      <h2 class="h2">O próximo lead não precisa<br class="mobile-only-br"> <span class="grad-verde">esperar alguém lembrar.</span></h2>
+      <p class="lede">O Rezult cuida do atendimento, do acompanhamento e do registro. Sua equipe recebe o contexto necessário para decidir e vender.</p>
+
+      <ul class="fechamento-itens">
+        <li><strong>7 dias grátis, sem cartão de crédito.</strong> Você testa antes de dar qualquer dado de pagamento.</li>
+        <li><strong>Mais 30 dias de garantia depois disso.</strong> Se não servir, devolvemos integralmente.</li>
+        <li><strong>Nós migramos sua base.</strong> Leads, tags e histórico do seu CRM atual, em 48 a 72 horas na maioria dos casos.</li>
+        <li><strong>Sem fidelidade.</strong> Cobrança mensal recorrente, e você cancela quando quiser.</li>
+        <li><strong>Parceiro oficial da Meta</strong> para WhatsApp Business API.</li>
+        <li><strong>5.0 em 774 avaliações</strong> no Google.</li>
+      </ul>
+
+      <a href="https://app.rezultcrm.com/register" class="btn-pontos fechamento-cta">
+        <div class="btn-pontos-wrap" aria-hidden="true">
+          <i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i>
+          <i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i>
+        </div>
+        <span class="btn-pontos-inner">Começar os 7 dias grátis<svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <p class="fechamento-nota">Ative seu plano antes do fim dos 7 dias de teste e a primeira mensalidade sai pela metade. Planos a partir de R$ 237/mês.</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="logo">
+        <a href="ab2.html" class="logo">
           <img src="logos/logo-rodape.png" alt="Rezult CRM" width="350" height="100">
         </a>
         <p>O CRM com automações, WhatsApp e agentes de IA para empresas que vendem de verdade.</p>
         <div class="footer-brand-actions">
-          <a href="planos.html#demo-planos" class="btn btn-primary">Agendar demo</a>
+          <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary">Agendar demo</a>
           <a href="planos.html" class="btn btn-secondary">Ver planos</a>
         </div>
       </div>
@@ -1170,7 +1527,7 @@ fbq('track','PageView');
         <h3>Produto</h3>
         <a href="#recursos">Recursos</a>
         <a href="planos.html">Planos</a>
-        <a href="planos.html#demo-planos">Demo</a>
+        <a href="https://cal.com/rezult-crm/demonstracao">Demo</a>
       </div>
       <div class="footer-col">
         <h3>Empresa</h3>
@@ -1198,44 +1555,22 @@ fbq('track','PageView');
 
 <script src="mockups.js"></script>
 <script src="rastreio.js"></script>
-<script src="main.js"></script>
+<script src="home.js"></script>
 <!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
-     src/paineis/. Preenche o slot #featWhatsapp, que o mockups.js deixou de
-     ocupar. Vem depois dele para o innerHTML do injectMockups não passar por
-     cima do que o React montou. -->
+     src/paineis/. Preenchem #featWhatsapp, #featAutomation e #featPipelines,
+     que o mockups.js deixou de ocupar. Vem depois dele para o innerHTML do
+     injectMockups não passar por cima do que o React montou. -->
 <script src="build/paineis.js" defer></script>
-<script>
-  const demoForm = document.getElementById("demoForm");
-  const demoSuccess = document.getElementById("demoSuccess");
-  if (demoForm) {
-    demoForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      demoForm.style.display = "none";
-      demoSuccess.style.display = "flex";
-    });
-  }
+<script type="module">
+  import { animate, inView } from "https://esm.sh/motion@12.42.2";
 
-  document.querySelectorAll("select.demo-select").forEach(function(sel) {
-    sel.addEventListener("change", function() {
-      this.classList.toggle("has-value", !!this.value);
-    });
-  });
-
-  const wppInput = document.getElementById("demo-whatsapp");
-  if (wppInput) {
-    wppInput.addEventListener("input", function(e) {
-      let v = e.target.value.replace(/\D/g, "").slice(0, 11);
-      if (v.length === 0) { e.target.value = ""; return; }
-      if (v.length <= 2) {
-        e.target.value = "(" + v;
-      } else if (v.length <= 7) {
-        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2);
-      } else if (v.length <= 10) {
-        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,6) + "-" + v.slice(6);
-      } else {
-        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
-      }
-    });
+  // Float na imagem da hero — desktop e tablet apenas
+  const heroImg = document.getElementById("hero-img");
+  if (heroImg && window.matchMedia("(min-width: 768px)").matches) {
+    animate(heroImg,
+      { y: [0, -14, 0] },
+      { duration: 4, easing: "ease-in-out", repeat: Infinity, delay: 1.5 }
+    );
   }
 </script>
 </body>

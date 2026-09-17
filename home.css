@@ -1,6 +1,6 @@
 /* ============================================================
    Rezult CRM — Site
-   Dark · Neon · Geist · Filled
+   Tipografia Rezult Design System · Inter
    ============================================================ */
 
 :root {
@@ -78,19 +78,11 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Geist em tudo. A Poppins entrou em 2026-09-02 e foi revertida no dia
-     seguinte; a Inter era o corpo do texto e saiu agora, para esta página ficar
-     igual ao index. A Geist Mono segue como voz dos rótulos, dos números e das
-     etiquetas em caixa alta.
-
-     --sans e --display continuam separados de propósito: os pontos de uso já
-     distinguem corpo de título, e um token só obrigaria a reescrever todos eles
-     no dia em que voltar a haver duas fontes. Enquanto forem iguais, as
-     exceções espalhadas pelo arquivo que trocam para var(--display) não mudam
-     nada -- estão marcadas e podem sair numa limpeza. */
-  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --display: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --mono: 'Geist Mono', ui-monospace, monospace;
+  /* Fontes do Rezult Design System. A escala da landing mantém tamanhos
+     próprios para preservar a hierarquia editorial e os layouts responsivos. */
+  --sans: var(--font-sans);
+  --display: var(--font-sans);
+  --mono: var(--font-mono);
 
   /* Radius */
   --r-sm: 10px;
@@ -125,11 +117,12 @@
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 28px); }
 body {
   font-family: var(--sans);
+  font-size: var(--fs-16);
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+  line-height: var(--lh-normal);
   overflow-x: hidden;
 }
 body::after {
@@ -182,9 +175,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(0, 184, 115,0.04)  0%, transparent 65%); }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: var(--text-overline-size);
   color: var(--green-text);
-  font-weight: 300;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -220,16 +214,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
      três linhas, e a do meio ficava com 8,35em contra 19,25em da primeira,
      porque .grad-verde é inline-block e o trecho verde não parte. Como bloco
      indivisível de 12,28em, ele descia inteiro e deixava o buraco.
-     760px foi medido com fontTools sobre o Geist-Bold: dá duas linhas de
-     20,45em e 19,64em, com o verde inteiro na segunda. É o mesmo 760px que
-     #operacao, #ate-onde e #como-funciona já usam inline. */
+     760px mantém uma largura editorial próxima das outras seções; conferir
+     a quebra de linhas quando o texto ou a fonte mudar. */
   #clientes .section-head { max-width: 760px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
 .section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
-h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: var(--ink); }
+h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-height: 1; font-weight: var(--fw-semibold); color: var(--ink); }
 .h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.2; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
@@ -586,28 +579,27 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    12x18 mantém a razão do viewBox, que é 15x23 — quase o dobro de alto que de
    largo. Forçar caixa quadrada nele achataria o desenho. */
 .hero-badge-ico { width: 12px; height: 18px; color: var(--green-text); flex-shrink: 0; }
-/* Ícone oficial da Meta (logos/meta.svg). 24x16 mantém a razão do viewBox,
+/* Ícone oficial da Meta (logos/meta.svg). 18x12 mantém a razão do viewBox,
    287.56x191. */
-.hero-badge-meta { width: 24px; height: 16px; flex-shrink: 0; display: block; }
-/* Variante da home: raio no lugar da cápsula e fundo verde claro, sem contorno.
-   Fica escopada porque as pills de planos, política e termo usam a cápsula .tag
-   e continuam com a borda da regra base. */
+.hero-badge-meta { width: 18px; height: 12px; flex-shrink: 0; display: block; }
+/* Variante da home: fundo branco, texto na cor do título e sombra curta para atuar
+   como um selo discreto de autoridade ao lado da marca Meta. */
 .hero-badge-ia {
-  /* Verde bem claro e translúcido: é o --green-text a 10%, então acompanha a
-     cor da marca numa troca futura, em vez de um hex claro fixo. Sendo rgba,
-     o fundo da hero aparece por baixo. O texto volta ao --ink dos títulos. */
-  /* Fundo branco com sombra curta: a pill se destaca do cinza claro da hero
-     sem precisar de contorno, e o azul do ícone da Meta fica legível. */
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
   background: #FFFFFF;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 18px -6px rgba(0, 0, 0, 0.14);
+  border: 0;
+  box-shadow: 0 2px 6px rgba(19, 26, 30, 0.10);
   color: var(--ink);
   font-size: 13px;
-  padding: 8px 14px;
-  /* `border: 0`, e não `border-color: transparent`: a regra base declara
-     `1px solid`, e uma borda transparente continuaria ocupando 1px de cada lado,
-     deixando a pill 2px mais alta e mais larga do que o conteúdo pede. */
-  border: 0;
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
 }
+.hero-badge-ia .hero-badge-meta { transform: translateY(-1px); }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
    48px fixo estouraria a largura em tela estreita — o clamp é o que faz o
@@ -2383,66 +2375,52 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Agentes de IA ---------- */
-/* Abas + um painel por agente. Só o painel ativo fica no DOM visível (hidden nos
-   demais), então nada de conteúdo escondido sendo lido por leitor de tela. */
-.ag-abas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
-.ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
-.ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
-/* A aba ativa é verde chapado, o mesmo --primary da etiqueta com o nome do
-   agente dentro do painel. Aqui morava o tratamento inteiro do .btn-pontos: o
-   verde com clarão subindo da base, duas camadas internas em ::before/::after e
-   os pontinhos animados. Saiu tudo. O efeito de botão pertence ao CTA, que é
-   uma ação; a aba é um seletor de estado, e competir com o CTA na mesma tela
-   tirava a hierarquia dos dois.
-   Os pontinhos continuam no HTML dentro de .btn-pontos-wrap, escondidos: o
-   markup é o mesmo do CTA e foi mantido para não divergirem. */
-.ag-aba { position: relative; overflow: hidden; }
+/* Uma superfície verde reúne as cinco abas, o texto e a cena da conversa.
+   Só o painel ativo fica visível; os demais usam o atributo hidden. */
+.ag-shell {
+  overflow: hidden;
+  padding: 0 40px 40px;
+  border: 1px solid #D9EEE3;
+  border-radius: 24px;
+  background: radial-gradient(circle at 75% 42%, rgba(0, 184, 115, .13), transparent 48%), linear-gradient(145deg, #F7FCF9, #EBF7F0);
+}
+/* A barra encosta nas bordas do card. Cada opção ocupa sua coluna, sem
+   contorno de botão; a linha inferior marca qual painel está selecionado. */
+.ag-abas {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0 -40px 28px;
+  border-bottom: 1px solid #D9EEE3;
+  background: rgba(255, 255, 255, .24);
+}
+.ag-aba {
+  position: relative;
+  min-width: 0;
+  min-height: 62px;
+  padding: 14px 8px;
+  border-right: 1px solid rgba(0, 128, 80, .1);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: inset 0 -3px 0 transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color .2s, background .2s, box-shadow .2s;
+}
+.ag-aba:last-child { border-right: 0; }
+.ag-aba:hover { color: #047857; background: rgba(255, 255, 255, .4); }
+.ag-aba:focus-visible { outline: 2px solid #047857; outline-offset: -5px; }
 .ag-aba .btn-pontos-wrap { display: none; }
 .ag-aba-txt { position: relative; z-index: 2; }
 .ag-aba.ativa {
-  border-color: transparent;
-  color: #FFFFFF;
-  /* #047857 e não --primary: com branco por cima, o verde da marca dá 2,3:1 e
-     reprova no mínimo de 4,5:1. Este verde sobe para 5,5:1. Mesmo valor da
-     etiqueta com o nome do agente, para os dois lerem como um par. */
-  background: #047857;
+  color: #047857;
+  background: rgba(255, 255, 255, .52);
+  box-shadow: inset 0 -3px 0 #047857;
+  font-weight: 700;
 }
 
-/* position + overflow existem por causa do light sweep abaixo: o ::before é
-   posicionado contra este elemento, e o overflow recorta a faixa de luz no
-   contorno arredondado do card. */
-.ag-painel { position: relative; overflow: hidden; display: block; background: #FBFBFB; border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 44px; }
-
-/* Light sweep. Faixa de luz diagonal que atravessa o card de tempos em tempos.
-   O verde entra a 10% em vez de branco puro: sobre o #FBFBFB do card, branco a
-   90% muda quatro unidades de brilho e não aparece. O tom da marca a 10% é o
-   que faz a passagem ser percebida como luz, e não como sujeira.
-   O blur de 8px tira a borda dura das duas pontas do degradê, que sem ele
-   leriam como duas linhas viajando em vez de um brilho só. */
-.ag-painel::before {
-  content: '';
-  position: absolute; z-index: 0;
-  top: -25%; bottom: -25%; left: 0;
-  width: 55%;
-  pointer-events: none;
-  background: linear-gradient(100deg,
-    rgba(0, 184, 115, 0) 0%,
-    rgba(0, 184, 115, 0.06) 35%,
-    rgba(0, 184, 115, 0.13) 50%,
-    rgba(0, 184, 115, 0.06) 65%,
-    rgba(0, 184, 115, 0) 100%);
-  filter: blur(8px);
-  animation: ag-sweep 7s ease-in-out infinite;
-}
-/* A luz cruza em 45% do ciclo e fica parada fora do card no resto: sem essa
-   folga a passagem vira estrobo e cansa em segundos. */
-@keyframes ag-sweep {
-  0%        { transform: translateX(-130%); }
-  45%, 100% { transform: translateX(320%); }
-}
-/* O conteúdo precisa de position própria para empilhar acima do ::before.
-   Sem isto o texto continua no fluxo normal e a faixa passa por cima dele. */
-.ag-painel-txt { position: relative; z-index: 1; }
+.ag-painel { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(28px, 4vw, 56px); }
+.ag-painel-txt { min-width: 0; }
 /* [hidden] perde para o display do .ag-painel, então precisa reafirmar. */
 .ag-painel[hidden] { display: none; }
 
@@ -2465,29 +2443,71 @@ select.demo-select:invalid { color: #374151; }
 .ag-painel h4 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
 .ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
-/* Duas colunas na lista, como no modelo. columns e não grid: os itens fluem e
-   preenchem as colunas sozinhos, sem precisar dividir a lista na marra. */
-.ag-lista { columns: 2; column-gap: 28px; margin-top: 26px; list-style: none; }
+/* A lista fica em uma coluna para preservar a leitura na metade textual do card. */
+.ag-lista { columns: 1; margin-top: 26px; list-style: none; }
 .ag-lista li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 11px; break-inside: avoid; }
 .ag-lista li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
-.ag-cta { margin-top: 28px; }
-.ag-cta .btn-pontos-inner { font-size: 15px; }
+/* Cena ilustrativa de cada agente: conversa à frente, robô e registro no CRM.
+   As mensagens têm o mesmo ciclo para reiniciar ao trocar de aba. */
+.ag-demo { position: relative; min-width: 0; height: 500px; }
+.ag-demo::before { content: ''; position: absolute; width: 85%; aspect-ratio: 1.5; top: 22%; left: 14%; border: 1px solid rgba(0, 184, 115, .26); border-radius: 50%; transform: rotate(-18deg); }
+.ag-demo::after { content: ''; position: absolute; width: 8px; height: 8px; top: 21%; right: 14%; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 7px rgba(0, 184, 115, .1); }
+.ag-demo-label { position: absolute; top: 20px; left: 22px; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .12em; color: #047857; text-transform: uppercase; }
+.ag-chat { position: absolute; z-index: 2; top: 12%; left: 5%; width: 69%; padding: 18px; border: 1px solid #DCEBE3; border-radius: 20px; background: #FFFFFF; box-shadow: 0 24px 55px -28px rgba(12, 56, 37, .35); transform: rotate(-4deg); }
+.ag-chat-head { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #E7F1EB; }
+.ag-chat-mark { display: grid; place-items: center; width: 33px; height: 33px; flex: none; border-radius: 10px; background: #E4F8ED; color: #047857; font-size: 20px; font-weight: var(--fw-bold); }
+.ag-chat-head strong { display: block; color: var(--ink); font-size: 13px; line-height: 1.2; }
+.ag-chat-head small { display: flex; align-items: center; gap: 5px; margin-top: 3px; color: #687B70; font-size: 10px; }
+.ag-chat-head small::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+.ag-chat-bubbles { display: grid; gap: 9px; padding: 17px 0 14px; }
+.ag-bolha { width: fit-content; max-width: 90%; padding: 10px 12px; border-radius: 13px; font-size: 12px; line-height: 1.4; }
+.ag-bolha--lead { justify-self: start; background: #F1F3F2; color: #263A30; border-bottom-left-radius: 4px; }
+.ag-bolha--ia { justify-self: end; background: #E8F8EF; color: #155640; border-bottom-right-radius: 4px; }
+.ag-chat-result { display: flex; align-items: center; gap: 9px; padding: 10px; border: 1px solid #D6EEDD; border-radius: 12px; background: #F5FCF7; color: #155640; font-size: 11px; font-weight: 600; line-height: 1.3; }
+.ag-chat-result svg { width: 19px; height: 19px; flex: none; color: #047857; }
+.ag-bot { position: absolute; z-index: 1; top: 23%; right: 1%; width: 31%; max-width: 170px; filter: drop-shadow(0 16px 20px rgba(8, 62, 39, .12)); }
+.ag-bot svg { display: block; width: 100%; height: auto; }
+.ag-demo-note { position: absolute; z-index: 3; right: 6%; bottom: 7%; max-width: 55%; padding: 12px 14px; border: 1px solid #D9EEE3; border-radius: 12px; background: rgba(255, 255, 255, .93); box-shadow: 0 14px 35px -25px rgba(12, 56, 37, .35); }
+.ag-demo-note strong { display: block; color: #164B36; font-size: 12px; line-height: 1.3; }
+.ag-demo-note span { display: block; margin-top: 3px; color: #708278; font-size: 10px; }
+
+@keyframes ag-demo-float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
+@keyframes ag-bot-float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
+@keyframes ag-msg-one { 0%, 5% { opacity: 0; transform: translateY(12px); } 13%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
+@keyframes ag-msg-two { 0%, 27% { opacity: 0; transform: translateY(12px); } 35%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
+@keyframes ag-msg-three { 0%, 49% { opacity: 0; transform: translateY(12px); } 57%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
+@keyframes ag-msg-result { 0%, 68% { opacity: 0; transform: translateY(12px); } 76%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .ag-painel.ativo .ag-chat { animation: ag-demo-float 6s ease-in-out infinite; }
+  .ag-painel.ativo .ag-bot { animation: ag-bot-float 4s ease-in-out infinite; }
+  .ag-painel.ativo .ag-bolha:nth-child(1) { animation: ag-msg-one 12s ease-in-out infinite; }
+  .ag-painel.ativo .ag-bolha:nth-child(2) { animation: ag-msg-two 12s ease-in-out infinite; }
+  .ag-painel.ativo .ag-bolha:nth-child(3) { animation: ag-msg-three 12s ease-in-out infinite; }
+  .ag-painel.ativo .ag-chat-result, .ag-painel.ativo .ag-demo-note { animation: ag-msg-result 12s ease-in-out infinite; }
+}
 
 
 @media (max-width: 980px) {
-  .ag-painel { padding: 28px 24px; }
+  .ag-shell { padding: 0 24px 28px; }
+  .ag-painel { grid-template-columns: 1fr; gap: 20px; }
   .ag-painel h4 { font-size: 23px; }
-  .ag-abas { gap: 8px; margin-bottom: 28px; }
-  .ag-aba { padding: 9px 16px; font-size: 14px; }
+  .ag-abas { margin: 0 -24px 22px; }
+  .ag-aba { min-height: 56px; padding: 10px 6px; }
+  .ag-demo { height: 430px; }
 }
 @media (max-width: 560px) {
-  .ag-lista { columns: 1; }
+  .ag-shell { padding: 0 16px 22px; }
+  .ag-abas { margin: 0 -16px 18px; }
+  .ag-aba { min-height: 52px; padding: 8px 2px; font-size: 11px; white-space: nowrap; }
+  .ag-demo { height: 365px; }
+  .ag-chat { top: 15%; left: 4%; width: 75%; padding: 11px; }
+  .ag-chat-bubbles { gap: 6px; padding: 10px 0; }
+  .ag-bolha { padding: 7px 9px; font-size: 10px; }
+  .ag-bot { top: 22%; right: -2%; width: 31%; }
+  .ag-demo-note { right: 4%; bottom: 5%; padding: 9px 10px; }
 }
-
 /* ---------- Como funciona em 3 passos ---------- */
-/* Mesma situação da .hero-sub: era exceção ao padrão antigo (título em Geist,
-   resto em Inter) e hoje não muda nada, porque as duas variáveis apontam para a
-   Geist. Mantida pelo mesmo motivo. */
+/* O apoio desta seção acompanha a mesma família dos títulos. */
 #como-funciona .lede { font-family: var(--display); font-size: 18px; }
 .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .passo { text-align: center; }
@@ -3581,8 +3601,25 @@ select.demo-select:invalid { color: #374151; }
 #passivo-ativo .h2 { color: var(--dark-text); }
 #passivo-ativo .grad-verde { background: linear-gradient(90deg, #00B873 0%, #5CE6B8 100%); -webkit-background-clip: text; background-clip: text; }
 
-#passivo-ativo .vs-passivo { border-color: rgba(255, 59, 85, 0.32); background: linear-gradient(180deg, rgba(255, 59, 85, 0.09), rgba(12, 17, 21, 0.4) 55%), var(--dark-surface); }
-#passivo-ativo .vs-ativo { border-color: rgba(0, 184, 115, 0.38); background: linear-gradient(180deg, rgba(0, 184, 115, 0.11), rgba(12, 17, 21, 0.4) 55%), var(--dark-surface); box-shadow: 0 30px 80px -40px rgba(0, 184, 115, 0.55); }
+#passivo-ativo .vs { max-width: 1100px; column-gap: 24px; }
+#passivo-ativo .vs-slot { display: flex; min-width: 0; }
+#passivo-ativo .vs-slot[data-d="1"] { transition-delay: .12s; }
+#passivo-ativo .vs-meio[data-d="2"] { transition-delay: .28s; }
+#passivo-ativo .vs-slot[data-d="3"] { transition-delay: .44s; }
+#passivo-ativo .vs-card {
+  flex: 1;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s cubic-bezier(.2, .8, .2, 1);
+}
+#passivo-ativo .vs-passivo { border-color: rgba(255, 90, 110, 0.27); background: linear-gradient(180deg, rgba(255, 59, 85, 0.08), transparent 58%), var(--vs-card); }
+#passivo-ativo .vs-ativo { border-color: rgba(63, 224, 168, 0.32); background: linear-gradient(180deg, rgba(0, 184, 115, 0.09), transparent 58%), var(--vs-card); box-shadow: 0 30px 70px -50px rgba(0, 184, 115, 0.38); }
+#passivo-ativo .vs-card .vs-num { font-size: clamp(56px, 6.8vw, 92px); }
+#passivo-ativo .vs-frase { font-size: 14px; line-height: 1.45; min-height: 4.35em; }
+#passivo-ativo .vs-grafico { margin-top: 20px; }
+#passivo-ativo .vs-lista { margin-top: 16px; gap: 10px; }
+#passivo-ativo .vs-lista li { font-size: 13.5px; }
+#passivo-ativo .vs-seta { background: #8BE5C6; color: #09271D; box-shadow: 0 12px 28px -14px rgba(85, 224, 177, 0.72); }
 
 #passivo-ativo .vs-passivo .vs-pill { color: #FF5A6E; border-color: rgba(255, 59, 85, 0.35); background: rgba(255, 59, 85, 0.08); }
 #passivo-ativo .vs-ativo .vs-pill { color: #3FE0A8; border-color: rgba(0, 184, 115, 0.4); background: rgba(0, 184, 115, 0.08); }
@@ -3601,22 +3638,63 @@ select.demo-select:invalid { color: #374151; }
 #passivo-ativo .vs-lista li b { color: var(--dark-text); }
 
 #passivo-ativo .vs-meio::before { border-color: rgba(255, 255, 255, 0.14); }
-#passivo-ativo .vs-meio-rotulo { background: var(--dark-bg); color: #3FE0A8; }
+#passivo-ativo .vs-meio-rotulo { background: var(--vs-bg); color: #8BE5C6; }
 
-/* Malha de pontos com degradê no fundo da seção passivo x ativo, como na
-   referência: pontos visíveis no centro, sumindo para as bordas (a máscara
-   radial faz o degradê), e uma vinheta escura nas laterais por cima.
-   Tudo em pseudo-elementos atrás do conteúdo, sem imagem. */
-#passivo-ativo { position: relative; overflow: hidden; isolation: isolate; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #passivo-ativo .vs-card:hover {
+    transform: perspective(1000px) translateY(-10px) rotateX(var(--vs-tilt-x, 0deg)) rotateY(var(--vs-tilt-y, 0deg));
+    box-shadow: 0 28px 64px -34px rgba(0, 0, 0, .55), 0 18px 42px -35px rgba(63, 224, 168, .45);
+  }
+  #passivo-ativo .vs-passivo:hover {
+    box-shadow: 0 32px 70px -24px rgba(0, 0, 0, .92), 0 18px 48px -22px rgba(0, 0, 0, .74);
+  }
+}
+
+@keyframes vs-line-draw { from { stroke-dashoffset: 1200; } to { stroke-dashoffset: 0; } }
+@keyframes vs-area-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vs-card-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes vs-arrow-glow {
+  0%, 100% { box-shadow: 0 12px 28px -14px rgba(85, 224, 177, .72), 0 0 0 0 rgba(85, 224, 177, .2); }
+  50% { box-shadow: 0 16px 36px -10px rgba(85, 224, 177, .85), 0 0 0 12px rgba(85, 224, 177, 0); }
+}
+#passivo-ativo .vs-grafico polyline { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+#passivo-ativo .vs-grafico path { opacity: 0; }
+#passivo-ativo .vs-slot.in .vs-grafico polyline { animation: vs-line-draw 1.25s cubic-bezier(.2, .8, .2, 1) .32s both; }
+#passivo-ativo .vs-slot.in .vs-grafico path { animation: vs-area-in .8s ease .65s both; }
+@media (prefers-reduced-motion: no-preference) {
+  #passivo-ativo .vs-slot.in { animation: vs-card-float 5.2s ease-in-out 1.2s infinite; }
+  #passivo-ativo .vs-slot[data-d="3"].in { animation-delay: 2.5s; }
+  #passivo-ativo .vs-meio.in .vs-seta { animation: vs-arrow-glow 3s ease-in-out 1s infinite; }
+}
+
+/* Pontos pequenos e discretos, com grão e vinheta para não criar uma chapa
+   preta. As cores ficam só nesta seção; os mockups escuros não mudam. */
+#passivo-ativo { --vs-bg: #0C1012; --vs-card: rgba(16, 17, 19, .78); position: relative; overflow: hidden; isolation: isolate; background: var(--vs-bg); }
 #passivo-ativo::before,
 #passivo-ativo::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1; }
 #passivo-ativo::before {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.34) 1.3px, transparent 1.9px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1.5px);
+  background-size: 26px 26px;
   background-position: center center;
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 55%, #000 0%, rgba(0, 0, 0, 0.7) 50%, transparent 92%);
-          mask-image: radial-gradient(ellipse 75% 70% at 50% 55%, #000 0%, rgba(0, 0, 0, 0.7) 50%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 52%, #000 25%, transparent 86%);
+          mask-image: radial-gradient(ellipse 80% 70% at 50% 52%, #000 25%, transparent 86%);
 }
 #passivo-ativo::after {
-  background: radial-gradient(100% 80% at 50% 50%, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+  background: radial-gradient(100% 85% at 50% 50%, transparent 38%, rgba(0, 0, 0, 0.22) 100%);
+}
+
+@media (max-width: 560px) {
+  #passivo-ativo .vs-frase { min-height: 0; }
+  #passivo-ativo .vs-lista li { font-size: 13px; }
+}
+
+@media (max-width: 980px) {
+  #passivo-ativo .vs { max-width: 580px; column-gap: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #passivo-ativo .vs-slot.reveal, #passivo-ativo .vs-meio.reveal { opacity: 1; transform: none; transition: none; }
+  #passivo-ativo .vs-card { transition: none; }
+  #passivo-ativo .vs-grafico polyline { stroke-dashoffset: 0; animation: none; }
+  #passivo-ativo .vs-grafico path { opacity: 1; animation: none; }
 }

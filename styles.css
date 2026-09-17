@@ -1,6 +1,6 @@
 /* ============================================================
    Rezult CRM — Site
-   Dark · Neon · Geist · Filled
+   Tipografia Rezult Design System · Inter
    ============================================================ */
 
 :root {
@@ -84,18 +84,10 @@
   --purple: #A855F7;
 
   /* Type */
-  /* Geist em tudo. A Poppins entrou em 2026-09-02 e foi revertida no dia
-     seguinte; a Inter era o texto corrido e saiu agora. A Geist Mono segue como
-     voz dos rótulos, dos números e das etiquetas em caixa alta.
-
-     --sans e --display apontam para a mesma família e continuam separados de
-     propósito: os pontos de uso já distinguem corpo de título, e um token só
-     obrigaria a reescrever todos eles no dia em que voltar a haver duas fontes.
-     Enquanto forem iguais, as exceções espalhadas pelo arquivo que trocam para
-     var(--display) não mudam nada -- estão marcadas e podem sair numa limpeza. */
-  --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --display: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --mono: 'Geist Mono', ui-monospace, monospace;
+  /* Fontes do Rezult Design System com escala adaptada ao site público. */
+  --sans: var(--font-sans);
+  --display: var(--font-sans);
+  --mono: var(--font-mono);
 
   /* Radius */
   --r-sm: 10px;
@@ -130,11 +122,12 @@
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 28px); }
 body {
   font-family: var(--sans);
+  font-size: var(--fs-16);
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+  line-height: var(--lh-normal);
   overflow-x: hidden;
 }
 body::after {
@@ -187,9 +180,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(0, 184, 115,0.04)  0%, transparent 65%); }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: var(--text-overline-size);
   color: var(--green-text);
-  font-weight: 300;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -225,7 +219,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head.center .eyebrow { justify-content: center; }
 .section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
-h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1; font-weight: 600; color: var(--ink); }
+h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-height: 1; font-weight: var(--fw-semibold); color: var(--ink); }
 .h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
 .eyebrow + .h2 { margin-top: 15px; }
 #integ-heading { letter-spacing: -0.03em; }
@@ -634,11 +628,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-/* Este var(--display) era exceção à convenção antiga (Geist nos títulos, Inter
-   no apoio): a 18px e logo abaixo do h1, a troca de família aparecia como emenda
-   entre as duas linhas. Com a Inter fora, --display e --sans são a mesma fonte e
-   a declaração virou inócua. Fica registrada, e não apagada, para o motivo
-   sobreviver caso o site volte a ter duas famílias. */
+/* O apoio da hero acompanha a mesma família dos títulos. */
 .hero-sub { font-family: var(--display); font-size: 18px; color: var(--verde-titulo); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 /* Traço à mão sob um trecho da subheadline, no lugar de sublinhado. Sublinhado
    corta as descidas das letras e lê como link; este é um risco de caneta.
@@ -823,7 +813,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .monta-chip {
   padding: 9px 17px; border-radius: 100px;
   border: 1px solid var(--border-2); background: #FFFFFF;
-  font-family: var(--display); font-size: 14px; font-weight: 300; color: var(--ink);
+  font-family: var(--display); font-size: 14px; font-weight: var(--fw-regular); color: var(--ink);
   cursor: pointer; transition: border-color .2s, background .2s, color .2s;
 }
 .monta-chip:hover { border-color: rgba(0, 184, 115, 0.45); color: #047857; }
@@ -2022,8 +2012,7 @@ select.demo-select:invalid { color: #374151; }
 /* Três linhas fixas no título e duas na lede, por <br>. O corpo encolhe para a
    linha mais longa de cada um caber: "Você não precisa contratar" no título
    e "Os agentes cuidam de todas as etapas" na lede, 12.67 em e 17.57 em
-   medidos na Geist. Os 64px descontam o padding lateral do .wrap, 32 de cada
-   lado. */
+   com 64px reservados para o padding lateral do .wrap. */
 #agentes .h2 { font-size: min(36px, calc((100vw - 64px) / 12.93)); }
 #agentes .lede { font-size: min(18px, calc((100vw - 64px) / 17.93)); }
 
@@ -2179,9 +2168,7 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Como funciona em 3 passos ---------- */
-/* Mesma situação da .hero-sub: era exceção ao padrão antigo (título em Geist,
-   resto em Inter) e hoje não muda nada, porque as duas variáveis apontam para a
-   Geist. Mantida pelo mesmo motivo. */
+/* O apoio desta seção acompanha a mesma família dos títulos. */
 #como-funciona .lede { font-family: var(--display); }
 .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .passo { text-align: center; }

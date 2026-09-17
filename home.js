@@ -37,6 +37,32 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+// ---- Comparação CRM passivo x ativo ----
+// A entrada dos cartões usa o reveal acima; a inclinação responde apenas a
+// mouse/trackpad e é desativada quando a pessoa prefere menos movimento.
+const tiltPermitido = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+document.querySelectorAll("#passivo-ativo .vs-card").forEach(card => {
+  let frame = 0;
+  card.addEventListener("pointermove", event => {
+    if (!tiltPermitido.matches) return;
+    if (frame) cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      card.style.setProperty("--vs-tilt-x", `${(-y * 7).toFixed(2)}deg`);
+      card.style.setProperty("--vs-tilt-y", `${(x * 7).toFixed(2)}deg`);
+      frame = 0;
+    });
+  });
+  card.addEventListener("pointerleave", () => {
+    if (frame) cancelAnimationFrame(frame);
+    card.style.removeProperty("--vs-tilt-x");
+    card.style.removeProperty("--vs-tilt-y");
+    frame = 0;
+  });
+});
+
 // ---- Integrations marquee ----
 (function () {
   const mq = document.getElementById("intgMarquee");
@@ -279,6 +305,38 @@ wirePricingToggle("priceToggle");
   const abas = Array.from(document.querySelectorAll(".ag-abas .ag-aba"));
   if (!abas.length) return;
   const paineis = abas.map(a => document.getElementById(a.getAttribute("aria-controls")));
+
+  // Cenas ilustrativas, uma por agente. O texto é inserido com textContent;
+  // o desenho e a estrutura são os mesmos em todas as abas.
+  const cenas = [
+    { agente: "Atendente", mensagens: ["Oi! Cheguei pelo anúncio. Ainda atendem?", "Atendemos sim. Como posso ajudar?", "Quero agendar uma demonstração."], resultado: "Conversa registrada no CRM", detalhe: "Primeiro atendimento iniciado" },
+    { agente: "SDR", mensagens: ["Temos 12 vendedores e muitos leads por semana.", "Entendi. Qual é a maior dificuldade do time hoje?", "Responder rápido e saber quem está pronto."], resultado: "Lead qualificado e sinalizado", detalhe: "Próximo passo organizado" },
+    { agente: "Closer", mensagens: ["Gostei, mas preciso entender o investimento.", "Claro. Posso enviar a proposta para sua equipe?", "Pode mandar, vamos analisar."], resultado: "Proposta enviada e etapa atualizada", detalhe: "Negociação acompanhada" },
+    { agente: "Pós-venda", mensagens: ["Como foi sua primeira semana com o Rezult?", "Boa! Só tenho uma dúvida sobre o funil.", "Vou chamar o time com o contexto da conversa."], autores: ["ia", "lead", "ia"], resultado: "Suporte acionado com histórico", detalhe: "Cliente acompanhado" },
+    { agente: "Conversa do time", status: "Registro automático", mensagens: ["Quero falar do plano para 12 pessoas.", "Claro. Podemos conversar amanhã às 10h?", "Pode sim."], resultado: "Contato e funil atualizados", detalhe: "Sem preenchimento manual" },
+  ];
+  const robo = `<svg viewBox="0 0 180 210" fill="none" aria-hidden="true"><path d="M90 37V22" stroke="#047857" stroke-width="7" stroke-linecap="round"/><circle cx="90" cy="15" r="10" fill="#00B873"/><path d="M38 156c-19 7-22 24-13 30 9 6 22-5 31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><path d="M142 156c19 7 22 24 13 30-9 6-22-5-31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="159" rx="51" ry="39" fill="white" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="151" rx="25" ry="6" fill="#00B873" opacity=".75"/><rect x="20" y="38" width="140" height="112" rx="56" fill="white" stroke="#CBE9D8" stroke-width="2"/><rect x="34" y="53" width="112" height="80" rx="37" fill="#102820"/><path d="M53 92c6-12 16-12 22 0m30 0c6-12 16-12 22 0" stroke="#B9F1D4" stroke-width="5" stroke-linecap="round"/><path d="M79 108c7 7 15 7 22 0" stroke="#B9F1D4" stroke-width="4" stroke-linecap="round"/></svg>`;
+
+  paineis.forEach((painel, i) => {
+    const cena = cenas[i];
+    const visual = document.createElement("div");
+    visual.className = "ag-demo";
+    visual.setAttribute("aria-hidden", "true");
+    visual.innerHTML = `<span class="ag-demo-label">Simulação ilustrativa</span><div class="ag-chat"><div class="ag-chat-head"><span class="ag-chat-mark">R</span><span><strong>Rezult · <span class="ag-chat-role"></span></strong><small>Online agora</small></span></div><div class="ag-chat-bubbles"><p class="ag-bolha ag-bolha--lead"></p><p class="ag-bolha ag-bolha--ia"></p><p class="ag-bolha ag-bolha--lead"></p></div><div class="ag-chat-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></div></div><div class="ag-bot">${robo}</div><div class="ag-demo-note"><strong></strong><span></span></div>`;
+    visual.querySelector(".ag-chat-role").textContent = cena.agente;
+    if (cena.status) visual.querySelector(".ag-chat-head small").textContent = cena.status;
+    visual.querySelectorAll(".ag-bolha").forEach((bolha, n) => {
+      bolha.textContent = cena.mensagens[n];
+      if (cena.autores) {
+        bolha.classList.toggle("ag-bolha--lead", cena.autores[n] === "lead");
+        bolha.classList.toggle("ag-bolha--ia", cena.autores[n] === "ia");
+      }
+    });
+    visual.querySelector(".ag-chat-result span").textContent = cena.resultado;
+    visual.querySelector(".ag-demo-note strong").textContent = cena.detalhe;
+    visual.querySelector(".ag-demo-note span").textContent = "Atualizado no CRM";
+    painel.append(visual);
+  });
 
   function mostrar(indice, focar) {
     abas.forEach((aba, i) => {

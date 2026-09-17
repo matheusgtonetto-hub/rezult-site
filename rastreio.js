@@ -23,6 +23,17 @@
   var CHAVES = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"];
   var DESTINO = "https://app.rezultcrm.com/register";
   var ARMAZEM = "rz_atribuicao";
+  var ARMAZEM_VARIANTE = "rz_home_variante";
+
+  // A variante fica na sessão para sobreviver à passagem por /planos antes
+  // do cadastro. A home A não grava nada; somente /ab2 marca a exposição B.
+  if (document.documentElement.getAttribute("data-rz-variant") === "ab2") {
+    try { sessionStorage.setItem(ARMAZEM_VARIANTE, "ab2"); } catch (e) {}
+  }
+
+  function variante() {
+    try { return sessionStorage.getItem(ARMAZEM_VARIANTE) || "a"; } catch (e) { return "a"; }
+  }
 
   function ler() {
     try { return JSON.parse(sessionStorage.getItem(ARMAZEM) || "{}"); } catch (e) { return {}; }
@@ -61,6 +72,15 @@
       CHAVES.forEach(function (k) {
         if (guardado[k] && !u.searchParams.has(k)) u.searchParams.set(k, guardado[k]);
       });
+      // O app já persiste utm_content até a criação da empresa. Preservamos o
+      // criativo original e acrescentamos a variante para medir StartTrial,
+      // não apenas o clique no site. Não alteramos a atribuição da home A.
+      if (variante() === "ab2") {
+        var conteudo = u.searchParams.get("utm_content") || "";
+        if (conteudo !== "ab2" && !conteudo.endsWith("__ab2")) {
+          u.searchParams.set("utm_content", conteudo ? conteudo + "__ab2" : "ab2");
+        }
+      }
       if (secao) u.searchParams.set("rz_secao", secao);
       return u.toString();
     } catch (e) {
@@ -81,7 +101,7 @@
     var secao = secaoDe(a);
     a.href = comParametros(a.getAttribute("href"), secao);
     if (typeof fbq === "function") {
-      fbq("trackCustom", "TrialStartClick", { section: secao });
+      fbq("trackCustom", "TrialStartClick", { section: secao, variant: variante() });
     }
   }, true);
 })();
