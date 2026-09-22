@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
-<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="home.css?v=20260921-1" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -126,8 +126,8 @@ fbq('track','PageView');
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge hero-badge-ia reveal">
-          <img class="hero-badge-meta" src="logos/meta.svg" alt="Meta" width="15" height="10">
-          <span>Parceiro Oficial da Meta para WhatsApp</span>
+          <svg class="hero-badge-ico" viewBox="0 0 15 23" fill="currentColor" aria-hidden="true"><path d="M5.96784 21.8658C5.82514 22.095 5.57425 22.2343 5.30425 22.2343C4.82456 22.2343 4.45803 21.8063 4.53187 21.3323L5.4809 15.2405C5.6162 14.372 4.94458 13.5876 4.06561 13.5876H2.57606C1.45278 13.5876 0.764504 12.3569 1.35709 11.4026C3.01895 8.72652 5.89715 4.09055 8.20424 0.368261C8.34667 0.138456 8.59696 0 8.86733 0C9.34664 0 9.71288 0.427713 9.6391 0.90131L8.68996 6.99384C8.55466 7.86233 9.22628 8.64669 10.1053 8.64669H11.6188C12.7427 8.64669 13.4287 9.88197 12.8347 10.8361L5.96784 21.8658Z"/></svg>
+          <span>Potencialize seu negócio com IA</span>
         </div>
         <h1 class="reveal" data-d="1">O lead chega às 22h. O<br class="mobile-only-br"> Rezult atende, qualifica<br class="mobile-only-br"> e agenda. Às 8h você<br class="mobile-only-br"> só abre a agenda.</h1>
         <p class="hero-sub reveal" data-d="2">Enquanto o seu CRM espera alguém do time, o Rezult entra em ação no minuto em que o lead chega: atende, qualifica, agenda, move o negócio no funil e registra tudo sozinho.</p>
@@ -1153,14 +1153,19 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="meta-grade">
       <div class="meta-texto reveal">
-        <!-- O selo numa placa branca, acima do título. width/height reservam o
-             espaço antes de o PNG carregar: sem eles a placa nasce sem altura e
-             empurra o título quando a imagem chega. -->
-        <span class="meta-selo-caixa">
-          <img class="meta-selo" src="logos/meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
-        </span>
-        <h2 class="h2">Nada disso é gambiarra. <span class="meta-azul">É a API oficial da Meta.</span></h2>
+        <div class="hero-badge hero-badge-ia meta-partner-pill">
+          <img class="hero-badge-meta" src="logos/meta.svg" alt="Meta" width="15" height="10">
+          <span>Parceiro Oficial da Meta para WhatsApp</span>
+        </div>
+        <h2 class="h2">O Rezult é parceiro oficial da Meta para integração com a <span class="meta-azul">WhatsApp Business API.</span></h2>
         <p class="lede">O Rezult opera o WhatsApp Business API homologado, com o número da sua própria empresa. Nada de API não oficial pendurada num celular, que é o que derruba número.</p>
+        <div class="meta-badges">
+          <!-- O selo oficial passa a fechar o bloco, depois do subtítulo.
+               width/height reservam seu espaço antes do PNG carregar. -->
+          <span class="meta-selo-caixa">
+            <img class="meta-selo" src="logos/meta-business-partner.png" alt="Meta Business Partner" width="786" height="267">
+          </span>
+        </div>
       </div>
 
       <!-- width/height reservam a proporção antes de o PNG carregar. Sem eles a
@@ -1292,6 +1297,30 @@ fbq('track','PageView');
           Escopos diferem entre as ferramentas.
         </p>
       </div>
+
+      <section class="risco-zero reveal" aria-labelledby="risco-zero-titulo">
+        <div class="risco-zero-icone" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l7 3v5c0 4.6-2.9 8.5-7 10-4.1-1.5-7-5.4-7-10V6l7-3Z"/>
+            <path d="m8.8 12 2 2 4.5-4.5"/>
+          </svg>
+        </div>
+        <div class="risco-zero-conteudo">
+          <p class="risco-zero-label">RISCO ZERO</p>
+          <h3 id="risco-zero-titulo">Satisfação garantida ou 100% do seu dinheiro de volta.</h3>
+          <p class="risco-zero-texto">Você tem 7 dias após a contratação para conhecer o Rezult com tranquilidade. Se não fizer sentido para o seu negócio, peça o reembolso nesse prazo e devolvemos o valor integral.</p>
+          <ul class="risco-zero-beneficios" aria-label="Condições da garantia">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              7 dias de garantia
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Válido em todos os planos
+            </li>
+          </ul>
+        </div>
+      </section>
 
 
     <!-- id priceTogglePreview: o wirePricingToggle do main.js já espera este id.
@@ -1531,6 +1560,27 @@ fbq('track','PageView');
       </ul>
 
       <p class="fechamento-nota">Ative seu plano antes do fim dos 7 dias de teste e a primeira mensalidade sai pela metade. Planos a partir de R$ 237/mês.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO FINAL -->
+<section class="ainda-duvidas" aria-labelledby="ainda-duvidas-titulo">
+  <div class="wrap">
+    <div class="ainda-duvidas-card reveal">
+      <div class="ainda-duvidas-icone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+          <path d="M9.7 9a2.4 2.4 0 1 1 3.8 1.95c-.9.62-1.5 1.05-1.5 2.05"/>
+          <path d="M12 16h.01"/>
+        </svg>
+      </div>
+      <h2 id="ainda-duvidas-titulo">Ainda tem dúvidas?</h2>
+      <p>Nossa equipe de especialistas está pronta para ajudar você</p>
+      <div class="ainda-duvidas-acoes">
+        <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary btn-lg">Falar com um Especialista</a>
+        <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-secondary btn-lg">Agendar Demonstração</a>
+      </div>
     </div>
   </div>
 </section>
