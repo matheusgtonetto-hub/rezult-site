@@ -600,6 +600,15 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   letter-spacing: 0.01em;
 }
 .hero-badge-ia .hero-badge-meta { transform: translateY(-1px); }
+/* A pill de IA da hero recupera o tratamento verde claro original. A classe
+   própria evita alterar o selo da Meta, que reutiliza .hero-badge-ia mais
+   abaixo na página. */
+.hero-badge-verde {
+  background: rgba(0, 184, 115, 0.10);
+  border: 0;
+  box-shadow: none;
+  color: var(--ink);
+}
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
    48px fixo estouraria a largura em tela estreita — o clamp é o que faz o
