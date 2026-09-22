@@ -426,21 +426,41 @@ wirePricingToggle("priceToggle");
   }
 
   function quadro(agora) {
-    const dt = ultimoQuadro ? (agora - ultimoQuadro) / 1000 : 0;
+    // Limita o intervalo em vez de descartar o quadro inteiro. O teste antigo
+    // `dt < 0.1` congelava a faixa quando o navegador caía para 10 fps ou
+    // menos, porque todos os quadros passavam a ser ignorados. O limite evita
+    // saltos ao voltar de outra aba e mantém o avanço em dispositivos lentos.
+    const dt = ultimoQuadro ? Math.min((agora - ultimoQuadro) / 1000, 0.1) : 0;
     ultimoQuadro = agora;
     const emGesto = segurando || agora <= inerciaAte;
     // O reposicionamento que fecha o ciclo nunca roda durante um gesto: mexer
     // em scrollLeft no meio dele cancela a inércia e trava a rolagem.
     if (!emGesto) normalizar();
-    if (!emGesto) {
-      // dt acima de 0.1s é a aba voltando do segundo plano: sem o corte a
-      // esteira daria um salto proporcional ao tempo em que ficou escondida.
-      if (dt > 0 && dt < 0.1) esteira.scrollLeft += VELOCIDADE * dt;
+    if (!emGesto && !document.hidden && dt > 0) {
+      esteira.scrollLeft += VELOCIDADE * dt;
     }
     marcarPonto();
     requestAnimationFrame(quadro);
   }
   requestAnimationFrame(quadro);
+
+  // Ao restaurar a aba ou a página pelo cache de navegação, descarta o tempo
+  // em segundo plano e libera qualquer gesto que tenha ficado sem pointerup.
+  function retomarMovimento() {
+    ultimoQuadro = performance.now();
+    segurando = false;
+    inerciaAte = 0;
+    esteira.classList.remove("arrastando");
+    normalizar();
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) retomarMovimento();
+  });
+  window.addEventListener("pageshow", retomarMovimento);
+  window.addEventListener("blur", () => {
+    segurando = false;
+    esteira.classList.remove("arrastando");
+  });
 
   // Sem pausa no hover, ao contrario do :hover dos depoimentos: a esteira e
   // decorativa e deve andar sempre. Passar o mouse por cima nao e intencao de
@@ -479,6 +499,11 @@ wirePricingToggle("priceToggle");
   }
   esteira.addEventListener("pointerup", soltar);
   esteira.addEventListener("pointercancel", soltar);
+  esteira.addEventListener("lostpointercapture", () => {
+    segurando = false;
+    inerciaAte = performance.now() + INERCIA;
+    esteira.classList.remove("arrastando");
+  });
   // A imagem do card é arrastável por padrão e sequestraria o gesto.
   esteira.addEventListener("dragstart", e => e.preventDefault());
 

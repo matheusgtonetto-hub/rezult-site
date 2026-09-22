@@ -692,16 +692,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    coisas convivem na mesma propriedade. Ver main.js, bloco "Esteira de cases". */
 .hero-cases {
   margin-top: 130px;
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
-  /* Barra de rolagem escondida nos três motores. O corte lateral da máscara já
-     avisa que há mais conteúdo, e uma barra cinza atravessada embaixo dos cards
-     sujaria o hero. */
+  /* Barra de rolagem escondida nos três motores. Os próprios cards cortados nas
+     bordas mostram que há mais conteúdo; a máscara foi removida para a faixa
+     ocupar visualmente toda a largura da tela. */
   scrollbar-width: none; -ms-overflow-style: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .hero-cases::-webkit-scrollbar { display: none; }
 .hero-cases.arrastando { cursor: grabbing; user-select: none; -webkit-user-select: none; }
@@ -2726,21 +2730,31 @@ select.demo-select:invalid { color: #374151; }
 }
 
 /* ---------- Esteira de depoimentos ---------- */
-/* Duas faixas rolando em sentidos opostos. A máscara nas laterais dissolve os
-   cards que entram e saem, senão eles apareceriam cortados na borda da tela. */
-/* O padding vertical existe por causa do hover: o card sobe 3px, e o overflow
-   hidden recorta na borda da caixa de padding, não na do conteúdo. Sem ele o
-   topo do card ficava cortado. A margem negativa devolve o espaço, para a
-   seção não crescer por conta disso. */
-.dep-esteira { display: flex; flex-direction: column; gap: 20px; overflow: hidden; padding: 8px 0; margin: -8px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
-.dep-linha { display: flex; gap: 20px; width: max-content; }
+/* Duas faixas rolando em sentidos opostos. A esteira sai do limite do .wrap e
+   ocupa a viewport inteira; os cards cortados nas bordas comunicam a
+   continuidade sem esconder parte útil da faixa com uma máscara. */
+/* O padding vertical preserva a borda e a sombra dos cards dentro do overflow.
+   A margem negativa devolve esse espaço para a seção não crescer por causa da
+   área de proteção. */
+.dep-esteira {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  padding: 8px 0;
+  margin: -8px -50vw;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.dep-linha { display: flex; width: max-content; will-change: transform; }
 /* A lista está duplicada no HTML, então -50% chega exatamente onde a cópia
    começa e o reinício é invisível. */
 .dep-linha.esq { animation: dep-esq 40s linear infinite; }
 .dep-linha.dir { animation: dep-dir 47s linear infinite; }
-/* Pausa só a faixa sob o mouse, não as duas: parar a de baixo enquanto se lê a
-   de cima congela a seção inteira sem motivo. */
-.dep-linha:hover { animation-play-state: paused; }
 @keyframes dep-esq { from { transform: translateX(0); }      to { transform: translateX(-50%); } }
 @keyframes dep-dir { from { transform: translateX(-50%); }   to { transform: translateX(0); } }
 /* Largura e altura fixas. A largura já era fixa; a altura precisa ser também
@@ -2749,7 +2763,7 @@ select.demo-select:invalid { color: #374151; }
    com a de baixo. Os 290px cabem a citação mais longa (5 linhas a 15px) mais
    estrelas, autor e padding. Se um depoimento novo for maior que isso, este
    número precisa subir junto. */
-.dep-esteira .tcard { width: 370px; height: 220px; padding: 22px; gap: 16px; flex-shrink: 0; }
+.dep-esteira .tcard { width: 370px; height: 220px; margin-right: 20px; padding: 22px; gap: 16px; flex-shrink: 0; }
 /* Dentro da esteira o card não sobe no hover. O translateY de 3px tira a borda
    de baixo do card de debaixo do cursor: o hover cai, o card volta, o hover
    volta, e com transition no transform isso vira oscilação. Na grade de
@@ -2761,8 +2775,7 @@ select.demo-select:invalid { color: #374151; }
    que deixava os depoimentos estáticos em máquinas com "Reduzir movimento"
    ligado no macOS. */
 @media (max-width: 560px) {
-  .dep-esteira .tcard { width: 320px; height: 235px; }
-  .dep-linha { gap: 14px; }
+  .dep-esteira .tcard { width: 320px; height: 235px; margin-right: 14px; }
   .dep-esteira { gap: 14px; }
 }
 
