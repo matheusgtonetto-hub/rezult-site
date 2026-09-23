@@ -189,7 +189,11 @@ function wirePricingToggle(toggleId) {
   toggle.querySelectorAll("button").forEach(btn => {
     btn.addEventListener("click", () => {
       const period = btn.dataset.period;
-      toggle.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+      document.querySelectorAll(".price-toggle").forEach(group => {
+        group.querySelectorAll("button").forEach(b => {
+          b.classList.toggle("active", b.dataset.period === period);
+        });
+      });
       document.querySelectorAll(".amt").forEach(amt => {
         const val = period === "anual" ? amt.dataset.a : period === "semestral" ? amt.dataset.s : amt.dataset.m;
         if (val) animateNumber(amt, parseInt(amt.textContent.replace(/\D/g, "")) || 0, parseInt(val));
@@ -233,6 +237,7 @@ function animateNumber(el, from, to) {
   requestAnimationFrame(step);
 }
 wirePricingToggle("priceTogglePreview");
+wirePricingToggle("priceToggleFinal");
 wirePricingToggle("priceToggle");
 
 
