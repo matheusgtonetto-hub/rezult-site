@@ -89,6 +89,7 @@
   --r-md: 14px;
   --r-lg: 20px;
   --r-xl: 28px;
+  --shadow-sm: 0 2px 8px rgba(7, 16, 13, .07);
 
   /* Layout */
   --maxw: 1200px;
@@ -110,7 +111,7 @@
      alguém for mexer nisso de novo por causa daquela tira: já foi tentado com
      padding env(), fundo opaco e pseudo-elemento. Nenhum funciona, e não é
      defeito do site. */
-  --nav-h: calc(70px + env(safe-area-inset-top, 0px));
+  --nav-h: calc(60px + env(safe-area-inset-top, 0px));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -298,9 +299,9 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  /* Com box-sizing border-box, a faixa útil é sempre 70px: o padding só empurra
+  /* Com box-sizing border-box, a faixa útil é sempre 60px: o padding só empurra
      logo e botões para baixo do recorte quando ele existe. No Safari em
-     navegação normal o env() vale 0 e isto vira height: 70px, padding: 0. */
+     navegação normal o env() vale 0 e isto vira height: 60px, padding: 0. */
   height: var(--nav-h);
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
@@ -322,18 +323,17 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
      transparência ele não tem o que desfocar e fica 100% coberto, custo de GPU
      invisível, sentido justamente em celular. */
   background: #fff;
-  /* Separa a barra da hero branca, que sem isso encosta nela sem emenda. Duas
-     camadas fracas em vez de uma linha: uma de 3px logo abaixo, que dá o
-     contorno, e uma de 12px bem diluída, que dá a profundidade. Ambas em preto
-     de baixa opacidade, para não puxar cor sobre o branco. */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  /* A navbar e a hero são superfícies brancas. Uma hairline cinza faz a
+     separação sem criar profundidade artificial entre as duas áreas. */
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
   transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
               border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
 }
-/* Rolou 12px: a barra descola do topo e vira um cartão flutuante.
+/* Rolou 12px: a barra descola do topo e vira um cartão recortado.
 
-   Ela continua fixed e do mesmo tamanho útil (70px); o que muda é que ganha
-   uma margem em volta, cantos e sombra. A largura sai de 100% para o mesmo
+   Ela continua fixed e do mesmo tamanho útil (60px); o que muda é que ganha
+   uma margem em volta, cantos e contorno. A largura sai de 100% para o mesmo
    --maxw do .wrap, então no estado flutuante a barra e o conteúdo da página
    passam a ter exatamente a mesma caixa — é isso que faz o cartão parecer
    alinhado ao site em vez de solto.
@@ -343,17 +343,17 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
    resolve a sobra nas margens auto.
 
    O fundo segue opaco: transparência com blur foi tentada e descartada aqui
-   porque o hero tem o mockup claro do notebook passando por trás, e o logo
-   branco some em cima dele. O destaque vem do recorte e da sombra. */
+   porque o hero tem o mockup claro do notebook passando por trás. O destaque
+   vem apenas do recorte e do contorno, sem sombra. */
 .nav.scrolled {
   top: calc(env(safe-area-inset-top, 0px) + 12px);
-  height: 70px;
+  height: 60px;
   padding-top: 0;
   width: min(var(--maxw), calc(100% - 32px));
   margin-inline: auto;
   border-radius: var(--r-md);
   border: 1px solid rgba(0, 0, 0, 0.10);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 }
 /* O .wrap já reserva 32px de respiro nas laterais para o conteúdo não grudar
    na borda da tela. Flutuando, quem dá esse respiro é a própria margem do
@@ -390,7 +390,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O letter-spacing saiu junto com o uppercase: os 0.04em existiam para abrir a
    caixa alta, que precisa de mais respiro entre letras para não fechar. Em
    caixa mista esse mesmo tracking deixa as palavras espaçadas demais. */
-.nav-links a { font-size: 16px; color: rgba(5, 10, 7, 0.72); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
+.nav-links a { font-size: 14px; color: var(--ink); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
 .nav-links a:hover { color: #050A07; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 /* Sem font-weight aqui, de propósito. Este seletor já teve um 500 para devolver
@@ -600,14 +600,26 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   letter-spacing: 0.01em;
 }
 .hero-badge-ia .hero-badge-meta { transform: translateY(-1px); }
-/* A pill de IA da hero recupera o tratamento verde claro original. A classe
-   própria evita alterar o selo da Meta, que reutiliza .hero-badge-ia mais
-   abaixo na página. */
+/* Badge operacional da hero: superfície e borda neutras do design system.
+   O ícone é o único acento verde e identifica o estado ativo sem transformar
+   toda a peça em uma mancha de cor. */
 .hero-badge-verde {
-  background: rgba(0, 184, 115, 0.10);
-  border: 0;
-  box-shadow: none;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
   color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .08em;
+}
+.hero-badge-agent-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: var(--green-text);
 }
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* O teto do clamp é o tamanho de desktop: 48px. O piso e o 4vw seguem porque
@@ -637,7 +649,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @keyframes em-shine {
   to { background-position: -200% center; }
 }
-.hero-sub { font-size: 20px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-size: 18px; color: var(--text-muted); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 .hero-desc { font-size: clamp(15px, 1.6vw, 17px); color: var(--text-muted); line-height: 1.4; max-width: 560px; margin-top: 10px; letter-spacing: -0.01em; }
 .hero-actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; align-items: center; }
 /* O font-size fica escopado em .hero: a classe .hero-actions é reaproveitada
@@ -695,8 +707,44 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero.va .hero-note { justify-content: center; }
 .hero.va .hero-badge { margin-left: auto; margin-right: auto; }
 .hero.va .hero-mockup-wrap { max-width: 820px; margin-top: 56px; }
-.hero.va .hero-conversion { display: flex; flex-direction: column; align-items: center; margin-top: 32px; }
+.hero.va .hero-conversion { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 32px; }
 .hero.va .hero-conversion .hero-note { margin-top: 0; }
+.hero-benefits {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+}
+.hero-benefit {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  color: #626670;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+}
+.hero-benefit-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.hero-benefit-icon svg { width: 20px; height: 20px; }
 .hero-mockup-wrap, .hero-glow, .hero-badge { will-change: transform; }
 
 
@@ -1559,6 +1607,8 @@ select.demo-select:invalid { color: #374151; }
      palavra e o conjunto centraliza de verdade. */
   .hero.vb .hero-note { display: block; }
   .hero.vb .hero-note svg { display: inline-block; vertical-align: -2px; margin-right: 8px; }
+  .hero-benefits { gap: 16px; }
+  .hero-benefit { gap: 12px; font-size: 14px; }
 
   /* Só a .page-hero: o cabeçalho de planos e das legais continua branco, e
      glow verde sobre branco vira véu. O .hero da home voltou a ser escuro e
@@ -1635,6 +1685,9 @@ select.demo-select:invalid { color: #374151; }
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
   .hero-sub { max-width: 95%; font-size: 18px; letter-spacing: 0; }
+  .hero.va .hero-conversion { margin-top: 26px; }
+  .hero-benefits { max-width: 330px; grid-template-columns: 1fr; gap: 12px; }
+  .hero-benefit { width: 100%; gap: 14px; font-size: 15px; white-space: normal; }
   .hero-cases { margin-top: 100px; }
   .case-card { width: 255px; height: 370px; margin-right: 14px; border-radius: 16px; }
   .case-info { padding: 18px; }
@@ -1900,7 +1953,7 @@ select.demo-select:invalid { color: #374151; }
 }
 .link-seta:hover .link-seta-icon { transform: translateX(2px); }
 
-/* O mesmo botão dos pontinhos na navbar, na escala dela: a barra tem 70px de
+/* O mesmo botão dos pontinhos na navbar, na escala dela: a barra tem 60px de
    altura útil, e os 44px de min-height mais o padding de 23px do hero deixariam
    o CTA dominando a linha. Fonte, padding e radius voltam aos valores que o
    .nav-right .btn já usava. */
@@ -3780,4 +3833,643 @@ select.demo-select:invalid { color: #374151; }
   #passivo-ativo .vs-card { transition: none; }
   #passivo-ativo .vs-grafico polyline { stroke-dashoffset: 0; animation: none; }
   #passivo-ativo .vs-grafico path { opacity: 1; animation: none; }
+}
+
+/* ═══ Seção 2.5 · CRM passivo x CRM Ativo ════════════════════════════════
+   A comparação é conteúdo HTML antes de ser animação: o JavaScript apenas
+   coordena a entrada e pode ser removido sem ocultar nenhuma informação. */
+.passive-compare {
+  overflow: hidden;
+  padding: 120px 0 84px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-2);
+}
+.passive-compare-head {
+  max-width: 860px;
+  margin: 0 auto 54px;
+  padding: 0 12px;
+}
+.passive-compare-head .eyebrow { margin-bottom: 18px; }
+.passive-compare-head .h2 { max-width: 820px; margin-right: auto; margin-left: auto; }
+.passive-compare-head .lede { max-width: 780px; margin: 20px auto 0; font-size: 18px; }
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 24px;
+}
+.compare-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 590px;
+  flex-direction: column;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.compare-card-active {
+  border-color: rgba(0, 184, 115, .52);
+  background: rgba(0, 184, 115, .065);
+  box-shadow: 0 8px 24px rgba(0, 184, 115, .09);
+}
+.compare-card-top { min-height: 104px; }
+.compare-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-bottom: 14px;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: #FFFFFF;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.compare-card-active .compare-label {
+  border-color: rgba(0, 184, 115, .44);
+  background: rgba(255, 255, 255, .82);
+  color: var(--primary-lo);
+}
+.compare-card.compare-card-active h3 { color: var(--primary-lo); }
+.compare-card h3 {
+  max-width: 470px;
+  color: var(--ink);
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+.compare-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 24px 0 26px;
+  padding: 15px 16px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-md);
+  background: #FFFFFF;
+}
+.compare-channel {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+}
+.compare-channel img { width: 18px; height: 18px; object-fit: contain; }
+.compare-message > div { min-width: 0; }
+.compare-message span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-subtle);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: .02em;
+}
+.compare-message p { color: var(--ink); font-size: 14px; line-height: 1.45; }
+
+.compare-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.compare-timeline::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  bottom: 17px;
+  left: 68px;
+  width: 1px;
+  background: var(--border);
+}
+.compare-card-active .compare-timeline::before { width: 2px; background: rgba(0, 184, 115, .46); }
+.compare-step {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 46px 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  min-height: 54px;
+  padding: 8px 0;
+}
+.compare-step time {
+  padding-top: 3px;
+  color: var(--text-subtle);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.compare-marker {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid #C9C9C9;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: var(--text-muted);
+}
+.compare-marker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.compare-marker svg { width: 14px; height: 14px; }
+.compare-card-active .compare-marker::before { display: none; }
+.compare-card-active .compare-marker { border-color: rgba(0, 184, 115, .58); background: #FFFFFF; color: var(--primary-lo); }
+.compare-card-active .compare-step:last-child {
+  border-radius: var(--r-sm);
+  background: rgba(0, 184, 115, .08);
+}
+.compare-card-active .compare-step:last-child .compare-marker { border-color: var(--primary); background: var(--primary); color: var(--on-primary); }
+.compare-card-active .compare-step:last-child strong { color: var(--primary-lo); }
+.compare-step > span:last-child { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.compare-step strong { color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.35; }
+.compare-step small { color: var(--text-subtle); font-size: 12px; line-height: 1.35; }
+.compare-step.is-waiting strong { color: var(--text-muted); }
+.compare-wait { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: 4px !important; min-height: 10px; }
+.compare-wait i { display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--text-subtle); }
+.compare-card-footer {
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-2);
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.compare-card-active .compare-card-footer { color: var(--ink); }
+
+.passive-transition {
+  max-width: 680px;
+  margin: 38px auto 0;
+  text-align: center;
+}
+.passive-transition .passive-transition-main { color: var(--primary-lo); font-size: 18px; font-weight: 600; line-height: 1.4; }
+.passive-transition .passive-transition-next { margin-top: 5px; color: var(--text-muted); font-size: 14px; line-height: 1.45; }
+
+/* A animação só é armada pelo JavaScript quando a seção entra na tela. */
+.passive-compare.is-prepared .compare-card,
+.passive-compare.is-prepared .compare-message,
+.passive-compare.is-prepared .compare-step { opacity: 0; }
+.passive-compare.is-prepared .compare-card { transform: translateY(16px); }
+.passive-compare.is-playing .compare-card { animation: compareCardIn .5s cubic-bezier(.16, 1, .3, 1) forwards; }
+.passive-compare.is-playing .compare-card-active { animation-delay: .08s; }
+.passive-compare.is-playing .compare-message { animation: compareItemIn .4s ease .48s forwards; }
+.passive-compare.is-playing .compare-step { animation: compareItemIn .4s ease forwards; }
+.passive-compare.is-playing .compare-step:nth-child(1) { animation-delay: .85s; }
+.passive-compare.is-playing .compare-step:nth-child(2) { animation-delay: 1.2s; }
+.passive-compare.is-playing .compare-step:nth-child(3) { animation-delay: 1.55s; }
+.passive-compare.is-playing .compare-step:nth-child(4) { animation-delay: 1.9s; }
+.passive-compare.is-playing .compare-step:nth-child(5) { animation-delay: 2.25s; }
+.passive-compare.is-playing .compare-wait i { animation: compareWait .7s ease-in-out 3; }
+.passive-compare.is-playing .compare-wait i:nth-child(2) { animation-delay: .12s; }
+.passive-compare.is-playing .compare-wait i:nth-child(3) { animation-delay: .24s; }
+.passive-compare.is-complete .compare-card-active { border-color: rgba(0, 184, 115, .72); box-shadow: 0 14px 34px rgba(0, 184, 115, .14); }
+@keyframes compareCardIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes compareItemIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes compareWait { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+
+@media (max-width: 780px) {
+  .passive-compare { padding: 80px 0; }
+  .passive-compare-head { margin-bottom: 38px; padding: 0; }
+  .passive-compare-head .lede { font-size: 17px; }
+  .compare-grid { grid-template-columns: 1fr; gap: 18px; }
+  .compare-card { min-height: 0; padding: 24px; }
+  .compare-card-top { min-height: 0; }
+  .compare-card-footer { margin-top: 14px; }
+  .passive-transition { margin-top: 34px; }
+}
+
+@media (max-width: 480px) {
+  .passive-compare { padding: 70px 0; }
+  .compare-card { padding: 20px 18px; border-radius: var(--r-md); }
+  .compare-card h3 { font-size: 20px; }
+  .compare-message { margin: 20px 0 22px; padding: 13px; }
+  .compare-timeline::before { left: 62px; }
+  .compare-step { grid-template-columns: 40px 24px minmax(0, 1fr); gap: 10px; min-height: 56px; }
+  .compare-step strong { font-size: 13px; }
+  .passive-transition .passive-transition-main { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .passive-compare.is-prepared .compare-card,
+  .passive-compare.is-prepared .compare-message,
+  .passive-compare.is-prepared .compare-step { opacity: 1; transform: none; animation: none; }
+  .passive-compare .compare-card-active { box-shadow: none; }
+  .passive-compare .compare-wait i { animation: none; }
+}
+
+
+/* ═══ Seção 3 · mecanismo CRM Ativo ═══════════════════════════════════════
+   O diagrama é HTML e CSS para continuar editável, responsivo e acessível.
+   A animação só reforça o fluxo; todos os estados permanecem legíveis sem ela. */
+.crm-ativo {
+  overflow: hidden;
+  padding: 100px 0 120px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(0, 184, 115, .065), transparent 42%),
+    var(--bg);
+  border-top: 0;
+  border-bottom: 1px solid var(--border-2);
+}
+.crm-ativo-head { max-width: 860px; margin: 0 auto 40px; padding: 0 12px; }
+.crm-ativo-head .eyebrow { margin-bottom: 18px; }
+.crm-ativo-head .h2 { max-width: 780px; margin-left: auto; margin-right: auto; }
+.crm-ativo-head .lede { max-width: 690px; margin: 20px auto 0; font-size: 18px; }
+.crm-ativo-apoio {
+  max-width: 790px;
+  margin: 22px auto 0;
+  padding: 16px 20px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, .78);
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.crm-flow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1120px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 36px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-xl);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 18px 50px rgba(7, 16, 13, .07);
+}
+.crm-flow-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  color: var(--text);
+  padding: 20px;
+  text-align: left;
+  transition: transform .26s cubic-bezier(.16, 1, .3, 1), border-color .18s ease, background .18s ease, box-shadow .26s ease;
+}
+.crm-flow-node:hover { border-color: var(--border-active); background: #FFFFFF; }
+.crm-flow-node:focus-visible {
+  outline: 3px solid rgba(0, 184, 115, .35);
+  outline-offset: 3px;
+}
+.crm-flow-node.is-selected {
+  border-color: var(--primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 184, 115, .09);
+}
+.crm-flow-node.is-flow-active {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0, 184, 115, .13);
+}
+.crm-flow-node-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: #FFFFFF;
+  color: var(--icon-default, var(--text-muted));
+}
+.crm-flow-node-icon svg { width: 20px; height: 20px; }
+.crm-flow-node.is-selected .crm-flow-node-icon,
+.crm-flow-node.is-flow-active .crm-flow-node-icon { color: var(--ink); border-color: rgba(0, 184, 115, .32); background: rgba(0, 184, 115, .08); }
+.crm-flow-copy { display: flex; flex-direction: column; min-width: 0; gap: 5px; }
+.crm-flow-copy strong { color: var(--ink); font-size: 17px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
+.crm-flow-copy small { color: var(--text-muted); font-size: 14px; line-height: 1.45; }
+
+.crm-flow-lead { width: min(100%, 560px); align-items: center; gap: 16px; }
+.crm-flow-sources { display: flex; align-items: center; gap: 8px; margin-left: auto; padding-left: 16px; }
+.crm-flow-sources > span { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--border-2); border-radius: 9px; background: #FFFFFF; color: var(--text-muted); }
+.crm-flow-sources img, .crm-flow-sources svg { width: 17px; height: 17px; object-fit: contain; }
+
+.crm-flow-core {
+  width: min(100%, 760px);
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  border-color: rgba(0, 184, 115, .55);
+  background: #FFFFFF;
+  box-shadow: 0 14px 38px rgba(0, 184, 115, .10);
+}
+.crm-flow-core-top { display: flex; align-items: center; gap: 16px; }
+.crm-flow-core-top .crm-flow-copy { flex: 1; }
+.crm-flow-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  background: rgba(0, 184, 115, .09);
+  color: #076F4B;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.crm-flow-online i, .crm-flow-status i { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--primary); }
+.crm-flow-capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.crm-flow-capabilities > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 9px 10px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+}
+.crm-flow-capabilities svg { width: 17px; height: 17px; flex: none; color: var(--text-muted); }
+
+.crm-flow-actions { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; width: 100%; }
+.crm-flow-action { align-items: flex-start; gap: 16px; padding: 24px; }
+.crm-flow-action .crm-flow-copy { padding-top: 3px; }
+.crm-flow-status {
+  position: absolute;
+  left: 88px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #076F4B;
+  font-size: 12px;
+  font-weight: 500;
+}
+.crm-flow-action { padding-bottom: 58px; }
+
+.crm-flow-result { width: min(100%, 820px); flex-direction: column; gap: 18px; padding: 24px; }
+.crm-flow-result-head { display: flex; align-items: center; gap: 16px; }
+.crm-flow-checks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.crm-flow-checks > span { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 13px; font-weight: 500; }
+.crm-flow-checks svg { width: 17px; height: 17px; flex: none; color: var(--primary); }
+
+/* Conectores: a linha neutra explica a arquitetura; o ponto verde animado
+   mostra a passagem do lead sem esconder informação quando está parado. */
+.crm-flow-connector { position: relative; width: 2px; height: 48px; background: var(--border); }
+.crm-flow-connector span { position: absolute; top: -3px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); opacity: 0; transform: translateX(-50%); }
+.crm-flow-connector.is-flow-active { background: rgba(0, 184, 115, .45); }
+.crm-flow-connector.is-flow-active span { opacity: 1; animation: crm-flow-down .65s cubic-bezier(.2, .8, .2, 1) both; }
+
+.crm-flow-branch, .crm-flow-merge { position: relative; width: calc(50% + 12px); height: 58px; color: var(--border); }
+.crm-flow-branch::before, .crm-flow-merge::before,
+.crm-flow-branch span, .crm-flow-merge span,
+.crm-flow-branch i, .crm-flow-merge i,
+.crm-flow-branch b, .crm-flow-merge b { position: absolute; display: block; background: currentColor; content: ""; }
+.crm-flow-branch::before { top: 0; left: 50%; width: 2px; height: 30px; transform: translateX(-50%); }
+.crm-flow-branch span { top: 29px; left: 0; width: 100%; height: 2px; }
+.crm-flow-branch i, .crm-flow-branch b { top: 29px; width: 2px; height: 29px; }
+.crm-flow-branch i { left: 0; }
+.crm-flow-branch b { right: 0; }
+.crm-flow-merge::before { bottom: 0; left: 50%; width: 2px; height: 30px; transform: translateX(-50%); }
+.crm-flow-merge span { top: 27px; left: 0; width: 100%; height: 2px; }
+.crm-flow-merge i, .crm-flow-merge b { top: 0; width: 2px; height: 29px; }
+.crm-flow-merge i { left: 0; }
+.crm-flow-merge b { right: 0; }
+.crm-flow-branch.is-flow-active, .crm-flow-merge.is-flow-active { color: rgba(0, 184, 115, .48); }
+.crm-flow-branch.is-flow-active::after, .crm-flow-merge.is-flow-active::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  transform: translateX(-50%);
+  animation: crm-flow-pulse .65s ease both;
+}
+.crm-flow-branch.is-flow-active::after { top: 23px; }
+.crm-flow-merge.is-flow-active::after { bottom: 23px; }
+
+.crm-flow-detail {
+  display: grid;
+  grid-template-columns: 150px minmax(180px, 230px) minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  max-width: 920px;
+  min-width: 0;
+  margin: 20px auto 0;
+  padding: 18px 22px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-md);
+  background: #FFFFFF;
+}
+.crm-flow-detail-label { color: var(--green-text); font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.crm-flow-detail strong { color: var(--ink); font-size: 15px; font-weight: 600; }
+.crm-flow-detail p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+
+.crm-ativo-cta { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 680px; margin: 44px auto 0; text-align: center; }
+.crm-ativo-cta p { color: var(--text-muted); font-size: 16px; line-height: 1.5; }
+.crm-ativo-cta .btn { border-radius: var(--r-sm); }
+.crm-ativo-cta .btn svg { width: 18px; height: 18px; margin-left: 6px; transition: transform .18s ease; }
+.crm-ativo-cta .btn:hover svg { transform: translateX(3px); }
+
+@keyframes crm-flow-down { from { top: -3px; } to { top: calc(100% - 5px); } }
+@keyframes crm-flow-pulse { 0% { opacity: 0; transform: translateX(-50%) scale(.7); } 45% { opacity: 1; } 100% { opacity: 0; transform: translateX(-50%) scale(1.4); } }
+
+@media (max-width: 980px) {
+  .crm-ativo-head { max-width: 780px; }
+  .crm-flow { max-width: 820px; padding: 28px; }
+  .crm-flow-action { padding: 20px 18px 58px; }
+  .crm-flow-status { left: 82px; }
+  .crm-flow-detail { max-width: 760px; grid-template-columns: 130px 190px minmax(0, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .crm-ativo-head { margin-bottom: 40px; padding: 0; }
+  .crm-ativo-head .lede { font-size: 17px; }
+  .crm-ativo-apoio { padding: 15px 16px; font-size: 15px; }
+  .crm-flow { padding: 18px; border-radius: var(--r-lg); }
+  .crm-flow-lead, .crm-flow-core, .crm-flow-result { width: 100%; }
+  .crm-flow-actions { grid-template-columns: 1fr; gap: 48px; }
+  .crm-flow-actions::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--border); transform: translateX(-50%); }
+  .crm-flow-branch, .crm-flow-merge { width: 2px; height: 44px; background: var(--border); color: transparent; }
+  .crm-flow-branch::before, .crm-flow-branch span, .crm-flow-branch i, .crm-flow-branch b,
+  .crm-flow-merge::before, .crm-flow-merge span, .crm-flow-merge i, .crm-flow-merge b { display: none; }
+  .crm-flow-branch.is-flow-active, .crm-flow-merge.is-flow-active { background: rgba(0, 184, 115, .48); color: transparent; }
+  .crm-flow-branch.is-flow-active::after { top: 18px; }
+  .crm-flow-merge.is-flow-active::after { bottom: 18px; }
+  .crm-flow-action { width: 100%; background: var(--surface); }
+  .crm-flow-capabilities { grid-template-columns: 1fr; }
+  .crm-flow-capabilities > span { justify-content: flex-start; padding-left: 14px; }
+  .crm-flow-checks { grid-template-columns: 1fr; gap: 12px; }
+  .crm-flow-detail { grid-template-columns: 1fr; gap: 7px; margin-top: 16px; padding: 18px; }
+}
+
+@media (max-width: 480px) {
+  .crm-flow-node { padding: 18px; border-radius: var(--r-md); }
+  .crm-flow-lead { align-items: flex-start; flex-wrap: wrap; }
+  .crm-flow-lead .crm-flow-copy { flex: 1; padding-top: 3px; }
+  .crm-flow-sources { width: 100%; margin-left: 64px; padding-left: 0; }
+  .crm-flow-core { padding: 18px; }
+  .crm-flow-core-top { align-items: flex-start; flex-wrap: wrap; }
+  .crm-flow-core-top .crm-flow-copy { padding-top: 3px; }
+  .crm-flow-online { margin-left: 64px; }
+  .crm-flow-action { padding-bottom: 58px; }
+  .crm-flow-status { left: 82px; bottom: 19px; }
+  .crm-flow-result-head { align-items: flex-start; }
+  .crm-flow-result-head .crm-flow-copy { padding-top: 3px; }
+  .crm-ativo-cta { margin-top: 36px; }
+  .crm-ativo-cta .btn { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm-flow-node, .crm-ativo-cta .btn svg { transition: none; }
+  .crm-flow-node.is-flow-active { transform: none; }
+  .crm-flow-connector.is-flow-active span,
+  .crm-flow-branch.is-flow-active::after,
+  .crm-flow-merge.is-flow-active::after { animation: none; opacity: 1; }
+}
+
+
+/* ═══ CRM Ativo · diagrama minimalista ═══════════════════════════════════
+   Variante enxuta inspirada no fluxograma de referência: quatro cartões,
+   um núcleo de marca e conectores finos. Os retratos circulares são a única
+   camada animada, então o gráfico continua legível mesmo sem movimento. */
+.crm-mini-flow {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+.crm-mini-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 78px;
+  padding: 17px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(7, 16, 13, .045);
+}
+.crm-mini-lead { width: min(100%, 390px); }
+.crm-mini-core {
+  width: min(100%, 470px);
+  min-height: 86px;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 14px 34px rgba(0, 184, 115, .20);
+}
+.crm-mini-actions { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 92px; width: 100%; }
+.crm-mini-action { min-height: 82px; background: rgba(0, 184, 115, .055); border-color: rgba(0, 184, 115, .30); }
+.crm-mini-result { width: min(100%, 620px); min-height: 82px; border-color: rgba(0, 184, 115, .34); background: #FFFFFF; border-style: dashed; }
+
+.crm-mini-icon { position: absolute; left: 22px; display: grid; place-items: center; width: 40px; height: 40px; color: var(--text-muted); }
+.crm-mini-icon svg { width: 24px; height: 24px; }
+.crm-mini-core .crm-mini-icon { color: var(--on-primary); }
+.crm-mini-result .crm-mini-icon { color: var(--primary-lo); }
+.crm-mini-copy { display: flex; width: 100%; min-width: 0; flex-direction: column; align-items: center; gap: 5px; padding: 0 62px; text-align: center; }
+.crm-mini-copy strong { color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
+.crm-mini-copy small { color: var(--text-muted); font-size: 14px; line-height: 1.35; }
+.crm-mini-core .crm-mini-copy strong { color: var(--on-primary); }
+.crm-mini-core .crm-mini-copy small { color: rgba(4, 20, 13, .72); }
+.crm-mini-source { position: absolute; right: 22px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--border-2); border-radius: 50%; background: var(--surface); }
+.crm-mini-source img { width: 18px; height: 18px; object-fit: contain; }
+.crm-mini-online { position: absolute; right: 22px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid rgba(4, 20, 13, .18); border-radius: var(--r-sm); font-family: var(--mono); font-size: 11px; font-weight: 600; }
+.crm-mini-online i { width: 6px; height: 6px; border-radius: 50%; background: var(--on-primary); }
+
+.crm-mini-line { position: relative; width: 1px; height: 44px; background: rgba(7, 16, 13, .26); }
+.crm-mini-line::after { content: ""; position: absolute; bottom: 1px; left: 50%; width: 6px; height: 6px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transform: translateX(-50%) rotate(45deg); }
+.crm-mini-branch, .crm-mini-merge { position: relative; width: calc(50% + 46px); height: 64px; color: rgba(7, 16, 13, .24); }
+.crm-mini-branch::before, .crm-mini-merge::before,
+.crm-mini-branch span, .crm-mini-merge span,
+.crm-mini-branch i, .crm-mini-merge i,
+.crm-mini-branch b, .crm-mini-merge b { position: absolute; display: block; content: ""; background: currentColor; }
+.crm-mini-branch::before { top: 0; left: 50%; width: 1px; height: 32px; }
+.crm-mini-branch span { top: 31px; left: 0; width: 100%; height: 1px; }
+.crm-mini-branch i, .crm-mini-branch b { top: 31px; width: 1px; height: 33px; }
+.crm-mini-branch i { left: 0; }
+.crm-mini-branch b { right: 0; }
+.crm-mini-merge::before { bottom: 0; left: 50%; width: 1px; height: 32px; }
+.crm-mini-merge span { top: 32px; left: 0; width: 100%; height: 1px; border-top: 1px dashed currentColor; background: transparent; }
+.crm-mini-merge i, .crm-mini-merge b { top: 0; width: 1px; height: 33px; border-left: 1px dashed currentColor; background: transparent; }
+.crm-mini-merge i { left: 0; }
+.crm-mini-merge b { right: 0; }
+
+.crm-mini-leads { position: absolute; z-index: 1; inset: 0; pointer-events: none; }
+.crm-mini-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  background: var(--surface-2);
+  box-shadow: 0 4px 12px rgba(7, 16, 13, .18), 0 0 0 1px rgba(0, 184, 115, .25);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.crm-mini-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 700px) {
+  .crm-mini-flow { max-width: 520px; }
+  .crm-mini-actions { grid-template-columns: 1fr; gap: 40px; width: min(100%, 460px); }
+  .crm-mini-actions::before { content: ""; position: absolute; z-index: 0; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(7, 16, 13, .20); }
+  .crm-mini-branch, .crm-mini-merge { width: 1px; height: 40px; background: rgba(7, 16, 13, .24); color: transparent; }
+  .crm-mini-branch::before, .crm-mini-branch span, .crm-mini-branch i, .crm-mini-branch b,
+  .crm-mini-merge::before, .crm-mini-merge span, .crm-mini-merge i, .crm-mini-merge b { display: none; }
+  .crm-mini-action { z-index: 2; }
+}
+
+@media (max-width: 480px) {
+  .crm-mini-node { min-height: 64px; padding: 13px 14px; }
+  .crm-mini-lead, .crm-mini-core, .crm-mini-actions, .crm-mini-result { width: 100%; }
+  .crm-mini-icon { left: 14px; width: 30px; height: 30px; }
+  .crm-mini-icon svg { width: 18px; height: 18px; }
+  .crm-mini-copy { padding: 0 40px; }
+  .crm-mini-copy strong { font-size: 14px; }
+  .crm-mini-copy small { font-size: 12px; }
+  .crm-mini-source, .crm-mini-online { right: 14px; }
+  .crm-mini-online { padding: 4px 6px; font-size: 10px; }
+  .crm-mini-avatar { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm-mini-avatar { display: none; }
 }

@@ -37,31 +37,173 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-// ---- Comparação CRM passivo x ativo ----
-// A entrada dos cartões usa o reveal acima; a inclinação responde apenas a
-// mouse/trackpad e é desativada quando a pessoa prefere menos movimento.
-const tiltPermitido = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-document.querySelectorAll("#passivo-ativo .vs-card").forEach(card => {
-  let frame = 0;
-  card.addEventListener("pointermove", event => {
-    if (!tiltPermitido.matches) return;
-    if (frame) cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(() => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - .5;
-      const y = (event.clientY - rect.top) / rect.height - .5;
-      card.style.setProperty("--vs-tilt-x", `${(-y * 7).toFixed(2)}deg`);
-      card.style.setProperty("--vs-tilt-y", `${(x * 7).toFixed(2)}deg`);
-      frame = 0;
+// ---- CRM passivo x CRM Ativo ----
+// O HTML contém a comparação completa. Este bloco só coordena uma execução
+// discreta quando a seção entra na tela.
+(function () {
+  const section = document.querySelector(".passive-compare");
+  if (!section) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let completionTimer = 0;
+  let hasPlayed = false;
+
+  function showWithoutMotion() {
+    window.clearTimeout(completionTimer);
+    section.classList.remove("is-prepared", "is-playing");
+    section.classList.add("is-complete");
+  }
+
+  function playComparison() {
+    if (reducedMotion.matches) {
+      showWithoutMotion();
+      return;
+    }
+
+    window.clearTimeout(completionTimer);
+    section.classList.remove("is-prepared", "is-playing", "is-complete");
+    void section.offsetWidth;
+    section.classList.add("is-prepared");
+    requestAnimationFrame(() => section.classList.add("is-playing"));
+    completionTimer = window.setTimeout(() => section.classList.add("is-complete"), 2850);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (hasPlayed || !entries.some(entry => entry.isIntersecting)) return;
+    hasPlayed = true;
+    playComparison();
+    observer.disconnect();
+  }, { threshold: .18 });
+
+  observer.observe(section);
+  reducedMotion.addEventListener?.("change", event => event.matches ? showWithoutMotion() : playComparison());
+})();
+
+// ---- Mecanismo CRM Ativo ----
+// Os retratos percorrem as posições reais dos cartões. Assim a animação não
+// depende de coordenadas fixas e continua alinhada quando o fluxo vira coluna.
+(function () {
+  const flow = document.querySelector(".crm-mini-flow");
+  if (!flow) return;
+
+  const avatars = Array.from(flow.querySelectorAll("[data-flow-avatar]"));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mobileFlow = window.matchMedia("(max-width: 700px)");
+  let animations = [];
+  let flowVisible = false;
+  let resizeTimer = 0;
+
+  function cancelAnimations() {
+    animations.forEach(animation => animation.cancel());
+    animations = [];
+  }
+
+  function pointAt(x, y, flowRect, avatarSize) {
+    return {
+      x: x - flowRect.left - avatarSize / 2,
+      y: y - flowRect.top - avatarSize / 2
+    };
+  }
+
+  function nodeEdge(name, edge, flowRect, avatarSize) {
+    const node = flow.querySelector(`[data-flow-node="${name}"]`);
+    if (!node) return null;
+    const rect = node.getBoundingClientRect();
+    const y = edge === "top" ? rect.top : rect.bottom;
+    return pointAt(rect.left + rect.width / 2, y, flowRect, avatarSize);
+  }
+
+  function elementPoint(selector, horizontal, vertical, flowRect, avatarSize) {
+    const element = flow.querySelector(selector);
+    if (!element) return null;
+    const rect = element.getBoundingClientRect();
+    const x = horizontal === "left" ? rect.left : horizontal === "right" ? rect.right : rect.left + rect.width / 2;
+    const y = vertical === "top" ? rect.top : vertical === "bottom" ? rect.bottom : rect.top + rect.height / 2;
+    return pointAt(x, y, flowRect, avatarSize);
+  }
+
+  function routePoints(route, flowRect, avatarSize) {
+    if (mobileFlow.matches) {
+      return [
+        nodeEdge("lead", "bottom", flowRect, avatarSize),
+        nodeEdge("core", "top", flowRect, avatarSize),
+        nodeEdge("core", "bottom", flowRect, avatarSize),
+        nodeEdge("ai", "top", flowRect, avatarSize),
+        nodeEdge("ai", "bottom", flowRect, avatarSize),
+        nodeEdge("team", "top", flowRect, avatarSize),
+        nodeEdge("team", "bottom", flowRect, avatarSize),
+        nodeEdge("result", "top", flowRect, avatarSize)
+      ].filter(Boolean);
+    }
+
+    const side = route === "ai" ? "left" : "right";
+    return [
+      nodeEdge("lead", "bottom", flowRect, avatarSize),
+      nodeEdge("core", "top", flowRect, avatarSize),
+      nodeEdge("core", "bottom", flowRect, avatarSize),
+      elementPoint(".crm-mini-branch", "center", "center", flowRect, avatarSize),
+      elementPoint(".crm-mini-branch", side, "center", flowRect, avatarSize),
+      nodeEdge(route, "top", flowRect, avatarSize),
+      nodeEdge(route, "bottom", flowRect, avatarSize),
+      elementPoint(".crm-mini-merge", side, "center", flowRect, avatarSize),
+      elementPoint(".crm-mini-merge", "center", "center", flowRect, avatarSize),
+      nodeEdge("result", "top", flowRect, avatarSize)
+    ].filter(Boolean);
+  }
+
+  function routeFrames(points) {
+    const distances = points.slice(1).map((point, index) => Math.hypot(point.x - points[index].x, point.y - points[index].y));
+    const totalDistance = distances.reduce((total, distance) => total + distance, 0) || 1;
+    let traveled = 0;
+    const frames = points.map((point, index) => {
+      const transform = `translate3d(${point.x}px, ${point.y}px, 0) scale(1)`;
+      const offset = index === 0 ? 0 : (traveled += distances[index - 1]) / totalDistance;
+      return { transform, opacity: index === 0 || index === points.length - 1 ? 0 : 1, offset };
     });
-  });
-  card.addEventListener("pointerleave", () => {
-    if (frame) cancelAnimationFrame(frame);
-    card.style.removeProperty("--vs-tilt-x");
-    card.style.removeProperty("--vs-tilt-y");
-    frame = 0;
-  });
-});
+    return frames;
+  }
+
+  function buildAnimations() {
+    cancelAnimations();
+    if (reducedMotion.matches || typeof Element.prototype.animate !== "function") return;
+
+    const flowRect = flow.getBoundingClientRect();
+    avatars.forEach((avatar, index) => {
+      const avatarSize = avatar.getBoundingClientRect().width || 36;
+      const points = routePoints(avatar.dataset.route, flowRect, avatarSize);
+      if (points.length < 2) return;
+
+      const duration = mobileFlow.matches ? 9200 : 7600;
+      const interval = duration / avatars.length;
+      const animation = avatar.animate(routeFrames(points), {
+        duration,
+        delay: index * interval - interval,
+        iterations: Infinity,
+        easing: "linear",
+        fill: "both"
+      });
+      if (!flowVisible) animation.pause();
+      animations.push(animation);
+    });
+  }
+
+  const motionObserver = new IntersectionObserver(entries => {
+    flowVisible = entries.some(entry => entry.isIntersecting);
+    animations.forEach(animation => flowVisible ? animation.play() : animation.pause());
+  }, { threshold: .15 });
+  motionObserver.observe(flow);
+
+  function scheduleBuild() {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(buildAnimations, 140);
+  }
+
+  window.addEventListener("resize", scheduleBuild, { passive: true });
+  reducedMotion.addEventListener?.("change", buildAnimations);
+  mobileFlow.addEventListener?.("change", buildAnimations);
+  buildAnimations();
+  document.fonts?.ready.then(buildAnimations);
+})();
 
 // ---- Integrations marquee ----
 (function () {

@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
-<link rel="stylesheet" href="home.css?v=20260922-7" />
+<link rel="stylesheet" href="home.css?v=20260926-9" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -126,19 +126,36 @@ fbq('track','PageView');
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge hero-badge-ia hero-badge-verde reveal">
-          <span>100% Integrado com Inteligência Artificial</span>
+          <svg class="hero-badge-agent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+          <span>CRM ATIVO COM AGENTES DE IA</span>
         </div>
-        <h1 class="reveal" data-d="1">O lead chega às 22h. O<br class="mobile-only-br"> Rezult atende, qualifica,<br class="mobile-only-br"> agenda e registra.<br class="mobile-only-br"> Às 8h, seu time só abre a agenda.</h1>
+        <h1 class="reveal" data-d="1">O lead chega às 22h. O Rezult<br class="desktop-only-br"> atende, qualifica e agenda. Às 8h<br class="desktop-only-br"> você só abre a agenda.</h1>
         <p class="hero-sub reveal" data-d="2">Seu time vende. O Rezult trabalha 24 horas para que nenhuma oportunidade fique esperando. Enquanto sua equipe está offline, os agentes de IA atendem, qualificam e agendam automaticamente.</p>
       </div>
       <div class="hero-mockup-wrap" id="mockupSlotA">
         <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
       </div>
       <div class="hero-conversion">
-        <p class="hero-note reveal" data-d="4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-          7 dias grátis, sem cartão. Depois, 30 dias de garantia. Sem fidelidade.
-        </p>
+        <ul class="hero-benefits reveal" data-d="4" aria-label="Benefícios para começar no Rezult">
+          <li class="hero-benefit">
+            <span class="hero-benefit-icon" aria-hidden="true">
+              <svg class="lucide lucide-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            </span>
+            <span>Teste grátis por 7 dias</span>
+          </li>
+          <li class="hero-benefit">
+            <span class="hero-benefit-icon" aria-hidden="true">
+              <svg class="lucide lucide-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <span>Garantia incondicional de 30 dias</span>
+          </li>
+          <li class="hero-benefit">
+            <span class="hero-benefit-icon" aria-hidden="true">
+              <svg class="lucide lucide-arrow-right-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+            </span>
+            <span>Migração facilitada</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -462,87 +479,172 @@ fbq('track','PageView');
   </div>
 </section>
 
-<!-- DOBRA 2.5 · CRM PASSIVO x CRM ATIVO -----------------------------------------
-     A categoria aprovada no posicionamento e CRM ATIVO. Sem esta dobra, a
-     pagina ia do problema (as quatro perguntas) direto para como os agentes
-     funcionam, e o leitor nunca entendia POR QUE o CRM dele falha. Aqui entra
-     o mecanismo: o jeito antigo espera, o novo age.
-
-     Titulo = Big Idea B ("era passivo. Ele esperava."), a recomendada por
-     Makepeace e Georgi. O passado e o que faz o leitor classificar o proprio
-     CRM antes de alguem pedir.
-
-     A lista do cartao ativo fecha com "Seu time entra so na hora de vender",
-     frase que saiu do subtitulo do hero para nao repetir o "voce so" da H1.
-     Estilo em home.css, bloco "CRM passivo x CRM ativo". -->
-<section class="section" id="passivo-ativo" style="padding: 90px 0px">
+<!-- DOBRA 02.5 · CRM PASSIVO X CRM ATIVO -->
+<section class="section passive-compare" id="crm-passivo" aria-labelledby="crm-passivo-heading">
   <div class="wrap">
-    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Todo CRM que você já usou era passivo.<br class="mobile-only-br"> <span class="grad-verde">Ele esperava.</span></h2>
+    <div class="section-head center reveal passive-compare-head">
+      <span class="eyebrow">O problema dos CRMs passivos</span>
+      <h2 class="h2" id="crm-passivo-heading">Seu CRM registra oportunidades. Mas quem trabalha quando seu time está offline?</h2>
+      <p class="lede">O lead chega, entra no funil e espera pela próxima ação. Quando o atendimento depende exclusivamente da disponibilidade da equipe, cada hora sem resposta pode representar uma oportunidade perdida.</p>
     </div>
 
-    <!-- Antes e depois, no formato da comparação do sonartrack.pro (pedido do
-         dono): dois cartões com número grande, gráfico em área e lista com
-         valor à direita, ligados por um conector no meio. Adaptado ao Emerald
-         do Rezult e ao fundo escuro desta dobra.
-         O destaque é TEMPO até a primeira resposta (Horas x Segundos), e não
-         percentual: número de resultado sem fonte não entra na página. Os
-         gráficos são ilustrativos, sem eixo nem valor. -->
-    <div class="vs">
-      <div class="vs-slot reveal" data-d="1">
-      <div class="vs-card vs-passivo">
-        <span class="vs-pill"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>CRM passivo</span>
-        <p class="vs-num">Horas</p>
-        <p class="vs-rotulo">até alguém responder o lead</p>
-        <p class="vs-frase">O lead que chega às 22h só é visto no dia seguinte. E o que foi conversado só existe se alguém lembrar de digitar.</p>
-        <div class="vs-grafico">
-          <svg viewBox="0 0 600 150" aria-hidden="true">
-            <defs><linearGradient id="vsGradPassivo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF3B55" stop-opacity="0.22"/><stop offset="1" stop-color="#FF3B55" stop-opacity="0"/></linearGradient></defs>
-            <line x1="0" y1="50" x2="600" y2="50" class="vs-grade"/><line x1="0" y1="100" x2="600" y2="100" class="vs-grade"/>
-            <path d="M0,34 L45,42 L90,30 L135,50 L180,44 L225,60 L270,68 L315,62 L360,82 L405,90 L450,96 L495,108 L540,114 L592,124 L592,150 L0,150 Z" fill="url(#vsGradPassivo)"/>
-            <polyline points="0,34 45,42 90,30 135,50 180,44 225,60 270,68 315,62 360,82 405,90 450,96 495,108 540,114 592,124" fill="none" stroke="#FF3B55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="592" cy="124" r="5" fill="#FF3B55"/>
-          </svg>
+    <div class="compare-grid" aria-label="Comparação ilustrativa entre duas jornadas para o mesmo lead">
+      <article class="compare-card compare-card-passive" aria-labelledby="compare-passive-title">
+        <div class="compare-card-top">
+          <span class="compare-label">CRM passivo</span>
+          <h3 id="compare-passive-title">O lead chega. O sistema registra. O atendimento espera.</h3>
         </div>
-        <ul class="vs-lista">
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg><span>Primeira resposta ao lead</span><b>quando alguém vê</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg><span>Registro da conversa</span><b>se alguém digitar</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg><span>Lead esfriando</span><b>só avisa</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg><span>Card no funil</span><b>arrastado à mão</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg><span>Fim do mês</span><b>mostra o que deu errado</b></li>
-        </ul>
-      </div>
+
+        <div class="compare-message" data-compare-message>
+          <span class="compare-channel" aria-hidden="true"><img src="logos/whatsapp.svg" alt=""></span>
+          <div>
+            <span>Novo contato · 22:04</span>
+            <p>“Olá! Gostaria de saber mais sobre os planos.”</p>
+          </div>
+        </div>
+
+        <ol class="compare-timeline" aria-label="Jornada dependente de atendimento manual">
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:04">22:04</time>
+            <span class="compare-marker" aria-hidden="true"></span>
+            <span><strong>Lead recebido</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:04">22:04</time>
+            <span class="compare-marker" aria-hidden="true"></span>
+            <span><strong>Contato registrado no CRM</strong></span>
+          </li>
+          <li class="compare-step is-waiting" data-compare-step>
+            <time datetime="22:05">22:05</time>
+            <span class="compare-marker" aria-hidden="true"></span>
+            <span><strong>Aguardando atendimento humano</strong><small class="compare-wait" aria-label="Em espera"><i></i><i></i><i></i></small></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="08:00">08:00</time>
+            <span class="compare-marker" aria-hidden="true"></span>
+            <span><strong>Equipe inicia o expediente</strong><small>Próxima ação disponível para o time</small></span>
+          </li>
+        </ol>
+
+        <p class="compare-card-footer">O contato está no CRM, mas a próxima ação ainda depende da disponibilidade de alguém.</p>
+      </article>
+
+      <article class="compare-card compare-card-active" aria-labelledby="compare-active-title">
+        <div class="compare-card-top">
+          <span class="compare-label">Rezult CRM Ativo</span>
+          <h3 id="compare-active-title">O lead chega. O Rezult entra em ação.</h3>
+        </div>
+
+        <div class="compare-message" data-compare-message>
+          <span class="compare-channel" aria-hidden="true"><img src="logos/whatsapp.svg" alt=""></span>
+          <div>
+            <span>Novo contato · 22:04</span>
+            <p>“Olá! Gostaria de saber mais sobre os planos.”</p>
+          </div>
+        </div>
+
+        <ol class="compare-timeline" aria-label="Jornada com agentes de IA e automações configuradas">
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:04">22:04</time>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span><strong>Lead recebido</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:04">22:04</time>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></span>
+            <span><strong>Agente de IA inicia o atendimento</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:06">22:06</time>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span><strong>Lead qualificado</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:08">22:08</time>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="m9 16 2 2 4-4"/></svg></span>
+            <span><strong>Reunião agendada</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <time datetime="22:08">22:08</time>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span><strong>Informações registradas no CRM</strong></span>
+          </li>
+        </ol>
+
+        <p class="compare-card-footer">Enquanto seu time está offline, o Rezult pode atender, qualificar, agendar e organizar as oportunidades automaticamente.</p>
+      </article>
+    </div>
+
+    <div class="passive-transition reveal" data-d="2">
+      <p class="passive-transition-main">A diferença está em transformar registros em ações.</p>
+      <p class="passive-transition-next">Conheça o CRM Ativo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOBRA 03 · MECANISMO CRM ATIVO -->
+<section class="section crm-ativo" id="crm-ativo" aria-labelledby="crm-ativo-heading">
+  <div class="wrap">
+    <div class="section-head center reveal crm-ativo-head">
+      <span class="eyebrow">Conheça o CRM Ativo</span>
+      <h2 class="h2" id="crm-ativo-heading">O CRM que não espera seu vendedor <span class="grad-verde">começar a trabalhar.</span></h2>
+      <p class="lede">Agentes de IA, automações e sua equipe trabalhando juntos para manter cada oportunidade em movimento.</p>
+    </div>
+
+    <div class="crm-mini-flow reveal" data-d="1" aria-label="Fluxo de leads pelo CRM Ativo">
+      <article class="crm-mini-node crm-mini-lead" data-flow-node="lead">
+        <span class="crm-mini-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+        </span>
+        <span class="crm-mini-copy"><strong>Lead recebido</strong><small>WhatsApp, formulário ou campanha</small></span>
+        <span class="crm-mini-source" aria-hidden="true"><img src="logos/whatsapp.svg" alt=""></span>
+      </article>
+
+      <div class="crm-mini-line" aria-hidden="true"></div>
+
+      <article class="crm-mini-node crm-mini-core" data-flow-node="core">
+        <span class="crm-mini-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18 8.58 3.9a1 1 0 0 1 0 1.83l-8.58 3.91a2 2 0 0 1-1.66 0L2.6 7.92a1 1 0 0 1 0-1.83l8.58-3.91a2 2 0 0 1 1.66 0Z"/><path d="m22 12.5-9.17 4.17a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.17a2 2 0 0 1-1.66 0L2 17.5"/></svg>
+        </span>
+        <span class="crm-mini-copy"><strong>Rezult CRM</strong><small>IA + automações + gestão do funil</small></span>
+        <span class="crm-mini-online"><i></i>24h</span>
+      </article>
+
+      <div class="crm-mini-branch" aria-hidden="true"><span></span><i></i><b></b></div>
+
+      <div class="crm-mini-actions">
+        <article class="crm-mini-node crm-mini-action" data-flow-node="ai">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Atendimento com IA</strong><small>Atende, qualifica e agenda.</small></span>
+        </article>
+        <article class="crm-mini-node crm-mini-action" data-flow-node="team">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Equipe comercial</strong><small>Assume e negocia</small></span>
+        </article>
       </div>
 
-      <div class="vs-meio reveal" data-d="2" aria-hidden="true">
-        <span class="vs-seta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <span class="vs-meio-rotulo">Ativa em <br>minutos</span>
-      </div>
+      <div class="crm-mini-merge" aria-hidden="true"><span></span><i></i><b></b></div>
 
-      <div class="vs-slot reveal" data-d="3">
-      <div class="vs-card vs-ativo">
-        <span class="vs-pill"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg>CRM ativo · Rezult</span>
-        <p class="vs-num">Segundos</p>
-        <p class="vs-rotulo">até o primeiro atendimento</p>
-        <p class="vs-frase">O Rezult responde no minuto em que o lead chega, registra a conversa enquanto ela acontece e move o negócio no funil sozinho.</p>
-        <div class="vs-grafico">
-          <svg viewBox="0 0 600 150" aria-hidden="true">
-            <defs><linearGradient id="vsGradAtivo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00B873" stop-opacity="0.22"/><stop offset="1" stop-color="#00B873" stop-opacity="0"/></linearGradient></defs>
-            <line x1="0" y1="50" x2="600" y2="50" class="vs-grade"/><line x1="0" y1="100" x2="600" y2="100" class="vs-grade"/>
-            <path d="M0,124 L50,114 L100,112 L150,100 L200,104 L250,90 L300,82 L350,78 L400,64 L450,54 L500,44 L550,32 L592,22 L592,150 L0,150 Z" fill="url(#vsGradAtivo)"/>
-            <polyline points="0,124 50,114 100,112 150,100 200,104 250,90 300,82 350,78 400,64 450,54 500,44 550,32 592,22" fill="none" stroke="#00B873" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="592" cy="22" r="5" fill="#00B873"/>
-          </svg>
-        </div>
-        <ul class="vs-lista">
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg><span>Primeira resposta ao lead</span><b>no minuto em que chega</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg><span>Registro da conversa</span><b>enquanto acontece</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg><span>Lead esfriando</span><b>responde antes</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg><span>Card no funil</span><b>anda sozinho</b></li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 5"/></svg><span>Seu time</span><b>entra só na hora de vender</b></li>
-        </ul>
+      <article class="crm-mini-node crm-mini-result" data-flow-node="result">
+        <span class="crm-mini-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <span class="crm-mini-copy"><strong>Tudo registrado no mesmo CRM</strong><small>Histórico, pipeline e próximas ações atualizados.</small></span>
+      </article>
+
+      <div class="crm-mini-leads" aria-hidden="true">
+        <span class="crm-mini-avatar" data-flow-avatar data-route="ai"><img src="bruna-lima.jpg" alt=""></span>
+        <span class="crm-mini-avatar" data-flow-avatar data-route="team"><img src="diego-ramos.jpg" alt=""></span>
       </div>
-      </div>
+    </div>
+
+    <div class="crm-ativo-cta reveal" data-d="3">
+      <p>Da primeira mensagem à próxima oportunidade: descubra como o Rezult trabalha junto com seu time.</p>
+      <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary">Veja o Rezult em ação <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -1501,7 +1603,7 @@ fbq('track','PageView');
 
 <script src="mockups.js"></script>
 <script src="rastreio.js"></script>
-<script src="home.js?v=20260923-1"></script>
+<script src="home.js?v=20260926-5"></script>
 <!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
      src/paineis/. Preenchem #featWhatsapp, #featAutomation e #featPipelines,
      que o mockups.js deixou de ocupar. Vem depois dele para o innerHTML do
