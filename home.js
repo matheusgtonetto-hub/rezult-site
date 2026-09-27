@@ -37,6 +37,43 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+// ---- FAQ da home ----
+(function () {
+  const items = Array.from(document.querySelectorAll("#faq .faq-item"));
+  if (!items.length) return;
+
+  function closeItem(item) {
+    const question = item.querySelector(".faq-q");
+    const answer = item.querySelector(".faq-a");
+    item.classList.remove("open");
+    question.setAttribute("aria-expanded", "false");
+    answer.setAttribute("aria-hidden", "true");
+    answer.style.maxHeight = null;
+  }
+
+  items.forEach(item => {
+    const question = item.querySelector(".faq-q");
+    const answer = item.querySelector(".faq-a");
+
+    question.addEventListener("click", () => {
+      const shouldOpen = !item.classList.contains("open");
+      items.forEach(closeItem);
+
+      if (shouldOpen) {
+        item.classList.add("open");
+        question.setAttribute("aria-expanded", "true");
+        answer.setAttribute("aria-hidden", "false");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    const openAnswer = document.querySelector("#faq .faq-item.open .faq-a");
+    if (openAnswer) openAnswer.style.maxHeight = openAnswer.scrollHeight + "px";
+  });
+})();
+
 // ---- CRM passivo x CRM Ativo ----
 // O HTML contém a comparação completa. Este bloco só coordena uma execução
 // discreta quando a seção entra na tela.
@@ -87,6 +124,9 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   if (!flow) return;
 
   const avatars = Array.from(flow.querySelectorAll("[data-flow-avatar]"));
+  const operationSignals = Array.from(flow.querySelectorAll("[data-operation-signal]"));
+  const operationPathIn = flow.querySelector('[data-operation-path="in"]');
+  const operationPathOut = flow.querySelector('[data-operation-path="out"]');
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const mobileFlow = window.matchMedia("(max-width: 700px)");
   let animations = [];
@@ -105,49 +145,35 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     };
   }
 
-  function nodeEdge(name, edge, flowRect, avatarSize) {
+  function nodePoint(name, horizontal, vertical, flowRect, elementSize = 0) {
     const node = flow.querySelector(`[data-flow-node="${name}"]`);
     if (!node) return null;
     const rect = node.getBoundingClientRect();
-    const y = edge === "top" ? rect.top : rect.bottom;
-    return pointAt(rect.left + rect.width / 2, y, flowRect, avatarSize);
-  }
-
-  function elementPoint(selector, horizontal, vertical, flowRect, avatarSize) {
-    const element = flow.querySelector(selector);
-    if (!element) return null;
-    const rect = element.getBoundingClientRect();
     const x = horizontal === "left" ? rect.left : horizontal === "right" ? rect.right : rect.left + rect.width / 2;
-    const y = vertical === "top" ? rect.top : vertical === "bottom" ? rect.bottom : rect.top + rect.height / 2;
-    return pointAt(x, y, flowRect, avatarSize);
+    const y = typeof vertical === "number"
+      ? rect.top + rect.height * vertical
+      : vertical === "top" ? rect.top : vertical === "bottom" ? rect.bottom : rect.top + rect.height / 2;
+    return pointAt(x, y, flowRect, elementSize);
   }
 
-  function routePoints(route, flowRect, avatarSize) {
-    if (mobileFlow.matches) {
-      return [
-        nodeEdge("lead", "bottom", flowRect, avatarSize),
-        nodeEdge("core", "top", flowRect, avatarSize),
-        nodeEdge("core", "bottom", flowRect, avatarSize),
-        nodeEdge("ai", "top", flowRect, avatarSize),
-        nodeEdge("ai", "bottom", flowRect, avatarSize),
-        nodeEdge("team", "top", flowRect, avatarSize),
-        nodeEdge("team", "bottom", flowRect, avatarSize),
-        nodeEdge("result", "top", flowRect, avatarSize)
-      ].filter(Boolean);
-    }
+  function nodeEdge(name, edge, flowRect, elementSize) {
+    return nodePoint(name, "center", edge, flowRect, elementSize);
+  }
 
-    const side = route === "ai" ? "left" : "right";
+  function routePoints(flowRect, avatarSize) {
     return [
       nodeEdge("lead", "bottom", flowRect, avatarSize),
       nodeEdge("core", "top", flowRect, avatarSize),
       nodeEdge("core", "bottom", flowRect, avatarSize),
-      elementPoint(".crm-mini-branch", "center", "center", flowRect, avatarSize),
-      elementPoint(".crm-mini-branch", side, "center", flowRect, avatarSize),
-      nodeEdge(route, "top", flowRect, avatarSize),
-      nodeEdge(route, "bottom", flowRect, avatarSize),
-      elementPoint(".crm-mini-merge", side, "center", flowRect, avatarSize),
-      elementPoint(".crm-mini-merge", "center", "center", flowRect, avatarSize),
-      nodeEdge("result", "top", flowRect, avatarSize)
+      nodeEdge("ai", "top", flowRect, avatarSize),
+      nodeEdge("ai", "bottom", flowRect, avatarSize),
+      nodeEdge("ops", "top", flowRect, avatarSize),
+      nodeEdge("ops", "bottom", flowRect, avatarSize),
+      nodeEdge("team", "top", flowRect, avatarSize),
+      nodeEdge("team", "bottom", flowRect, avatarSize),
+      nodeEdge("sale", "top", flowRect, avatarSize),
+      nodePoint("sale", "center", "center", flowRect, avatarSize),
+      nodeEdge("sale", "bottom", flowRect, avatarSize)
     ].filter(Boolean);
   }
 
@@ -163,27 +189,92 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     return frames;
   }
 
+  function operationGeometry(flowRect, elementSize = 0) {
+    const ai = nodeEdge("ai", "bottom", flowRect, elementSize);
+    const operationIn = nodeEdge("ops", "top", flowRect, elementSize);
+    const operationOut = nodeEdge("ops", "bottom", flowRect, elementSize);
+    const team = nodeEdge("team", "top", flowRect, elementSize);
+    if (!ai || !operationIn || !operationOut || !team) return null;
+    return {
+      inbound: [ai, operationIn],
+      outbound: [operationOut, team]
+    };
+  }
+
+  function pathData(points) {
+    if (!points?.length) return "";
+    return points.reduce((path, point, index) => `${path}${index ? " L" : "M"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`, "");
+  }
+
+  function drawOperationPaths(flowRect) {
+    const geometry = operationGeometry(flowRect);
+    if (!geometry) return;
+    operationPathIn?.setAttribute("d", pathData(geometry.inbound));
+    operationPathOut?.setAttribute("d", pathData(geometry.outbound));
+  }
+
+  function operationFrames(points, startOffset, endOffset) {
+    const distances = points.slice(1).map((point, index) => Math.hypot(point.x - points[index].x, point.y - points[index].y));
+    const totalDistance = distances.reduce((total, distance) => total + distance, 0) || 1;
+    let traveled = 0;
+    const moving = points.map((point, index) => ({
+      transform: `translate3d(${point.x}px, ${point.y}px, 0) scale(${index === 1 || index === 2 ? 1.35 : 1})`,
+      opacity: 1,
+      offset: startOffset + (index === 0 ? 0 : (traveled += distances[index - 1]) / totalDistance) * (endOffset - startOffset)
+    }));
+    const first = moving[0];
+    const last = moving[moving.length - 1];
+    return [
+      { transform: first.transform, opacity: 0, offset: 0 },
+      { transform: first.transform, opacity: 0, offset: Math.max(0, startOffset - .012) },
+      ...moving,
+      { transform: last.transform, opacity: 0, offset: Math.min(1, endOffset + .012) },
+      { transform: last.transform, opacity: 0, offset: 1 }
+    ];
+  }
+
   function buildAnimations() {
     cancelAnimations();
+    const flowRect = flow.getBoundingClientRect();
+    drawOperationPaths(flowRect);
     if (reducedMotion.matches || typeof Element.prototype.animate !== "function") return;
 
-    const flowRect = flow.getBoundingClientRect();
+    const duration = mobileFlow.matches ? 9200 : 7600;
+    const interval = duration / avatars.length;
     avatars.forEach((avatar, index) => {
       const avatarSize = avatar.getBoundingClientRect().width || 36;
-      const points = routePoints(avatar.dataset.route, flowRect, avatarSize);
+      const points = routePoints(flowRect, avatarSize);
       if (points.length < 2) return;
 
-      const duration = mobileFlow.matches ? 9200 : 7600;
-      const interval = duration / avatars.length;
-      const animation = avatar.animate(routeFrames(points), {
+      const avatarFrames = routeFrames(points);
+      const delay = index * interval - interval;
+      const animation = avatar.animate(avatarFrames, {
         duration,
-        delay: index * interval - interval,
+        delay,
         iterations: Infinity,
         easing: "linear",
         fill: "both"
       });
       if (!flowVisible) animation.pause();
       animations.push(animation);
+
+      const signal = operationSignals[index];
+      if (!signal) return;
+      const signalSize = signal.getBoundingClientRect().width || 9;
+      const operation = operationGeometry(flowRect, signalSize);
+      if (!operation) return;
+      const operationPoints = [...operation.inbound, ...operation.outbound];
+      const startOffset = Math.max(.02, avatarFrames[4]?.offset || .3);
+      const endOffset = Math.min(.96, avatarFrames[7]?.offset || .7);
+      const signalAnimation = signal.animate(operationFrames(operationPoints, startOffset, endOffset), {
+        duration,
+        delay,
+        iterations: Infinity,
+        easing: "linear",
+        fill: "both"
+      });
+      if (!flowVisible) signalAnimation.pause();
+      animations.push(signalAnimation);
     });
   }
 
@@ -449,58 +540,63 @@ wirePricingToggle("priceToggle");
 
 // ---- Abas dos agentes de IA ----
 (function () {
-  const abas = Array.from(document.querySelectorAll(".ag-abas .ag-aba"));
-  if (!abas.length) return;
-  const paineis = abas.map(a => document.getElementById(a.getAttribute("aria-controls")));
+  const overview = document.getElementById("ag-overview");
+  const visualHost = document.querySelector(".ag-persistent-visual");
+  const abas = Array.from(document.querySelectorAll(".ag-agent-nav .ag-agent-button"));
+  if (!overview || !visualHost || !abas.length) return;
+  const paineis = abas.map(aba => document.getElementById(aba.getAttribute("aria-controls")));
+  let indiceAtivo = -1;
 
-  // Cenas ilustrativas, uma por agente. O texto é inserido com textContent;
-  // o desenho e a estrutura são os mesmos em todas as abas.
-  const cenas = [
-    { agente: "Atendente", mensagens: ["Oi! Cheguei pelo anúncio. Ainda atendem?", "Atendemos sim. Como posso ajudar?", "Quero agendar uma demonstração."], resultado: "Conversa registrada no CRM", detalhe: "Primeiro atendimento iniciado" },
-    { agente: "SDR", mensagens: ["Temos 12 vendedores e muitos leads por semana.", "Entendi. Qual é a maior dificuldade do time hoje?", "Responder rápido e saber quem está pronto."], resultado: "Lead qualificado e sinalizado", detalhe: "Próximo passo organizado" },
-    { agente: "Closer", mensagens: ["Gostei, mas preciso entender o investimento.", "Claro. Posso enviar a proposta para sua equipe?", "Pode mandar, vamos analisar."], resultado: "Proposta enviada e etapa atualizada", detalhe: "Negociação acompanhada" },
-    { agente: "Pós-venda", mensagens: ["Como foi sua primeira semana com o Rezult?", "Boa! Só tenho uma dúvida sobre o funil.", "Vou chamar o time com o contexto da conversa."], autores: ["ia", "lead", "ia"], resultado: "Suporte acionado com histórico", detalhe: "Cliente acompanhado" },
-    { agente: "Conversa do time", status: "Registro automático", mensagens: ["Quero falar do plano para 12 pessoas.", "Claro. Podemos conversar amanhã às 10h?", "Pode sim."], resultado: "Contato e funil atualizados", detalhe: "Sem preenchimento manual" },
-  ];
+  // O chat e o avatar permanecem fixos. Os botões trocam apenas o texto
+  // da coluna esquerda, preservando a posição de toda a navegação.
+  const cena = {
+    agente: "Atendimento com IA",
+    mensagens: ["Oi! Cheguei pelo anúncio. Ainda atendem?", "Atendemos sim. Como posso ajudar?", "Quero agendar uma demonstração."],
+    resultado: "Conversa registrada no CRM",
+    detalhe: "Primeiro atendimento iniciado"
+  };
   const robo = `<svg viewBox="0 0 180 210" fill="none" aria-hidden="true"><path d="M90 37V22" stroke="#047857" stroke-width="7" stroke-linecap="round"/><circle cx="90" cy="15" r="10" fill="#00B873"/><path d="M38 156c-19 7-22 24-13 30 9 6 22-5 31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><path d="M142 156c19 7 22 24 13 30-9 6-22-5-31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="159" rx="51" ry="39" fill="white" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="151" rx="25" ry="6" fill="#00B873" opacity=".75"/><rect x="20" y="38" width="140" height="112" rx="56" fill="white" stroke="#CBE9D8" stroke-width="2"/><rect x="34" y="53" width="112" height="80" rx="37" fill="#102820"/><path d="M53 92c6-12 16-12 22 0m30 0c6-12 16-12 22 0" stroke="#B9F1D4" stroke-width="5" stroke-linecap="round"/><path d="M79 108c7 7 15 7 22 0" stroke="#B9F1D4" stroke-width="4" stroke-linecap="round"/></svg>`;
 
-  paineis.forEach((painel, i) => {
-    const cena = cenas[i];
-    const visual = document.createElement("div");
-    visual.className = "ag-demo";
-    visual.setAttribute("aria-hidden", "true");
-    visual.innerHTML = `<span class="ag-demo-label">Simulação ilustrativa</span><div class="ag-chat"><div class="ag-chat-head"><span class="ag-chat-mark">R</span><span><strong>Rezult · <span class="ag-chat-role"></span></strong><small>Online agora</small></span></div><div class="ag-chat-bubbles"><p class="ag-bolha ag-bolha--lead"></p><p class="ag-bolha ag-bolha--ia"></p><p class="ag-bolha ag-bolha--lead"></p></div><div class="ag-chat-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></div></div><div class="ag-bot">${robo}</div><div class="ag-demo-note"><strong></strong><span></span></div>`;
-    visual.querySelector(".ag-chat-role").textContent = cena.agente;
-    if (cena.status) visual.querySelector(".ag-chat-head small").textContent = cena.status;
-    visual.querySelectorAll(".ag-bolha").forEach((bolha, n) => {
-      bolha.textContent = cena.mensagens[n];
-      if (cena.autores) {
-        bolha.classList.toggle("ag-bolha--lead", cena.autores[n] === "lead");
-        bolha.classList.toggle("ag-bolha--ia", cena.autores[n] === "ia");
-      }
-    });
-    visual.querySelector(".ag-chat-result span").textContent = cena.resultado;
-    visual.querySelector(".ag-demo-note strong").textContent = cena.detalhe;
-    visual.querySelector(".ag-demo-note span").textContent = "Atualizado no CRM";
-    painel.append(visual);
+  const visual = document.createElement("div");
+  visual.className = "ag-demo";
+  visual.innerHTML = `<span class="ag-demo-label">Simulação ilustrativa</span><div class="ag-chat"><div class="ag-chat-head"><span class="ag-chat-mark">R</span><span><strong>Rezult · <span class="ag-chat-role"></span></strong><small>Online agora</small></span></div><div class="ag-chat-bubbles"><p class="ag-bolha ag-bolha--lead"></p><p class="ag-bolha ag-bolha--ia"></p><p class="ag-bolha ag-bolha--lead"></p></div><div class="ag-chat-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></div></div><div class="ag-bot">${robo}</div><div class="ag-demo-note"><strong></strong><span></span></div>`;
+  visual.querySelector(".ag-chat-role").textContent = cena.agente;
+  visual.querySelectorAll(".ag-bolha").forEach((bolha, index) => {
+    bolha.textContent = cena.mensagens[index];
   });
+  visual.querySelector(".ag-chat-result span").textContent = cena.resultado;
+  visual.querySelector(".ag-demo-note strong").textContent = cena.detalhe;
+  visual.querySelector(".ag-demo-note span").textContent = "Atualizado no CRM";
+  visualHost.append(visual);
 
   function mostrar(indice, focar) {
+    indiceAtivo = indice;
+    overview.hidden = true;
+    overview.classList.remove("ativo");
     abas.forEach((aba, i) => {
       const ativa = i === indice;
       aba.classList.toggle("ativa", ativa);
-      aba.setAttribute("aria-selected", ativa ? "true" : "false");
-      // Só a aba ativa fica na ordem de tabulação: dentro de um tablist quem
-      // navega entre as abas são as setas, não o Tab. O Tab sai do grupo.
-      aba.tabIndex = ativa ? 0 : -1;
+      aba.setAttribute("aria-expanded", ativa ? "true" : "false");
       paineis[i].hidden = !ativa;
       paineis[i].classList.toggle("ativo", ativa);
     });
     if (focar) abas[indice].focus();
   }
 
+  function mostrarVisaoGeral() {
+    indiceAtivo = -1;
+    overview.hidden = false;
+    overview.classList.add("ativo");
+    abas.forEach((aba, i) => {
+      aba.classList.remove("ativa");
+      aba.setAttribute("aria-expanded", "false");
+      paineis[i].hidden = true;
+      paineis[i].classList.remove("ativo");
+    });
+  }
+
   abas.forEach((aba, i) => {
-    aba.addEventListener("click", () => mostrar(i, false));
+    aba.addEventListener("click", () => indiceAtivo === i ? mostrarVisaoGeral() : mostrar(i, false));
     aba.addEventListener("keydown", e => {
       const passo = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
       if (passo) {

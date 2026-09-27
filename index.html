@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
-<link rel="stylesheet" href="home.css?v=20260926-9" />
+<link rel="stylesheet" href="home.css?v=20260927-1" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <!-- Meta Pixel -->
 <script>
@@ -129,8 +129,11 @@ fbq('track','PageView');
           <svg class="hero-badge-agent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
           <span>CRM ATIVO COM AGENTES DE IA</span>
         </div>
-        <h1 class="reveal" data-d="1">O lead chega às 22h. O Rezult<br class="desktop-only-br"> atende, qualifica e agenda. Às 8h<br class="desktop-only-br"> você só abre a agenda.</h1>
-        <p class="hero-sub reveal" data-d="2">Seu time vende. O Rezult trabalha 24 horas para que nenhuma oportunidade fique esperando. Enquanto sua equipe está offline, os agentes de IA atendem, qualificam e agendam automaticamente.</p>
+        <h1 class="reveal" data-d="1">O lead chega às 22h. O Rezult<br class="desktop-only-br"> atende, qualifica e agenda. Às 8h<br class="desktop-only-br"> o time só abre a agenda.</h1>
+        <p class="hero-sub reveal" data-d="2">Seu time deve entrar para decidir e vender. Não para correr atrás de leads, lembrar follow-ups e preencher CRM.</p>
+        <div class="hero-actions reveal" data-d="3">
+          <a href="https://app.rezultcrm.com/register" class="btn btn-primary">Crie sua conta grátis</a>
+        </div>
       </div>
       <div class="hero-mockup-wrap" id="mockupSlotA">
         <img id="hero-img" src="rezult-pipeline.png" alt="Pipeline comercial Rezult CRM" class="hero-mockup-img" />
@@ -147,7 +150,7 @@ fbq('track','PageView');
             <span class="hero-benefit-icon" aria-hidden="true">
               <svg class="lucide lucide-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
             </span>
-            <span>Garantia incondicional de 30 dias</span>
+            <span>Garantia de 7 dias em todos os planos</span>
           </li>
           <li class="hero-benefit">
             <span class="hero-benefit-icon" aria-hidden="true">
@@ -483,8 +486,8 @@ fbq('track','PageView');
 <section class="section passive-compare" id="crm-passivo" aria-labelledby="crm-passivo-heading">
   <div class="wrap">
     <div class="section-head center reveal passive-compare-head">
-      <span class="eyebrow">O problema dos CRMs passivos</span>
-      <h2 class="h2" id="crm-passivo-heading">Seu CRM registra oportunidades. Mas quem trabalha quando seu time está offline?</h2>
+      <span class="eyebrow">Diferença de CRM passivo x CRM ativo</span>
+      <h2 class="h2" id="crm-passivo-heading">Quem atua quando o seu time está offline ou ocupado?</h2>
       <p class="lede">O lead chega, entra no funil e espera pela próxima ação. Quando o atendimento depende exclusivamente da disponibilidade da equipe, cada hora sem resposta pode representar uma oportunidade perdida.</p>
     </div>
 
@@ -587,58 +590,82 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="section-head center reveal crm-ativo-head">
       <span class="eyebrow">Conheça o CRM Ativo</span>
-      <h2 class="h2" id="crm-ativo-heading">O CRM que não espera seu vendedor <span class="grad-verde">começar a trabalhar.</span></h2>
+      <h2 class="h2" id="crm-ativo-heading">O CRM que trabalha <span class="grad-verde">junto com o seu time.</span></h2>
       <p class="lede">Agentes de IA, automações e sua equipe trabalhando juntos para manter cada oportunidade em movimento.</p>
     </div>
 
     <div class="crm-mini-flow reveal" data-d="1" aria-label="Fluxo de leads pelo CRM Ativo">
-      <article class="crm-mini-node crm-mini-lead" data-flow-node="lead">
-        <span class="crm-mini-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
-        </span>
-        <span class="crm-mini-copy"><strong>Lead recebido</strong><small>WhatsApp, formulário ou campanha</small></span>
-        <span class="crm-mini-source" aria-hidden="true"><img src="logos/whatsapp.svg" alt=""></span>
-      </article>
+      <div class="crm-mini-main-lane">
+        <article class="crm-mini-node crm-mini-lead" data-flow-node="lead">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Lead recebido</strong><small>WhatsApp, formulário ou campanha</small></span>
+          <span class="crm-mini-source" aria-hidden="true"><img src="logos/whatsapp.svg" alt=""></span>
+        </article>
 
-      <div class="crm-mini-line" aria-hidden="true"></div>
+        <div class="crm-mini-line" aria-hidden="true"></div>
 
-      <article class="crm-mini-node crm-mini-core" data-flow-node="core">
-        <span class="crm-mini-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18 8.58 3.9a1 1 0 0 1 0 1.83l-8.58 3.91a2 2 0 0 1-1.66 0L2.6 7.92a1 1 0 0 1 0-1.83l8.58-3.91a2 2 0 0 1 1.66 0Z"/><path d="m22 12.5-9.17 4.17a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.17a2 2 0 0 1-1.66 0L2 17.5"/></svg>
-        </span>
-        <span class="crm-mini-copy"><strong>Rezult CRM</strong><small>IA + automações + gestão do funil</small></span>
-        <span class="crm-mini-online"><i></i>24h</span>
-      </article>
+        <article class="crm-mini-node crm-mini-core" data-flow-node="core">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18 8.58 3.9a1 1 0 0 1 0 1.83l-8.58 3.91a2 2 0 0 1-1.66 0L2.6 7.92a1 1 0 0 1 0-1.83l8.58-3.91a2 2 0 0 1-1.66 0Z"/><path d="m22 12.5-9.17 4.17a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.17a2 2 0 0 1-1.66 0L2 17.5"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Rezult CRM</strong><small>IA + automações + gestão do funil</small></span>
+          <span class="crm-mini-online"><i></i>24h</span>
+        </article>
 
-      <div class="crm-mini-branch" aria-hidden="true"><span></span><i></i><b></b></div>
+        <div class="crm-mini-line" aria-hidden="true"></div>
 
-      <div class="crm-mini-actions">
         <article class="crm-mini-node crm-mini-action" data-flow-node="ai">
           <span class="crm-mini-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
           </span>
           <span class="crm-mini-copy"><strong>Atendimento com IA</strong><small>Atende, qualifica e agenda.</small></span>
         </article>
+
+        <div class="crm-mini-line crm-mini-line--operation" aria-hidden="true"></div>
+
+        <article class="crm-mini-node crm-mini-ops" data-flow-node="ops">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14H4V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1"/><path d="m9 13 2 2 4-4"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Operacional com IA</strong><small>Registra dados, atualiza etapas e próximas ações.</small></span>
+        </article>
+
+        <div class="crm-mini-line crm-mini-line--operation" aria-hidden="true"></div>
+
         <article class="crm-mini-node crm-mini-action" data-flow-node="team">
           <span class="crm-mini-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </span>
-          <span class="crm-mini-copy"><strong>Equipe comercial</strong><small>Assume e negocia</small></span>
+          <span class="crm-mini-copy"><strong>Equipe comercial</strong><small>Assume a conversa e negocia.</small></span>
+        </article>
+
+        <div class="crm-mini-line" aria-hidden="true"></div>
+
+        <article class="crm-mini-node crm-mini-sale" data-flow-node="sale">
+          <span class="crm-mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+          </span>
+          <span class="crm-mini-copy"><strong>Venda</strong><small>Oportunidade convertida.</small></span>
         </article>
       </div>
 
-      <div class="crm-mini-merge" aria-hidden="true"><span></span><i></i><b></b></div>
+      <svg class="crm-mini-ops-lines" aria-hidden="true">
+        <path data-operation-path="in"></path>
+        <path data-operation-path="out"></path>
+      </svg>
 
-      <article class="crm-mini-node crm-mini-result" data-flow-node="result">
-        <span class="crm-mini-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>
-        <span class="crm-mini-copy"><strong>Tudo registrado no mesmo CRM</strong><small>Histórico, pipeline e próximas ações atualizados.</small></span>
-      </article>
+      <div class="crm-mini-operation-signals" aria-hidden="true">
+        <span class="crm-mini-operation-signal" data-operation-signal></span>
+        <span class="crm-mini-operation-signal" data-operation-signal></span>
+        <span class="crm-mini-operation-signal" data-operation-signal></span>
+      </div>
 
       <div class="crm-mini-leads" aria-hidden="true">
         <span class="crm-mini-avatar" data-flow-avatar data-route="ai"><img src="bruna-lima.jpg" alt=""></span>
         <span class="crm-mini-avatar" data-flow-avatar data-route="team"><img src="diego-ramos.jpg" alt=""></span>
+        <span class="crm-mini-avatar" data-flow-avatar data-route="ai"><img src="rafael-almeida.jpg" alt=""></span>
       </div>
     </div>
 
@@ -652,22 +679,22 @@ fbq('track','PageView');
 <!-- DOBRA · AGENTES DE IA -->
 <section class="section" id="agentes" style="background: #FFFFFF; padding: 100px 0px">
   <div class="wrap">
-    <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Conheça os <span class="grad-verde">novos membros</span> do seu time</h2>
-      <p class="lede">No CRM de sempre, alguém precisa parar de vender para digitar o que aconteceu. E ninguém digita. No Rezult, o registro se escreve enquanto a conversa acontece. <strong>Os outros avisam que o lead esfriou. O Rezult responde antes de esfriar.</strong></p>
-      <p class="lede lede-2">São cinco agentes, um para cada etapa do seu processo. <strong>Você liga os cinco ou liga um só.</strong> Todos alimentam o mesmo funil, sem ninguém digitar nada.</p>
-    </div>
-
-      <div class="ag-shell">
-      <div class="ag-abas" role="tablist" aria-label="Agentes de IA">
-        <button class="ag-aba ativa" type="button" role="tab" id="ag-t0" aria-controls="ag-p0" aria-selected="true" tabindex="0"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Atendente</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t1" aria-controls="ag-p1" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">SDR</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t2" aria-controls="ag-p2" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Closer</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t3" aria-controls="ag-p3" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Pós-venda</span></button>
-        <button class="ag-aba" type="button" role="tab" id="ag-t4" aria-controls="ag-p4" aria-selected="false" tabindex="-1"><span class="btn-pontos-wrap" aria-hidden="true"><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i><i class="btn-pontos-point"></i></span><span class="ag-aba-txt">Operacional</span></button>
+    <div class="ag-shell">
+      <div class="ag-stage">
+        <div class="ag-copy-stage">
+      <div class="ag-painel ag-painel--overview ativo" id="ag-overview">
+        <div class="ag-overview-copy">
+          <span class="ag-overview-pill">Em todos os planos</span>
+          <h3>Agentes de IA que atendem, qualificam e agendam.</h3>
+          <p>A IA assume a primeira conversa, entende o que o cliente quer e só passa para uma pessoa quando vale a pena. No seu tom de voz, com as suas regras.</p>
+          <div class="ag-channel">
+            <strong>Conectados ao seu principal canal de atendimento.</strong>
+            <span class="ag-channel-pill"><img src="logos/whatsapp.svg" alt="" aria-hidden="true">WhatsApp Oficial</span>
+          </div>
+        </div>
       </div>
 
-      <div class="ag-painel ativo" id="ag-p0" role="tabpanel" aria-labelledby="ag-t0">
+      <div class="ag-painel" id="ag-p0" role="region" aria-labelledby="ag-t0" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
             <h3>Agente Atendente</h3>
@@ -684,27 +711,39 @@ fbq('track','PageView');
           </ul>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p1" role="tabpanel" aria-labelledby="ag-t1" hidden>
+      <div class="ag-painel" id="ag-p1" role="region" aria-labelledby="ag-t1" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente SDR</h3>
+            <h3>Agente de Qualificação</h3>
           </div>
-          <h4>Descobre quem está pronto para comprar.</h4>
-          <p class="ag-desc">Cada contato é analisado assim que chega, sem depender de alguém livre para fazer na mão.</p>
+          <h4>Entende quem está pronto para avançar.</h4>
+          <p class="ag-desc">Cada contato é analisado assim que chega, seguindo as perguntas e os critérios definidos pela sua operação.</p>
           <ul class="ag-lista">
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Score automático a cada novo lead</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Perguntas de qualificação configuráveis</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Tags aplicadas sozinhas no contato</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Agenda na disponibilidade real do time</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmação e lembrete automáticos</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Aviso na hora quando o lead está quente</li>
           </ul>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p2" role="tabpanel" aria-labelledby="ag-t2" hidden>
+      <div class="ag-painel" id="ag-p2" role="region" aria-labelledby="ag-t2" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Closer</h3>
+            <h3>Agente de Agendamento</h3>
+          </div>
+          <h4>Encontra o horário e confirma a reunião.</h4>
+          <p class="ag-desc">Depois da qualificação, o agente consulta a disponibilidade do time e organiza o próximo passo.</p>
+          <ul class="ag-lista">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Agenda na disponibilidade real do time</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmação e lembrete automáticos</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Próximo passo organizado no CRM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ag-painel" id="ag-p3" role="region" aria-labelledby="ag-t3" hidden>
+        <div class="ag-painel-txt">
+          <div class="ag-painel-cab">
+            <h3>Agente de Venda</h3>
           </div>
           <h4>Conduz a negociação até o fechamento.</h4>
           <p class="ag-desc">Segue a conversa do primeiro contato até a decisão, sem perder o timing.</p>
@@ -718,24 +757,7 @@ fbq('track','PageView');
           </ul>
         </div>
       </div>
-      <div class="ag-painel" id="ag-p3" role="tabpanel" aria-labelledby="ag-t3" hidden>
-        <div class="ag-painel-txt">
-          <div class="ag-painel-cab">
-            <h3>Agente de Pós-venda</h3>
-          </div>
-          <h4>O cliente não some depois da compra.</h4>
-          <p class="ag-desc">Acompanha, tira dúvidas e devolve para um humano quando precisa.</p>
-          <ul class="ag-lista">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Onboarding guiado do novo cliente</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Check-in programado no pós-venda</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Pesquisa de satisfação automática</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Pedido de indicação na hora certa</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Alerta de risco de cancelamento</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reativação de cliente inativo</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ag-painel" id="ag-p4" role="tabpanel" aria-labelledby="ag-t4" hidden>
+      <div class="ag-painel" id="ag-p4" role="region" aria-labelledby="ag-t4" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
             <h3>Agente Operacional</h3>
@@ -751,6 +773,18 @@ fbq('track','PageView');
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Acesso por API e webhook</li>
           </ul>
         </div>
+      </div>
+        </div>
+
+        <div class="ag-persistent-visual" aria-hidden="true"></div>
+      </div>
+
+      <div class="ag-agent-nav" role="group" aria-label="Conheça cada agente">
+        <button class="ag-agent-button" type="button" id="ag-t0" aria-controls="ag-p0" aria-expanded="false">Atendimento</button>
+        <button class="ag-agent-button" type="button" id="ag-t1" aria-controls="ag-p1" aria-expanded="false">Qualificação</button>
+        <button class="ag-agent-button" type="button" id="ag-t2" aria-controls="ag-p2" aria-expanded="false">Agendamento</button>
+        <button class="ag-agent-button" type="button" id="ag-t3" aria-controls="ag-p3" aria-expanded="false">Venda</button>
+        <button class="ag-agent-button" type="button" id="ag-t4" aria-controls="ag-p4" aria-expanded="false">Operacional</button>
       </div>
       </div>
   </div>
@@ -777,7 +811,7 @@ fbq('track','PageView');
 <section class="section" id="ate-onde" style="background: #FFFFFF; padding: 90px 0px">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Você decide <span class="grad-verde">o nível de autonomia do Rezult</span></h2>
+      <h2 class="h2">Você decide <span class="grad-verde">o nível de autonomia</span></h2>
       <p class="lede">Nem todo negócio quer IA conversando com cliente no primeiro dia. Tudo bem. Os agentes ligam um a um, no ritmo que a sua operação aguentar.</p>
     </div>
 
@@ -795,11 +829,10 @@ fbq('track','PageView');
       <div class="volume-passo">
         <span class="volume-nivel">Nível 3</span>
         <h3>Fechamento e pós-venda</h3>
-        <p>Atendimento, qualificação, negociação, pós-venda e registro rodando sozinhos, 24 horas por dia. É o que os clientes desta página fazem hoje.</p>
+        <p>Os agentes cuidam da rotina comercial 24 horas por dia. Seu time entra nas conversas que exigem julgamento.</p>
       </div>
     </div>
 
-    <p class="volume-fecho reveal" data-d="2">Você muda isso a qualquer momento, e não precisa de ninguém para autorizar.</p>
 
   </div>
 </section>
@@ -1060,8 +1093,8 @@ fbq('track','PageView');
 <section class="section" id="recursos" style="background: #FBFBFB; padding: 90px 0px; overflow: hidden;">
   <div class="wrap" style="padding: 0px 20px">
     <div class="section-head center reveal" style="max-width: 760px">
-      <h2 class="h2">Quatro produtos que você <span class="grad-verde">compraria separados</span></h2>
-      <p class="lede">Nenhum deles funciona sozinho. É a combinação que faz o funil se preencher sem ninguém digitar.</p>
+      <h2 class="h2">Um CRM. <span class="grad-verde">Quatro capacidades</span> mantendo o funil em movimento.</h2>
+      <p class="lede">WhatsApp Oficial, agentes de IA, automações e pipeline trabalham juntos para que cada ação alimente o mesmo CRM.</p>
     </div>
 
     <!-- Feature 1: WhatsApp -->
@@ -1155,6 +1188,16 @@ fbq('track','PageView');
 
 </section>
 
+<!-- Mantém a narrativa Golden Circle na página renderizada:
+     mecanismo e capacidades antes da prova social. -->
+<script>
+  {
+    const recursos = document.getElementById('recursos');
+    const clientes = document.getElementById('clientes');
+    if (recursos && clientes) clientes.before(recursos);
+  }
+</script>
+
 <!-- DOBRA · PARCEIRO META -->
 <section class="section" id="parceiro-meta" style="background: #F1F6FD; padding: 90px 0px">
   <div class="wrap">
@@ -1164,7 +1207,7 @@ fbq('track','PageView');
           <img class="hero-badge-meta" src="logos/meta.svg" alt="Meta" width="15" height="10">
           <span>Parceiro Oficial da Meta</span>
         </div>
-        <h2 class="h2">Somos parceiros oficial da Meta para <span class="meta-azul">WhatsApp Business API.</span></h2>
+        <h2 class="h2">Somos parceiro oficial da Meta para <span class="meta-azul">WhatsApp Business API.</span></h2>
         <p class="lede">O Rezult opera o WhatsApp Business API homologado, com o número da sua própria empresa. Nada de API não oficial pendurada num celular, que é o que derruba número.</p>
         <div class="meta-badges">
           <span class="meta-selo-caixa">
@@ -1185,7 +1228,7 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
       <h2 class="h2"><span class="grad-verde">3 passos</span> para começar</h2>
-      <p class="lede">Sem instalação, sem projeto de implantação. Você configura hoje e o time atende ainda hoje.</p>
+      <p class="lede">Conecte sua operação, defina como o Rezult deve agir e acompanhe tudo no mesmo CRM.</p>
     </div>
     <div class="passos">
       <div class="passo reveal">
@@ -1202,7 +1245,7 @@ fbq('track','PageView');
           </svg>
         </div>
           <h3>Iniciar teste grátis</h3>
-        <p>Um QR Code e pronto. O número da sua empresa começa a receber no Rezult em menos de um minuto.</p>
+        <p>Conecte o número da sua empresa ao Rezult para centralizar as conversas do time.</p>
       </div>
       <div class="passo reveal" data-d="1">
         <div class="passo-arte">
@@ -1239,251 +1282,127 @@ fbq('track','PageView');
           </svg>
         </div>
           <h3>Especialista dedicado</h3>
-        <p>No mesmo dia eles já respondem, qualificam e agendam, com tudo caindo no funil sozinho.</p>
+        <p>Depois do briefing e da configuração, o Rezult atende, qualifica e agenda com tudo registrado no funil.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="precos" style="background: #FBFBFB; padding: 100px 0px">
+<!-- faq -->
+<section class="section faq-section" id="faq" aria-labelledby="faq-titulo">
   <div class="wrap">
     <div class="section-head center reveal" style="padding: 0 12px; max-width: 760px;">
-      <h2 class="h2">Planos para o momento <span class="grad-verde">do seu negócio</span></h2>
-      <p class="lede">Comece com 7 dias grátis, sem cartão de crédito.</p>
+      <h2 class="h2" id="faq-titulo">Perguntas <span class="grad-verde">frequentes</span></h2>
+      <p class="lede">Respostas diretas para entender como o Rezult entra na sua operação.</p>
     </div>
 
-      <!-- STACK DE VALOR -----------------------------------------------------
-           Ancorada no custo do substituto que o prospecto ja conhece, que e a
-           unica ancoragem honesta que existe.
-
-           CADA LINHA TEM FONTE VERIFICADA E DATADA. Nenhum valor estimado,
-           nenhum arredondado para cima. O SDR usa o PISO mais baixo entre seis
-           vagas abertas (R$ 2.000), e nao a media nem o teto: subestimar a
-           propria vantagem e o que torna o numero indefensavel de atacar.
-           As vagas sao PJ, entao nao ha encargos a somar -- o valor cheio ja e
-           o custo.
-
-           PRECO DE CONCORRENTE ENVELHECE. Se a RD ou a Agentesia mudarem de
-           tabela, esta secao passa a mentir sem ninguem ter tocado nela.
-           Revisar a cada trimestre e atualizar a data das notas. -->
-      <div class="stack reveal">
-        <p class="stack-titulo">O que custaria montar isso separado, hoje:</p>
-        <ul class="stack-itens">
-          <li>
-            <span class="stack-item">Plataforma de WhatsApp oficial <em>parceiro BSP da Meta</em></span>
-            <span class="stack-valor">R$ 989<i>/mês</i></span>
-          </li>
-          <li>
-            <span class="stack-item">Agente de IA atendendo no WhatsApp <em>só o atendimento, sem CRM</em></span>
-            <span class="stack-valor">R$ 497<i>/mês</i></span>
-          </li>
-          <li>
-            <span class="stack-item">Um SDR para responder e qualificar <em>vagas abertas, contrato PJ</em></span>
-            <span class="stack-valor">R$ 2.000<i>/mês</i></span>
-          </li>
-          <li class="stack-total">
-            <span class="stack-item">Somado</span>
-            <span class="stack-valor">R$ 3.486<i>/mês</i></span>
-          </li>
-        </ul>
-        <p class="stack-fecho">No Rezult, tudo isso <strong>a partir de R$ 237 por mês.</strong></p>
-        <p class="stack-fontes">
-          Valores públicos consultados em 11/09/2026:
-          <a href="https://www.rdstation.com/planos/conversas/" target="_blank" rel="noopener">RD Station Conversas</a>, plano Basic ·
-          <a href="https://www.agentesia.com.br/planos" target="_blank" rel="noopener">Agentesia</a>, plano START ·
-          seis vagas de SDR com salário publicado, faixa de R$ 2.000 a R$ 5.000.
-          Escopos diferem entre as ferramentas.
-        </p>
+    <div class="faq reveal">
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-1" aria-expanded="false" aria-controls="faq-resposta-1">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>O Rezult é apenas um bot de WhatsApp?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-1" role="region" aria-labelledby="faq-pergunta-1" aria-hidden="true">
+          <div class="faq-a-inner"><p>Não. O Rezult reúne WhatsApp Business API, agentes de IA, automações e pipeline no mesmo CRM. Assim, a conversa, o próximo passo e o registro permanecem na mesma operação.</p></div>
+        </div>
       </div>
 
-    <!-- id priceTogglePreview: o wirePricingToggle do main.js já espera este id.
-         O seletor atualiza todos os .amt da página, e como esta é a única grade
-         de preços da home, não há conflito. -->
-    <div class="price-toggle" id="priceTogglePreview">
-      <button class="active" data-period="mensal">Mensal</button>
-      <button data-period="semestral">Semestral <span class="save">-15%</span></button>
-      <button data-period="anual">Anual <span class="save">-30%</span></button>
-    </div>
-
-    <div class="pgrid">
-      <div class="pcard">
-        <div>
-          <div class="pname">Silver</div>
-          <div class="pdesc">Perfeito para pequenas equipes</div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-2" aria-expanded="false" aria-controls="faq-resposta-2">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>O Rezult substitui minha equipe comercial?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-2" role="region" aria-labelledby="faq-pergunta-2" aria-hidden="true">
+          <div class="faq-a-inner"><p>Não. Os agentes cuidam da rotina operacional, enquanto sua equipe assume as conversas que exigem julgamento, negociação ou relacionamento.</p></div>
         </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="237" data-stotal="1209" data-atotal="1989">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="237" data-s="202" data-a="166">237</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
-        </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Teste grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">4 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>8 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 pipelines</b> com até 8 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
       </div>
 
-      <div class="pcard featured">
-        <div>
-          <div class="pname">Platinum</div>
-          <div class="pdesc">Pensado para quem está crescendo</div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-3" aria-expanded="false" aria-controls="faq-resposta-3">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>Posso escolher quais agentes ativar?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-3" role="region" aria-labelledby="faq-pergunta-3" aria-hidden="true">
+          <div class="faq-a-inner"><p>Sim. Você ativa apenas os agentes que fazem sentido para sua operação e define o tom, a atuação e o momento de passar a conversa para sua equipe.</p></div>
         </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="399" data-stotal="2035" data-atotal="3352">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="399" data-s="339" data-a="279">399</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
-        </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Teste grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">15 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>100 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>10 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 pipelines</b> com até 15 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
       </div>
 
-      <div class="pcard">
-        <div>
-          <div class="pname">Emerald</div>
-          <div class="pdesc">Ideal para empresas em escala</div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-4" aria-expanded="false" aria-controls="faq-resposta-4">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>Como controlo o que a IA pode fazer?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-4" role="region" aria-labelledby="faq-pergunta-4" aria-hidden="true">
+          <div class="faq-a-inner"><p>Durante o briefing, você define como o Rezult deve agir, quais ações estão permitidas e quando uma pessoa precisa assumir. O histórico da conversa fica disponível para a continuidade.</p></div>
         </div>
-        <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="747" data-stotal="3810" data-atotal="6272">
-            <span class="cur">R$</span>
-            <span class="amt" data-m="747" data-s="635" data-a="523">747</span>
-            <span class="per">/mês</span><span class="pperiod">Mensal</span>
-          </div>
-          <div class="pprice-recurring">Cobrança mensal recorrente</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-5" aria-expanded="false" aria-controls="faq-resposta-5">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>O Rezult funciona com o número da minha empresa?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-5" role="region" aria-labelledby="faq-pergunta-5" aria-hidden="true">
+          <div class="faq-a-inner"><p>Sim. O Rezult opera pela WhatsApp Business API oficial, com o número da própria empresa e as conversas centralizadas no CRM.</p></div>
         </div>
-        <a href="https://app.rezultcrm.com/register" class="btn-pontos">
-          <div class="btn-pontos-wrap" aria-hidden="true">
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-            <i class="btn-pontos-point"></i>
-          </div>
-          <span class="btn-pontos-inner">Teste grátis</span>
-        </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">Usuários ilimitados</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Leads ilimitados</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Automações ilimitadas</b></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Conexões ilimitadas</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Pipelines ilimitadas</b> com até 25 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Integrações ilimitadas</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-6" aria-expanded="false" aria-controls="faq-resposta-6">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>O que fica registrado no pipeline?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-6" role="region" aria-labelledby="faq-pergunta-6" aria-hidden="true">
+          <div class="faq-a-inner"><p>Cada atendimento pode alimentar o mesmo CRM com a conversa, as anotações e a etapa da oportunidade. O registro acontece junto com a operação, sem depender de preenchimento posterior.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-7" aria-expanded="false" aria-controls="faq-resposta-7">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>Como funciona a ativação?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-7" role="region" aria-labelledby="faq-pergunta-7" aria-hidden="true">
+          <div class="faq-a-inner"><p>Você conecta sua operação, compartilha o briefing e define como o Rezult deve atuar. Um especialista acompanha essa configuração para colocar os agentes em funcionamento.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" id="faq-pergunta-8" aria-expanded="false" aria-controls="faq-resposta-8">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>Posso testar antes de contratar?</span>
+        </button>
+        <div class="faq-a" id="faq-resposta-8" role="region" aria-labelledby="faq-pergunta-8" aria-hidden="true">
+          <div class="faq-a-inner"><p>Sim. Você pode criar sua conta e usar o Rezult gratuitamente por 7 dias, sem cartão de crédito.</p></div>
+        </div>
       </div>
     </div>
-
-    <section class="risco-zero reveal" aria-labelledby="risco-zero-titulo">
-      <div class="risco-zero-icone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 3l7 3v5c0 4.6-2.9 8.5-7 10-4.1-1.5-7-5.4-7-10V6l7-3Z"/>
-          <path d="m8.8 12 2 2 4.5-4.5"/>
-        </svg>
-      </div>
-      <div class="risco-zero-conteudo">
-        <p class="risco-zero-label">RISCO ZERO</p>
-        <h3 id="risco-zero-titulo">Satisfação garantida ou 100% do seu dinheiro de volta.</h3>
-        <p class="risco-zero-texto">Você tem 7 dias após a contratação para conhecer o Rezult com tranquilidade. Se não fizer sentido para o seu negócio, peça o reembolso nesse prazo e devolvemos o valor integral.</p>
-        <ul class="risco-zero-beneficios" aria-label="Condições da garantia">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            7 dias de garantia
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Válido em todos os planos
-          </li>
-        </ul>
-      </div>
-    </section>
   </div>
 </section>
-
-<script>
-  {
-    const recursos = document.getElementById('recursos');
-    const agentes = document.getElementById('agentes');
-    const autonomia = document.getElementById('ate-onde');
-    const planos = document.getElementById('precos');
-    const garantia = document.querySelector('.risco-zero');
-
-    if (recursos && agentes) agentes.before(recursos);
-    if (planos && agentes && autonomia && garantia) {
-      planos.after(agentes, autonomia, garantia);
-    }
-  }
-</script>
+<!-- /faq -->
 
 <!-- CONTATO FINAL -->
 <section class="ainda-duvidas" aria-labelledby="ainda-duvidas-titulo">
   <div class="wrap">
     <div class="ainda-duvidas-card reveal">
-      <div class="ainda-duvidas-icone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
-          <path d="M9.7 9a2.4 2.4 0 1 1 3.8 1.95c-.9.62-1.5 1.05-1.5 2.05"/>
-          <path d="M12 16h.01"/>
-        </svg>
-      </div>
-      <h2 id="ainda-duvidas-titulo">Ainda tem dúvidas?</h2>
-      <p>Nossa equipe de especialistas está pronta para ajudar você</p>
+      <h2 id="ainda-duvidas-titulo">Seu cliente atendido na hora e seu time mais produtivo.</h2>
+      <p>Veja como o Rezult se adapta à sua operação e avance no seu ritmo.</p>
       <div class="ainda-duvidas-acoes">
         <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary btn-lg">Falar com um Especialista</a>
         <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-secondary btn-lg">Agendar Demonstração</a>
@@ -1491,27 +1410,6 @@ fbq('track','PageView');
     </div>
   </div>
 </section>
-
-<script>
-  {
-    const planos = document.getElementById('precos');
-    const contatoFinal = document.querySelector('.ainda-duvidas');
-
-    if (planos && contatoFinal) {
-      const planosFinal = planos.cloneNode(true);
-      planosFinal.id = 'precos-final';
-
-      planosFinal.querySelector('.section-head')?.remove();
-      planosFinal.querySelector('.stack')?.remove();
-
-      const seletorFinal = planosFinal.querySelector('#priceTogglePreview');
-      if (seletorFinal) seletorFinal.id = 'priceToggleFinal';
-
-      contatoFinal.before(planosFinal);
-    }
-  }
-</script>
-
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1559,7 +1457,7 @@ fbq('track','PageView');
 
 <script src="mockups.js"></script>
 <script src="rastreio.js"></script>
-<script src="home.js?v=20260926-5"></script>
+<script src="home.js?v=20260927-1"></script>
 <!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
      src/paineis/. Preenchem #featWhatsapp, #featAutomation e #featPipelines,
      que o mockups.js deixou de ocupar. Vem depois dele para o innerHTML do
@@ -1568,7 +1466,7 @@ fbq('track','PageView');
 <script type="module">
   import { animate, inView } from "https://esm.sh/motion@12.42.2";
 
-  // Float na imagem da hero — desktop e tablet apenas
+  // Float na imagem da hero: desktop e tablet apenas
   const heroImg = document.getElementById("hero-img");
   if (heroImg && window.matchMedia("(min-width: 768px)").matches) {
     animate(heroImg,
