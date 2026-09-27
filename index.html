@@ -133,6 +133,7 @@ fbq('track','PageView');
         <p class="hero-sub reveal" data-d="2">Seu time deve entrar para decidir e vender. Não para correr atrás de leads, lembrar follow-ups e preencher CRM.</p>
         <div class="hero-actions reveal" data-d="3">
           <a href="https://app.rezultcrm.com/register" class="btn btn-primary">Crie sua conta grátis</a>
+          <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-secondary">Agendar demonstração</a>
         </div>
       </div>
       <div class="hero-mockup-wrap" id="mockupSlotA">
@@ -487,15 +488,15 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="section-head center reveal passive-compare-head">
       <span class="eyebrow">Diferença de CRM passivo x CRM ativo</span>
-      <h2 class="h2" id="crm-passivo-heading">Quem atua quando o seu time está offline ou ocupado?</h2>
-      <p class="lede">O lead chega, entra no funil e espera pela próxima ação. Quando o atendimento depende exclusivamente da disponibilidade da equipe, cada hora sem resposta pode representar uma oportunidade perdida.</p>
+      <h2 class="h2" id="crm-passivo-heading">Quem atua quando o seu time está ocupado?</h2>
+      <p class="lede">O mesmo lead. Duas jornadas. Veja o que acontece quando o CRM apenas registra e quando também entra em ação.</p>
     </div>
 
     <div class="compare-grid" aria-label="Comparação ilustrativa entre duas jornadas para o mesmo lead">
       <article class="compare-card compare-card-passive" aria-labelledby="compare-passive-title">
         <div class="compare-card-top">
           <span class="compare-label">CRM passivo</span>
-          <h3 id="compare-passive-title">O lead chega. O sistema registra. O atendimento espera.</h3>
+          <h3 id="compare-passive-title">O lead entra. O trabalho espera.</h3>
         </div>
 
         <div class="compare-message" data-compare-message>
@@ -506,36 +507,36 @@ fbq('track','PageView');
           </div>
         </div>
 
-        <ol class="compare-timeline" aria-label="Jornada dependente de atendimento manual">
+        <ul class="compare-list" aria-label="Jornada dependente de atendimento manual">
           <li class="compare-step" data-compare-step>
-            <time datetime="22:04">22:04</time>
-            <span class="compare-marker" aria-hidden="true"></span>
-            <span><strong>Lead recebido</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <time datetime="22:04">22:04</time>
-            <span class="compare-marker" aria-hidden="true"></span>
-            <span><strong>Contato registrado no CRM</strong></span>
-          </li>
-          <li class="compare-step is-waiting" data-compare-step>
-            <time datetime="22:05">22:05</time>
-            <span class="compare-marker" aria-hidden="true"></span>
-            <span><strong>Aguardando atendimento humano</strong><small class="compare-wait" aria-label="Em espera"><i></i><i></i><i></i></small></span>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span>
+            <span><strong>Registra o contato no funil</strong></span>
           </li>
           <li class="compare-step" data-compare-step>
-            <time datetime="08:00">08:00</time>
-            <span class="compare-marker" aria-hidden="true"></span>
-            <span><strong>Equipe inicia o expediente</strong><small>Próxima ação disponível para o time</small></span>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+            <span><strong>Espera alguém iniciar a conversa</strong></span>
           </li>
-        </ol>
+          <li class="compare-step" data-compare-step>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+            <span><strong>Depende do time lembrar o próximo passo</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+            <span><strong>Exige atualização manual do histórico</strong></span>
+          </li>
+          <li class="compare-step" data-compare-step>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+            <span><strong>A oportunidade fica parada quando ninguém pode atender</strong></span>
+          </li>
+        </ul>
 
-        <p class="compare-card-footer">O contato está no CRM, mas a próxima ação ainda depende da disponibilidade de alguém.</p>
+        <p class="compare-card-footer">O lead está no CRM. A próxima ação ainda depende de alguém.</p>
       </article>
 
       <article class="compare-card compare-card-active" aria-labelledby="compare-active-title">
         <div class="compare-card-top">
           <span class="compare-label">Rezult CRM Ativo</span>
-          <h3 id="compare-active-title">O lead chega. O Rezult entra em ação.</h3>
+          <h3 id="compare-active-title">O lead entra. O Rezult começa a trabalhar.</h3>
         </div>
 
         <div class="compare-message" data-compare-message>
@@ -546,35 +547,30 @@ fbq('track','PageView');
           </div>
         </div>
 
-        <ol class="compare-timeline" aria-label="Jornada com agentes de IA e automações configuradas">
+        <ul class="compare-list" aria-label="Jornada com agentes de IA e automações configuradas">
           <li class="compare-step" data-compare-step>
-            <time datetime="22:04">22:04</time>
             <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Lead recebido</strong></span>
+            <span><strong>Responde conforme as regras definidas</strong></span>
           </li>
           <li class="compare-step" data-compare-step>
-            <time datetime="22:04">22:04</time>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></span>
-            <span><strong>Agente de IA inicia o atendimento</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <time datetime="22:06">22:06</time>
             <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Lead qualificado</strong></span>
+            <span><strong>Entende a necessidade e qualifica o lead</strong></span>
           </li>
           <li class="compare-step" data-compare-step>
-            <time datetime="22:08">22:08</time>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="m9 16 2 2 4-4"/></svg></span>
-            <span><strong>Reunião agendada</strong></span>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span><strong>Agenda reuniões e executa follow-ups</strong></span>
           </li>
           <li class="compare-step" data-compare-step>
-            <time datetime="22:08">22:08</time>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span><strong>Informações registradas no CRM</strong></span>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span><strong>Registra conversas e próximos passos</strong></span>
           </li>
-        </ol>
+          <li class="compare-step" data-compare-step>
+            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span><strong>Entrega o contexto pronto para o time vender</strong></span>
+          </li>
+        </ul>
 
-        <p class="compare-card-footer">Enquanto seu time está offline, o Rezult pode atender, qualificar, agendar e organizar as oportunidades automaticamente.</p>
+        <p class="compare-card-footer">O lead avança. Seu time recebe a conversa pronta para decidir e vender.</p>
       </article>
     </div>
 
