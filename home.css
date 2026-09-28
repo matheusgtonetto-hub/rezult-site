@@ -2674,6 +2674,7 @@ select.demo-select:invalid { color: #374151; }
 /* ---------- Como funciona em 3 passos ---------- */
 /* O apoio desta seção acompanha a mesma família dos títulos. */
 #como-funciona .lede { font-family: var(--display); font-size: 18px; }
+.como-funciona-pill { margin-bottom: 14px; }
 .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .passo { text-align: center; }
 /* A arte fica numa caixa de proporção fixa para as três alinharem, mesmo que os
@@ -2682,6 +2683,8 @@ select.demo-select:invalid { color: #374151; }
 .passo-arte svg { display: block; width: 100%; height: auto; }
 .passo h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
 .passo p { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 10px; max-width: 320px; margin-inline: auto; }
+.como-funciona-cta { display: flex; justify-content: center; margin-top: 44px; }
+.como-funciona-cta .btn-pontos-inner { gap: 10px; font-size: 18px; }
 
 /* Animações dos três mockups. Todas em transform e opacity, que o navegador
    compõe na GPU sem recalcular layout. transform-box: fill-box é obrigatório em
@@ -4052,14 +4055,6 @@ select.demo-select:invalid { color: #374151; }
 }
 .compare-card-active .compare-card-footer { color: var(--ink); }
 
-.passive-transition {
-  max-width: 680px;
-  margin: 38px auto 0;
-  text-align: center;
-}
-.passive-transition .passive-transition-main { color: var(--primary-lo); font-size: 18px; font-weight: 600; line-height: 1.4; }
-.passive-transition .passive-transition-next { margin-top: 5px; color: var(--text-muted); font-size: 14px; line-height: 1.45; }
-
 /* A animação só é armada pelo JavaScript quando a seção entra na tela. */
 .passive-compare.is-prepared .compare-card,
 .passive-compare.is-prepared .compare-message,
@@ -4086,7 +4081,6 @@ select.demo-select:invalid { color: #374151; }
   .compare-card { min-height: 0; padding: 24px; }
   .compare-card-top { min-height: 0; }
   .compare-card-footer { margin-top: 14px; }
-  .passive-transition { margin-top: 34px; }
 }
 
 @media (max-width: 480px) {
@@ -4095,7 +4089,6 @@ select.demo-select:invalid { color: #374151; }
   .compare-card h3 { font-size: 20px; }
   .compare-message { margin: 20px 0 22px; padding: 13px; }
   .compare-step { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; min-height: 46px; }
-  .passive-transition .passive-transition-main { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
