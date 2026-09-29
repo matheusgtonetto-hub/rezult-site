@@ -2606,44 +2606,19 @@ select.demo-select:invalid { color: #374151; }
 .ag-lista { columns: 1; margin-top: 26px; list-style: none; }
 .ag-lista li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 11px; break-inside: avoid; }
 .ag-lista li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
-/* Cena ilustrativa de cada agente: conversa à frente, robô e registro no CRM.
-   As mensagens têm o mesmo ciclo para reiniciar ao trocar de aba. */
-.ag-demo { position: relative; min-width: 0; height: 500px; }
-.ag-demo::before { content: ''; position: absolute; width: 85%; aspect-ratio: 1.5; top: 22%; left: 14%; border: 1px solid rgba(0, 184, 115, .26); border-radius: 50%; transform: rotate(-18deg); }
-.ag-demo::after { content: ''; position: absolute; width: 8px; height: 8px; top: 21%; right: 14%; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 7px rgba(0, 184, 115, .1); }
-.ag-demo-label { position: absolute; top: 20px; left: 22px; font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .12em; color: #047857; text-transform: uppercase; }
-.ag-chat { position: absolute; z-index: 2; top: 12%; left: 5%; width: 69%; padding: 18px; border: 1px solid #DCEBE3; border-radius: 20px; background: #FFFFFF; box-shadow: 0 24px 55px -28px rgba(12, 56, 37, .35); transform: rotate(-4deg); }
-.ag-chat-head { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #E7F1EB; }
-.ag-chat-mark { display: grid; place-items: center; width: 33px; height: 33px; flex: none; border-radius: 10px; background: #E4F8ED; color: #047857; font-size: 20px; font-weight: var(--fw-bold); }
-.ag-chat-head strong { display: block; color: var(--ink); font-size: 13px; line-height: 1.2; }
-.ag-chat-head small { display: flex; align-items: center; gap: 5px; margin-top: 3px; color: #687B70; font-size: 10px; }
-.ag-chat-head small::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
-.ag-chat-bubbles { display: grid; gap: 9px; padding: 17px 0 14px; }
-.ag-bolha { width: fit-content; max-width: 90%; padding: 10px 12px; border-radius: 13px; font-size: 12px; line-height: 1.4; }
-.ag-bolha--lead { justify-self: start; background: #F1F3F2; color: #263A30; border-bottom-left-radius: 4px; }
-.ag-bolha--ia { justify-self: end; background: #E8F8EF; color: #155640; border-bottom-right-radius: 4px; }
-.ag-chat-result { display: flex; align-items: center; gap: 9px; padding: 10px; border: 1px solid #D6EEDD; border-radius: 12px; background: #F5FCF7; color: #155640; font-size: 11px; font-weight: 600; line-height: 1.3; }
-.ag-chat-result svg { width: 19px; height: 19px; flex: none; color: #047857; }
-.ag-bot { position: absolute; z-index: 1; top: 23%; right: 1%; width: 31%; max-width: 170px; filter: drop-shadow(0 16px 20px rgba(8, 62, 39, .12)); }
-.ag-bot svg { display: block; width: 100%; height: auto; }
-.ag-demo-note { position: absolute; z-index: 3; right: 6%; bottom: 7%; max-width: 55%; padding: 12px 14px; border: 1px solid #D9EEE3; border-radius: 12px; background: rgba(255, 255, 255, .93); box-shadow: 0 14px 35px -25px rgba(12, 56, 37, .35); }
-.ag-demo-note strong { display: block; color: #164B36; font-size: 12px; line-height: 1.3; }
-.ag-demo-note span { display: block; margin-top: 3px; color: #708278; font-size: 10px; }
-
-@keyframes ag-demo-float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
-@keyframes ag-bot-float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
-@keyframes ag-msg-one { 0%, 5% { opacity: 0; transform: translateY(12px); } 13%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
-@keyframes ag-msg-two { 0%, 27% { opacity: 0; transform: translateY(12px); } 35%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
-@keyframes ag-msg-three { 0%, 49% { opacity: 0; transform: translateY(12px); } 57%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
-@keyframes ag-msg-result { 0%, 68% { opacity: 0; transform: translateY(12px); } 76%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
-@media (prefers-reduced-motion: no-preference) {
-  .ag-persistent-visual .ag-chat { animation: ag-demo-float 6s ease-in-out infinite; }
-  .ag-persistent-visual .ag-bot { animation: ag-bot-float 4s ease-in-out infinite; }
-  .ag-persistent-visual .ag-bolha:nth-child(1) { animation: ag-msg-one 12s ease-in-out infinite; }
-  .ag-persistent-visual .ag-bolha:nth-child(2) { animation: ag-msg-two 12s ease-in-out infinite; }
-  .ag-persistent-visual .ag-bolha:nth-child(3) { animation: ag-msg-three 12s ease-in-out infinite; }
-  .ag-persistent-visual .ag-chat-result, .ag-persistent-visual .ag-demo-note { animation: ag-msg-result 12s ease-in-out infinite; }
+/* A mesma ilha do card “WhatsApp Oficial” aparece aqui como uma segunda
+   instância independente. O slot conserva as dimensões da ilustração anterior
+   e recorta o painel dentro do card dos agentes. */
+.ag-persistent-visual.tem-painel-wpp {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  border: 1px solid #D9EEE3;
+  border-radius: 20px;
+  background: #FAFAFA;
+  box-shadow: 0 24px 55px -34px rgba(12, 56, 37, .3);
 }
+.ag-persistent-visual .painel-wpp { border: 0; }
 
 
 @media (max-width: 980px) {
@@ -2652,7 +2627,7 @@ select.demo-select:invalid { color: #374151; }
   .ag-copy-stage { min-height: 380px; }
   .ag-painel h4 { font-size: 23px; }
   .ag-agent-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .ag-demo { height: 430px; }
+  .ag-persistent-visual.tem-painel-wpp { height: 430px; }
 }
 @media (max-width: 560px) {
   .ag-shell { padding: 24px 16px; border-radius: 20px; }
@@ -2664,12 +2639,7 @@ select.demo-select:invalid { color: #374151; }
   .ag-agent-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 20px; padding-top: 20px; }
   .ag-agent-button { min-height: 48px; padding: 9px 8px; font-size: 13px; }
   .ag-agent-button:last-child { grid-column: 1 / -1; }
-  .ag-demo { height: 365px; }
-  .ag-chat { top: 15%; left: 4%; width: 75%; padding: 11px; }
-  .ag-chat-bubbles { gap: 6px; padding: 10px 0; }
-  .ag-bolha { padding: 7px 9px; font-size: 10px; }
-  .ag-bot { top: 22%; right: -2%; width: 31%; }
-  .ag-demo-note { right: 4%; bottom: 5%; padding: 9px 10px; }
+  .ag-persistent-visual.tem-painel-wpp { height: 365px; }
 }
 /* ---------- Como funciona em 3 passos ---------- */
 /* O apoio desta seção acompanha a mesma família dos títulos. */

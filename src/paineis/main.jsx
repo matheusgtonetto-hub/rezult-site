@@ -21,6 +21,7 @@ import PainelPipeline from './PainelPipeline';
  * console delas.
  */
 const ILHAS = [
+  { id: 'agWhatsappDemo', classe: 'tem-painel-wpp', Painel: PainelWhatsapp },
   { id: 'featWhatsapp', classe: 'tem-painel-wpp', Painel: PainelWhatsapp },
   { id: 'featAutomation', classe: 'tem-painel-automacao', Painel: PainelAutomacao },
   { id: 'featPipelines', classe: 'tem-painel-pipeline', Painel: PainelPipeline },

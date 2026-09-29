@@ -541,33 +541,13 @@ wirePricingToggle("priceToggle");
 // ---- Abas dos agentes de IA ----
 (function () {
   const overview = document.getElementById("ag-overview");
-  const visualHost = document.querySelector(".ag-persistent-visual");
   const abas = Array.from(document.querySelectorAll(".ag-agent-nav .ag-agent-button"));
-  if (!overview || !visualHost || !abas.length) return;
+  if (!overview || !abas.length) return;
   const paineis = abas.map(aba => document.getElementById(aba.getAttribute("aria-controls")));
   let indiceAtivo = -1;
 
-  // O chat e o avatar permanecem fixos. Os botões trocam apenas o texto
-  // da coluna esquerda, preservando a posição de toda a navegação.
-  const cena = {
-    agente: "Atendimento com IA",
-    mensagens: ["Oi! Cheguei pelo anúncio. Ainda atendem?", "Atendemos sim. Como posso ajudar?", "Quero agendar uma demonstração."],
-    resultado: "Conversa registrada no CRM",
-    detalhe: "Primeiro atendimento iniciado"
-  };
-  const robo = `<svg viewBox="0 0 180 210" fill="none" aria-hidden="true"><path d="M90 37V22" stroke="#047857" stroke-width="7" stroke-linecap="round"/><circle cx="90" cy="15" r="10" fill="#00B873"/><path d="M38 156c-19 7-22 24-13 30 9 6 22-5 31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><path d="M142 156c19 7 22 24 13 30-9 6-22-5-31-18" fill="#E8F8EF" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="159" rx="51" ry="39" fill="white" stroke="#CBE9D8" stroke-width="2"/><ellipse cx="90" cy="151" rx="25" ry="6" fill="#00B873" opacity=".75"/><rect x="20" y="38" width="140" height="112" rx="56" fill="white" stroke="#CBE9D8" stroke-width="2"/><rect x="34" y="53" width="112" height="80" rx="37" fill="#102820"/><path d="M53 92c6-12 16-12 22 0m30 0c6-12 16-12 22 0" stroke="#B9F1D4" stroke-width="5" stroke-linecap="round"/><path d="M79 108c7 7 15 7 22 0" stroke="#B9F1D4" stroke-width="4" stroke-linecap="round"/></svg>`;
-
-  const visual = document.createElement("div");
-  visual.className = "ag-demo";
-  visual.innerHTML = `<span class="ag-demo-label">Simulação ilustrativa</span><div class="ag-chat"><div class="ag-chat-head"><span class="ag-chat-mark">R</span><span><strong>Rezult · <span class="ag-chat-role"></span></strong><small>Online agora</small></span></div><div class="ag-chat-bubbles"><p class="ag-bolha ag-bolha--lead"></p><p class="ag-bolha ag-bolha--ia"></p><p class="ag-bolha ag-bolha--lead"></p></div><div class="ag-chat-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></div></div><div class="ag-bot">${robo}</div><div class="ag-demo-note"><strong></strong><span></span></div>`;
-  visual.querySelector(".ag-chat-role").textContent = cena.agente;
-  visual.querySelectorAll(".ag-bolha").forEach((bolha, index) => {
-    bolha.textContent = cena.mensagens[index];
-  });
-  visual.querySelector(".ag-chat-result span").textContent = cena.resultado;
-  visual.querySelector(".ag-demo-note strong").textContent = cena.detalhe;
-  visual.querySelector(".ag-demo-note span").textContent = "Atualizado no CRM";
-  visualHost.append(visual);
+  // O painel animado de WhatsApp permanece fixo. Os botões trocam apenas o
+  // texto da coluna esquerda, preservando a posição de toda a navegação.
 
   function mostrar(indice, focar) {
     indiceAtivo = indice;
