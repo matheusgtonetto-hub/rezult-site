@@ -1891,6 +1891,8 @@ select.demo-select:invalid { color: #374151; }
   font-size: 15px; font-weight: 500; line-height: 1.5;
   transition: color 0.2s ease-in-out;
 }
+.hero .hero-btn-pontos { padding: 12px 30px; text-decoration: none; }
+.hero .hero-btn-pontos .btn-pontos-inner { gap: 10px; font-size: 16px; font-weight: 600; }
 .btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
 .btn-pontos:hover .btn-pontos-icon { transform: translateX(2px); }
 .btn-pontos:hover .btn-pontos-icon path { animation: dash 0.8s linear forwards; }
