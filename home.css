@@ -2778,7 +2778,7 @@ select.demo-select:invalid { color: #374151; }
 
 /* Alinhado à esquerda, ao contrário das outras seções: aqui o texto divide a
    linha com a arte, e centralizado ele perderia a borda comum com ela. */
-.meta-texto { max-width: 460px; --meta-proof-gap: 22px; }
+.meta-texto { max-width: 460px; --meta-proof-gap: 20px; }
 
 /* O azul da Meta, #0668E1, e não o --blue do site (#3B82F6, que aliás não é
    usado em lugar nenhum). Numa seção sobre a parceria, com o selo deles logo
@@ -2797,14 +2797,13 @@ select.demo-select:invalid { color: #374151; }
    A margem de baixo continua sobrescrita: os 10px do padrão faziam o subtítulo
    parecer a quarta linha do título em vez de um bloco separado. O .lede não tem
    margem de topo, então este número é o vão inteiro. */
-.meta-texto .h2 { margin-top: 0; margin-bottom: 20px; }
+.meta-texto .h2 { margin-top: 0; margin-bottom: 16px; }
 
 /* 20px em vez dos 16px do .lede base, e escopado à seção: a regra global serve
    as outras quatro ledes da página, que continuam em 16 e 18px. */
 .meta-texto .lede { font-size: 20px; }
 
-/* Mesma distância nas duas provas: pill → título e subtítulo → selo. O valor
-   fica único para os dois intervalos não voltarem a divergir. */
+/* O selo abre o bloco e usa um único intervalo até o título. */
 .meta-partner-pill {
   display: flex;
   width: fit-content;
@@ -2817,7 +2816,7 @@ select.demo-select:invalid { color: #374151; }
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: var(--meta-proof-gap);
+  margin: 0 0 var(--meta-proof-gap);
 }
 
 /* O CTA da seção, no azul da Meta e não no verde do site.
@@ -4094,6 +4093,14 @@ select.demo-select:invalid { color: #374151; }
 .crm-ativo-head .eyebrow { margin-bottom: 18px; }
 .crm-ativo-head .h2 { max-width: 780px; margin-left: auto; margin-right: auto; }
 .crm-ativo-head .lede { max-width: 690px; margin: 20px auto 0; font-size: 18px; }
+@media (min-width: 981px) {
+  .crm-ativo-head { max-width: 100%; }
+  .crm-ativo-head .h2 {
+    max-width: none;
+    font-size: clamp(29px, 2.75vw, 36px);
+    white-space: nowrap;
+  }
+}
 .crm-ativo-apoio {
   max-width: 790px;
   margin: 22px auto 0;
