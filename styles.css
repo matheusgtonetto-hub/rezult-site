@@ -210,6 +210,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-head { max-width: 900px; margin-bottom: 40px; }
 @media (min-width: 981px) {
   .section-head { margin-bottom: 50px; }
+  .crm-ativo-head { max-width: 100%; }
+  #crm-ativo-heading {
+    font-size: clamp(29px, 2.75vw, 36px);
+    white-space: nowrap;
+  }
   /* Só o título de Depoimentos, e só no desktop: os 900px da regra base valem
      para as outras seções, e reduzir ali soltaria o título isolado num bloco
      de texto bem mais estreito que o .h2 sozinho preencheria mal. */
