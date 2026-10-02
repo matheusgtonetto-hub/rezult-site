@@ -1680,7 +1680,7 @@ select.demo-select:invalid { color: #374151; }
      quebras fixadas ele nao tem o que distribuir e so atrapalharia se um
      segmento passasse de uma linha. */
   .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
-  .hero h1 { letter-spacing: -2.5px; }
+  .hero h1 { font-size: 35px; letter-spacing: -1.2px; }
   /* As paginas internas nao tem quebra fixada no markup, entao elas
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
