@@ -926,7 +926,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    align-items passou de center para stretch para a coluna do mockup ter a
    altura cheia do card; com center ela ficaria centralizada e sobraria faixa
    de fundo em cima e embaixo. */
-.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; background: #FFFFFF; border: 2px solid var(--border-2); border-radius: 25px; padding: 0; position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05); }
+/* Sem fundo, borda ou sombra: a linha não é mais um card branco, o texto fica
+   direto sobre o cinza da seção. O recorte arredondado saiu daqui e passou a
+   ser do .feature-visual, que virou um painel com moldura própria. */
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; margin-bottom: 50px; padding: 0; position: relative; }
 .feature-text { padding: 120px 40px; align-self: center; }
 .feature-row:last-child { margin-bottom: 0; }
 .feature-row.flip .feature-text { order: 2; }
@@ -971,7 +974,25 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
 .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); list-style: none; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
-.feature-visual { border-radius: 0; background: var(--surface); overflow: hidden; position: relative; align-self: stretch; display: flex; }
+/* Mesmo tratamento que o painel de chat tinha na seção de agentes: moldura
+   própria com canto arredondado, em vez de meia-face recortada pelo card que
+   não existe mais. O overflow recorta o painel interno, que é absolute. */
+.feature-visual {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid #D9EEE3;
+  border-radius: 20px;
+  background: #FAFAFA;
+  box-shadow: 0 24px 55px -34px rgba(12, 56, 37, .3);
+}
+/* A borda-divisória de cada painel servia para separá-lo da coluna de texto
+   dentro do card branco. Agora a moldura do .feature-visual faz esse papel, e
+   a borda interna apareceria como linha dupla. */
+.feature-visual .painel-wpp,
+.feature-visual .painel-automacao,
+.feature-visual .painel-pipeline { border: 0; }
 .feature-visual > * { flex: 1; min-width: 0; }
 
 
@@ -1626,9 +1647,6 @@ select.demo-select:invalid { color: #374151; }
   .page-hero .mesh-blob { display: none; }
   .feature-row { grid-template-columns: 1fr; gap: 0; padding: 0; }
   .feature-text { padding: 45px 24px; }
-  /* Sombra mais forte no celular. A camada difusa quase dobra de opacidade e
-     sobe o deslocamento; a de contato escurece junto, senão o card parece
-     flutuar sem tocar a superfície. */
   /* Empilhado: texto em cima, mockup embaixo. O order: -1 que existia no
      .feature-visual puxava o mockup para o topo; sem ele os dois seguem a
      ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
@@ -1692,7 +1710,7 @@ select.demo-select:invalid { color: #374151; }
      quebras fixadas ele nao tem o que distribuir e so atrapalharia se um
      segmento passasse de uma linha. */
   .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
-  .hero h1 { font-size: 35px; letter-spacing: -1.2px; line-height: 1.1; }
+  .hero h1 { font-size: 33px; letter-spacing: -1.2px; line-height: 1.1; }
   /* As paginas internas nao tem quebra fixada no markup, entao elas
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
@@ -2510,7 +2528,39 @@ select.demo-select:invalid { color: #374151; }
   gap: clamp(28px, 4vw, 56px);
 }
 .ag-copy-stage { display: flex; align-items: center; min-width: 0; min-height: 500px; }
-.ag-persistent-visual { min-width: 0; }
+/* Os quatro agentes em resumo, na coluna onde antes ficava a ilha animada de
+   WhatsApp. Desde a remoção da .ag-agent-nav este resumo é a única porta de
+   entrada dos agentes na página: os .ag-painel detalhados seguem no HTML, mas
+   sem botão que os abra. */
+.ag-resumo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; min-width: 0; }
+.ag-resumo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 22px 20px;
+  border: 1px solid #D9EEE3;
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 18px 40px -32px rgba(12, 56, 37, .3);
+}
+/* O número marca a ordem do funil: o lead passa pelos quatro nessa sequência. */
+.ag-resumo-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(0, 184, 115, .12);
+  color: var(--primary);
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+.ag-resumo-card h3 { margin: 0; font-size: 17px; line-height: 1.2; letter-spacing: -0.02em; }
+.ag-resumo-card p { margin: 0; font-size: 13.5px; color: var(--text-muted); line-height: 1.45; }
 .ag-painel { display: block; width: 100%; }
 .ag-painel-txt { min-width: 0; }
 /* [hidden] perde para o display do .ag-painel, então precisa reafirmar. */
@@ -2570,28 +2620,6 @@ select.demo-select:invalid { color: #374151; }
   font-weight: 650;
 }
 .ag-channel-pill img { width: 18px; height: 18px; }
-.ag-agent-nav {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 20px;
-  padding-top: 24px;
-  border-top: 1px solid #D9EEE3;
-}
-.ag-agent-button {
-  min-height: 46px;
-  padding: 10px 12px;
-  border: 1px solid #CFE7DA;
-  border-radius: var(--r-sm);
-  background: #FFFFFF;
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 600;
-  transition: border-color .18s, background .18s, color .18s;
-}
-.ag-agent-button:hover { border-color: var(--primary); color: #047857; }
-.ag-agent-button:focus-visible { outline: 3px solid rgba(0, 184, 115, .35); outline-offset: 2px; }
-.ag-agent-button.ativa { border-color: #047857; background: #047857; color: #FFFFFF; }
 
 /* Ícone e nome do agente na mesma linha. */
 .ag-painel-cab { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
@@ -2616,28 +2644,14 @@ select.demo-select:invalid { color: #374151; }
 .ag-lista { columns: 1; margin-top: 26px; list-style: none; }
 .ag-lista li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 11px; break-inside: avoid; }
 .ag-lista li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
-/* A mesma ilha do card “WhatsApp Oficial” aparece aqui como uma segunda
-   instância independente. O slot conserva as dimensões da ilustração anterior
-   e recorta o painel dentro do card dos agentes. */
-.ag-persistent-visual.tem-painel-wpp {
-  position: relative;
-  height: 500px;
-  overflow: hidden;
-  border: 1px solid #D9EEE3;
-  border-radius: 20px;
-  background: #FAFAFA;
-  box-shadow: 0 24px 55px -34px rgba(12, 56, 37, .3);
-}
-.ag-persistent-visual .painel-wpp { border: 0; }
 
 
 @media (max-width: 980px) {
   .ag-shell { padding: 28px 24px; }
   .ag-stage { grid-template-columns: 1fr; gap: 20px; }
   .ag-copy-stage { min-height: 380px; }
+  .ag-resumo { gap: 12px; }
   .ag-painel h4 { font-size: 23px; }
-  .ag-agent-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .ag-persistent-visual.tem-painel-wpp { height: 430px; }
 }
 @media (max-width: 560px) {
   .ag-shell { padding: 24px 16px; border-radius: 20px; }
@@ -2646,10 +2660,8 @@ select.demo-select:invalid { color: #374151; }
   .ag-channel { margin-top: 24px; }
   .ag-channel strong { max-width: 270px; font-size: 15px; }
   .ag-copy-stage { min-height: 410px; }
-  .ag-agent-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 20px; padding-top: 20px; }
-  .ag-agent-button { min-height: 48px; padding: 9px 8px; font-size: 13px; }
-  .ag-agent-button:last-child { grid-column: 1 / -1; }
-  .ag-persistent-visual.tem-painel-wpp { height: 365px; }
+  .ag-resumo { grid-template-columns: 1fr; }
+  .ag-resumo-card { padding: 18px 16px; }
 }
 /* ---------- Como funciona em 3 passos ---------- */
 /* O apoio desta seção acompanha a mesma família dos títulos. */
@@ -4085,509 +4097,6 @@ select.demo-select:invalid { color: #374151; }
 }
 
 
-/* ═══ Seção 3 · mecanismo CRM Ativo ═══════════════════════════════════════
-   O diagrama é HTML e CSS para continuar editável, responsivo e acessível.
-   A animação só reforça o fluxo; todos os estados permanecem legíveis sem ela. */
-.crm-ativo {
-  overflow: hidden;
-  padding: 100px 0 120px;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(0, 184, 115, .065), transparent 42%),
-    var(--bg);
-  border-top: 0;
-  border-bottom: 1px solid var(--border-2);
-}
-.crm-ativo-head { max-width: 860px; margin: 0 auto 40px; padding: 0 12px; }
-.crm-ativo-head .eyebrow { margin-bottom: 18px; }
-.crm-ativo-head .h2 { max-width: 780px; margin-left: auto; margin-right: auto; }
-.crm-ativo-head .lede { max-width: 690px; margin: 20px auto 0; font-size: 18px; }
-@media (min-width: 981px) {
-  .crm-ativo-head { max-width: 100%; }
-  .crm-ativo-head .h2 {
-    max-width: none;
-    font-size: clamp(29px, 2.75vw, 36px);
-    white-space: nowrap;
-  }
-}
-.crm-ativo-apoio {
-  max-width: 790px;
-  margin: 22px auto 0;
-  padding: 16px 20px;
-  border: 1px solid var(--border-2);
-  border-radius: var(--r-md);
-  background: rgba(255, 255, 255, .78);
-  color: var(--text-muted);
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-.crm-flow {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1120px;
-  min-width: 0;
-  margin: 0 auto;
-  padding: 36px;
-  border: 1px solid var(--border-2);
-  border-radius: var(--r-xl);
-  background: rgba(255, 255, 255, .92);
-  box-shadow: 0 18px 50px rgba(7, 16, 13, .07);
-}
-.crm-flow-node {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  min-width: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  color: var(--text);
-  padding: 20px;
-  text-align: left;
-  transition: transform .26s cubic-bezier(.16, 1, .3, 1), border-color .18s ease, background .18s ease, box-shadow .26s ease;
-}
-.crm-flow-node:hover { border-color: var(--border-active); background: #FFFFFF; }
-.crm-flow-node:focus-visible {
-  outline: 3px solid rgba(0, 184, 115, .35);
-  outline-offset: 3px;
-}
-.crm-flow-node.is-selected {
-  border-color: var(--primary);
-  background: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(0, 184, 115, .09);
-}
-.crm-flow-node.is-flow-active {
-  border-color: var(--primary);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 34px rgba(0, 184, 115, .13);
-}
-.crm-flow-node-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  background: #FFFFFF;
-  color: var(--icon-default, var(--text-muted));
-}
-.crm-flow-node-icon svg { width: 20px; height: 20px; }
-.crm-flow-node.is-selected .crm-flow-node-icon,
-.crm-flow-node.is-flow-active .crm-flow-node-icon { color: var(--ink); border-color: rgba(0, 184, 115, .32); background: rgba(0, 184, 115, .08); }
-.crm-flow-copy { display: flex; flex-direction: column; min-width: 0; gap: 5px; }
-.crm-flow-copy strong { color: var(--ink); font-size: 17px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
-.crm-flow-copy small { color: var(--text-muted); font-size: 14px; line-height: 1.45; }
-
-.crm-flow-lead { width: min(100%, 560px); align-items: center; gap: 16px; }
-.crm-flow-sources { display: flex; align-items: center; gap: 8px; margin-left: auto; padding-left: 16px; }
-.crm-flow-sources > span { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--border-2); border-radius: 9px; background: #FFFFFF; color: var(--text-muted); }
-.crm-flow-sources img, .crm-flow-sources svg { width: 17px; height: 17px; object-fit: contain; }
-
-.crm-flow-core {
-  width: min(100%, 760px);
-  flex-direction: column;
-  gap: 20px;
-  padding: 24px;
-  border-color: rgba(0, 184, 115, .55);
-  background: #FFFFFF;
-  box-shadow: 0 14px 38px rgba(0, 184, 115, .10);
-}
-.crm-flow-core-top { display: flex; align-items: center; gap: 16px; }
-.crm-flow-core-top .crm-flow-copy { flex: 1; }
-.crm-flow-online {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  flex-shrink: 0;
-  padding: 7px 10px;
-  border-radius: var(--r-sm);
-  background: rgba(0, 184, 115, .09);
-  color: #076F4B;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .02em;
-}
-.crm-flow-online i, .crm-flow-status i { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--primary); }
-.crm-flow-capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.crm-flow-capabilities > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 9px 10px;
-  border: 1px solid var(--border-2);
-  border-radius: var(--r-sm);
-  background: var(--surface);
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 500;
-}
-.crm-flow-capabilities svg { width: 17px; height: 17px; flex: none; color: var(--text-muted); }
-
-.crm-flow-actions { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; width: 100%; }
-.crm-flow-action { align-items: flex-start; gap: 16px; padding: 24px; }
-.crm-flow-action .crm-flow-copy { padding-top: 3px; }
-.crm-flow-status {
-  position: absolute;
-  left: 88px;
-  bottom: 22px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: #076F4B;
-  font-size: 12px;
-  font-weight: 500;
-}
-.crm-flow-action { padding-bottom: 58px; }
-
-.crm-flow-result { width: min(100%, 820px); flex-direction: column; gap: 18px; padding: 24px; }
-.crm-flow-result-head { display: flex; align-items: center; gap: 16px; }
-.crm-flow-checks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.crm-flow-checks > span { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 13px; font-weight: 500; }
-.crm-flow-checks svg { width: 17px; height: 17px; flex: none; color: var(--primary); }
-
-/* Conectores: a linha neutra explica a arquitetura; o ponto verde animado
-   mostra a passagem do lead sem esconder informação quando está parado. */
-.crm-flow-connector { position: relative; width: 2px; height: 48px; background: var(--border); }
-.crm-flow-connector span { position: absolute; top: -3px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); opacity: 0; transform: translateX(-50%); }
-.crm-flow-connector.is-flow-active { background: rgba(0, 184, 115, .45); }
-.crm-flow-connector.is-flow-active span { opacity: 1; animation: crm-flow-down .65s cubic-bezier(.2, .8, .2, 1) both; }
-
-.crm-flow-branch, .crm-flow-merge { position: relative; width: calc(50% + 12px); height: 58px; color: var(--border); }
-.crm-flow-branch::before, .crm-flow-merge::before,
-.crm-flow-branch span, .crm-flow-merge span,
-.crm-flow-branch i, .crm-flow-merge i,
-.crm-flow-branch b, .crm-flow-merge b { position: absolute; display: block; background: currentColor; content: ""; }
-.crm-flow-branch::before { top: 0; left: 50%; width: 2px; height: 30px; transform: translateX(-50%); }
-.crm-flow-branch span { top: 29px; left: 0; width: 100%; height: 2px; }
-.crm-flow-branch i, .crm-flow-branch b { top: 29px; width: 2px; height: 29px; }
-.crm-flow-branch i { left: 0; }
-.crm-flow-branch b { right: 0; }
-.crm-flow-merge::before { bottom: 0; left: 50%; width: 2px; height: 30px; transform: translateX(-50%); }
-.crm-flow-merge span { top: 27px; left: 0; width: 100%; height: 2px; }
-.crm-flow-merge i, .crm-flow-merge b { top: 0; width: 2px; height: 29px; }
-.crm-flow-merge i { left: 0; }
-.crm-flow-merge b { right: 0; }
-.crm-flow-branch.is-flow-active, .crm-flow-merge.is-flow-active { color: rgba(0, 184, 115, .48); }
-.crm-flow-branch.is-flow-active::after, .crm-flow-merge.is-flow-active::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  transform: translateX(-50%);
-  animation: crm-flow-pulse .65s ease both;
-}
-.crm-flow-branch.is-flow-active::after { top: 23px; }
-.crm-flow-merge.is-flow-active::after { bottom: 23px; }
-
-.crm-flow-detail {
-  display: grid;
-  grid-template-columns: 150px minmax(180px, 230px) minmax(0, 1fr);
-  align-items: center;
-  gap: 20px;
-  max-width: 920px;
-  min-width: 0;
-  margin: 20px auto 0;
-  padding: 18px 22px;
-  border: 1px solid var(--border-2);
-  border-radius: var(--r-md);
-  background: #FFFFFF;
-}
-.crm-flow-detail-label { color: var(--green-text); font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-.crm-flow-detail strong { color: var(--ink); font-size: 15px; font-weight: 600; }
-.crm-flow-detail p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
-
-.crm-ativo-cta { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 680px; margin: 44px auto 0; text-align: center; }
-.crm-ativo-cta p { color: var(--text-muted); font-size: 16px; line-height: 1.5; }
-.crm-ativo-cta .btn { border-radius: var(--r-sm); }
-.crm-ativo-cta .btn svg { width: 18px; height: 18px; margin-left: 6px; transition: transform .18s ease; }
-.crm-ativo-cta .btn:hover svg { transform: translateX(3px); }
-
-@keyframes crm-flow-down { from { top: -3px; } to { top: calc(100% - 5px); } }
-@keyframes crm-flow-pulse { 0% { opacity: 0; transform: translateX(-50%) scale(.7); } 45% { opacity: 1; } 100% { opacity: 0; transform: translateX(-50%) scale(1.4); } }
-
-@media (max-width: 980px) {
-  .crm-ativo-head { max-width: 780px; }
-  .crm-flow { max-width: 820px; padding: 28px; }
-  .crm-flow-action { padding: 20px 18px 58px; }
-  .crm-flow-status { left: 82px; }
-  .crm-flow-detail { max-width: 760px; grid-template-columns: 130px 190px minmax(0, 1fr); }
-}
-
-@media (max-width: 700px) {
-  .crm-ativo-head { margin-bottom: 40px; padding: 0; }
-  .crm-ativo-head .lede { font-size: 17px; }
-  .crm-ativo-apoio { padding: 15px 16px; font-size: 15px; }
-  .crm-flow { padding: 18px; border-radius: var(--r-lg); }
-  .crm-flow-lead, .crm-flow-core, .crm-flow-result { width: 100%; }
-  .crm-flow-actions { grid-template-columns: 1fr; gap: 48px; }
-  .crm-flow-actions::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--border); transform: translateX(-50%); }
-  .crm-flow-branch, .crm-flow-merge { width: 2px; height: 44px; background: var(--border); color: transparent; }
-  .crm-flow-branch::before, .crm-flow-branch span, .crm-flow-branch i, .crm-flow-branch b,
-  .crm-flow-merge::before, .crm-flow-merge span, .crm-flow-merge i, .crm-flow-merge b { display: none; }
-  .crm-flow-branch.is-flow-active, .crm-flow-merge.is-flow-active { background: rgba(0, 184, 115, .48); color: transparent; }
-  .crm-flow-branch.is-flow-active::after { top: 18px; }
-  .crm-flow-merge.is-flow-active::after { bottom: 18px; }
-  .crm-flow-action { width: 100%; background: var(--surface); }
-  .crm-flow-capabilities { grid-template-columns: 1fr; }
-  .crm-flow-capabilities > span { justify-content: flex-start; padding-left: 14px; }
-  .crm-flow-checks { grid-template-columns: 1fr; gap: 12px; }
-  .crm-flow-detail { grid-template-columns: 1fr; gap: 7px; margin-top: 16px; padding: 18px; }
-}
-
-@media (max-width: 480px) {
-  .crm-flow-node { padding: 18px; border-radius: var(--r-md); }
-  .crm-flow-lead { align-items: flex-start; flex-wrap: wrap; }
-  .crm-flow-lead .crm-flow-copy { flex: 1; padding-top: 3px; }
-  .crm-flow-sources { width: 100%; margin-left: 64px; padding-left: 0; }
-  .crm-flow-core { padding: 18px; }
-  .crm-flow-core-top { align-items: flex-start; flex-wrap: wrap; }
-  .crm-flow-core-top .crm-flow-copy { padding-top: 3px; }
-  .crm-flow-online { margin-left: 64px; }
-  .crm-flow-action { padding-bottom: 58px; }
-  .crm-flow-status { left: 82px; bottom: 19px; }
-  .crm-flow-result-head { align-items: flex-start; }
-  .crm-flow-result-head .crm-flow-copy { padding-top: 3px; }
-  .crm-ativo-cta { margin-top: 36px; }
-  .crm-ativo-cta .btn { width: 100%; justify-content: center; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .crm-flow-node, .crm-ativo-cta .btn svg { transition: none; }
-  .crm-flow-node.is-flow-active { transform: none; }
-  .crm-flow-connector.is-flow-active span,
-  .crm-flow-branch.is-flow-active::after,
-  .crm-flow-merge.is-flow-active::after { animation: none; opacity: 1; }
-}
-
-
-/* ═══ CRM Ativo · diagrama minimalista ═══════════════════════════════════
-   Variante enxuta inspirada no fluxograma de referência: quatro cartões,
-   um núcleo de marca e conectores finos. Os retratos circulares são a única
-   camada animada, então o gráfico continua legível mesmo sem movimento. */
-.crm-mini-flow {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 960px;
-  min-width: 0;
-  margin: 0 auto;
-  padding: 10px 0;
-}
-.crm-mini-node {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-width: 0;
-  min-height: 112px;
-  padding: 17px 22px;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  background: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(7, 16, 13, .045);
-}
-.crm-mini-lead { width: min(100%, 390px); }
-.crm-mini-core {
-  width: min(100%, 470px);
-  min-height: 120px;
-  border-color: var(--primary);
-  background: var(--primary);
-  color: var(--on-primary);
-  box-shadow: 0 14px 34px rgba(0, 184, 115, .20);
-}
-.crm-mini-actions { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 92px; width: 100%; }
-.crm-mini-action { min-height: 116px; background: rgba(0, 184, 115, .055); border-color: rgba(0, 184, 115, .30); }
-.crm-mini-result { width: min(100%, 620px); min-height: 82px; border-color: rgba(0, 184, 115, .34); background: #FFFFFF; border-style: dashed; }
-
-.crm-mini-icon { position: static; display: grid; flex: 0 0 40px; place-items: center; width: 40px; height: 40px; color: var(--text-muted); }
-.crm-mini-icon svg { width: 24px; height: 24px; }
-.crm-mini-core .crm-mini-icon { color: var(--on-primary); }
-.crm-mini-result .crm-mini-icon { color: var(--primary-lo); }
-.crm-mini-copy { display: flex; width: 100%; min-width: 0; flex-direction: column; align-items: center; gap: 5px; padding: 0 54px; text-align: center; }
-.crm-mini-copy strong { color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
-.crm-mini-copy small { color: var(--text-muted); font-size: 14px; line-height: 1.35; }
-.crm-mini-core .crm-mini-copy strong { color: var(--on-primary); }
-.crm-mini-core .crm-mini-copy small { color: rgba(4, 20, 13, .72); }
-.crm-mini-source { position: absolute; top: 16px; right: 18px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--border-2); border-radius: 50%; background: var(--surface); }
-.crm-mini-source img { width: 18px; height: 18px; object-fit: contain; }
-.crm-mini-online { position: absolute; top: 16px; right: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid rgba(4, 20, 13, .18); border-radius: var(--r-sm); font-family: var(--mono); font-size: 11px; font-weight: 600; }
-.crm-mini-online i { width: 6px; height: 6px; border-radius: 50%; background: var(--on-primary); }
-
-.crm-mini-line { position: relative; width: 1px; height: 44px; background: rgba(7, 16, 13, .26); }
-.crm-mini-line::after { content: ""; position: absolute; bottom: 1px; left: 50%; width: 6px; height: 6px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transform: translateX(-50%) rotate(45deg); }
-.crm-mini-branch, .crm-mini-merge { position: relative; width: calc(50% + 46px); height: 64px; color: rgba(7, 16, 13, .24); }
-.crm-mini-branch::before, .crm-mini-merge::before,
-.crm-mini-branch span, .crm-mini-merge span,
-.crm-mini-branch i, .crm-mini-merge i,
-.crm-mini-branch b, .crm-mini-merge b { position: absolute; display: block; content: ""; background: currentColor; }
-.crm-mini-branch::before { top: 0; left: 50%; width: 1px; height: 32px; }
-.crm-mini-branch span { top: 31px; left: 0; width: 100%; height: 1px; }
-.crm-mini-branch i, .crm-mini-branch b { top: 31px; width: 1px; height: 33px; }
-.crm-mini-branch i { left: 0; }
-.crm-mini-branch b { right: 0; }
-.crm-mini-merge::before { bottom: 0; left: 50%; width: 1px; height: 32px; }
-.crm-mini-merge span { top: 32px; left: 0; width: 100%; height: 1px; border-top: 1px dashed currentColor; background: transparent; }
-.crm-mini-merge i, .crm-mini-merge b { top: 0; width: 1px; height: 33px; border-left: 1px dashed currentColor; background: transparent; }
-.crm-mini-merge i { left: 0; }
-.crm-mini-merge b { right: 0; }
-
-.crm-mini-leads {
-  position: absolute;
-  z-index: 4;
-  inset: 0;
-  pointer-events: none;
-}
-.crm-mini-avatar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  border: 2px solid #FFFFFF;
-  border-radius: 50%;
-  background: var(--surface-2);
-  box-shadow: 0 4px 12px rgba(7, 16, 13, .18), 0 0 0 1px rgba(0, 184, 115, .25);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-.crm-mini-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-@media (max-width: 700px) {
-  .crm-mini-flow { max-width: 520px; }
-  .crm-mini-actions { grid-template-columns: 1fr; gap: 40px; width: min(100%, 460px); }
-  .crm-mini-actions::before { content: ""; position: absolute; z-index: 0; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(7, 16, 13, .20); }
-  .crm-mini-branch, .crm-mini-merge { width: 1px; height: 40px; background: rgba(7, 16, 13, .24); color: transparent; }
-  .crm-mini-branch::before, .crm-mini-branch span, .crm-mini-branch i, .crm-mini-branch b,
-  .crm-mini-merge::before, .crm-mini-merge span, .crm-mini-merge i, .crm-mini-merge b { display: none; }
-  .crm-mini-action { z-index: 2; }
-}
-
-@media (max-width: 480px) {
-  .crm-mini-node { min-height: 104px; gap: 7px; padding: 13px 14px; }
-  .crm-mini-lead, .crm-mini-core, .crm-mini-actions, .crm-mini-result { width: 100%; }
-  .crm-mini-icon { flex-basis: 30px; width: 30px; height: 30px; }
-  .crm-mini-icon svg { width: 18px; height: 18px; }
-  .crm-mini-copy { padding: 0 42px; }
-  .crm-mini-copy strong { font-size: 14px; }
-  .crm-mini-copy small { font-size: 12px; }
-  .crm-mini-source, .crm-mini-online { top: 12px; right: 12px; }
-  .crm-mini-online { padding: 4px 6px; font-size: 10px; }
-  .crm-mini-avatar { width: 32px; height: 32px; }
-}
-
-/* Fluxo vertical do lead e do registro operacional automático. */
-.crm-mini-main-lane {
-  position: relative;
-  z-index: 2;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: min(100%, 470px);
-  margin: 0 auto;
-}
-.crm-mini-main-lane .crm-mini-node { width: 100%; }
-.crm-mini-main-lane .crm-mini-line { flex: 0 0 44px; }
-.crm-mini-line--operation { background: transparent; }
-.crm-mini-line--operation::after { display: none; }
-.crm-mini-sale {
-  min-height: 116px;
-  border-color: rgba(0, 184, 115, .34);
-  background: #FFFFFF;
-}
-.crm-mini-sale .crm-mini-icon { color: var(--primary-lo); }
-.crm-mini-ops {
-  position: relative;
-  z-index: 2;
-  top: auto;
-  right: auto;
-  width: 100%;
-  min-height: 122px;
-  border-color: rgba(0, 184, 115, .34);
-  border-style: dashed;
-  background: var(--surface);
-}
-.crm-mini-ops .crm-mini-icon { color: var(--primary-lo); }
-.crm-mini-ops-lines {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.crm-mini-ops-lines path {
-  fill: none;
-  stroke: rgba(0, 184, 115, .48);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 5 6;
-}
-.crm-mini-operation-signals {
-  position: absolute;
-  z-index: 3;
-  inset: 0;
-  pointer-events: none;
-}
-.crm-mini-operation-signal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 9px;
-  height: 9px;
-  border: 2px solid #FFFFFF;
-  border-radius: 50%;
-  background: var(--primary);
-  box-shadow: 0 0 0 1px rgba(0, 184, 115, .30), 0 3px 8px rgba(7, 16, 13, .16);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-@media (max-width: 980px) {
-  .crm-mini-main-lane { width: min(100%, 430px); margin: 0 auto; }
-  .crm-mini-ops { width: 100%; }
-}
-
-@media (max-width: 700px) {
-  .crm-mini-main-lane { width: 100%; }
-  .crm-mini-ops { width: 100%; }
-}
-
-@media (max-width: 480px) {
-  .crm-mini-main-lane { width: 100%; }
-  .crm-mini-ops {
-    width: 100%;
-    min-height: 108px;
-  }
-  .crm-mini-operation-signal { width: 8px; height: 8px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .crm-mini-avatar, .crm-mini-operation-signal { display: none; }
-}
 
 /* ---------- Escala tipográfica dos subtítulos ---------- */
 /* Regra canônica no fim do arquivo para neutralizar variações antigas de
@@ -4606,7 +4115,6 @@ select.demo-select:invalid { color: #374151; }
 .implanta-texto .lede,
 #como-funciona .lede,
 .meta-texto .lede,
-.passive-compare-head .lede,
-.crm-ativo-head .lede {
+.passive-compare-head .lede {
   font-size: 18px;
 }
