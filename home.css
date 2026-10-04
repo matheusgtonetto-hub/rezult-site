@@ -628,7 +628,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com especificidade maior e, além disso, pinta o texto por gradiente clipado
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* Tracking fixo de -2.5px para manter a compactação visual em todas as larguras. */
-.hero h1 { font-size: 55px; letter-spacing: -2.5px; line-height: 58px; font-weight: 700; }
+.hero h1 { font-size: 48px; letter-spacing: -2.5px; line-height: 1.10; font-weight: 700; }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
