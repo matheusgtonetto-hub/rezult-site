@@ -117,6 +117,85 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 })();
 
 
+// ---- Diagnóstico marcável (seção "perdendo vendas") ----
+// O contador traduz quantas cenas o leitor marcou numa frase por faixa. Três
+// regras que não podem ser afrouxadas sem quebrar a seção:
+//   1. Zero é estado inicial, nunca veredito. Quem não marcou nada lê a
+//      instrução, não um diagnóstico. Só depois de marcar e desmarcar tudo é
+//      que aparece a frase de zero, e ela reclassifica em vez de desqualificar.
+//   2. O CTA aparece em todas as faixas, com o mesmo texto e o mesmo destino.
+//      CTA travado atrás de marcação é fatal em tráfego pago.
+//   3. Nada de porcentagem, nota ou barra de progresso: vira avaliação, e
+//      avaliação convida defesa.
+// No celular a coluna sticky não existe, então o contador vira uma barra fixa
+// de rodapé que só nasce depois do primeiro clique.
+(function () {
+  const secao = document.getElementById("perdendo-vendas");
+  if (!secao) return;
+
+  const itens = Array.from(secao.querySelectorAll("[data-diag-item]"));
+  const painel = secao.querySelector("[data-diag-contador]");
+  if (!itens.length || !painel) return;
+
+  const INICIAL = "Marque as cenas que acontecem no seu comercial.";
+
+  function frase(n, jaInteragiu) {
+    if (n === 0) {
+      if (!jaInteragiu) return INICIAL;
+      return "Nenhuma delas? Então você já tem uma operação registrada, e é raro. O Rezult serve pra parte que ainda é feita na mão: atender, qualificar e seguir o lead enquanto o time fecha.";
+    }
+    if (n <= 2) return `Você marcou <strong>${n}</strong>. Uma só já custa negociação todo mês, porque não é erro pontual, é o que o sistema deixa passar todos os dias, sem avisar.`;
+    if (n <= 4) return `Você marcou <strong>${n}</strong>. Nesse ponto não é mais falha de uma pessoa. É o desenho da operação: o seu CRM espera o vendedor parar de vender pra registrar que ele vendeu.`;
+    return `Você marcou <strong>${n}</strong>. Seu time não vende menos por falta de lead nem por falta de vontade. Vende menos porque faz na mão tudo que vem antes e depois da venda.`;
+  }
+
+  // A barra do celular usa uma versão curta da frase. A coluna de texto ali tem
+  // menos de 200px: a frase cheia quebrava em dez linhas e a barra comia um
+  // quarto da tela, cobrindo os próprios itens que o leitor está marcando.
+  function fraseCurta(n, jaInteragiu) {
+    if (n === 0) {
+      if (!jaInteragiu) return INICIAL;
+      return "Operação registrada é raro. Veja o que ainda é feito na mão.";
+    }
+    if (n <= 2) return `Você marcou <strong>${n}</strong>. Uma só já custa negociação todo mês.`;
+    if (n <= 4) return `Você marcou <strong>${n}</strong>. Não é falha de pessoa, é o desenho da operação.`;
+    return `Você marcou <strong>${n}</strong>. Seu time faz na mão tudo que cerca a venda.`;
+  }
+
+  // A barra de rodapé reaproveita o mesmo botão da coluna, clonado, para o CTA
+  // do celular ser literalmente o mesmo elemento do desktop.
+  const barra = document.createElement("div");
+  barra.className = "diag-barra";
+  const barraTexto = document.createElement("p");
+  barra.appendChild(barraTexto);
+  const botao = secao.querySelector(".diag-painel .btn-pontos");
+  if (botao) {
+    const clone = botao.cloneNode(true);
+    clone.classList.add("diag-barra-btn");
+    barra.appendChild(clone);
+  }
+  document.body.appendChild(barra);
+
+  let jaInteragiu = false;
+
+  function atualizar() {
+    const n = itens.filter(i => i.checked).length;
+    painel.innerHTML = frase(n, jaInteragiu);
+    barraTexto.innerHTML = fraseCurta(n, jaInteragiu);
+    if (jaInteragiu) barra.classList.add("visivel");
+  }
+
+  itens.forEach(item => item.addEventListener("change", () => {
+    jaInteragiu = true;
+    atualizar();
+  }));
+
+  // O navegador restaura o estado dos checkboxes ao voltar para a página, então
+  // o contador precisa nascer coerente com o que já está marcado na tela.
+  if (itens.some(i => i.checked)) jaInteragiu = true;
+  atualizar();
+})();
+
 // ---- Integrations marquee ----
 (function () {
   const mq = document.getElementById("intgMarquee");

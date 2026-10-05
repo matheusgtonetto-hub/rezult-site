@@ -466,36 +466,102 @@ fbq('track','PageView');
      A evidencia vira dele, nao nossa -- e ninguem derruba um dado que o
      proprio prospecto coletou.
      Quando houver telemetria real, ela entra por cima; nao substitui. -->
-<section class="section" id="perdendo-vendas" style="background: #FBFBFB; padding: 90px 0px">
+<section class="section diagnostico" id="perdendo-vendas" aria-labelledby="diag-titulo">
   <div class="wrap">
-    <div class="section-head center reveal" style="padding: 0 12px; max-width: 800px;">
-      <h2 class="h2">Confira se o seu negócio está <span class="grad-verde">perdendo vendas.</span></h2>
+    <div class="diag-grid">
+
+      <!-- Coluna fixa: numeral, titulo, instrucao, contador e CTA. O contador
+           e aria-live porque o texto dele muda por acao do usuario, e quem usa
+           leitor de tela precisa ouvir a mudanca sem reler a pagina. -->
+      <div class="diag-copy reveal">
+        <span class="diag-numeral" aria-hidden="true">6</span>
+        <h2 class="h2" id="diag-titulo">sinais de que a sua operação <span class="grad-verde">perde venda sem ninguém perceber.</span></h2>
+        <p class="diag-instrucao">Essas seis cenas acontecem em quase todo comercial que roda no WhatsApp. Não é falha de time, é o que um CRM que só registra deixa passar. <strong>Marque as que acontecem no seu.</strong></p>
+
+        <div class="diag-painel">
+          <p class="diag-contador" data-diag-contador aria-live="polite">Marque as cenas que acontecem no seu comercial.</p>
+          <a href="https://app.rezultcrm.com/register" class="btn-pontos">
+            <div class="btn-pontos-wrap" aria-hidden="true">
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+              <i class="btn-pontos-point"></i>
+            </div>
+            <span class="btn-pontos-inner">
+              Começar 7 dias grátis
+              <svg class="btn-pontos-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Os seis itens. Cada card e um <label> com checkbox real dentro: o
+           alvo de clique vira o card inteiro de graca, e teclado e leitor de
+           tela continuam funcionando sem JavaScript nenhum.
+           Marcado NAO tacha nem esmaece o texto: cada item e uma dor que o
+           leitor acabou de admitir, e apagar a dor no mesmo clique que a acende
+           anula a secao. Marcado fica mais presente, nao menos. -->
+      <div class="diag-lista reveal" data-d="1">
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Você não sabe quantos leads chegaram depois das 18h ontem.</strong>
+            <span>E se quiser saber, alguém vai ter que abrir o WhatsApp e contar na mão. Até lá, quem mandou mensagem às 22h já foi atendido por outra empresa.</span>
+          </span>
+        </label>
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Seu melhor vendedor passa boa parte do dia com quem nunca ia comprar.</strong>
+            <span>Ele não escolheu isso. A fila chega inteira, do curioso ao decidido, todos com o mesmo peso, e descobrir qual é qual custa a hora mais cara do seu time.</span>
+          </span>
+        </label>
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Tem negociação parada no seu funil agora e ninguém vai lembrar dela.</strong>
+            <span>Não é esquecimento. É que o próximo passo mora na cabeça do vendedor, e a cabeça dele está na negociação de hoje.</span>
+          </span>
+        </label>
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Você abre um contato no CRM e não tem ideia do que foi conversado.</strong>
+            <span>O campo de anotação está lá, vazio. Registrar é trabalho que não gera comissão, e entre registrar e vender, o vendedor escolhe vender. Todo dia.</span>
+          </span>
+        </label>
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Se o seu melhor vendedor sair amanhã, a carteira dele sai com ele.</strong>
+            <span>Fica nome, telefone e etapa do funil. O que ele sabia sobre cada cliente, quem decide, qual a objeção, o que foi prometido, vai embora junto.</span>
+          </span>
+        </label>
+        <label class="diag-item">
+          <input type="checkbox" class="diag-check" data-diag-item>
+          <span class="diag-marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="diag-txt">
+            <strong>Você cobra do seu time o que o sistema deveria fazer sozinho.</strong>
+            <span>Reunião de pipeline pra saber onde está cada negociação, cobrança de atualização, “e aí, falou com ele?”. Isso não é gestão comercial, é manutenção manual de um software que só guarda o que alguém digitou.</span>
+          </span>
+        </label>
+      </div>
+
     </div>
 
-    <!-- As quatro perguntas. Numeradas porque sao uma sequencia de auditoria:
-         a ordem leva do sintoma mais visivel (lead sem resposta) ao mais caro
-         (conhecimento que sai junto com o vendedor). -->
-    <div class="auditoria reveal" data-d="1">
-      <div class="auditoria-item">
-        <span class="auditoria-num">01</span>
-        <p>Quantos leads chegaram depois das 18h no mês passado? <strong>Quantos foram respondidos naquela noite?</strong></p>
-      </div>
-      <div class="auditoria-item">
-        <span class="auditoria-num">02</span>
-        <p>Quantas negociações estão paradas há mais de 7 dias <strong>no seu funil agora?</strong></p>
-      </div>
-      <div class="auditoria-item">
-        <span class="auditoria-num">03</span>
-        <p>Abra três contatos no seu CRM. <strong>Quantos têm anotação da última conversa?</strong></p>
-      </div>
-      <div class="auditoria-item">
-        <span class="auditoria-num">04</span>
-        <p>Se o vendedor que mais vende sair amanhã, <strong>o que fica registrado?</strong></p>
-      </div>
-    </div>
-
-    <p class="auditoria-fecho reveal" data-d="2">
-      Se você não sabe responder nenhuma delas, não é indisciplina do time. É <strong>que você não tem um CRM ativo, que não depende do vendedor parar de vender para registrar.</strong>
+    <p class="diag-fecho reveal" data-d="2">
+      Nada disso é indisciplina do time. É que o seu CRM só registra o que alguém digitou, <strong>e quem deveria digitar está vendendo.</strong>
     </p>
   </div>
 </section>

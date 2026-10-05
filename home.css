@@ -1786,7 +1786,7 @@ select.demo-select:invalid { color: #374151; }
      980px aplica align-items: center e text-align: center no .hero.vb
      .hero-text. Uma versão anterior desta regra usava flex-start, e os botões
      ficavam à esquerda enquanto o h1 e o subtítulo estavam centrados. */
-  .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 5px; }
+  .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 12px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
@@ -1996,79 +1996,184 @@ select.demo-select:invalid { color: #374151; }
 
 
 
-/* ═══ Seção "perdendo vendas" · a auditoria em quatro perguntas ═══════════
-   Cada pergunta ocupa um quadro próprio. A moldura torna as quatro verificações
-   fáceis de contar e comparar, enquanto a numeração preserva a sequência da
-   auditoria. No desktop os quatro quadros aparecem lado a lado; telas menores
-   recebem duas colunas e depois uma. */
-.auditoria {
+/* ═══ Seção "perdendo vendas" · diagnóstico marcável ══════════════════════
+   Duas colunas: à esquerda a copy com o contador e o CTA, à direita as seis
+   cenas marcáveis. A esquerda é sticky no desktop para o leitor ver o contador
+   subir enquanto marca; no celular isso não existe (ver o bloco de 980px).
+
+   Cada item é um <label> com <input type="checkbox"> real dentro. O card
+   inteiro vira alvo de clique de graça, e teclado, foco e leitor de tela
+   continuam funcionando sem depender do JavaScript. */
+.diagnostico { background: #FBFBFB; padding: 90px 0; }
+.diag-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  max-width: 1120px;
-  margin: 52px auto 0;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
 }
-.auditoria-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  min-height: 224px;
-  padding: 26px 22px;
-  background: #FFFFFF;
+.diag-copy { position: sticky; top: 100px; }
+/* O numeral é âncora visual, não informação: vai grande e em verde para marcar
+   a quantidade antes de o leitor contar. */
+.diag-numeral {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(72px, 9vw, 120px);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--green-text);
+  margin-bottom: 8px;
+}
+.diag-copy .h2 { margin-bottom: 20px; }
+/* Mesmo motivo do reset de .grad-verde no breakpoint de 560px: como
+   inline-block o trecho em degradê é uma caixa atômica, não começa no meio da
+   linha e desce inteiro, deixando órfã a palavra anterior. A coluna aqui é
+   estreita já no desktop, então o reset precisa valer em todas as larguras. */
+.diag-copy .grad-verde { display: inline; }
+.diag-instrucao { font-size: 18px; line-height: 1.5; color: var(--text-muted); margin: 0; }
+.diag-instrucao strong { color: var(--text); font-weight: 600; }
+/* O painel do contador fica separado da instrução por uma linha, porque ele
+   muda e ela não: o leitor precisa saber onde olhar depois de marcar. */
+.diag-painel {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-2);
+}
+.diag-contador {
+  font-family: var(--display);
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--text);
+  margin: 0 0 24px;
+  min-height: 58px;
+}
+.diag-contador strong { color: var(--green-text); font-weight: 700; }
+
+.diag-lista { display: flex; flex-direction: column; gap: 12px; }
+.diag-item {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 20px 22px;
   border: 1px solid var(--border-2);
-  border-radius: var(--r-lg);
-  box-shadow: 0 8px 24px rgba(7, 16, 13, 0.05);
+  border-radius: 16px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: border-color .14s, background .14s, box-shadow .14s;
 }
-/* O número é âncora de sequência, não decoração: fica em verde e em mono para
-   ler como índice. O fundo verde claro separa o índice do texto sem competir
-   com a pergunta. */
-.auditoria-num {
-  display: inline-flex;
+/* O checkbox real some da tela mas continua no fluxo de foco e de leitura. */
+.diag-check { position: absolute; opacity: 0; width: 0; height: 0; }
+.diag-marca {
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 42px;
-  height: 34px;
-  padding: 0 10px;
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--green-text);
-  line-height: 1;
-  background: rgba(0, 184, 115, 0.10);
-  border: 1px solid rgba(0, 184, 115, 0.18);
-  border-radius: 10px;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid #CFE7DA;
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #FFFFFF;
+  transition: background .14s, border-color .14s;
 }
-.auditoria-item p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--text-muted);
-  margin: 0;
-}
-/* O <strong> carrega a parte da pergunta que dói. Vai ao --text cheio para
-   destacar sem precisar de outra cor. */
-.auditoria-item strong { color: var(--text); font-weight: 600; }
+.diag-marca svg { width: 15px; height: 15px; opacity: 0; transition: opacity .14s; }
+.diag-txt { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.diag-txt strong { font-size: 16px; line-height: 1.35; color: var(--text); font-weight: 650; letter-spacing: -0.01em; }
+.diag-txt > span { font-size: 14.5px; line-height: 1.45; color: var(--text-muted); }
 
-/* O fecho é a virada: até aqui o leitor respondia, agora recebe o diagnóstico.
-   Centralizado e maior que as perguntas, com respiro grande antes. */
-.auditoria-fecho {
+.diag-item:hover { border-color: #CFE7DA; }
+/* O foco vem do checkbox escondido e precisa aparecer no card, senão quem
+   navega por teclado não enxerga onde está. */
+.diag-check:focus-visible ~ .diag-marca { border-color: var(--primary); }
+.diag-item:has(.diag-check:focus-visible) { outline: 3px solid rgba(0, 184, 115, .35); outline-offset: 2px; }
+
+/* Marcado: o card ganha presença e a afirmação é riscada, como na referência.
+   O risco comunica "isso aqui é meu", o item vira item cumprido de uma lista
+   que o leitor montou. A frase de apoio continua em contraste cheio para a
+   cena permanecer legível depois de marcada. */
+.diag-item:has(.diag-check:checked) {
+  border-color: var(--primary);
+  background: rgba(0, 184, 115, .055);
+  box-shadow: 0 10px 28px -22px rgba(12, 56, 37, .45);
+}
+.diag-check:checked ~ .diag-txt strong {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(7, 16, 13, .45);
+  color: var(--text-muted);
+}
+.diag-check:checked ~ .diag-marca { background: var(--primary); border-color: var(--primary); }
+.diag-check:checked ~ .diag-marca svg { opacity: 1; }
+
+.diag-fecho {
   text-align: center;
   max-width: 680px;
-  margin: 56px auto 0;
+  margin: 64px auto 0;
   font-size: 20px;
   line-height: 1.55;
   color: var(--text-muted);
 }
-.auditoria-fecho strong { color: var(--text); font-weight: 600; }
+.diag-fecho strong { color: var(--text); font-weight: 600; }
 
 @media (max-width: 980px) {
-  .auditoria { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+  .diag-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* Sticky morre aqui: em coluna única ele cobriria a lista. No celular o
+     contador vira a barra fixa de rodapé, que só nasce no primeiro clique. */
+  .diag-copy { position: static; }
+  .diag-painel { display: none; }
 }
 @media (max-width: 560px) {
-  .auditoria { grid-template-columns: 1fr; gap: 14px; max-width: 100%; margin-top: 40px; }
-  .auditoria-item { min-height: 0; padding: 22px 20px; gap: 16px; }
-  .auditoria-item p { font-size: 17px; }
-  .auditoria-fecho { font-size: 18px; margin-top: 40px; }
+  .diagnostico { padding: 70px 0; }
+  /* Numeral, título e instrução centralizados, acompanhando o hero, que também
+     centraliza nesta faixa. Os cards continuam à esquerda de propósito: texto
+     de lista centralizado perde o ponto de retorno da linha e cansa a leitura. */
+  .diag-copy { text-align: center; }
+  .diag-item { padding: 18px 16px; gap: 12px; }
+  .diag-fecho { font-size: 18px; margin-top: 44px; }
+}
+
+/* Barra de rodapé do celular. Nasce escondida e só entra depois do primeiro
+   clique: antes disso seria poluição sobre uma lista que ainda nem foi lida. */
+.diag-barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, .97);
+  border-top: 1px solid var(--border-2);
+  box-shadow: 0 -8px 24px rgba(7, 16, 13, .08);
+  transform: translateY(110%);
+  transition: transform .22s ease;
+}
+.diag-barra.visivel { transform: translateY(0); }
+/* Teto de 3 linhas: se a frase crescer, ela corta em vez de empurrar a barra
+   para cima da lista. */
+.diag-barra p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.diag-barra strong { color: var(--green-text); font-weight: 700; }
+.diag-barra .btn-pontos { flex-shrink: 0; padding: 10px 16px; min-height: 42px; min-width: 0; }
+.diag-barra .btn-pontos-inner { font-size: 14px; gap: 6px; }
+.diag-barra .btn-pontos-icon { width: 16px; height: 16px; }
+@media (max-width: 980px) {
+  .diag-barra { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .diag-item, .diag-marca, .diag-marca svg, .diag-barra { transition: none; }
 }
 
 
