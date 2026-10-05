@@ -419,6 +419,34 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Saíram daqui .logo-mark, .logo-word e .footer .logo-word, que montavam a
    versão em texto e ficaram sem nenhum elemento para estilizar. */
 .logo img { height: 34px; width: auto; display: block; }
+/* O logo da navbar passou a ser o mesmo ladrilho do app (favicon.png do
+   rezult-crm, copiado para logos/logo-rezult-app.png). Ele traz fundo escuro
+   próprio, então vai quadrado e com canto arredondado, nos mesmos 30px e raio
+   8 que a BarraSuperior usa. O logo-rodape.png, do rodapé, não muda: aquele é
+   feito para fundo escuro e já funciona lá. */
+.nav .logo img { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+/* A marca escrita ao lado do logo, como na barra superior do app
+   (rezult-crm, src/components/BarraSuperior.tsx). De lá vieram o
+   tracking-tight e, principalmente, os DOIS pesos na mesma palavra composta:
+   "Rezult" em 600 e "CRM" em 400, decisão do dono registrada lá. O tracking
+   junta as duas o suficiente para lerem como um nome, não como duas palavras
+   soltas.
+
+   O corpo é 16px e não os 15px do app: a barra do site é mais larga e tem menos
+   elementos, e em 15px o nome ficava miúdo ao lado do ladrilho de 30px.
+
+   Escopado em .nav porque a classe .logo também serve o rodapé, que já traz a
+   marca de outro jeito. */
+.nav .logo { gap: 10px; }
+.nav .logo-nome {
+  font-size: 16px;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  color: var(--ink);
+  font-weight: 400;
+}
+.nav .logo-nome b { font-weight: 600; }
+
 
 /* ---------- Hero ---------- */
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
@@ -949,6 +977,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .tema-laranja { --hl-fg: #EA580C; --hl-bg: #FEF0E6; }
 .tema-azul    { --hl-fg: #0284C7; --hl-bg: #E6F4FE; }
 .tema-roxo    { --hl-fg: #7C3AED; --hl-bg: #F3EDFE; }
+.tema-rosa    { --hl-fg: #BE185D; --hl-bg: #FDF2F7; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .feature-text .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
@@ -1080,6 +1109,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .carousel-arrow-edge.carousel-arrow-left { left: 0; }
 .carousel-arrow-edge.carousel-arrow-right { right: 0; }
 @media (max-width: 560px) {
+  /* Mesma razão do modo compacto da barra do app: em tela estreita o logo
+     sozinho já diz o nome, e a marca escrita disputaria espaço com o CTA. */
+  .nav .logo-nome { display: none; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
@@ -1924,6 +1956,24 @@ select.demo-select:invalid { color: #374151; }
 }
 .hero .hero-btn-pontos { padding: 12px 30px; text-decoration: none; }
 .hero .hero-btn-pontos .btn-pontos-inner { gap: 10px; font-size: 16px; font-weight: 600; }
+/* O par de botões do hero da home segue o mesmo verde da navbar e do botão do
+   Platinum: #01D8A4, o --accent-400 do CRM. No primário o verde está em dois
+   lugares, o fundo e o ::after, e o brilho radial sobe junto para continuar
+   mais claro que a base. No secundário o verde é só a borda. Os efeitos
+   seguem intactos nos dois. */
+.hero .hero-btn-pontos,
+.hero .hero-btn-pontos::after {
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(92, 255, 192, 0.8) 0%, rgba(92, 255, 192, 0) 100%),
+              linear-gradient(0deg, #01D8A4, #01D8A4);
+}
+.hero .hero-btn-pontos .btn-pontos-inner { color: #2D2F33; }
+.hero .hero-actions .btn-secondary { border-color: #01D8A4; }
+/* O SVG já vem com stroke="currentColor", mas a regra .btn-pontos-icon o
+   sobrescreve com #fff, e atributo de apresentação perde para CSS. Devolvendo
+   o currentColor aqui, a seta passa a seguir a tinta do texto sozinha: hoje o
+   charcoal, e o que vier depois. Só no botão do hero, porque os outros dois
+   que têm seta seguem no verde escuro com texto branco. */
+.hero .hero-btn-pontos .btn-pontos-icon { stroke: currentColor; }
 .btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
 .btn-pontos:hover .btn-pontos-icon { transform: translateX(2px); }
 .btn-pontos:hover .btn-pontos-icon path { animation: dash 0.8s linear forwards; }
@@ -1993,6 +2043,24 @@ select.demo-select:invalid { color: #374151; }
 .nav-right .btn-pontos::before { border-radius: calc(var(--r-sm) - 1px); }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
+/* O CTA da navbar troca de verde, e SÓ de verde: os pontinhos animados, o
+   brilho de vidro do ::before e o degradê do ::after continuam como estão.
+
+   O verde mora em dois lugares, o fundo do botão e o ::after, que repete o
+   mesmo par. Nos dois, o #059669 chapado vira #01D8A4 (o --accent-400 do CRM,
+   o mesmo do botão do Platinum) e o brilho de baixo acompanha, indo do
+   #10B981 para o #5CFFC0, que já existe no degradê de brilho do site. Sem
+   subir o brilho junto, o radial ficaria mais ESCURO que a base e o efeito
+   inverteria.
+
+   A tinta vai para o charcoal do app: branco sobre #01D8A4 dá 1,85:1 e some,
+   contra 7,25:1 do #2D2F33. */
+.nav-right .btn-pontos,
+.nav-right .btn-pontos::after {
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(92, 255, 192, 0.8) 0%, rgba(92, 255, 192, 0) 100%),
+              linear-gradient(0deg, #01D8A4, #01D8A4);
+}
+.nav-right .btn-pontos .btn-pontos-inner { color: #2D2F33; }
 
 
 
@@ -3089,8 +3157,10 @@ select.demo-select:invalid { color: #374151; }
    está numa classe, e não no #featWhatsapp, para o painel poder mudar de slot
    sem a altura do celular ficar para trás em silêncio. */
 .tem-painel-wpp,
+.tem-painel-disparos,
 .tem-painel-automacao,
-.tem-painel-pipeline { position: relative; }
+.tem-painel-pipeline,
+.tem-painel-dashboards { position: relative; }
 
 /* Cabeçalho: branco sobre o #FAFAFA das mensagens, como no app. */
 .pw-topo {
@@ -3273,6 +3343,8 @@ select.demo-select:invalid { color: #374151; }
      em 560px, entre 561px e 980px o slot colapsava para zero e os três painéis
      sumiam da página. */
   .tem-painel-wpp { height: 380px; }
+  .tem-painel-disparos { height: 360px; }
+  .tem-painel-dashboards { height: 360px; }
   .tem-painel-automacao { height: 300px; }
   .tem-painel-pipeline { height: 330px; }
 }
@@ -3299,6 +3371,137 @@ select.demo-select:invalid { color: #374151; }
    .feature-visual é ilha escura (todo pixel descoberto vira bloco preto) e um
    filho no fluxo faria a altura da linha do grid crescer com o conteúdo. Daí o
    position: absolute; inset: 0. */
+/* ---------- Painel de dashboards ----------
+   Réplica do dashboard do CRM (rezult-crm, src/pages/DashboardPage.tsx): o
+   título "Desempenho geral do seu negócio", o seletor de período, os KPIs do
+   topo e o funil com a conversão por etapa. Os números contam do zero e as
+   barras entram uma a uma quando o card chega à tela. */
+.painel-dashboards {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  overflow: hidden;
+  background: #F4F6F8;
+  font-family: var(--sans);
+}
+.pdb-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pdb-titulo { font-size: 14px; font-weight: 600; color: #111111; line-height: 1.3; }
+.pdb-sub { font-size: 11px; color: #737373; }
+.pdb-periodo { flex-shrink: 0; padding: 5px 10px; border: 1px solid #E8E7E0; border-radius: 8px; background: #FFFFFF; font-size: 11px; font-weight: 500; color: #525252; }
+
+.pdb-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pdb-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 11px;
+  border: 1px solid #E8E7E0;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+.pdb-kpi-rotulo { font-size: 10.5px; color: #737373; line-height: 1.2; }
+/* Tabular para o número não dançar de largura enquanto conta do zero. */
+.pdb-kpi-valor { font-size: 19px; font-weight: 700; color: #111111; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.pdb-kpi-var { font-size: 10px; font-weight: 600; color: #16A34A; }
+
+.pdb-funil { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 13px; border: 1px solid #E8E7E0; border-radius: 10px; background: #FFFFFF; }
+.pdb-funil-cab { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+.pdb-funil-cab span:first-child { font-size: 12px; font-weight: 600; color: #111111; }
+.pdb-funil-leg { font-size: 10px; color: #9CA3AF; }
+.pdb-etapas { display: flex; flex-direction: column; gap: 9px; list-style: none; margin: 0; padding: 0; }
+/* Quatro colunas: nome, trilho elástico, contagem e percentual. Os dois
+   últimos têm largura fixa para as linhas alinharem na vertical. */
+.pdb-etapa { display: grid; grid-template-columns: 62px minmax(0, 1fr) 30px 32px; align-items: center; gap: 8px; }
+.pdb-etapa-nome { font-size: 11px; color: #525252; }
+.pdb-trilho { display: block; height: 8px; border-radius: 100px; background: #ECEEF0; overflow: hidden; }
+.pdb-trilho i { display: block; height: 100%; border-radius: 100px; background: linear-gradient(90deg, #128A68, #00B873); transition: width .55s cubic-bezier(.22,.8,.3,1); }
+.pdb-etapa-num { font-size: 11px; font-weight: 600; color: #111111; text-align: right; font-variant-numeric: tabular-nums; }
+.pdb-etapa-pct { font-family: var(--mono); font-size: 10px; color: #128A68; text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pdb-trilho i { transition: none; }
+}
+
+/* ---------- Painel de disparos em massa ----------
+   Réplica da tela de disparos do CRM (rezult-crm, src/pages/DisparosPage.tsx e
+   src/data/disparos.ts). Os quatro ritmos, as cadências e os pares de cor dos
+   chips de status são os mesmos de lá; nada de tom inventado. */
+.painel-disparos {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  overflow: hidden;
+  background: #FAFAFA;
+  font-family: var(--sans);
+}
+.pd-topo { display: flex; align-items: flex-start; gap: 12px; }
+.pd-topo-txt { flex: 1; min-width: 0; }
+.pd-titulo { font-size: 14px; font-weight: 600; color: #111111; line-height: 1.3; }
+/* O filtro é o ponto do recurso: o disparo nasce de quem já está no CRM, não
+   de uma planilha importada. Por isso ele fica no cabeçalho, não escondido. */
+.pd-filtro { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 11.5px; color: #737373; }
+.pd-filtro svg { width: 12px; height: 12px; }
+.pd-status { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; padding: 4px 9px; border-radius: 100px; background: #E0F2FE; color: #0369A1; font-size: 10.5px; font-weight: 600; }
+.pd-status-ponto { width: 6px; height: 6px; border-radius: 50%; background: #0EA5E9; }
+
+.pd-ritmos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.pd-ritmo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 7px 4px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  color: #525252;
+}
+.pd-ritmo small { font-size: 9.5px; font-weight: 500; color: #9CA3AF; }
+.pd-ritmo svg { width: 11px; height: 11px; }
+/* "Humano" fica selecionado porque é o ritmo que separa o recurso de um
+   disparador comum: espaça as mensagens como uma pessoa faria. */
+.pd-ritmo.ativo { border-color: #128A68; background: #F0FDF4; color: #128A68; }
+.pd-ritmo.ativo small { color: #15803D; }
+
+.pd-progresso-txt { display: flex; justify-content: space-between; align-items: baseline; font-size: 11.5px; color: #737373; margin-bottom: 6px; }
+.pd-progresso-txt strong { color: #111111; font-size: 13px; }
+.pd-progresso-pct { font-family: var(--mono); font-size: 11px; color: #128A68; }
+.pd-barra { height: 5px; border-radius: 100px; background: #E8E7E0; overflow: hidden; }
+.pd-barra i { display: block; height: 100%; border-radius: 100px; background: #128A68; transition: width .5s ease; }
+
+.pd-fila { display: flex; flex-direction: column; gap: 7px; list-style: none; margin: 0; padding: 0; min-height: 0; }
+.pd-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 1px solid #E8E7E0;
+  border-radius: 10px;
+  background: #FFFFFF;
+  transition: border-color .25s, box-shadow .25s;
+}
+/* O item que está saindo agora ganha a borda da marca, para o olho encontrar a
+   frente da fila sem precisar ler os chips. */
+.pd-item.ativo { border-color: #93C5FD; box-shadow: 0 0 0 3px rgba(59, 130, 246, .10); }
+.pd-avatar { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; color: #FFFFFF; font-size: 10px; font-weight: 600; }
+.pd-item-txt { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.pd-item-txt strong { font-size: 12.5px; font-weight: 600; color: #111111; line-height: 1.25; }
+.pd-item-txt small { font-size: 10.5px; color: #9CA3AF; }
+.pd-chip { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 3px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; }
+.pd-chip svg { width: 10px; height: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-barra i, .pd-item { transition: none; }
+}
+
 .painel-automacao {
   position: absolute;
   inset: 0;

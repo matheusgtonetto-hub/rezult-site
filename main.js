@@ -178,19 +178,41 @@ function wirePricingToggle(toggleId) {
         if (!recurringEl || !recurringEl.classList.contains("pprice-recurring")) return;
         const m = parseInt(pp.dataset.m);
         if (period === "mensal") {
-          savingsEl.innerHTML = "";
+          // No mensal o lugar do "economize" é do preço âncora, quando o
+          // cartão declara um em data-de. Sem o atributo, segue vazio como
+          // antes: as outras páginas que carregam este arquivo não o têm.
+          const de = parseInt(pp.dataset.de);
+          // No mensal a economia é a diferença de UMA mensalidade: o ciclo tem
+          // um mês só. Nos outros dois ela multiplica pelos meses do ciclo.
+          // Mesma base nos três, o preço âncora, para a linha nunca mostrar um
+          // riscado e uma economia que não conversam.
+          savingsEl.innerHTML = de
+            ? `<s class="pprice-de">De R$${de}/mês</s> Economize ${brl(de - m)}`
+            : "";
           recurringEl.textContent = "Cobrança mensal recorrente";
           return;
         }
         const months = period === "anual" ? 12 : 6;
         const total = parseInt(period === "anual" ? pp.dataset.atotal : pp.dataset.stotal);
-        const savings = m * months - total;
+        // A economia sai da MESMA base que o riscado mostra. Enquanto o riscado
+        // era a mensalidade de lista, a conta era m * meses - total; agora que
+        // ele é o preço âncora, usar m deixaria a linha se contradizendo: o
+        // leitor veria "De R$297/mês" riscado e uma economia calculada sobre
+        // R$237. Quem faz a conta de cabeça percebe.
+        const base = parseInt(pp.dataset.de) || m;
+        const savings = base * months - total;
         // Risca a MENSALIDADE cheia, não o total do ciclo. As duas linhas ficam
         // na mesma unidade (R$ 237 riscado, R$ 202/mês abaixo) e a comparação
         // se lê sem conta nenhuma. O total do ciclo continua na linha de
         // cobrança logo abaixo, onde há espaço para dizer o que ele é.
         // Mesmo critério do OfertaDeContratacao do app.
-        savingsEl.innerHTML = `<s>${brl(m)}</s> Economize ${brl(savings)}`;
+        // O riscado usa o MESMO preço âncora do ciclo mensal quando o cartão
+        // declara um, e a mesma classe .pprice-de: assim a linha acima do preço
+        // é a mesma peça nos três ciclos, em vez de mudar de valor, de cor e de
+        // corpo conforme o botão. Sem data-de, cai no comportamento antigo.
+        const de = pp.dataset.de;
+        const riscado = de ? `<s class="pprice-de">De R$${de}/mês</s>` : `<s>${brl(m)}</s>`;
+        savingsEl.innerHTML = `${riscado} Economize ${brl(savings)}`;
         recurringEl.textContent = `Cobrança ${period} de ${brl(total)}`;
       });
     });

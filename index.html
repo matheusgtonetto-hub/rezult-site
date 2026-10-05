@@ -29,7 +29,7 @@
 <meta name="twitter:image:alt" content="Tela do pipeline comercial do Rezult CRM" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
 <link rel="stylesheet" href="home.css?v=20260930-2" />
 <link rel="icon" type="image/png" href="Favicon.png" />
@@ -83,7 +83,8 @@ fbq('track','PageView');
   <div class="wrap">
     <div class="nav-left">
       <a href="index.html" class="logo">
-        <img src="logos/logo-rezult.png" alt="Rezult CRM" width="1080" height="1080">
+        <img src="logos/logo-rezult-app.png" alt="" width="256" height="256">
+        <span class="logo-nome"><b>Rezult</b> CRM</span>
       </a>
     </div>
     <div class="nav-links">
@@ -1110,7 +1111,28 @@ fbq('track','PageView');
       <div class="feature-visual reveal" data-d="1" id="featWhatsapp"></div>
     </div>
 
-    <!-- Feature 2: Automações -->
+    <!-- Feature 2: Disparos em massa -->
+    <div class="feature-row">
+      <div class="feature-text reveal tema-laranja">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+          </div>
+          <h3><span class="hl">Disparos</span> em massa</h3>
+        </div>
+        <div class="feature-foot">
+          <p>Fala com a sua base inteira sem tirar ninguém do time para isso. Você filtra quem recebe, define o ritmo e acompanha contato por contato.</p>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Escolhe quem recebe filtrando os leads que já estão no CRM, sem exportar e reimportar lista</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Ritmo de envio no seu controle, do turbo ao humano, que espaça as mensagens como uma pessoa faria</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Cada contato aparece com status próprio: quem recebeu, quem está na fila e quem deu erro</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featDisparos"></div>
+    </div>
+
+    <!-- Feature 3: Automações -->
     <div class="feature-row">
       <div class="feature-text reveal tema-azul">
         <div class="feature-heading">
@@ -1131,7 +1153,7 @@ fbq('track','PageView');
       <div class="feature-visual reveal" data-d="1" id="featAutomation"></div>
     </div>
 
-    <!-- Feature 3: Pipelines -->
+    <!-- Feature 4: Pipelines -->
     <div class="feature-row">
       <div class="feature-text reveal tema-roxo">
         <div class="feature-heading">
@@ -1150,6 +1172,27 @@ fbq('track','PageView');
         </ul>
       </div>
       <div class="feature-visual reveal" data-d="1" id="featPipelines"></div>
+    </div>
+
+    <!-- Feature 5: Dashboards -->
+    <div class="feature-row">
+      <div class="feature-text reveal tema-rosa">
+        <div class="feature-heading">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16l4-5 4 3 5-7"/></svg>
+          </div>
+          <h3><span class="hl">Dashboards</span> em tempo real</h3>
+        </div>
+        <div class="feature-foot">
+          <p>O número existe porque o CRM registrou sozinho. Você abre e vê onde a operação está, sem pedir atualização para ninguém.</p>
+        </div>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Leads que entraram, negócios ganhos e conversão do funil, sem ninguém montar planilha</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Conversão etapa por etapa: você vê onde o lead para, não só quantos chegaram no fim</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Número por vendedor para a reunião de time começar pelo dado, não pela versão de cada um</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal" data-d="1" id="featDashboards"></div>
     </div>
   </div>
 
@@ -1446,7 +1489,7 @@ fbq('track','PageView');
 <script src="rastreio.js"></script>
 <script src="home.js?v=20260927-1"></script>
 <!-- Ilhas React (Preact/compat), compiladas por `npm run build` a partir de
-     src/paineis/. Preenchem #featWhatsapp, #featAutomation e #featPipelines,
+     src/paineis/. Preenchem #featWhatsapp, #featDisparos, #featAutomation, #featPipelines e #featDashboards,
      que o mockups.js deixou de ocupar. Vem depois dele para o innerHTML do
      injectMockups não passar por cima do que o React montou. -->
 <script src="build/paineis.js" defer></script>

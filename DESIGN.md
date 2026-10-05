@@ -3,7 +3,7 @@ version: "2.2"
 name: "Rezult CRM Marketing Site"
 description: "Light, conversion-focused Rezult CRM marketing system with emerald accents, operational typography, and product-led proof."
 defaultMode: "light"
-supportsDark: false
+supportsDark: scoped   # ver mode_rule: escopos escuros existem, tema escuro global nao
 archetype: "Operational SaaS · Emerald on warm white"
 chips:
   - "Inter"
@@ -19,7 +19,8 @@ consumer_contract:
     - "Reuse existing component classes before creating new variants."
     - "Use Lucide-compatible icons only, with the Rezult stroke and size rules."
     - "Keep conversion content direct, operational, and evidence-led."
-  mode_rule: "The marketing site is light-first. Dark colors are reserved for product mockups and intentional proof islands, not a global dark theme."
+  mode_rule: "The marketing site is light-first. Dark surfaces are scoped, never global: product mockups, intentional proof islands, and the decision block of planos.html (hero + pricing table), which replicates the in-app plans screen (rezult-crm/src/components/OfertaDeContratacao.tsx) so the page where the customer chooses a plan already looks like the product. Scoped dark blocks must redefine the tokens inside a container class, as .mockup and .page-hero.tema-escuro do, never by switching :root."
+  dark_ink_rule: "Dark scopes follow the rezult-crm sales surface, whose canonical palette is the VENDA object in rezult-crm/src/lib/superficie-de-venda.ts. Surfaces #05080A / #0C1115 / #131A1E (the same three blacks this site already has in --dark-bg, --dark-surface, --dark-surface-2). Green is #01D8A4 (--accent-400, 9.32:1 on dark), never the site #00B873, which sits near 3:1 on black and fails WCAG AA for text. Ink on green is #2D2F33. No green glow: VENDA zeroes brilhoSuave and brilhoVerde on purpose, the standout comes from card-versus-canvas contrast, not from a halo."
   font_rule: "Use Inter for UI and editorial copy; JetBrains Mono only for identifiers and compact technical labels."
   asset_rule: "Use the existing Rezult logo and product imagery. Do not recolor or synthesize replacement brand marks."
   accessibility_rule: "Ship WCAG AA contrast, visible focus rings, keyboard-operable controls, and no body text below 16px."

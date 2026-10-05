@@ -2,6 +2,8 @@ import { createRoot } from 'react-dom/client';
 import PainelWhatsapp from './PainelWhatsapp';
 import PainelAutomacao from './PainelAutomacao';
 import PainelPipeline from './PainelPipeline';
+import PainelDisparos from './PainelDisparos';
+import PainelDashboards from './PainelDashboards';
 
 /* Entrada do bundle. Monta cada ilha React no slot que já existe no HTML.
  *
@@ -22,8 +24,10 @@ import PainelPipeline from './PainelPipeline';
  */
 const ILHAS = [
   { id: 'featWhatsapp', classe: 'tem-painel-wpp', Painel: PainelWhatsapp },
+  { id: 'featDisparos', classe: 'tem-painel-disparos', Painel: PainelDisparos },
   { id: 'featAutomation', classe: 'tem-painel-automacao', Painel: PainelAutomacao },
   { id: 'featPipelines', classe: 'tem-painel-pipeline', Painel: PainelPipeline },
+  { id: 'featDashboards', classe: 'tem-painel-dashboards', Painel: PainelDashboards },
 ];
 
 ILHAS.forEach(({ id, classe, Painel }) => {

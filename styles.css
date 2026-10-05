@@ -115,7 +115,7 @@
      alguém for mexer nisso de novo por causa daquela tira: já foi tentado com
      padding env(), fundo opaco e pseudo-elemento. Nenhum funciona, e não é
      defeito do site. */
-  --nav-h: calc(70px + env(safe-area-inset-top, 0px));
+  --nav-h: calc(60px + env(safe-area-inset-top, 0px));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -292,9 +292,9 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  /* Com box-sizing border-box, a faixa útil é sempre 70px: o padding só empurra
+  /* Com box-sizing border-box, a faixa útil é sempre 60px: o padding só empurra
      logo e botões para baixo do recorte quando ele existe. No Safari em
-     navegação normal o env() vale 0 e isto vira height: 70px, padding: 0. */
+     navegação normal o env() vale 0 e isto vira height: 60px, padding: 0. */
   height: var(--nav-h);
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
@@ -316,11 +316,10 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
      transparência ele não tem o que desfocar e fica 100% coberto, custo de GPU
      invisível, sentido justamente em celular. */
   background: #fff;
-  /* Separa a barra da hero branca, que sem isso encosta nela sem emenda. Duas
-     camadas fracas em vez de uma linha: uma de 3px logo abaixo, que dá o
-     contorno, e uma de 12px bem diluída, que dá a profundidade. Ambas em preto
-     de baixa opacidade, para não puxar cor sobre o branco. */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  /* A navbar e a hero são superfícies brancas. Uma hairline cinza faz a
+     separação sem criar profundidade artificial entre as duas áreas. */
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
   transition: top .3s ease, height .3s ease, width .3s ease, padding-top .3s ease,
               border-radius .3s ease, background .3s, box-shadow .3s, transform .3s ease;
 }
@@ -384,7 +383,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* O letter-spacing saiu junto com o uppercase: os 0.04em existiam para abrir a
    caixa alta, que precisa de mais respiro entre letras para não fechar. Em
    caixa mista esse mesmo tracking deixa as palavras espaçadas demais. */
-.nav-links a { font-size: 16px; color: rgba(5, 10, 7, 0.72); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
+.nav-links a { font-size: 14px; color: var(--ink); transition: color .15s; font-weight: 500; text-transform: capitalize; letter-spacing: normal; }
 .nav-links a:hover { color: #050A07; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 /* Sem font-weight aqui, de propósito. Este seletor já teve um 500 para devolver
@@ -413,6 +412,34 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Saíram daqui .logo-mark, .logo-word e .footer .logo-word, que montavam a
    versão em texto e ficaram sem nenhum elemento para estilizar. */
 .logo img { height: 34px; width: auto; display: block; }
+/* O logo da navbar passou a ser o mesmo ladrilho do app (favicon.png do
+   rezult-crm, copiado para logos/logo-rezult-app.png). Ele traz fundo escuro
+   próprio, então vai quadrado e com canto arredondado, nos mesmos 30px e raio
+   8 que a BarraSuperior usa. O logo-rodape.png, do rodapé, não muda: aquele é
+   feito para fundo escuro e já funciona lá. */
+.nav .logo img { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+/* A marca escrita ao lado do logo, como na barra superior do app
+   (rezult-crm, src/components/BarraSuperior.tsx). De lá vieram o
+   tracking-tight e, principalmente, os DOIS pesos na mesma palavra composta:
+   "Rezult" em 600 e "CRM" em 400, decisão do dono registrada lá. O tracking
+   junta as duas o suficiente para lerem como um nome, não como duas palavras
+   soltas.
+
+   O corpo é 16px e não os 15px do app: a barra do site é mais larga e tem menos
+   elementos, e em 15px o nome ficava miúdo ao lado do ladrilho de 30px.
+
+   Escopado em .nav porque a classe .logo também serve o rodapé, que já traz a
+   marca de outro jeito. */
+.nav .logo { gap: 10px; }
+.nav .logo-nome {
+  font-size: 16px;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  color: var(--ink);
+  font-weight: 400;
+}
+.nav .logo-nome b { font-weight: 600; }
+
 
 /* ---------- Hero ---------- */
 /* padding-bottom em 90px reproduz o que estava inline no <header> do index.html.
@@ -1003,6 +1030,188 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
 .hero-inner { position: relative; }
 
+
+/* ---------- Superfície de venda do produto, no bloco de decisão da planos ----
+   Hero e tabela de preços da planos.html replicam a tela de planos do app
+   (rezult-crm, src/components/OfertaDeContratacao.tsx), cuja paleta canônica
+   está em src/lib/superficie-de-venda.ts no objeto VENDA.
+
+   Escopado em .tema-escuro porque styles.css serve quatro páginas: planos,
+   agentes, termo e politica. A técnica é a da ilha .mockup logo abaixo:
+   redefinir os tokens dentro do container faz as regras que já pedem var()
+   receberem o valor escuro, sem reescrever cada uma.
+
+   Os três pretos do VENDA (#05080A, #0C1115, #131A1E) são os mesmos que este
+   arquivo já tem em --dark-bg, --dark-surface e --dark-surface-2: o comentário
+   do CRM diz que eles "continuam sendo os do site". Então aqui eles voltam
+   para casa.
+
+   O verde é #01D8A4, o --accent-400 do CRM, anotado lá como "A COR DA MARCA",
+   com 9,32:1 sobre superfície escura. NÃO é o #00B873 do site, que sobre preto
+   fica perto de 3:1 e reprova no AA para texto. */
+.page-hero.tema-escuro {
+  /* Barra de rolagem, autofill e controles nativos acompanham. */
+  color-scheme: dark;
+
+  --bg: var(--dark-bg);
+  --bg-deep: var(--dark-bg);
+  --surface: var(--dark-surface);
+  --surface-2: var(--dark-surface-2);
+  --border: rgba(255, 255, 255, 0.15);
+  --border-2: rgba(255, 255, 255, 0.15);
+  --border-active: rgba(1, 216, 164, 0.45);
+  --text: #FFFFFF;
+  --text-muted: #D5D5D5;
+  --text-subtle: rgba(244, 246, 244, 0.38);
+  --green-text: #01D8A4;
+  --red: #FD5555;
+
+  background: var(--dark-bg);
+  color: var(--text);
+}
+
+/* O apoio do hero da planos vai a 18px fixos. A regra global .page-hero p é
+   clamp(18px, 2.2vw, 22px) e serve também agentes, termo e politica, então o
+   ajuste é escopado aqui em vez de mexer no clamp.
+
+   Filho DIRETO do .wrap de propósito: dentro deste hero moram mais seis <p>,
+   os "O que está incluso:" e as notas de teste grátis dos três cartões. Um
+   seletor descendente pegaria todos. */
+.page-hero.tema-escuro > .wrap > p { font-size: 18px; }
+
+/* Os efeitos do hero estavam desligados com !important porque glow verde sobre
+   branco virava véu. No escuro o glow e os blobs voltam a fazer sentido, e a
+   especificidade maior do escopo vence a regra que os desligou.
+
+   O .hero-grid (malha de pontos de 1px a cada 18px) fica de fora: sobre o preto
+   ele some de longe e aparece de perto como ruído, competindo com a leitura dos
+   preços, que é o único trabalho desta dobra. */
+.page-hero.tema-escuro .hero-glow,
+.page-hero.tema-escuro .mesh-blob { display: block !important; }
+
+.page-hero.tema-escuro h1,
+.page-hero.tema-escuro .pname,
+.page-hero.tema-escuro .pprice .amt { color: var(--text); }
+/* O .em-shine-text do site é verde chapado: o degradê animado foi removido de
+   lá por ser ilegível sobre branco. Sobre o preto do app ele volta, e volta
+   igual ao .texto-brilho do CRM, mesmo degradê e mesmos 5s lineares. */
+.page-hero.tema-escuro .em-shine-text,
+.page-hero.tema-escuro .grad-verde {
+  background: linear-gradient(90deg, #00B87A, #5CFFC0, #00E599, #5CFFC0, #00B87A);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: em-shine 5s linear infinite;
+}
+/* "Rezult" antes do nome do plano, como no título do modal do app. Pesa menos
+   que o nome: ali ele é prefixo de marca, e quem decide compara Silver com
+   Platinum, não um "Rezult" com o outro. */
+.page-hero.tema-escuro .pcard .pname .em-shine-text { font-weight: 500; }
+
+/* A pill do hero era a única peça do bloco que tinha ficado com o verde antigo
+   do site (#00B873 na cápsula e na borda), destoando de tudo em volta, que já
+   usa o emerald do app. A borda vai ao bordaSuave do VENDA e a cápsula ao
+   emerald com a tinta charcoal, o mesmo par do botão destacado. */
+.page-hero.tema-escuro .hero-badge { border-color: rgba(1, 216, 164, 0.20); color: var(--text-muted); }
+.page-hero.tema-escuro .hero-badge .tag { background: #01D8A4; color: #2D2F33; }
+.page-hero.tema-escuro .hero-badge-ico { color: #01D8A4; }
+
+/* Seletor de ciclo. O ativo leva o emerald com tinta charcoal (VENDA.sobreVerde),
+   e o selo de desconto é texto verde sem fundo: VENDA.brilhoSuave é transparent. */
+.page-hero.tema-escuro .price-toggle { background: var(--dark-surface); border-color: rgba(1, 216, 164, 0.20); }
+.page-hero.tema-escuro .price-toggle button.active { background: #01D8A4; color: #2D2F33; }
+.page-hero.tema-escuro .price-toggle .save { background: transparent; color: #01D8A4; }
+.page-hero.tema-escuro .price-toggle button.active .save { background: transparent; color: #2D2F33; }
+
+/* Cartões. Sem halo verde: a paleta zera brilhoSuave e brilhoVerde de
+   propósito, e documenta o motivo ("o destaque vem do contraste entre o cartão
+   escuro e o canvas, não de um brilho em volta"). A sombra do destacado é a
+   neutra do app. */
+.page-hero.tema-escuro .pcard { background: var(--dark-surface); border-color: rgba(255, 255, 255, 0.15); }
+.page-hero.tema-escuro .pcard:hover { border-color: rgba(1, 216, 164, 0.45); }
+.page-hero.tema-escuro .pcard.featured {
+  background: var(--dark-surface);
+  border-color: rgba(1, 216, 164, 0.45);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+}
+
+/* O selo sai de dentro do nome e vai para o topo do cartão, centralizado e
+   montado na borda, como no app. */
+.page-hero.tema-escuro .pcard.featured { overflow: visible; }
+.page-hero.tema-escuro .pcard.featured .pname::after {
+  content: "Recomendado";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: 0;
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 100px;
+  background: #01D8A4;
+  color: #2D2F33;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.page-hero.tema-escuro .pcard .pprice .cur,
+.page-hero.tema-escuro .pcard .pprice .per,
+.page-hero.tema-escuro .pcard .pprice-recurring { color: var(--text-subtle); }
+.page-hero.tema-escuro .pcard .pprice .pperiod { background: transparent; color: #01D8A4; }
+.page-hero.tema-escuro .pcard .pprice-savings { color: #01D8A4; }
+.page-hero.tema-escuro .pcard .pprice-savings s { color: #FD5555; text-decoration-color: #FD5555; }
+.page-hero.tema-escuro .pcard .pprice-savings s.pprice-de { color: var(--text-subtle); text-decoration-color: var(--text-subtle); }
+
+/* Botão: só o plano destacado leva o emerald preenchido. Os outros dois ficam
+   em superficie2 com borda, como no app, para o olho ter um alvo só. */
+.page-hero.tema-escuro .pcard .btn-pontos {
+  background: var(--dark-surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+/* Correção óptica, não erro de valor: os três botões nasceram em 500, medido,
+   e o texto renderiza com a mesma largura nos três. Mas claro sobre escuro
+   aparenta menos peso que escuro sobre claro, porque o fundo invade as hastes
+   da letra. Os dois laterais sobem para 600 para PARECEREM o que já são, e o
+   destacado fica em 500 porque a tinta escura sobre o emerald já se impõe. */
+.page-hero.tema-escuro .pcard .btn-pontos .btn-pontos-inner { color: #FFFFFF; font-weight: 600; }
+.page-hero.tema-escuro .pcard.featured .btn-pontos { background: #01D8A4; border-color: #01D8A4; }
+.page-hero.tema-escuro .pcard.featured .btn-pontos .btn-pontos-inner { color: #2D2F33; font-weight: 500; }
+/* O botão do site traz pontinhos animados, um brilho de vidro no ::before e um
+   halo verde no ::after. No app o botão é chapado, e o halo pintava de verde
+   até os dois botões que deveriam ficar escuros. Os três efeitos saem. */
+.page-hero.tema-escuro .pcard .btn-pontos-wrap { display: none; }
+.page-hero.tema-escuro .pcard .btn-pontos::before,
+.page-hero.tema-escuro .pcard .btn-pontos::after { display: none; }
+
+.page-hero.tema-escuro .pcard .pfeats li { color: var(--text-muted); }
+.page-hero.tema-escuro .pcard .pfeats li b { color: var(--text); }
+.page-hero.tema-escuro .pcard .pfeats-titulo { color: var(--text); }
+.page-hero.tema-escuro .pcard .pfeats li svg { color: #01D8A4; }
+/* O primeiro item é o destaque do plano e leva o verde animado, igual ao app. */
+.page-hero.tema-escuro .pcard .pfeats li:first-child b {
+  background: linear-gradient(90deg, #00B87A, #5CFFC0, #00E599, #5CFFC0, #00B87A);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-hero.tema-escuro .em-shine-text,
+  .page-hero.tema-escuro .grad-verde,
+  .page-hero.tema-escuro .pcard .pfeats li:first-child b {
+    background: none;
+    color: #00E599;
+    -webkit-text-fill-color: #00E599;
+    animation: none;
+  }
+}
+
 /* ---------- App mockup ---------- */
 /* Ilha escura. Os mockups são print da interface do produto, que é escura. O
    container redefine os tokens localmente, então o CSS e o mockups.js seguem
@@ -1208,6 +1417,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .carousel-arrow-edge.carousel-arrow-left { left: 0; }
 .carousel-arrow-edge.carousel-arrow-right { right: 0; }
 @media (max-width: 560px) {
+  /* Mesma razão do modo compacto da barra do app: em tela estreita o logo
+     sozinho já diz o nome, e a marca escrita disputaria espaço com o CTA. */
+  .nav .logo-nome { display: none; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
@@ -1370,6 +1582,34 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    ocupar a linha inteira, papel que o .btn-block fazia no botão anterior. */
 .pcard .btn-pontos { width: 100%; }
 .pcard .pfeats { display: flex; flex-direction: column; gap: 13px; }
+/* Preço âncora do ciclo mensal. Mora dentro do .pprice-savings, que é o mesmo
+   lugar onde o "economize" aparece no semestral e no anual, então os dois
+   nunca disputam espaço: o JS troca um pelo outro.
+
+   A forma é a MESMA da .pprice-recurring ("Cobrança mensal recorrente"): 13.5px,
+   peso 400 e --text-subtle. As duas são apoio do preço, uma acima e outra
+   abaixo, e com tamanhos ou cinzas diferentes o bloco lia como três níveis de
+   informação em vez de um preço entre duas notas. Classe própria porque o <s>
+   do economize é vermelho e 16px, e aqui a leitura é de preço antigo, não de
+   alerta. */
+.pcard .pprice-savings s.pprice-de {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  text-decoration: line-through;
+  text-decoration-color: var(--text-subtle);
+}
+/* Nota de risco zero, logo abaixo do CTA: é no instante seguinte ao botão que
+   a objeção "vou ter que passar o cartão?" aparece. O peso 300 exigiu carregar
+   esse corte da Inter no <link> das páginas, que vinha só de 400 a 700; sem
+   isso o navegador cairia em 400 ou inventaria um light sintético. */
+.pcard .pcard-nota { font-size: 12px; font-weight: 300; line-height: 1.4; color: var(--text-subtle); margin: -14px 0 0; }
+/* Título da lista de recursos. Fica junto com a <ul> dentro de um bloco
+   próprio porque o .pcard é um flex column com gap de 24px: solto, o título
+   herdaria esse vão e flutuaria longe da lista que ele anuncia. No bloco, o
+   gap entre os dois é de 10px e os 24px ficam só entre o bloco e o botão. */
+.pcard .pfeats-bloco { display: flex; flex-direction: column; gap: 10px; }
+.pcard .pfeats-titulo { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin: 0; }
 .pcard .pfeats li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; color: var(--text-muted); list-style: none; line-height: 1.45; }
 .pcard .pfeats li svg { width: 18px; height: 18px; color: var(--green-text); flex-shrink: 0; margin-top: 1px; }
 .pcard .pfeats li b { color: var(--text); font-weight: 600; }
@@ -1408,6 +1648,58 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.01em; margin: 28px auto 36px; max-width: 600px; }
 .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .cta-actions .btn { border-radius: 9999px; flex: 1; text-align: center; justify-content: center; }
+
+/* ---------- Ainda com dúvidas ----------
+   Portado do home.css sem alteração: a mesma peça fecha a home e a planos, e
+   duas cópias divergentes seriam o caminho mais curto para elas pararem de se
+   parecer. Se mexer aqui, mexer lá também. */
+.ainda-duvidas {
+  padding: 88px 0;
+  background: #FFFFFF;
+}
+.ainda-duvidas-card {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 40px;
+  text-align: center;
+  background: #F1FBF7;
+  border: 1px solid rgba(0, 184, 115, 0.22);
+  border-radius: var(--r-xl);
+}
+.ainda-duvidas h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(26px, 4vw, 35px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+.ainda-duvidas p {
+  margin: 16px auto 30px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+}
+.ainda-duvidas-acoes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ainda-duvidas-acoes .btn {
+  min-width: 220px;
+  border-radius: 9999px;
+  justify-content: center;
+}
+.ainda-duvidas-acoes .btn-secondary {
+  background: #FFFFFF;
+  border-color: rgba(0, 184, 115, 0.42);
+  color: var(--text);
+}
+.ainda-duvidas-acoes .btn-secondary:hover {
+  background: rgba(0, 184, 115, 0.07);
+  border-color: var(--primary);
+}
 
 /* ---------- Demo form ---------- */
 .demo-form { margin-top: 0; text-align: left; }
@@ -1998,6 +2290,24 @@ select.demo-select:invalid { color: #374151; }
 .nav-right .btn-pontos::before { border-radius: calc(var(--r-sm) - 1px); }
 .nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
+/* O CTA da navbar troca de verde, e SÓ de verde: os pontinhos animados, o
+   brilho de vidro do ::before e o degradê do ::after continuam como estão.
+
+   O verde mora em dois lugares, o fundo do botão e o ::after, que repete o
+   mesmo par. Nos dois, o #059669 chapado vira #01D8A4 (o --accent-400 do CRM,
+   o mesmo do botão do Platinum) e o brilho de baixo acompanha, indo do
+   #10B981 para o #5CFFC0, que já existe no degradê de brilho do site. Sem
+   subir o brilho junto, o radial ficaria mais ESCURO que a base e o efeito
+   inverteria.
+
+   A tinta vai para o charcoal do app: branco sobre #01D8A4 dá 1,85:1 e some,
+   contra 7,25:1 do #2D2F33. */
+.nav-right .btn-pontos,
+.nav-right .btn-pontos::after {
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(92, 255, 192, 0.8) 0%, rgba(92, 255, 192, 0) 100%),
+              linear-gradient(0deg, #01D8A4, #01D8A4);
+}
+.nav-right .btn-pontos .btn-pontos-inner { color: #2D2F33; }
 
 
 /* ---------- Agentes de IA ---------- */

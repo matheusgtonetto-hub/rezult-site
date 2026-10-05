@@ -248,98 +248,16 @@ function animateIntegrations() {
   setTimeout(runCall, 600);
 }
 
-// ---- Dashboards completos (feature) ----
-MK.dashboards = `
-<div id="dashMock" style="padding:20px 22px;height:340px;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px;">
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">LTV</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV0" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">+12%</span></div></div>
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">CAC</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV1" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">R$ 0</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">-8%</span></div></div>
-    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:hidden;"><div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);">Conversão</div><div style="display:flex;align-items:baseline;gap:3px;margin-top:4px;overflow:hidden;"><span id="dashV2" style="font-size:15px;font-weight:600;letter-spacing:-0.03em;white-space:nowrap;">0%</span><span style="font-family:var(--mono);font-size:8px;color:var(--primary);flex-shrink:0;">+4pp</span></div></div>
-  </div>
-  <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:10px;">Receita por mês</div>
-    <div style="display:flex;align-items:flex-end;gap:6px;height:66px;">
-      ${[42,58,51,74,68,89].map((h,i)=>`<div style="flex:1;height:${Math.round(h*66/100)}px;transform:scaleY(0);transform-origin:bottom;transition:transform 1.1s cubic-bezier(0.4,0,0.2,1);background:${i===5?'linear-gradient(180deg,#00B873,#00B87A)':'var(--surface-3)'};border-radius:5px 5px 0 0;${i===5?'box-shadow:0 0 12px var(--glow-soft);':''}" id="dashBar${i}"></div>`).join("")}
-    </div>
-    <div style="display:flex;gap:6px;margin-top:6px;">
-      ${['N','D','J','F','M','A'].map(l=>`<div style="flex:1;text-align:center;font-family:var(--mono);font-size:8px;color:var(--text-subtle);">${l}</div>`).join("")}
-    </div>
-  </div>
-  <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;">
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:10px;">Conversão por origem</div>
-    ${[["Meta Ads",78],["Google",62],["Indicação",91]].map(([l,p],i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;"><span style="font-size:10px;color:var(--text-muted);width:60px;flex-shrink:0;">${l}</span><div style="flex:1;height:7px;background:var(--surface-3);border-radius:100px;overflow:hidden;"><div id="dashHBar${i}" style="width:0%;height:100%;background:linear-gradient(90deg,#00B873,#00B87A);box-shadow:0 0 8px var(--glow-soft);transition:width 1.1s cubic-bezier(0.4,0,0.2,1);"></div></div><span id="dashHVal${i}" style="font-family:var(--mono);font-size:9px;font-weight:600;color:var(--primary);width:24px;text-align:right;">0%</span></div>`).join("")}
-  </div>
-</div>`;
-
-// ---- Dashboards animation ----
-function animateDashboards() {
-  const VBARS  = [42,58,51,74,68,89];
-  const HBARS  = [78,62,91];
-  const KPIS   = [
-    { el:"dashV0", target:8.4,  fmt: v => "R$ " + v.toFixed(1) + "k" },
-    { el:"dashV1", target:184,  fmt: v => "R$ " + Math.round(v) },
-    { el:"dashV2", target:32,   fmt: v => Math.round(v) + "%" },
-  ];
-  const STEPS = 40, DUR = 1100;
-
-  function counter(id, target, fmt) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let s = 0;
-    const iv = setInterval(() => {
-      s++;
-      el.textContent = fmt(target * s / STEPS);
-      if (s >= STEPS) clearInterval(iv);
-    }, DUR / STEPS);
-  }
-
-  function run() {
-    // Reset bars instantly (no transition)
-    for (let i = 0; i < 6; i++) {
-      const b = document.getElementById("dashBar" + i);
-      if (b) { b.style.transition = "none"; b.style.transform = "scaleY(0)"; }
-    }
-    for (let i = 0; i < 3; i++) {
-      const h = document.getElementById("dashHBar" + i);
-      const v = document.getElementById("dashHVal" + i);
-      if (h) { h.style.transition = "none"; h.style.width = "0%"; }
-      if (v) v.textContent = "0%";
-    }
-    KPIS.forEach(k => { const el = document.getElementById(k.el); if (el) el.textContent = k.fmt(0); });
-
-    setTimeout(() => {
-      // Re-enable transitions and animate
-      for (let i = 0; i < 6; i++) {
-        const b = document.getElementById("dashBar" + i);
-        if (b) { b.style.transition = `transform 1.1s cubic-bezier(0.4,0,0.2,1) ${i * 60}ms`; b.style.transform = "scaleY(1)"; }
-      }
-      for (let i = 0; i < 3; i++) {
-        const h = document.getElementById("dashHBar" + i);
-        const v = document.getElementById("dashHVal" + i);
-        if (h) { h.style.transition = `width 1.1s cubic-bezier(0.4,0,0.2,1) ${i * 100}ms`; h.style.width = HBARS[i] + "%"; }
-        if (v) setTimeout(() => counter("dashHVal" + i, HBARS[i], w => Math.round(w) + "%"), i * 100);
-      }
-      KPIS.forEach((k, i) => setTimeout(() => counter(k.el, k.target, k.fmt), i * 80));
-    }, 150);
-
-    setTimeout(run, 2000);
-  }
-
-  run();
-}
-
 // ---- Inject ----
 function injectMockups() {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   ["mockupSlotB", "mockupSlotC"].forEach(id => set(id, MK.dashboard));
-  // #featWhatsapp, #featAutomation e #featPipelines saíram daqui: quem os
-  // preenche agora são as ilhas React em src/paineis/, montadas por
-  // build/paineis.js.
+  // #featWhatsapp, #featAutomation, #featPipelines e #featDashboards saíram
+  // daqui: quem os preenche agora são as ilhas React em src/paineis/, montadas
+  // por build/paineis.js.
   set("featAgent", MK.agent);
   animateAgent();
   set("featIntegrations", MK.integrations);
-  set("featDashboards", MK.dashboards);
-  animateDashboards();
   set("demoShowcase", MK.dashboard);
 }
 if (document.readyState !== "loading") injectMockups();

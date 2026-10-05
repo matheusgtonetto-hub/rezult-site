@@ -26,7 +26,7 @@
 <meta name="twitter:image:alt" content="Tela do pipeline comercial do Rezult CRM" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site-typography.css" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/png" href="Favicon.png" />
@@ -89,7 +89,8 @@ fbq('track','ViewContent',{content_name:'Planos'});
   <div class="wrap">
     <div class="nav-left">
       <a href="index.html" class="logo">
-        <img src="logos/logo-rezult.png" alt="Rezult CRM" width="1080" height="1080">
+        <img src="logos/logo-rezult-app.png" alt="" width="256" height="256">
+        <span class="logo-nome"><b>Rezult</b> CRM</span>
       </a>
     </div>
     <div class="nav-links">
@@ -111,7 +112,7 @@ fbq('track','ViewContent',{content_name:'Planos'});
         <i class="btn-pontos-point"></i>
         <i class="btn-pontos-point"></i>
         </div>
-        <span class="btn-pontos-inner">Teste Grátis</span>
+        <span class="btn-pontos-inner">Teste grátis</span>
       </a>
       <button class="nav-burger" id="burger" aria-label="Menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/><path d="M3 12h18"/><path d="M3 19h18"/></svg>
@@ -123,11 +124,11 @@ fbq('track','ViewContent',{content_name:'Planos'});
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="planos.html">Planos</a>
-  <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Teste Grátis</a>
+  <a href="https://app.rezultcrm.com/register" class="btn btn-primary btn-block">Teste grátis</a>
 </div>
 
 <!-- PAGE HERO + PREÇOS -->
-<header class="page-hero" style="padding-bottom: 100px">
+<header class="page-hero tema-escuro" style="padding-bottom: 100px">
   <div class="hero-bg">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
@@ -143,21 +144,27 @@ fbq('track','ViewContent',{content_name:'Planos'});
     <h1 class="reveal">Plano pro momento<br><span class="em em-shine-text">do seu negócio</span></h1>
     <p class="reveal" style="color: var(--text-muted);">Selecione o plano que melhor se adequa<br>ao momento do seu negócio.</p>
 
+    <!-- Os percentuais são sobre o preço âncora (data-de dos cartões), a mesma
+         base do riscado e do "Economize". Sobre a mensalidade de lista eles
+         seriam 15% e 30%, exatos; sobre a âncora ficam entre 31,8% e 32,2% no
+         semestral e entre 43,8% e 44,2% no anual, por isso arredondados para
+         32 e 44. Mudar a base aqui sem mudar em main.js volta a descasar o
+         seletor do cartão. -->
     <div class="price-toggle" id="priceToggle" style="margin-top: 48px;">
       <button class="active" data-period="mensal">Mensal</button>
-      <button data-period="semestral">Semestral <span class="save">-15%</span></button>
-      <button data-period="anual">Anual <span class="save">-30%</span></button>
+      <button data-period="semestral">Semestral <span class="save">-32%</span></button>
+      <button data-period="anual">Anual <span class="save">-44%</span></button>
     </div>
 
     <div class="pgrid">
       <div class="pcard">
         <div>
-          <div class="pname">Silver</div>
+          <div class="pname"><span class="em-shine-text">Rezult</span> Silver</div>
           <div class="pdesc">Perfeito para pequenas equipes</div>
         </div>
         <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="237" data-stotal="1209" data-atotal="1989">
+          <div class="pprice-savings"><s class="pprice-de">De R$297/mês</s> Economize R$ 60,00</div>
+          <div class="pprice" data-de="297" data-m="237" data-stotal="1209" data-atotal="1989">
             <span class="cur">R$</span>
             <span class="amt" data-m="237" data-s="202" data-a="166">237</span>
             <span class="per">/mês</span><span class="pperiod">Mensal</span>
@@ -179,26 +186,28 @@ fbq('track','ViewContent',{content_name:'Planos'});
           </div>
           <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
         </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">4 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>8 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 pipelines</b> com até 8 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
+        <p class="pcard-nota">Teste gratuito de 7 dias. Não é necessário cartão de crédito.</p>
+        <div class="pfeats-bloco">
+          <p class="pfeats-titulo">O que está incluso:</p>
+          <ul class="pfeats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">4 usuários</b> na empresa</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 mil leads</b> com controle de tags</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>8 automações</b> para interações com leads</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 conexões</b> WhatsApp</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>5 pipelines</b> com até 8 etapas</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>3 integrações</b> via Webhook</span></li>
+          </ul>
+        </div>
       </div>
 
       <div class="pcard featured">
         <div>
-          <div class="pname">Platinum</div>
+          <div class="pname"><span class="em-shine-text">Rezult</span> Platinum</div>
           <div class="pdesc">Pensado para quem está crescendo</div>
         </div>
         <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="399" data-stotal="2035" data-atotal="3352">
+          <div class="pprice-savings"><s class="pprice-de">De R$497/mês</s> Economize R$ 98,00</div>
+          <div class="pprice" data-de="497" data-m="399" data-stotal="2035" data-atotal="3352">
             <span class="cur">R$</span>
             <span class="amt" data-m="399" data-s="339" data-a="279">399</span>
             <span class="per">/mês</span><span class="pperiod">Mensal</span>
@@ -220,26 +229,28 @@ fbq('track','ViewContent',{content_name:'Planos'});
           </div>
           <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
         </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">15 usuários</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>100 mil leads</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 automações</b> para interações com leads</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>10 conexões</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 pipelines</b> com até 15 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 integrações</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
+        <p class="pcard-nota">Teste gratuito de 7 dias. Não é necessário cartão de crédito.</p>
+        <div class="pfeats-bloco">
+          <p class="pfeats-titulo">O que está incluso:</p>
+          <ul class="pfeats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">15 usuários</b> na empresa</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>100 mil leads</b> com controle de tags</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 automações</b> para interações com leads</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>10 conexões</b> WhatsApp</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 pipelines</b> com até 15 etapas</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 integrações</b> via Webhook</span></li>
+          </ul>
+        </div>
       </div>
 
       <div class="pcard">
         <div>
-          <div class="pname">Emerald</div>
+          <div class="pname"><span class="em-shine-text">Rezult</span> Emerald</div>
           <div class="pdesc">Ideal para empresas em escala</div>
         </div>
         <div class="price-block">
-          <div class="pprice-savings"></div>
-          <div class="pprice" data-m="747" data-stotal="3810" data-atotal="6272">
+          <div class="pprice-savings"><s class="pprice-de">De R$937/mês</s> Economize R$ 190,00</div>
+          <div class="pprice" data-de="937" data-m="747" data-stotal="3810" data-atotal="6272">
             <span class="cur">R$</span>
             <span class="amt" data-m="747" data-s="635" data-a="523">747</span>
             <span class="per">/mês</span><span class="pperiod">Mensal</span>
@@ -261,16 +272,18 @@ fbq('track','ViewContent',{content_name:'Planos'});
           </div>
           <span class="btn-pontos-inner">Começar 7 Dias Grátis</span>
         </a>
-        <ul class="pfeats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">Usuários ilimitados</b> na empresa</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Leads ilimitados</b> com controle de tags</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Automações ilimitadas</b></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Conexões ilimitadas</b> WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Pipelines ilimitadas</b> com até 25 etapas</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Integrações ilimitadas</b> via Webhook</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Acesso à API e MCP</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dashboards detalhados da operação</span></li>
-        </ul>
+        <p class="pcard-nota">Teste gratuito de 7 dias. Não é necessário cartão de crédito.</p>
+        <div class="pfeats-bloco">
+          <p class="pfeats-titulo">O que está incluso:</p>
+          <ul class="pfeats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b class="grad-verde">Usuários ilimitados</b> na empresa</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Leads ilimitados</b> com controle de tags</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Automações ilimitadas</b></span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Conexões ilimitadas</b> WhatsApp</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Pipelines ilimitadas</b> com até 25 etapas</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Integrações ilimitadas</b> via Webhook</span></li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -278,35 +291,6 @@ fbq('track','ViewContent',{content_name:'Planos'});
 </header>
 
 <!-- DOBRA · PROBLEMA / SOLUÇÃO -->
-<section class="section tint-left" id="implementacao" style="background: #FBFBFB; padding: 90px 0 80px; overflow: hidden; position: relative;">
-  <div class="impl-bg">
-    <div class="impl-bg-grid"></div>
-    <div class="impl-blob impl-blob-1"></div>
-    <div class="impl-blob impl-blob-2"></div>
-    <div class="impl-blob impl-blob-3"></div>
-  </div>
-  <div class="wrap" style="position: relative; z-index: 1;">
-    <div class="impl-pill-mobile" style="display: none; text-align: center; margin-bottom: 16px;">
-      <span class="eyebrow" style="background: rgba(0, 184, 115,0.18); border: 1px solid #00B873; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0, 184, 115,0.35);">Implementação gratuita</span>
-    </div>
-    <div class="impl-grid">
-      <div class="reveal">
-        <img src="implementacao-gratuita2.svg" alt="Implementação gratuita Rezult CRM" style="width: 100%; height: auto; display: block;" />
-      </div>
-      <div class="impl-section-text reveal" data-d="1">
-        <span class="eyebrow impl-pill-desktop" style="margin-bottom: 16px; background: rgba(0, 184, 115,0.18); border: 1px solid #00B873; border-radius: 100px; color: #166534; font-weight: 500; box-shadow: 0 4px 5px rgba(0, 184, 115,0.35); align-self: flex-start;">Implementação gratuita</span>
-        <h2 class="h2" style="font-size: 38px; font-weight: 600;">Implementação <span class="em-shine-text">gratuita</span> e <span class="em-shine-text">personalizada</span> do <span>Rezult</span> na sua operação.</h2>
-        <p class="impl-section-description">Com o Rezult na sua operação, você não recebe só um CRM, recebe um time de especialistas para fazer um diagnóstico comercial na sua operação e implementar o Rezult CRM de forma personalizada. Você terá a sua operação pronta para rodar com gestão e performance desde o primeiro dia.</p>
-        <div class="hero-actions" style="margin-top: 10px;">
-          <a href="#demo-planos" class="btn btn-primary btn-lg btn-shine">Agendar demonstração</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 <!-- DOBRA · PROVAS SOCIAIS -->
 <section class="section tint-center" id="clientes" style="padding: 90px 0px 80px">
   <div class="wrap">
@@ -360,79 +344,6 @@ fbq('track','ViewContent',{content_name:'Planos'});
   </div>
 </section>
 
-<!-- DOBRA · AGENDE UMA DEMO -->
-<section class="section" id="demo-planos" style="background: #FBFBFB; position: relative; overflow: hidden;">
-  <div class="demo-side-l"></div>
-  <div class="demo-side-r"></div>
-  <div class="wrap">
-    <div class="demo-split">
-      <div class="demo-split-left reveal">
-
-        <h2 class="h2" id="demo-planos-heading" style="color:#000; margin-top:16px;">Agendar <span class="em em-shine-text">demonstração</span></h2>
-        <p style="font-size:17px; color:#4b5563; margin-top:16px; max-width:420px;">Marque uma agenda com nosso time, faremos a demonstração do CRM de forma personalizada.</p>
-        <ul class="demo-trust">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Implementação gratuita incluída</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Suporte via Meet e WhatsApp</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sem fidelidade ou multa de cancelamento</li>
-        </ul>
-      </div>
-      <div class="demo-split-right reveal" data-d="1">
-    <div class="cta-final">
-      <div class="cta-final-grid"></div>
-      <div class="cta-final-glow"></div>
-      <form class="demo-form" id="demoFormPlanos">
-        <div class="demo-form-row">
-          <div class="demo-field">
-            <input class="demo-input" type="text" id="dp-nome" name="nome" placeholder="Nome completo" required>
-          </div>
-          <div class="demo-field">
-            <input class="demo-input" type="email" id="dp-email" name="email" placeholder="E-mail" required>
-          </div>
-        </div>
-        <div class="demo-form-row">
-          <div class="demo-field">
-            <input class="demo-input" type="tel" id="dp-whatsapp" name="whatsapp" placeholder="Seu WhatsApp" required>
-          </div>
-          <div class="demo-field">
-            <input class="demo-input" type="text" id="dp-site" name="site" placeholder="Site ou Instagram da empresa">
-          </div>
-        </div>
-        <div class="demo-field">
-          <select class="demo-input demo-select" id="dp-segmento" name="segmento" required>
-            <option value="" disabled selected>Qual o segmento da empresa?</option>
-            <option value="varejo">Varejo</option>
-            <option value="servicos">Serviços</option>
-            <option value="tecnologia">Tecnologia</option>
-            <option value="saude">Saúde</option>
-            <option value="educacao">Educação</option>
-            <option value="imobiliario">Imobiliário</option>
-            <option value="financeiro">Financeiro</option>
-            <option value="industria">Indústria</option>
-            <option value="outro">Outro</option>
-          </select>
-        </div>
-        <div class="demo-field">
-          <select class="demo-input demo-select" id="dp-time" name="time_size" required>
-            <option value="" disabled selected>Tamanho do time comercial</option>
-            <option value="1-5">1 a 5 pessoas</option>
-            <option value="6-15">6 a 15 pessoas</option>
-            <option value="16-30">16 a 30 pessoas</option>
-            <option value="30+">Mais de 30 pessoas</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg demo-submit btn-shine">Agendar demonstração</button>
-      </form>
-      <div class="demo-success" id="demoSuccessPlanos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <strong>Solicitação enviada!</strong>
-        <span>Nosso time entrará em contato em breve.</span>
-      </div>
-    </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- DOBRA · FAQ COBRANÇA -->
 <section class="section tint-left" id="faq-planos" style="background: var(--bg-deep); padding: 90px 0px 120px">
   <div class="wrap">
@@ -460,6 +371,25 @@ fbq('track','ViewContent',{content_name:'Planos'});
   </div>
 </section>
 
+<!-- DOBRA · AINDA COM DÚVIDAS
+     Fecha a página logo depois da FAQ: quem chegou até aqui leu as respostas
+     prontas e não achou a dele. As duas saídas são as que existem de verdade,
+     a agenda do Cal.com e o e-mail de atendimento publicado na Política de
+     Privacidade. Componente portado da home
+     (.ainda-duvidas), para a última dobra das duas páginas ser a mesma peça. -->
+<section class="ainda-duvidas" aria-labelledby="duvidas-planos-titulo">
+  <div class="wrap">
+    <div class="ainda-duvidas-card reveal">
+      <h2 id="duvidas-planos-titulo">Ficou com alguma dúvida sobre os planos?</h2>
+      <p>Agende uma demonstração para ver o Rezult rodando na sua operação, ou fale com o suporte se a sua dúvida for pontual.</p>
+      <div class="ainda-duvidas-acoes">
+        <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary btn-lg">Agendar demonstração</a>
+        <a href="mailto:atendimento@rezultcrm.com" class="btn btn-secondary btn-lg">Falar com o suporte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap">
@@ -470,7 +400,7 @@ fbq('track','ViewContent',{content_name:'Planos'});
         </a>
         <p>O CRM com automações, WhatsApp e agentes de IA para empresas que vendem de verdade.</p>
         <div class="footer-brand-actions">
-          <a href="#demo-planos" class="btn btn-primary">Agendar demo</a>
+          <a href="https://cal.com/rezult-crm/demonstracao" class="btn btn-primary">Agendar demo</a>
           <a href="planos.html" class="btn btn-secondary">Ver planos</a>
         </div>
       </div>
@@ -479,7 +409,7 @@ fbq('track','ViewContent',{content_name:'Planos'});
         <a href="index.html#recursos">Recursos</a>
         <a href="index.html#como-funciona">Como funciona</a>
         <a href="planos.html">Planos</a>
-        <a href="#demo-planos">Demo</a>
+        <a href="https://cal.com/rezult-crm/demonstracao">Demo</a>
       </div>
       <div class="footer-col">
         <h3>Empresa</h3>
