@@ -21,7 +21,8 @@ import {
  * Atributos em camelCase e className: o Preact aceita as duas formas, o React só
  * esta. Escrever na forma restrita mantém o componente válido como React puro. */
 
-const COR = { inicio: '#00B873', campos: '#22C55E', acoes: '#F97316' };
+/* Três categorias de bloco, agora separadas por valor e não por matiz. */
+const COR = { inicio: 'var(--neutral-900)', campos: 'var(--neutral-700)', acoes: 'var(--neutral-500)' };
 
 /* Altura, medida do topo do nó, em que a linha entra e sai. É o meio do
  * cabeçalho: o nó aqui não tem o rodapé de métricas que o do CRM tem. */

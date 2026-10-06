@@ -4,24 +4,52 @@
    ============================================================ */
 
 :root {
+  /* ── Rampa neutra do Rezult Design System ──────────────────────────────────
+     Os neutros do rezult-crm (src/index.css), sem um tom novo. A partir de
+     05/10/2026 o site é preto, branco e cinza: nenhum verde, e os tokens de
+     nome verde abaixo apontam para cá. Charcoal faz o trabalho do preto;
+     #000 não aparece.
+
+     Duas cores escapam, e por um motivo que não é de paleta: o #25D366 do
+     WhatsApp e o #0668E1 da Meta. São identificação de outra empresa, como um
+     logotipo, e em cinza o selo "WhatsApp Oficial" perde o reconhecimento
+     imediato, que é o trabalho dele. Ficam onde estão, nomeadas aqui para que
+     ninguém as "arrume" depois. */
+  --neutral-0:   #FFFFFF;
+  --neutral-25:  #FAFAFA;
+  --neutral-50:  #F7F7F7;
+  --neutral-100: #F2F2F2;
+  --neutral-150: #EBEBEB;
+  --neutral-200: #E7E7E7;
+  --neutral-300: #D5D5D5;
+  --neutral-400: #B4B4B7;
+  --neutral-500: #8A8A8E;  /* o DS libera só a partir de 16px: 3,44:1 */
+  --neutral-600: #6C6C6C;
+  --neutral-700: #525154;
+  --neutral-800: #3A3A3E;
+  --neutral-900: #2D2F33;  /* o "preto" do sistema */
+  --neutral-950: #1B1B1B;
+  --marca-whatsapp: #25D366;
+  --marca-meta:     #0668E1;
+
   /* Brand — o verde neon saiu do site. Ele rendia 1.66:1 de contraste sobre
      branco e, com a virada para fundo claro, não sobrou lugar onde
-     funcionasse. Ficou um verde só, o #00B873, que era o antigo --green-text. */
-  --primary: #00B873;
-  --primary-hi: #33CC96;
-  --primary-lo: #009A60;
-  --on-primary: #04140D;
+     funcionasse. Ficou um verde só, o #8A8A8E, que era o antigo --green-text. */
+  --primary: var(--neutral-900);
+  --primary-hi: var(--neutral-800);
+  --primary-lo: var(--neutral-950);
+  --on-primary: var(--neutral-0);
   /* Aponta para --primary: os dois são o mesmo verde desde a saída do neon, e
      um alias evita que saiam de sincronia numa troca futura. */
-  --green-text: var(--primary);
-  --glow: rgba(0, 184, 115, 0.45);
-  --glow-btn: rgba(0, 184, 115, 0.55);
+  --green-text: var(--neutral-900);
+  --glow: transparent;
+  --glow-btn: transparent;
   /* Verde dos CTAs do hero e da navbar. */
   /* Preto esverdeado dos títulos, e agora também do fundo da pill do hero. */
   /* Vermelho dos preços riscados, o mesmo --red do app. Marca o que a
      pessoa NÃO vai pagar. */
-  --red: #EF4444;
-  --ink: #07100D;
+  --red: var(--neutral-600);
+  --ink: var(--neutral-900);
   /* Dourado das estrelas de avaliação dentro dos cards de depoimento, e só
      delas. Ali o dourado é a convenção universal de nota, reconhecida antes
      de o leitor chegar a qualquer número.
@@ -29,16 +57,16 @@
      As estrelas do selo acima do título "Nunca usou IA no seu negócio?"
      seguem em --green-text de propósito: aquilo é um selo da marca e não a
      nota de um cliente, então acompanha o verde e não a convenção. */
-  --dourado: #F5A623;
+  --dourado: var(--neutral-700);
   /* Verde escuro do bloco de texto da hero: o h1 e a subheadline saem nele.
      Nasceu escrito à mão no h1 e virou token quando a subheadline passou a usar
      o mesmo verde -- é o que impede as duas de saírem de sincronia. Não é o
      --primary: aquele é o verde de marca dos CTAs, claro demais para texto
      corrido sobre o #FBFBFB da página. */
-  --verde-titulo: #105E48;
-  --green-cta: var(--green-text);
-  --green-cta-hover: #009A60;
-  --glow-soft: rgba(0, 184, 115, 0.18);
+  --verde-titulo: var(--neutral-900);
+  --green-cta: var(--neutral-900);
+  --green-cta-hover: var(--neutral-800);
+  --glow-soft: transparent;
 
   /* Surfaces
      Tema claro desde 2026-09-03, no padrão do gohighlevel.com (ver a skill
@@ -50,19 +78,19 @@
      deixaram de ser um tom diferente, o site inteiro é a mesma base e quem
      separa as seções agora é a borda de 1px e o branco dos cards. Segue como
      token separado porque três seções ainda o referenciam pelo nome. */
-  --bg: #FBFBFB;
-  --bg-deep: #FBFBFB;
-  --surface: #F6F6F6;
-  --surface-2: #EFEFEF;
-  --surface-3: #E7E7E7;
-  --border: rgba(0, 0, 0, 0.12);
-  --border-2: rgba(0, 0, 0, 0.07);
-  --border-active: rgba(0, 184, 115, 0.55);
+  --bg: var(--neutral-50);
+  --bg-deep: var(--neutral-0);
+  --surface: var(--neutral-0);
+  --surface-2: var(--neutral-100);
+  --surface-3: var(--neutral-150);
+  --border: var(--neutral-200);
+  --border-2: var(--neutral-200);
+  --border-active: var(--neutral-900);
 
   /* Text */
-  --text: #000000;
-  --text-muted: #575757;
-  --text-subtle: rgba(0, 0, 0, 0.45);
+  --text: var(--neutral-900);
+  --text-muted: var(--neutral-600);
+  --text-subtle: var(--neutral-500);
 
   /* Ilha escura: valores usados pelas superfícies que continuam escuras
      (os mockups do produto), para redefinir os tokens acima localmente. */
@@ -78,10 +106,10 @@
 
 
   /* Semantic (data only) */
-  --blue: #3B82F6;
-  --amber: #F59E0B;
-  --red: #EF4444;
-  --purple: #A855F7;
+  --blue: var(--neutral-600);
+  --amber: var(--neutral-700);
+  --red: #8A8A8E;
+  --purple: var(--neutral-600);
 
   /* Type */
   /* Fontes do Rezult Design System com escala adaptada ao site público. */
@@ -91,9 +119,9 @@
 
   /* Radius */
   --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 20px;
-  --r-xl: 28px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 16px;
 
   /* Layout */
   --maxw: 1200px;
@@ -144,7 +172,7 @@ body::after {
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-::selection { background: rgba(0, 184, 115, 0.3); }
+::selection { background: rgba(138, 138, 142, 0.3); }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 5px; }
@@ -155,11 +183,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section { padding: 120px 0; position: relative; }
 
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 184, 115,0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(0, 184, 115,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(138, 138, 142,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(138, 138, 142,0); }
 }
 .online-indicator { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-.online-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: #00B873; animation: pulse-dot 1.8s ease-in-out infinite; flex-shrink: 0; }
+.online-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--neutral-900); animation: pulse-dot 1.8s ease-in-out infinite; flex-shrink: 0; }
 .online-indicator span { font-size: 13px; font-weight: 500; color: #fff; letter-spacing: 0.02em; }
 .section-sm { padding: 80px 0; }
 
@@ -174,10 +202,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
   z-index: 0;
 }
-.tint-left::before   { background: radial-gradient(ellipse 55% 70% at 0% 50%,   rgba(0, 184, 115,0.055) 0%, transparent 70%); }
-.tint-right::before  { background: radial-gradient(ellipse 55% 70% at 100% 40%,  rgba(0, 184, 115,0.055) 0%, transparent 70%); }
-.tint-center::before { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0, 184, 115,0.05)  0%, transparent 70%); }
-.tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(0, 184, 115,0.04)  0%, transparent 65%); }
+.tint-left::before   { background: radial-gradient(ellipse 55% 70% at 0% 50%,   rgba(138, 138, 142,0.055) 0%, transparent 70%); }
+.tint-right::before  { background: radial-gradient(ellipse 55% 70% at 100% 40%,  rgba(138, 138, 142,0.055) 0%, transparent 70%); }
+.tint-center::before { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(138, 138, 142,0.05)  0%, transparent 70%); }
+.tint-top::before    { background: radial-gradient(ellipse 60% 50% at 50% 0%,   rgba(138, 138, 142,0.04)  0%, transparent 65%); }
 
 .eyebrow {
   font-size: var(--text-overline-size);
@@ -246,7 +274,7 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
    fim. Não é token do site de propósito: é cor de degradê, não cor de marca. */
 .grad-verde {
   display: inline-block;
-  background: linear-gradient(90deg, #047857 0%, rgba(0, 184, 115, 0.9) 100%);
+  background: linear-gradient(90deg, #6C6C6C 0%, rgba(138, 138, 142, 0.9) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -511,7 +539,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   width: 420px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(138, 138, 142,0.32) 0%, transparent 65%);
   filter: blur(80px);
   pointer-events: none;
   animation: meshFloat2 28s ease-in-out infinite;
@@ -523,7 +551,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   width: 420px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(138, 138, 142,0.32) 0%, transparent 65%);
   filter: blur(80px);
   pointer-events: none;
   animation: meshFloat2 28s ease-in-out infinite;
@@ -546,7 +574,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 }
 .mesh-blob-2 {
   width: 480px; height: 400px;
-  background: radial-gradient(circle, #00b87a 0%, transparent 70%);
+  background: radial-gradient(circle, #B4B4B7 0%, transparent 70%);
   bottom: 5%; left: -8%;
   opacity: 0.13;
   animation: meshFloat2 26s ease-in-out infinite;
@@ -607,7 +635,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   /* Verde bem claro e translúcido: é o --green-text a 10%, então acompanha a
      cor da marca numa troca futura, em vez de um hex claro fixo. Sendo rgba,
      o fundo da hero aparece por baixo. O texto volta ao --ink dos títulos. */
-  background: rgba(0, 184, 115, 0.10);
+  background: rgba(138, 138, 142, 0.10);
   color: var(--ink);
   padding: 8px 14px;
   /* `border: 0`, e não `border-color: transparent`: a regra base declara
@@ -728,8 +756,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* :focus-within e não :focus: o foco vive no textarea, mas quem precisa mudar
    de aparência é o cartão inteiro em volta dele. */
 .hero-monta:focus-within {
-  border-color: rgba(0, 184, 115, 0.45);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 6px 20px rgba(0, 184, 115, 0.10);
+  border-color: rgba(138, 138, 142, 0.45);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 6px 20px rgba(138, 138, 142, 0.10);
 }
 /* A altura é ajustada no main.js, medindo o scrollHeight a cada digitação.
    field-sizing: content resolveria sozinho, mas só existe no Chrome 123+ e no
@@ -774,7 +802,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   border-radius: 999px;
   /* Texto branco, contra o quase-preto que o .btn-primary usa nos outros CTAs.
      Fica registrado que é escolha de design, não descuido: branco sobre o
-     #00B873 dá 2,59:1, abaixo dos 4,5:1 que o WCAG AA pede para texto normal
+     #8A8A8E dá 2,59:1, abaixo dos 4,5:1 que o WCAG AA pede para texto normal
      (o --on-primary dá 7,29:1). Se o botão precisar passar em auditoria, o
      caminho é escurecer o fundo, não voltar o texto. */
   color: #FFFFFF;
@@ -843,16 +871,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   font-family: var(--display); font-size: 14px; font-weight: var(--fw-regular); color: var(--ink);
   cursor: pointer; transition: border-color .2s, background .2s, color .2s;
 }
-.monta-chip:hover { border-color: rgba(0, 184, 115, 0.45); color: #047857; }
+.monta-chip:hover { border-color: rgba(138, 138, 142, 0.45); color: #6C6C6C; }
 /* O chip que escreveu o que está no campo. Um deles já nasce marcado, porque o
    campo nasce preenchido -- sem isso o texto pareceria ter vindo do nada.
    Fundo verde a 10% e não chapado: o botão do cartão logo acima é o verde cheio
    da página, e um chip chapado disputaria a ação com ele. O peso sobe de 300
    para 500, que é o que sustenta a seleção quando o fundo é tão claro. */
 .monta-chip.ativo {
-  border-color: rgba(0, 184, 115, 0.45);
-  background: rgba(0, 184, 115, 0.10);
-  color: #047857; font-weight: 500;
+  border-color: rgba(138, 138, 142, 0.45);
+  background: rgba(138, 138, 142, 0.10);
+  color: #6C6C6C; font-weight: 500;
 }
 .monta-chip:focus-visible { outline: 2px solid var(--green-text); outline-offset: 2px; }
 
@@ -891,14 +919,14 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Hover só do hero, um passo mais escuro que o da navbar (--green-cta-hover,
    #009A60). Se os dois tiverem que andar juntos, é trocar por aquele token. */
 .hero .hero-actions .btn-primary:hover {
-  background: #008A58;
+  background: #6C6C6C;
   box-shadow: none;
 }
 /* Sem regra própria para o botão do hero: ele segue o .btn-primary do site,
    igual ao "Teste Grátis" da navbar (verde --green-text chapado, texto branco,
    sem sombra). Já foram testados e descartados aqui o degradê animado com anel
    e glow, e o verde neon com texto preto. */
-.hero-actions .btn-secondary { border: 1px solid #00B873; }
+.hero-actions .btn-secondary { border: 1px solid var(--neutral-300); }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--green-text); }
 
@@ -1031,116 +1059,347 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero-inner { position: relative; }
 
 
-/* ---------- Superfície de venda do produto, no bloco de decisão da planos ----
-   Hero e tabela de preços da planos.html replicam a tela de planos do app
-   (rezult-crm, src/components/OfertaDeContratacao.tsx), cuja paleta canônica
-   está em src/lib/superficie-de-venda.ts no objeto VENDA.
+/* ═══════════════════════════════════════════════════════════════════════════
+   REZULT DESIGN SYSTEM aplicado à planos.html, em preto, branco e cinza
+   ───────────────────────────────────────────────────────────────────────────
+   Fonte: rezult-crm, docs/design-system/rezult-design-system.md (v1.0,
+   17/09/2026) e o :root de rezult-crm/src/index.css, que o doc chama de
+   "fonte única de tokens". A escala de papéis de cartão vem da tela de planos
+   do app (src/components/OfertaDeContratacao.tsx).
 
-   Escopado em .tema-escuro porque styles.css serve quatro páginas: planos,
-   agentes, termo e politica. A técnica é a da ilha .mockup logo abaixo:
-   redefinir os tokens dentro do container faz as regras que já pedem var()
-   receberem o valor escuro, sem reescrever cada uma.
+   O QUE MUDA EM RELAÇÃO AO APP: a rampa verde não entra. No site a paleta é
+   preto, branco e cinza, decidido em 05/10/2026. O app segue com o emerald
+   #01D8A4; aqui todo papel que no app era verde virou um degrau da escala
+   neutra. A ESTRUTURA do sistema fica inteira: os mesmos papéis, a mesma
+   escala tipográfica, os mesmos raios, a mesma elevação, a mesma densidade.
+   Só o matiz saiu.
 
-   Os três pretos do VENDA (#05080A, #0C1115, #131A1E) são os mesmos que este
-   arquivo já tem em --dark-bg, --dark-surface e --dark-surface-2: o comentário
-   do CRM diz que eles "continuam sendo os do site". Então aqui eles voltam
-   para casa.
+   A tradução dos papéis verdes, e o motivo de cada um:
+     · superfície de destaque (botão, pill, seletor ativo, selo) era o emerald
+       com tinta charcoal; virou charcoal --neutral-900 com tinta BRANCA. A
+       inversão é obrigatória: charcoal sobre charcoal não existe.
+     · tinta de ênfase (verde de texto, ícone de check, valor economizado) era
+       --accent-700 no cartão e --accent-800 no canvas; virou --neutral-900,
+       que resolve os dois de uma vez e com folga (13,4:1 e 12,5:1).
+     · superfície tingida (pill de ciclo, cartão de dúvidas) era --accent-50 e
+       --accent-100; virou --neutral-50 e --neutral-100.
+     · o riscado do preço âncora saiu do vermelho para --neutral-600: em
+       escala de cinza o que marca "você não paga isto" é o risco, não a cor.
+     · as estrelas dos depoimentos saíram do dourado para --neutral-700. É a
+       única troca que custa algo, porque dourado é a convenção universal de
+       nota; fica anotada aqui para quem quiser reverter só ela.
 
-   O verde é #01D8A4, o --accent-400 do CRM, anotado lá como "A COR DA MARCA",
-   com 9,32:1 sobre superfície escura. NÃO é o #00B873 do site, que sobre preto
-   fica perto de 3:1 e reprova no AA para texto. */
-.page-hero.tema-escuro {
-  /* Barra de rolagem, autofill e controles nativos acompanham. */
-  color-scheme: dark;
+   Escopado em body.ds-crm porque styles.css serve quatro páginas. Só a planos
+   carrega a classe; agentes, termo e politica seguem no design antigo do
+   site. É a mesma técnica da ilha .mockup: redefinir os tokens dentro de um
+   container faz as regras que já pedem var() receberem o valor novo, sem
+   reescrever cada uma. O que precisa de regra própria aqui é só o que tinha
+   hex cravado, o que mudou de papel tipográfico e o que o DS resolve
+   diferente.
 
-  --bg: var(--dark-bg);
-  --bg-deep: var(--dark-bg);
-  --surface: var(--dark-surface);
-  --surface-2: var(--dark-surface-2);
-  --border: rgba(255, 255, 255, 0.15);
-  --border-2: rgba(255, 255, 255, 0.15);
-  --border-active: rgba(1, 216, 164, 0.45);
-  --text: #FFFFFF;
-  --text-muted: #D5D5D5;
-  --text-subtle: rgba(244, 246, 244, 0.38);
-  --green-text: #01D8A4;
-  --red: #FD5555;
+   A ordem importa, como no CRM:
+     1. Os NEUTROS, em hex. É o vocabulário inteiro da marca no site.
+     2. Os PAPÉIS semânticos, apontando para os neutros.
+   Trocar a paleta amanhã (devolver o verde, por exemplo) é mexer só na
+   camada 2: nenhuma regra abaixo dela cita um hex.
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.ds-crm {
+  /* ── 1. Os neutros. Charcoal faz o trabalho do preto; #000 não aparece ──
+     São exatamente os do CRM, sem um tom novo. */
+  --neutral-0:   #FFFFFF;
+  --neutral-25:  #FAFAFA;
+  --neutral-50:  #F7F7F7;
+  --neutral-100: #F2F2F2;
+  --neutral-150: #EBEBEB;
+  --neutral-200: #E7E7E7;
+  --neutral-300: #D5D5D5;
+  --neutral-400: #B4B4B7;
+  --neutral-500: #8A8A8E;  /* o DS libera só a partir de 16px: 3,44:1 */
+  --neutral-600: #6C6C6C;
+  --neutral-700: #525154;
+  --neutral-800: #3A3A3E;
+  --neutral-900: #2D2F33;  /* o "preto" do sistema */
+  --neutral-950: #1B1B1B;
 
-  background: var(--dark-bg);
+  /* ── 2. Papéis do site, apontando para os neutros ──
+     --bg é o canvas e --bg-deep virou o branco: é o que dá o ritmo de faixas
+     (hero e provas no canvas, FAQ no branco, dúvidas de volta no canvas) sem
+     precisar de cor nova. No site os dois tinham o MESMO valor e quem
+     separava seção era a borda. Sem verde, esse ritmo passa a ser o único
+     recurso de separação que a página tem, então ele carrega mais peso. */
+  --bg:        var(--neutral-50);
+  --bg-deep:   var(--neutral-0);
+  --surface:   var(--neutral-0);
+  --surface-2: var(--neutral-100);
+  --surface-3: var(--neutral-150);
+
+  --border:        var(--neutral-200);
+  --border-2:      var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --border-active: var(--neutral-900);
+
+  --text:        var(--neutral-900);   /* heading */
+  --ink:         var(--neutral-900);
+  --text-muted:  var(--neutral-600);   /* 5,25:1 sobre branco */
+  --text-subtle: var(--neutral-500);   /* proibido abaixo de 16px */
+  --text-inverse: var(--neutral-0);
+
+  /* A superfície de destaque e a tinta que vai em cima dela. No app este par
+     é emerald + charcoal; aqui é charcoal + branco. */
+  --primary:     var(--neutral-900);
+  --primary-hi:  var(--neutral-800);
+  --primary-lo:  var(--neutral-950);
+  --on-primary:  var(--neutral-0);
+  --green-cta:       var(--neutral-900);
+  --green-cta-hover: var(--neutral-800);
+
+  /* Os tokens de nome verde seguem existindo porque 30 regras deste arquivo
+     os leem, e renomeá-los mexeria nas outras três páginas. Aqui eles apontam
+     para o charcoal. O nome mente; o valor é que vale. */
+  --green-text:   var(--neutral-900);
+  --verde-titulo: var(--neutral-900);
+
+  --red:     var(--neutral-600);
+  --dourado: var(--neutral-700);
+
+  /* O DS zera halo de propósito: "o destaque vem do contraste entre o cartão
+     e o canvas, não de um brilho em volta". Sem verde isso fica mais verdade
+     ainda, porque não há cor para brilhar. */
+  --glow:      transparent;
+  --glow-btn:  transparent;
+  --glow-soft: transparent;
+
+  /* ── Raio, por papel (seis valores, no lugar dos quatro do site) ──
+     --r-md era 14px e servia botão E barra flutuante. Vira 10px, o raio de
+     controle do DS; a barra ganha os 16px de painel em regra própria. */
+  --r-sm: 10px;   /* botão, input, select */
+  --r-md: 10px;
+  --r-lg: 16px;   /* cartão, painel */
+  --r-xl: 16px;
+  --radius-badge: 6px;
+  --radius-menu:  12px;
+
+  /* ── Elevação. Cartão tem borda de 1px E sombra, nunca só um ── */
+  --shadow-xs:      0 1px 2px rgba(27, 27, 27, .05);
+  --shadow-card:    0 1px 2px rgba(27, 27, 27, .04), 0 4px 16px rgba(27, 27, 27, .05);
+  --shadow-raised:  0 2px 4px rgba(27, 27, 27, .05), 0 10px 28px rgba(27, 27, 27, .08);
+  --shadow-overlay: 0 12px 40px rgba(27, 27, 27, .14), 0 2px 8px rgba(27, 27, 27, .08);
+
+  /* ── Movimento e foco ──
+     O anel era emerald a 45%. Vira charcoal a 40%, que é o que sobra de
+     recurso para marcar foco quando não há cor de acento. */
+  --dur-fast:   120ms;
+  --dur-normal: 180ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ring-focus-color: rgba(45, 47, 51, .40);
+
+  background: var(--bg);
   color: var(--text);
 }
 
-/* O apoio do hero da planos vai a 18px fixos. A regra global .page-hero p é
-   clamp(18px, 2.2vw, 22px) e serve também agentes, termo e politica, então o
-   ajuste é escopado aqui em vez de mexer no clamp.
-
-   Filho DIRETO do .wrap de propósito: dentro deste hero moram mais seis <p>,
-   os "O que está incluso:" e as notas de teste grátis dos três cartões. Um
-   seletor descendente pegaria todos. */
-.page-hero.tema-escuro > .wrap > p { font-size: 18px; }
-
-/* Os efeitos do hero estavam desligados com !important porque glow verde sobre
-   branco virava véu. No escuro o glow e os blobs voltam a fazer sentido, e a
-   especificidade maior do escopo vence a regra que os desligou.
-
-   O .hero-grid (malha de pontos de 1px a cada 18px) fica de fora: sobre o preto
-   ele some de longe e aparece de perto como ruído, competindo com a leitura dos
-   preços, que é o único trabalho desta dobra. */
-.page-hero.tema-escuro .hero-glow,
-.page-hero.tema-escuro .mesh-blob { display: block !important; }
-
-.page-hero.tema-escuro h1,
-.page-hero.tema-escuro .pname,
-.page-hero.tema-escuro .pprice .amt { color: var(--text); }
-/* O .em-shine-text do site é verde chapado: o degradê animado foi removido de
-   lá por ser ilegível sobre branco. Sobre o preto do app ele volta, e volta
-   igual ao .texto-brilho do CRM, mesmo degradê e mesmos 5s lineares. */
-.page-hero.tema-escuro .em-shine-text,
-.page-hero.tema-escuro .grad-verde {
-  background: linear-gradient(90deg, #00B87A, #5CFFC0, #00E599, #5CFFC0, #00B87A);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: em-shine 5s linear infinite;
-}
-/* "Rezult" antes do nome do plano, como no título do modal do app. Pesa menos
-   que o nome: ali ele é prefixo de marca, e quem decide compara Silver com
-   Platinum, não um "Rezult" com o outro. */
-.page-hero.tema-escuro .pcard .pname .em-shine-text { font-weight: 500; }
-
-/* A pill do hero era a única peça do bloco que tinha ficado com o verde antigo
-   do site (#00B873 na cápsula e na borda), destoando de tudo em volta, que já
-   usa o emerald do app. A borda vai ao bordaSuave do VENDA e a cápsula ao
-   emerald com a tinta charcoal, o mesmo par do botão destacado. */
-.page-hero.tema-escuro .hero-badge { border-color: rgba(1, 216, 164, 0.20); color: var(--text-muted); }
-.page-hero.tema-escuro .hero-badge .tag { background: #01D8A4; color: #2D2F33; }
-.page-hero.tema-escuro .hero-badge-ico { color: #01D8A4; }
-
-/* Seletor de ciclo. O ativo leva o emerald com tinta charcoal (VENDA.sobreVerde),
-   e o selo de desconto é texto verde sem fundo: VENDA.brilhoSuave é transparent. */
-.page-hero.tema-escuro .price-toggle { background: var(--dark-surface); border-color: rgba(1, 216, 164, 0.20); }
-.page-hero.tema-escuro .price-toggle button.active { background: #01D8A4; color: #2D2F33; }
-.page-hero.tema-escuro .price-toggle .save { background: transparent; color: #01D8A4; }
-.page-hero.tema-escuro .price-toggle button.active .save { background: transparent; color: #2D2F33; }
-
-/* Cartões. Sem halo verde: a paleta zera brilhoSuave e brilhoVerde de
-   propósito, e documenta o motivo ("o destaque vem do contraste entre o cartão
-   escuro e o canvas, não de um brilho em volta"). A sombra do destacado é a
-   neutra do app. */
-.page-hero.tema-escuro .pcard { background: var(--dark-surface); border-color: rgba(255, 255, 255, 0.15); }
-.page-hero.tema-escuro .pcard:hover { border-color: rgba(1, 216, 164, 0.45); }
-.page-hero.tema-escuro .pcard.featured {
-  background: var(--dark-surface);
-  border-color: rgba(1, 216, 164, 0.45);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+/* Anel de foco do sistema: 3px, e o site não tinha nenhum. */
+body.ds-crm a:focus-visible,
+body.ds-crm button:focus-visible {
+  outline: 3px solid var(--ring-focus-color);
+  outline-offset: 2px;
 }
 
-/* O selo sai de dentro do nome e vai para o topo do cartão, centralizado e
-   montado na borda, como no app. */
-.page-hero.tema-escuro .pcard.featured { overflow: visible; }
-.page-hero.tema-escuro .pcard.featured .pname::after {
+/* ---------- Tipografia: os papéis do DS ------------------------------------
+   Inter, quatro pesos (400, 500, 600, 700). A família já era a certa nas duas
+   pontas, então aqui o que muda é a ESCALA.
+
+   Os títulos ficam na escala de venda, que o próprio DS prevê para o site
+   ("Display 48/700 — Só o site (hero)" e "H1 32/600 — Título de página do
+   site"). O miúdo cai nos papéis de app (Corpo 14/400, Small 13/400,
+   Caption 12/400, Overline 11/500).
+
+   Duas regras do DS que mudam valores herdados do site:
+     · mínimo funcional 12px, e nada de peso 300 (a família tem quatro pesos);
+     · tracking negativo só a partir de 18px, zero abaixo disso. */
+
+/* Display: o h1 do hero. */
+body.ds-crm .page-hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+/* H1 do site: título de seção e do cartão de dúvidas. O site usava 36px e um
+   clamp até 35px, nenhum dos dois papel do DS. */
+body.ds-crm .h2,
+body.ds-crm .ainda-duvidas h2 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+/* Lede do hero e do cartão de dúvidas: 18px é o piso do tracking negativo, e
+   a entrelinha é a de Corpo. */
+body.ds-crm .page-hero > .wrap > p,
+body.ds-crm .ainda-duvidas p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+/* Título de painel: a pergunta da FAQ. */
+body.ds-crm .faq-q {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+/* Corpo: resposta da FAQ e depoimento. */
+body.ds-crm .faq-a-inner,
+body.ds-crm .tcard .quote {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+body.ds-crm .faq-a-inner { color: var(--text-muted); }
+body.ds-crm .tcard .quote { color: var(--neutral-800); }
+/* Ênfase dentro de frase é 500 ou 600, nunca 700: no DS o 700 é de logo e de
+   valor de destaque. */
+body.ds-crm .tcard .quote .hl { color: var(--text); font-weight: 600; }
+body.ds-crm .tcard .who .nm {
+  font-size: 14px; font-weight: 600; letter-spacing: 0; color: var(--text);
+}
+body.ds-crm .tcard .who .rl {
+  font-size: 12px; font-weight: 400; line-height: 1.35; color: var(--text-muted);
+}
+/* Overline: a etiqueta da pill do hero. Sai do mono, porque no DS a segunda
+   família serve só a ID, token e código. */
+body.ds-crm .hero-badge .tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--neutral-900);
+  color: var(--on-primary);
+}
+body.ds-crm .hero-badge {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+body.ds-crm .hero-badge-ico { color: var(--green-text); }
+
+/* ---------- Controles ------------------------------------------------------
+   Altura de controle do DS: 36/40/44 (sm/md/lg). Raio de 10px em todo
+   controle, inclusive onde o site usava pílula: no DS a pílula é de filtro e
+   de avatar, não de botão. */
+body.ds-crm .btn {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  min-height: 40px;
+  border-radius: var(--r-sm);
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+body.ds-crm .btn-lg { font-size: 16px; min-height: 44px; padding: 12px 28px; }
+/* O halo neon de 30px sai: no lugar dele, a sombra discreta do sistema. */
+body.ds-crm .btn-primary {
+  background: var(--neutral-900);
+  color: var(--on-primary);
+  box-shadow: var(--shadow-xs);
+  font-weight: 600;
+}
+body.ds-crm .btn-primary:hover {
+  background: var(--neutral-800);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+body.ds-crm .btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+body.ds-crm .btn-secondary:hover {
+  background: var(--neutral-50);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+body.ds-crm .ainda-duvidas-acoes .btn { border-radius: var(--r-sm); }
+body.ds-crm .ainda-duvidas-acoes .btn-secondary {
+  background: var(--surface);
+  border-color: var(--border);
+}
+body.ds-crm .ainda-duvidas-acoes .btn-secondary:hover { background: var(--neutral-50); }
+
+/* ---------- Barra de navegação --------------------------------------------- */
+body.ds-crm .nav { background: var(--neutral-0); }
+body.ds-crm .nav-links a { color: var(--text); }
+body.ds-crm .nav-links a:hover { color: var(--neutral-950); }
+body.ds-crm .nav-burger { color: var(--text); }
+/* Flutuando, a barra é um painel: ganha os 16px de cartão e a sombra do
+   sistema, no lugar dos 14px e da sombra preta a 12%. */
+body.ds-crm .nav.scrolled {
+  border-radius: var(--r-lg);
+  border-color: var(--border);
+  box-shadow: var(--shadow-raised);
+}
+
+/* ---------- Seletor de ciclo de cobrança -----------------------------------
+   A correção que o DS força aqui: o botão ativo tinha texto BRANCO sobre o
+   emerald, 1,85:1. Vai para o charcoal, 7,25:1. */
+body.ds-crm .price-toggle {
+  background: var(--neutral-100);
+  border: 1px solid var(--border);
+  min-height: 40px;
+}
+body.ds-crm .price-toggle button { color: var(--text-muted); font-weight: 500; }
+body.ds-crm .price-toggle button.active {
+  background: var(--neutral-900);
+  color: var(--on-primary);
+  font-weight: 600;
+}
+body.ds-crm .price-toggle .save {
+  background: var(--neutral-200);
+  color: var(--neutral-900);
+  font-weight: 600;
+}
+body.ds-crm .price-toggle button.active .save {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--on-primary);
+}
+
+/* ---------- Cartões de preço -----------------------------------------------
+   Cartão branco sobre canvas, borda de 1px E sombra, raio de painel. A escala
+   de dentro vem da tela de planos do app, subida um degrau onde a página
+   pública pede presença: lá o nome do plano é 20px e o valor 24px, dentro de
+   um modal estreito; aqui são 24px e 32px, que são os papéis H2 e Métrica.
+
+   O padding fica em 32px, e não nos 20px de --pad-card do app: 32 está na
+   escala base 2 do DS e a coluna aqui é quase o dobro da do modal. */
+body.ds-crm .pcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-normal) var(--ease-out),
+              box-shadow var(--dur-normal) var(--ease-out),
+              transform var(--dur-normal) var(--ease-out);
+}
+body.ds-crm .pcard:hover {
+  border-color: var(--neutral-300);
+  box-shadow: var(--shadow-raised);
+}
+/* O destacado não ganha halo: ganha a borda emerald dobrada por um anel de
+   1px, que é borda e não brilho, mais a sombra de cartão levantado. */
+body.ds-crm .pcard.featured {
+  background: var(--surface);
+  border-color: var(--neutral-900);
+  box-shadow: 0 0 0 1px var(--neutral-900), var(--shadow-raised);
+}
+body.ds-crm .pcard.featured { overflow: visible; }
+body.ds-crm .pcard.featured .pname::after {
   content: "Recomendado";
   position: absolute;
   top: -11px;
@@ -1150,66 +1409,240 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   padding: 4px 12px;
   border: 0;
   border-radius: 100px;
-  background: #01D8A4;
-  color: #2D2F33;
+  background: var(--neutral-900);
+  color: var(--on-primary);
   font-family: var(--sans);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
+  text-transform: none;
   white-space: nowrap;
 }
 
-.page-hero.tema-escuro .pcard .pprice .cur,
-.page-hero.tema-escuro .pcard .pprice .per,
-.page-hero.tema-escuro .pcard .pprice-recurring { color: var(--text-subtle); }
-.page-hero.tema-escuro .pcard .pprice .pperiod { background: transparent; color: #01D8A4; }
-.page-hero.tema-escuro .pcard .pprice-savings { color: #01D8A4; }
-.page-hero.tema-escuro .pcard .pprice-savings s { color: #FD5555; text-decoration-color: #FD5555; }
-.page-hero.tema-escuro .pcard .pprice-savings s.pprice-de { color: var(--text-subtle); text-decoration-color: var(--text-subtle); }
-
-/* Botão: só o plano destacado leva o emerald preenchido. Os outros dois ficam
-   em superficie2 com borda, como no app, para o olho ter um alvo só. */
-.page-hero.tema-escuro .pcard .btn-pontos {
-  background: var(--dark-surface-2);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+/* H2 no nome do plano, Corpo na linha de apoio. */
+body.ds-crm .pcard .pname {
+  font-size: 24px; font-weight: 600; line-height: 1.2;
+  letter-spacing: -0.015em; color: var(--text);
 }
-/* Correção óptica, não erro de valor: os três botões nasceram em 500, medido,
-   e o texto renderiza com a mesma largura nos três. Mas claro sobre escuro
-   aparenta menos peso que escuro sobre claro, porque o fundo invade as hastes
-   da letra. Os dois laterais sobem para 600 para PARECEREM o que já são, e o
-   destacado fica em 500 porque a tinta escura sobre o emerald já se impõe. */
-.page-hero.tema-escuro .pcard .btn-pontos .btn-pontos-inner { color: #FFFFFF; font-weight: 600; }
-.page-hero.tema-escuro .pcard.featured .btn-pontos { background: #01D8A4; border-color: #01D8A4; }
-.page-hero.tema-escuro .pcard.featured .btn-pontos .btn-pontos-inner { color: #2D2F33; font-weight: 500; }
-/* O botão do site traz pontinhos animados, um brilho de vidro no ::before e um
-   halo verde no ::after. No app o botão é chapado, e o halo pintava de verde
-   até os dois botões que deveriam ficar escuros. Os três efeitos saem. */
-.page-hero.tema-escuro .pcard .btn-pontos-wrap { display: none; }
-.page-hero.tema-escuro .pcard .btn-pontos::before,
-.page-hero.tema-escuro .pcard .btn-pontos::after { display: none; }
-
-.page-hero.tema-escuro .pcard .pfeats li { color: var(--text-muted); }
-.page-hero.tema-escuro .pcard .pfeats li b { color: var(--text); }
-.page-hero.tema-escuro .pcard .pfeats-titulo { color: var(--text); }
-.page-hero.tema-escuro .pcard .pfeats li svg { color: #01D8A4; }
-/* O primeiro item é o destaque do plano e leva o verde animado, igual ao app. */
-.page-hero.tema-escuro .pcard .pfeats li:first-child b {
-  background: linear-gradient(90deg, #00B87A, #5CFFC0, #00E599, #5CFFC0, #00B87A);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+body.ds-crm .pcard .pdesc {
+  font-size: 14px; font-weight: 400; line-height: 1.45;
+  letter-spacing: 0; color: var(--text-muted);
 }
+/* "Rezult" antes do nome segue pesando menos que o nome, e vira tinta verde
+   chapada: o degradê animado era peça de superfície escura. */
+body.ds-crm .pcard .pname .em-shine-text {
+  font-weight: 500;
+  color: var(--green-text);
+  -webkit-text-fill-color: var(--green-text);
+  background: none;
+  animation: none;
+}
+
+/* Métrica: o valor. tabular-nums porque no DS número é sempre tabular, para
+   os dígitos não dançarem entre as três colunas. */
+body.ds-crm .pcard .pprice .amt {
+  font-size: 32px; font-weight: 600; line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+body.ds-crm .pcard .pprice .cur {
+  font-size: 20px; font-weight: 500; color: var(--text-muted);
+}
+/* Small. A tinta é --text-muted e não --text-subtle: o DS libera o
+   --neutral-500 só a partir de 16px, e aqui são 13. */
+body.ds-crm .pcard .pprice .per,
+body.ds-crm .pcard .pprice-recurring,
+body.ds-crm .pcard .pprice-savings s.pprice-de {
+  font-size: 13px; font-weight: 400; line-height: 1.4;
+  letter-spacing: 0; color: var(--text-muted);
+}
+body.ds-crm .pcard .pprice-savings s.pprice-de { text-decoration-color: var(--text-muted); }
+body.ds-crm .pcard .pprice .pperiod {
+  font-size: 12px; font-weight: 600; letter-spacing: 0;
+  background: var(--neutral-200); color: var(--neutral-900);
+}
+/* Corpo forte no "Economize", e o riscado na TINTA de erro (6,72:1) e não no
+   vermelho de botão. */
+body.ds-crm .pcard .pprice-savings {
+  font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--green-text);
+}
+body.ds-crm .pcard .pprice-savings s {
+  font-size: 14px; font-weight: 500;
+  color: var(--neutral-600); text-decoration-color: var(--neutral-600);
+}
+/* Caption. O peso vai de 300 para 400: a família do DS tem quatro pesos e o
+   300 não é um deles. */
+body.ds-crm .pcard .pcard-nota {
+  font-size: 12px; font-weight: 400; line-height: 1.35;
+  letter-spacing: 0; color: var(--text-muted);
+}
+body.ds-crm .pcard .pfeats-titulo {
+  font-size: 14px; font-weight: 600; letter-spacing: 0; color: var(--text);
+}
+body.ds-crm .pcard .pfeats li {
+  font-size: 14px; font-weight: 400; line-height: 1.45;
+  letter-spacing: 0; color: var(--neutral-800);
+}
+body.ds-crm .pcard .pfeats li b { color: var(--text); font-weight: 600; }
+body.ds-crm .pcard .pfeats li svg { color: var(--green-text); }
+/* O primeiro item é o destaque do plano: um degrau acima e em tinta verde. */
+body.ds-crm .pcard .pfeats li:first-child { font-size: 16px; }
+body.ds-crm .pcard .pfeats li:first-child b { font-weight: 600; }
+
+/* Botão do cartão. Só o destacado leva o emerald preenchido, para o olho ter
+   um alvo só, como no app. Os pontinhos, o brilho de vidro e o halo do botão
+   do site seguem desligados aqui: no DS o botão é chapado. */
+body.ds-crm .pcard .btn-pontos {
+  background: var(--neutral-100);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  min-height: 40px;
+  box-shadow: none;
+}
+body.ds-crm .pcard .btn-pontos .btn-pontos-inner {
+  color: var(--text); font-size: 14px; font-weight: 600; letter-spacing: 0;
+}
+body.ds-crm .pcard .btn-pontos:hover { background: var(--neutral-150); }
+body.ds-crm .pcard.featured .btn-pontos {
+  background: var(--neutral-900);
+  border-color: var(--neutral-900);
+}
+body.ds-crm .pcard.featured .btn-pontos:hover { background: var(--neutral-800); }
+body.ds-crm .pcard.featured .btn-pontos .btn-pontos-inner { color: var(--on-primary); }
+body.ds-crm .pcard .btn-pontos-wrap { display: none; }
+body.ds-crm .pcard .btn-pontos::before,
+body.ds-crm .pcard .btn-pontos::after { display: none; }
+
+/* ---------- Provas sociais -------------------------------------------------
+   O degradê verde do .grad-verde some: ele era calibrado para o site e nasce
+   de dois tons que o DS não tem. Vira tinta verde chapada, que no canvas é o
+   --accent-800 e dentro do cartão branco o --accent-700. */
+/* Ênfase dentro de título. O .grad-verde e o .em-shine-text marcavam o trecho
+   em destaque por COR, e em cinza o destaque ficava mais CLARO que a frase em
+   volta: a ênfase saía invertida. Resolve-se pelo outro lado, o título que
+   contém um destaque recua para --neutral-600 e o destaque fica no charcoal.
+   O :has() escopa aos títulos que de fato têm trecho marcado. */
+body.ds-crm .h2:has(.grad-verde),
+body.ds-crm .h2:has(.em-shine-text),
+body.ds-crm .page-hero h1:has(.em-shine-text) { color: var(--neutral-600); }
+
+body.ds-crm .grad-verde,
+body.ds-crm .em-shine-text {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--green-text);
+  -webkit-text-fill-color: var(--green-text);
+  animation: none;
+}
+body.ds-crm .tcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-normal) var(--ease-out),
+              box-shadow var(--dur-normal) var(--ease-out),
+              transform var(--dur-normal) var(--ease-out);
+}
+body.ds-crm .tcard:hover {
+  border-color: var(--neutral-300);
+  box-shadow: var(--shadow-raised);
+}
+body.ds-crm .tcard .stars { color: var(--dourado); }
+
+/* ---------- FAQ ------------------------------------------------------------ */
+body.ds-crm .faq-item { border-bottom-color: var(--border); }
+body.ds-crm .faq-q .ico { color: var(--green-text); }
+
+/* ---------- Cartão de dúvidas ---------------------------------------------- */
+body.ds-crm .ainda-duvidas { background: var(--bg); }
+body.ds-crm .ainda-duvidas-card {
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---------- Rodapé ---------------------------------------------------------
+   O preto do rodapé vira o --neutral-950 do DS. As tintas sobre ele subiram:
+   a de rgba(255,255,255,0.35) dava 3,38:1 e reprovava no AA. --neutral-300 dá
+   11,7:1 e --neutral-400 dá 8,3:1. */
+body.ds-crm .footer { background: var(--neutral-950); }
+body.ds-crm .footer .footer-brand p,
+body.ds-crm .footer .footer-col a { color: var(--neutral-300); }
+body.ds-crm .footer .footer-col h3,
+body.ds-crm .footer .footer-bottom .cp { color: var(--neutral-400); }
+body.ds-crm .footer .footer-bottom { border-top-color: rgba(255, 255, 255, 0.12); }
+body.ds-crm .footer .footer-social a {
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--neutral-300);
+}
+body.ds-crm .footer .btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--neutral-0);
+  box-shadow: none;
+}
+body.ds-crm .footer .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* O hover do link de rodapé lia var(--primary), que aqui é charcoal: sobre o
+   #1B1B1B ele sumiria. Vai para o branco. */
+body.ds-crm .footer .footer-col a:hover { color: var(--neutral-0); }
+
+/* ---------- CTA da navbar --------------------------------------------------
+   Ele é o último verde que sobrava na página, e mora fora deste bloco (em
+   .nav-right, regra compartilhada com a home). A troca é a mesma de antes, e
+   SÓ de cor: os pontinhos animados, o brilho de vidro do ::before e o degradê
+   do ::after continuam.
+
+   O verde está em dois lugares, o fundo e o ::after, que repetem o mesmo par.
+   Nos dois o #01D8A4 vira o charcoal --neutral-900, e o radial de baixo vira
+   branco a 35%: ele tem que ser MAIS CLARO que a base, senão o efeito inverte
+   e o botão parece ter um buraco no lugar do brilho. A tinta vai de charcoal
+   para branco, porque a base trocou de lado.
+
+   Escopado em body.ds-crm de propósito: a navbar da home segue verde. Mudar
+   lá é mudar uma página que não estava em discussão. */
+body.ds-crm .nav-right .btn-pontos,
+body.ds-crm .nav-right .btn-pontos::after {
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
+              linear-gradient(0deg, #2D2F33, #2D2F33);
+}
+body.ds-crm .nav-right .btn-pontos .btn-pontos-inner { color: var(--neutral-0); }
+body.ds-crm .nav-right .btn-pontos .btn-pontos-icon { stroke: currentColor; }
+
+/* O "Entrar" ao lado dele usava um quase-preto próprio (#050A07) e uma borda
+   em rgba desse mesmo tom. Passa a ler os neutros do sistema. */
+body.ds-crm .nav-cta-ghost {
+  color: var(--text);
+  border-color: var(--border-strong);
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  font-weight: 500;
+}
+body.ds-crm .nav-cta-ghost:hover { color: var(--neutral-950); border-color: var(--neutral-900); }
+
+/* Seleção de texto: era o verde da marca a 30%. Vira cinza, senão a página
+   fica neutra até alguém arrastar o cursor sobre um parágrafo. */
+body.ds-crm ::selection { background: rgba(45, 47, 51, 0.18); }
+
+/* Botão cheio SOBRE o rodapé escuro. Fora dele o botão cheio é charcoal com
+   tinta branca; aqui isso daria #2D2F33 sobre #1B1B1B, praticamente invisível.
+   No fundo invertido o par inverte junto: branco com tinta charcoal, 15,8:1. */
+body.ds-crm .footer .btn-primary {
+  background: var(--neutral-0);
+  color: var(--neutral-900);
+  box-shadow: none;
+}
+body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
+
 @media (prefers-reduced-motion: reduce) {
-  .page-hero.tema-escuro .em-shine-text,
-  .page-hero.tema-escuro .grad-verde,
-  .page-hero.tema-escuro .pcard .pfeats li:first-child b {
-    background: none;
-    color: #00E599;
-    -webkit-text-fill-color: #00E599;
-    animation: none;
-  }
+  body.ds-crm .pcard,
+  body.ds-crm .tcard,
+  body.ds-crm .btn { transition: none; }
+  body.ds-crm .pcard:hover,
+  body.ds-crm .tcard:hover,
+  body.ds-crm .btn:hover { transform: none; }
 }
 
 /* ---------- App mockup ---------- */
@@ -1241,7 +1674,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .mk-rail { width: 52px; background: var(--bg-deep); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 12px 0; gap: 4px; flex-shrink: 0; }
 .mk-rail .mk-logo { width: 30px; height: 30px; border-radius: 9px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: var(--on-primary); letter-spacing: -0.04em; margin-bottom: 10px; }
 .mk-rail .mk-nav { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--text-subtle); }
-.mk-rail .mk-nav.on { background: rgba(0, 184, 115,0.14); color: var(--primary); }
+.mk-rail .mk-nav.on { background: rgba(138, 138, 142,0.14); color: var(--primary); }
 .mk-rail .mk-nav svg { width: 17px; height: 17px; }
 .mk-main { flex: 1; padding: 16px; min-width: 0; }
 .mk-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
@@ -1300,10 +1733,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
 /* Tema de cor do card: declarado no .feature-text para alcançar os três que o
    usam — o ícone, a palavra em destaque no título e a seta do rodapé. */
-.tema-verde   { --hl-fg: #067A4B; --hl-bg: #DFF6EC; }
-.tema-laranja { --hl-fg: #EA580C; --hl-bg: #FEF0E6; }
-.tema-azul    { --hl-fg: #0284C7; --hl-bg: #E6F4FE; }
-.tema-roxo    { --hl-fg: #7C3AED; --hl-bg: #F3EDFE; }
+.tema-verde   { --hl-fg: #6C6C6C; --hl-bg: #F2F2F2; }
+.tema-laranja { --hl-fg: #8A8A8E; --hl-bg: #F2F2F2; }
+.tema-azul    { --hl-fg: #8A8A8E; --hl-bg: #F2F2F2; }
+.tema-roxo    { --hl-fg: #6C6C6C; --hl-bg: #F2F2F2; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .feature-text .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
@@ -1423,7 +1856,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
-.bcard { flex: 0 0 calc((100% - 40px) / 3); border-radius: var(--r-lg); background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 18px; min-height: 412px; position: relative; overflow: hidden; }.bcard .b-num { font-family: var(--mono); font-size: 12px; color: #166534; letter-spacing: 0.1em; position: relative; }
+.bcard { flex: 0 0 calc((100% - 40px) / 3); border-radius: var(--r-lg); background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 18px; min-height: 412px; position: relative; overflow: hidden; }.bcard .b-num { font-family: var(--mono); font-size: 12px; color: #525154; letter-spacing: 0.1em; position: relative; }
 .bcard .b-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); position: relative; box-shadow: none; }
 .bcard .b-icon svg { width: 24px; height: 24px; }
 .bcard h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.2; position: relative; margin-top: auto; font-weight: 700; }
@@ -1466,11 +1899,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Fundo verde bem claro derivado do próprio --green-text a 12%, em vez de um
    hex claro novo: acompanha a cor da marca numa troca futura. A borda cinza
    saiu — sobre o verde ela cortava a peça em duas cores sem necessidade. */
-.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); border: none; display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
+.seg-card .seg-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: rgba(138, 138, 142, 0.12); border: none; display: flex; align-items: center; justify-content: center; color: var(--green-text); box-shadow: none; flex-shrink: 0; }
 .seg-card .seg-icon svg { width: 24px; height: 24px; }
 .seg-card h3 { margin-top: 18px; font-size: 20px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; }
 .seg-card p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: var(--text-muted); }
-.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(0, 184, 115,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
+.seg-cta { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border-active); background: linear-gradient(150deg, rgba(138, 138, 142,0.16), var(--surface) 55%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 28px; gap: 18px; }
 .seg-cta .seg-cta-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 75%); mask-image: radial-gradient(ellipse at center, #000, transparent 75%); opacity: 0.5; }
 .seg-cta > * { position: relative; z-index: 1; }
 .seg-cta h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
@@ -1480,10 +1913,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    cena e as seções ficam no branco chapado. As regras originais continuam
    abaixo para histórico, mas estas as desligam em um lugar só, sem precisar
    mexer no HTML de 4 páginas. */
-/* O hero está fora desta lista: ele voltou a ser escuro e os efeitos dele
-   fazem sentido de novo. Os seletores abaixo miram só o que sobrou em seção
-   clara. A .page-hero das outras páginas segue sem efeito, porque o cabeçalho
-   delas continua branco. */
+/* A hero da home está fora desta lista (ela mora em home.css): lá o bloco é
+   escuro e os efeitos fazem sentido. Os seletores abaixo miram o que ficou em
+   seção clara, e isso agora inclui as QUATRO .page-hero. A de planos entrou
+   junto quando o fundo dela voltou ao branco: sobre claro o glow verde e os
+   blobs viram véu, e só os três cartões de preço seguem escuros. */
 .page-hero .hero-glow, .page-hero .hero-side-l, .page-hero .hero-side-r,
 .page-hero .mesh-blob, .page-hero .hero-grid,
 .impl-blob, .impl-bg-grid, .demo-side-l, .demo-side-r,
@@ -1517,7 +1951,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .compare-table thead th.us { color: var(--green-text); }
 .compare-table tbody td { font-size: 15px; }
 .compare-table tbody td:first-child { color: var(--text-muted); }
-.compare-table .col-us { background: rgba(0, 184, 115,0.05); }
+.compare-table .col-us { background: rgba(45, 47, 51, 0.0275); }
 .compare-table td.center { text-align: center; }
 .compare-table td svg { width: 20px; height: 20px; margin: 0 auto; }
 .chk { color: var(--green-text); }
@@ -1548,10 +1982,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .tcard .stars svg { width: 19px; height: 19px; margin-right: -2px; }
 
 /* ---------- Pricing ---------- */
-.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(0, 184, 115, 0.20); margin: 0 auto 56px; }
+.price-toggle { display: flex; width: 300px; align-items: center; gap: 3px; padding: 4px; border-radius: 100px; background: var(--surface-2); border: 1px solid rgba(138, 138, 142, 0.20); margin: 0 auto 56px; }
 .price-toggle button { font-size: 14px; font-weight: 500; padding: 9px 9px; border-radius: 100px; color: var(--text-muted); transition: all .15s; display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
 .price-toggle button.active { background: var(--primary); color: #FFFFFF; font-weight: 600; }
-.price-toggle .save { font-size: 10px; padding: 2px 5px; border-radius: 100px; background: rgba(0, 184, 115,0.16); color: #166534; letter-spacing: 0.02em; }
+.price-toggle .save { font-size: 10px; padding: 2px 5px; border-radius: 100px; background: rgba(138, 138, 142,0.16); color: #525154; letter-spacing: 0.02em; }
 .price-toggle button.active .save { background: rgba(255,255,255,0.22); color: #FFFFFF; }
 
 .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
@@ -1560,7 +1994,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 /* Sombra verde e discreta: é o único card com sombra, então ela é o que
    diferencia o plano em destaque. Em preto, marcava demais; no verde da marca e
    com opacidade baixa, vira um halo em vez de peso. */
-.pcard.featured { border-color: var(--border-active); background: #FFFFFF; box-shadow: 0 2px 6px rgba(0, 184, 115, 0.10), 0 16px 40px rgba(0, 184, 115, 0.14); }
+.pcard.featured { border-color: var(--border-active); background: #FFFFFF; box-shadow: 0 2px 6px rgba(138, 138, 142, 0.10), 0 16px 40px rgba(138, 138, 142, 0.14); }
 /* O selo sai de cima da borda e passa a acompanhar o nome do plano. Vira
    ::after do .pname para ficar na mesma linha do texto: como pseudo-elemento do
    próprio título, ele herda a linha em vez de precisar de posicionamento. Sem
@@ -1573,7 +2007,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .pcard .pprice .cur { font-size: 20px; font-weight: 500; color: var(--text-muted); }
 .pcard .pprice .amt { font-size: 35px; font-weight: 600; letter-spacing: -0.04em; }
 .pcard .pprice .per { font-size: 15px; color: var(--text-subtle); }
-.pcard .pprice .pperiod { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(0, 184, 115,0.16); color: #166534; letter-spacing: 0.02em; margin-left: auto; }
+.pcard .pprice .pperiod { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px; background: rgba(138, 138, 142,0.16); color: #525154; letter-spacing: 0.02em; margin-left: auto; }
 .pcard .pprice-savings { font-size: 14px; font-weight: 500; color: var(--green-text); display: flex; align-items: baseline; gap: 6px; }
 .pcard .pprice-savings:empty { display: none; }
 .pcard .pprice-savings s { color: var(--red); text-decoration-color: var(--red); font-weight: 600; font-size: 16px; }
@@ -1629,16 +2063,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
-.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
-.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0, 184, 115,0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(45, 47, 51, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(45, 47, 51, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .demo-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 12px; }
-.demo-trust li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #374151; font-weight: 500; }
-.demo-trust li svg { flex-shrink: 0; color: #00B873; }
+.demo-trust li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--neutral-700); font-weight: 500; }
+.demo-trust li svg { flex-shrink: 0; color: var(--neutral-700); }
 .demo-split .cta-final { max-width: 100%; margin: 0; }
 .demo-split-left > p { font-weight: 400; line-height: 1.3; }
 .demo-trust li { font-weight: 400; line-height: 1.3; }
-.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 48px 24px; text-align: left; background: #fff; border: 1px solid #00B873; max-width: 480px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.12); }
+.cta-final { position: relative; border-radius: var(--r-xl); overflow: hidden; padding: 48px 24px; text-align: left; background: #fff; border: 1px solid var(--neutral-200); max-width: 480px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.12); }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
@@ -1663,7 +2097,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   padding: 56px 40px;
   text-align: center;
   background: #F1FBF7;
-  border: 1px solid rgba(0, 184, 115, 0.22);
+  border: 1px solid rgba(138, 138, 142, 0.22);
   border-radius: var(--r-xl);
 }
 .ainda-duvidas h2 {
@@ -1693,11 +2127,11 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 }
 .ainda-duvidas-acoes .btn-secondary {
   background: #FFFFFF;
-  border-color: rgba(0, 184, 115, 0.42);
+  border-color: rgba(138, 138, 142, 0.42);
   color: var(--text);
 }
 .ainda-duvidas-acoes .btn-secondary:hover {
-  background: rgba(0, 184, 115, 0.07);
+  background: rgba(138, 138, 142, 0.07);
   border-color: var(--primary);
 }
 
@@ -1706,18 +2140,18 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .demo-form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
 .demo-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
 .demo-label { font-size: 13px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
-.demo-input { width: 100%; padding: 10px 14px; border: 1px solid #9ca3af; border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; -webkit-appearance: none; appearance: none; }
+.demo-input { width: 100%; padding: 10px 14px; border: 1px solid var(--neutral-300); border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; -webkit-appearance: none; appearance: none; }
 .demo-select { padding-right: 36px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-.demo-input:focus { border-color: #00B873; box-shadow: 0 0 0 3px rgba(0, 184, 115,0.15); background: #fff; }
-input.demo-input:not(:placeholder-shown) { background-color: #fefce8; }
-select.demo-select.has-value { background-color: #fefce8; }
-.demo-input::placeholder { color: #374151; }
-select.demo-select:invalid { color: #374151; }
+.demo-input:focus { border-color: var(--neutral-900); box-shadow: 0 0 0 3px rgba(45, 47, 51, 0.0825); background: #fff; }
+input.demo-input:not(:placeholder-shown) { background-color: var(--neutral-50); }
+select.demo-select.has-value { background-color: var(--neutral-50); }
+.demo-input::placeholder { color: var(--neutral-700); }
+select.demo-select:invalid { color: var(--neutral-700); }
 .demo-submit { width: 100%; margin-top: 20px; border-radius: 9999px !important; justify-content: center; }
 .demo-success { display: none; flex-direction: column; align-items: center; gap: 8px; padding: 32px 0 8px; color: #111; }
-.demo-success svg { width: 40px; height: 40px; color: #00B873; margin-bottom: 4px; }
+.demo-success svg { width: 40px; height: 40px; color: var(--neutral-900); margin-bottom: 4px; }
 .demo-success strong { font-size: 20px; font-weight: 600; }
-.demo-success span { font-size: 15px; color: #6b7280; }
+.demo-success span { font-size: 15px; color: var(--neutral-600); }
 
 /* ---------- Footer ---------- */
 .footer { background: #0a0d0b; padding: 72px 0 40px; }
@@ -1737,7 +2171,7 @@ select.demo-select:invalid { color: #374151; }
 .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 300px; }
 .footer-brand-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 .footer-brand-actions .btn { border-radius: 9999px; }
-.footer-brand-actions .btn-secondary { border: 1px solid #00B873; }
+.footer-brand-actions .btn-secondary { border: 1px solid #8A8A8E; }
 .footer-col h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 18px; }
 .footer-col a { display: block; font-size: 14.5px; color: var(--text-muted); margin-bottom: 12px; transition: color .15s; }
 .footer-col a:hover { color: var(--primary); }
@@ -1802,18 +2236,18 @@ select.demo-select:invalid { color: #374151; }
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(20px); } }
 
 .impl-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.impl-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 184, 115,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 184, 115,0.03) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.6; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); }
+.impl-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(138, 138, 142,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(138, 138, 142,0.03) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.6; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); mask-image: radial-gradient(ellipse 85% 100% at 50% 100%, #000 0%, transparent 60%); }
 .impl-blob { position: absolute; border-radius: 50%; filter: blur(100px); }
-.impl-blob-1 { top: -200px; right: -150px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0, 184, 115,0.12) 0%, transparent 65%); animation: float 20s ease-in-out infinite; }
-.impl-blob-2 { bottom: -250px; left: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0, 184, 115,0.08) 0%, transparent 70%); filter: blur(110px); animation: float 25s ease-in-out infinite reverse; }
-.impl-blob-3 { top: 50%; left: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 184, 115,0.05) 0%, transparent 75%); filter: blur(90px); animation: float 30s ease-in-out infinite; }
+.impl-blob-1 { top: -200px; right: -150px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(138, 138, 142,0.12) 0%, transparent 65%); animation: float 20s ease-in-out infinite; }
+.impl-blob-2 { bottom: -250px; left: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(138, 138, 142,0.08) 0%, transparent 70%); filter: blur(110px); animation: float 25s ease-in-out infinite reverse; }
+.impl-blob-3 { top: 50%; left: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(138, 138, 142,0.05) 0%, transparent 75%); filter: blur(90px); animation: float 30s ease-in-out infinite; }
 
 .impl-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
 .impl-section-text { display: flex; flex-direction: column; }
 .impl-section-text .h2 { margin-bottom: 20px; }
 .impl-section-sub { font-size: 18px; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
 .impl-section-description { font-size: 17px; line-height: 1.4; color: var(--text-muted); margin-bottom: 24px; }
-.impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(0, 184, 115, 0.06); border: 1px solid rgba(0, 184, 115, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(138, 138, 142, 0.06); border: 1px solid rgba(138, 138, 142, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .impl-section-footer p { font-size: 14px; font-weight: 500; color: #D1D5DB; margin: 0; }
 
 .impl-cards { display: grid; grid-template-columns: 1fr; gap: 24px; }
@@ -1834,13 +2268,13 @@ select.demo-select:invalid { color: #374151; }
 #implementacao h3,
 #entregaveis h3 { color: var(--ink); }
 #implementacao .impl-section-description { color: #444; }
-#implementacao .impl-section-footer { background: rgba(0, 184, 115,0.08); border-color: rgba(0, 184, 115,0.25); }
+#implementacao .impl-section-footer { background: rgba(138, 138, 142,0.08); border-color: rgba(138, 138, 142,0.25); }
 #implementacao .impl-section-footer p { color: #222; }
 #entregaveis .impl-card { background: #fff; border-color: rgba(0,0,0,0.08); }
 #entregaveis .impl-card-title { color: #000; }
 #entregaveis .impl-card-desc { color: #444; }
-#entregaveis .btn-secondary { background: #fff; color: #111; border: 1px solid #00B873; }
-#implementacao .btn-secondary { background: #fff; color: #111; border: 1px solid #00B873; }
+#entregaveis .btn-secondary { background: #fff; color: #111; border: 1px solid #8A8A8E; }
+#implementacao .btn-secondary { background: #fff; color: #111; border: 1px solid #8A8A8E; }
 #implementacao .hero-actions,
 #entregaveis .hero-actions,
 .tl-cta-mobile.hero-actions { flex-wrap: nowrap; }
@@ -1849,7 +2283,7 @@ select.demo-select:invalid { color: #374151; }
 #implementacao .hero-actions .btn { padding: 14px 30px; font-size: 16px; }
 #entregaveis h3.tl-title { color: var(--ink); }
 .impl-pill-desktop::before,
-.impl-pill-mobile .eyebrow::before { background: #00B873; }
+.impl-pill-mobile .eyebrow::before { background: #8A8A8E; }
 
 /* ---------- Entregáveis — título sticky ---------- */
 .impl-entregaveis-left {
@@ -1875,7 +2309,7 @@ select.demo-select:invalid { color: #374151; }
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: rgba(22, 101, 52, 0.3);
+  color: rgba(82, 81, 84, 0.3);
   transform: scale(0.92);
   flex-shrink: 0;
   will-change: color, transform;
@@ -2164,7 +2598,7 @@ select.demo-select:invalid { color: #374151; }
 .legal-toc h2 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; font-family: var(--mono); }
 .legal-toc nav { display: flex; flex-direction: column; gap: 2px; }
 .legal-toc nav a { font-size: 13.5px; color: var(--text-muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--border); transition: color .15s, border-color .15s; text-decoration: none; line-height: 1.4; }
-.legal-toc nav a:hover { color: var(--text); border-left-color: rgba(0, 184, 115,0.4); }
+.legal-toc nav a:hover { color: var(--text); border-left-color: rgba(138, 138, 142,0.4); }
 .legal-toc nav a.active { color: var(--green-text); border-left-color: var(--green-text); font-weight: 500; }
 
 .legal-content { min-width: 0; }
@@ -2179,7 +2613,7 @@ select.demo-select:invalid { color: #374151; }
 .legal-section ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
 .legal-section ul li strong { color: #111; }
 
-.legal-note { background: rgba(0, 184, 115,0.05); border: 1px solid rgba(0, 184, 115,0.2); border-radius: var(--r-md); padding: 18px 22px; margin-top: 24px; }
+.legal-note { background: rgba(138, 138, 142,0.05); border: 1px solid rgba(138, 138, 142,0.2); border-radius: var(--r-md); padding: 18px 22px; margin-top: 24px; }
 .legal-note p { font-size: 14px; color: #555; margin-bottom: 0; }
 .legal-note p strong { color: #111; }
 
@@ -2188,7 +2622,7 @@ select.demo-select:invalid { color: #374151; }
   .legal-toc { position: static; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--r-lg); padding: 24px; margin-bottom: 48px; }
   .legal-toc nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
   .legal-toc nav a { padding: 6px 12px; border-left: none; border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; font-size: 13px; }
-  .legal-toc nav a.active { background: rgba(0, 184, 115,0.1); border-color: var(--green-text); }
+  .legal-toc nav a.active { background: rgba(138, 138, 142,0.1); border-color: var(--green-text); }
 }
 
 @media (max-width: 560px) {
@@ -2212,8 +2646,8 @@ select.demo-select:invalid { color: #374151; }
   justify-content: center;
   overflow: hidden;
   transition: all 0.25s ease;
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%),
-              linear-gradient(0deg, #059669, #059669);
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
+              linear-gradient(0deg, #2D2F33, #2D2F33);
   border-radius: 0.75rem;
   border: none;
   outline: none;
@@ -2231,8 +2665,8 @@ select.demo-select:invalid { color: #374151; }
 }
 .btn-pontos::after {
   inset: 2px;
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(16, 185, 129, 0.8) 0%, rgba(16, 185, 129, 0) 100%),
-              linear-gradient(0deg, #059669, #059669);
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
+              linear-gradient(0deg, #2D2F33, #2D2F33);
   border-radius: calc(0.75rem - 2px);
 }
 .btn-pontos:active { transform: scale(0.95); }
@@ -2304,10 +2738,10 @@ select.demo-select:invalid { color: #374151; }
    contra 7,25:1 do #2D2F33. */
 .nav-right .btn-pontos,
 .nav-right .btn-pontos::after {
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(92, 255, 192, 0.8) 0%, rgba(92, 255, 192, 0) 100%),
-              linear-gradient(0deg, #01D8A4, #01D8A4);
+  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
+              linear-gradient(0deg, #2D2F33, #2D2F33);
 }
-.nav-right .btn-pontos .btn-pontos-inner { color: #2D2F33; }
+.nav-right .btn-pontos .btn-pontos-inner { color: var(--neutral-0); }
 
 
 /* ---------- Agentes de IA ---------- */
@@ -2357,7 +2791,7 @@ select.demo-select:invalid { color: #374151; }
 .ag-abas-quebra { flex-basis: 100%; height: 0; }
 @media (max-width: 560px) { .ag-abas-quebra { display: none; } }
 .ag-aba { padding: 11px 22px; border-radius: 8px; border: 1px solid var(--border-2); background: #FBFBFB; font-size: 14px; font-weight: 500; color: var(--ink); transition: color .2s, border-color .2s, background .2s, box-shadow .2s; }
-.ag-aba:hover { border-color: rgba(0, 184, 115, 0.35); }
+.ag-aba:hover { border-color: rgba(138, 138, 142, 0.35); }
 /* A aba ativa é verde chapado, o mesmo --primary da etiqueta com o nome do
    agente dentro do painel. Aqui morava o tratamento inteiro do .btn-pontos: o
    verde com clarão subindo da base, duas camadas internas em ::before/::after e
@@ -2372,9 +2806,9 @@ select.demo-select:invalid { color: #374151; }
 .ag-aba.ativa {
   border-color: transparent;
   color: #FFFFFF;
-  /* #047857 e não --primary: com branco por cima, o verde da marca dá 2,3:1 e
+  /* #6C6C6C e não --primary: com branco por cima, o verde da marca dá 2,3:1 e
      reprova no mínimo de 4,5:1. Este verde sobe para 5,5:1. */
-  background: #047857;
+  background: #6C6C6C;
 }
 
 /* position + overflow existem por causa do light sweep abaixo: o ::before é
@@ -2395,11 +2829,11 @@ select.demo-select:invalid { color: #374151; }
   width: 55%;
   pointer-events: none;
   background: linear-gradient(100deg,
-    rgba(0, 184, 115, 0) 0%,
-    rgba(0, 184, 115, 0.06) 35%,
-    rgba(0, 184, 115, 0.13) 50%,
-    rgba(0, 184, 115, 0.06) 65%,
-    rgba(0, 184, 115, 0) 100%);
+    rgba(138, 138, 142, 0) 0%,
+    rgba(138, 138, 142, 0.06) 35%,
+    rgba(138, 138, 142, 0.13) 50%,
+    rgba(138, 138, 142, 0.06) 65%,
+    rgba(138, 138, 142, 0) 100%);
   filter: blur(8px);
   animation: ag-sweep 7s ease-in-out infinite;
 }
@@ -2419,7 +2853,7 @@ select.demo-select:invalid { color: #374151; }
 /* Ícone em cima, nome do agente embaixo. `align-items: flex-start` para o
    quadrado do ícone não esticar na largura do nome. */
 .ag-painel-cab { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
-.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(0, 184, 115, 0.12); color: var(--primary); flex-shrink: 0; }
+.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(138, 138, 142, 0.12); color: var(--primary); flex-shrink: 0; }
 .ag-icone svg { width: 24px; height: 24px; }
 /* O h3 é o nome do agente e o h4 é a promessa. O h4 sai maior de propósito:
    a hierarquia de leitura não é a mesma da hierarquia de marcação, e quem
@@ -2519,7 +2953,7 @@ select.demo-select:invalid { color: #374151; }
 .sw-bola { animation: sw-anda 2.5s ease-in-out infinite; }
 @keyframes sw-anda { 0%, 15% { transform: translateX(0); } 30%, 88% { transform: translateX(20px); } 100% { transform: translateX(0); } }
 .sw-trilho { animation: sw-liga 2.5s ease-in-out infinite; }
-@keyframes sw-liga { 0%, 15% { fill: #DDE0DF; } 30%, 88% { fill: #00B873; } 100% { fill: #DDE0DF; } }
+@keyframes sw-liga { 0%, 15% { fill: #DDE0DF; } 30%, 88% { fill: #8A8A8E; } 100% { fill: #DDE0DF; } }
 .barras rect { transform-box: fill-box; transform-origin: bottom; animation: barra-sobe 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
 .barras .b1 { --alt: .34; } .barras .b2 { --alt: .56; }
 .barras .b3 { --alt: .78; } .barras .b4 { --alt: 1; }
@@ -2536,7 +2970,7 @@ select.demo-select:invalid { color: #374151; }
   .qr-linha { opacity: 0; animation: none; }
   .ag-card-1, .ag-card-2, .ag-card-3, .ag-novo { opacity: 1; transform: none; animation: none; }
   .sw-bola { transform: translateX(20px); animation: none; }
-  .sw-trilho { fill: #00B873; animation: none; }
+  .sw-trilho { fill: #8A8A8E; animation: none; }
   .barras rect { transform: scaleY(var(--alt)); animation: none; }
 }
 
@@ -2629,7 +3063,7 @@ select.demo-select:invalid { color: #374151; }
   border-radius: 11px;
   background: #FFFFFF;
   border: 1px solid #D9E4F3;
-  box-shadow: 0 1px 2px rgba(23, 61, 116, 0.05);
+  box-shadow: 0 1px 2px rgba(58, 58, 62, 0.05);
 }
 
 .meta-selo { display: block; width: auto; height: 28px; }
@@ -2778,11 +3212,11 @@ select.demo-select:invalid { color: #374151; }
   gap: 5px;
   margin-top: 4px;
   padding: 3px 8px 3px 6px;
-  background: #E1F5EE;
+  background: var(--neutral-100);
   border-radius: 100px;
   font-size: 11px;
   font-weight: 600;
-  color: #128A68;
+  color: var(--neutral-900);
   letter-spacing: -0.01em;
 }
 .pw-ico-wpp { flex-shrink: 0; }
@@ -2801,7 +3235,7 @@ select.demo-select:invalid { color: #374151; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #128A68;
+  background: var(--neutral-900);
   animation: pw-pulso 1.6s ease-in-out infinite;
 }
 
@@ -2866,7 +3300,7 @@ select.demo-select:invalid { color: #374151; }
 }
 .pw-bolha-agente {
   border-radius: 16px 4px 16px 16px;
-  background: #128A68;
+  background: var(--neutral-900);
   color: #FFFFFF;
   border: none;
   box-shadow: none;
@@ -2923,9 +3357,9 @@ select.demo-select:invalid { color: #374151; }
 /* ---------- Painel "Automações Avançadas" (ilha React) ---------- */
 /* Réplica do canvas de automações. Valores de
    rezult-crm/src/pages/AutomacoesPage.tsx: fundo pontilhado de 20px, nó branco
-   com borda #D1D5DB e raio 12, chip do gatilho em #F0FDF4/#86EFAC, chips de
-   ação em #FFF7ED/#FED7AA, operações de campos em #F0FDF4/#BBF7D0, porta de
-   saída #378ADD e linha ortogonal tracejada #CBD5E1.
+   com borda #D1D5DB e raio 12, chip do gatilho em #F0FDF4/var(--neutral-200), chips de
+   ação em var(--neutral-50)/var(--neutral-300), operações de campos em #F0FDF4/var(--neutral-150), porta de
+   saída var(--neutral-900) e linha ortogonal tracejada var(--neutral-300).
 
    Mesmas duas armadilhas do painel de WhatsApp, resolvidas do mesmo jeito: o
    .feature-visual é ilha escura (todo pixel descoberto vira bloco preto) e um
@@ -2978,7 +3412,7 @@ select.demo-select:invalid { color: #374151; }
 
 .pa-linha {
   fill: none;
-  stroke: #CBD5E1;
+  stroke: var(--neutral-300);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 5 5;
@@ -3043,19 +3477,19 @@ select.demo-select:invalid { color: #374151; }
   to   { opacity: 1; transform: none; }
 }
 
-.pa-chip-gatilho { background: #F0FDF4; border: 1px solid #86EFAC; }
-.pa-chip-titulo { font-size: 10.5px; font-weight: 600; color: #15803D; line-height: 1.25; }
-.pa-chip-desc { font-size: 9.5px; color: #4ADE80; margin-top: 2px; line-height: 1.25; }
+.pa-chip-gatilho { background: #F0FDF4; border: 1px solid var(--neutral-200); }
+.pa-chip-titulo { font-size: 10.5px; font-weight: 600; color: var(--neutral-800); line-height: 1.25; }
+.pa-chip-desc { font-size: 9.5px; color: var(--neutral-300); margin-top: 2px; line-height: 1.25; }
 
-.pa-chip-campos { background: #F0FDF4; border: 1px solid #BBF7D0; }
-.pa-chip-acoes  { background: #FFF7ED; border: 1px solid #FED7AA; }
+.pa-chip-campos { background: #F0FDF4; border: 1px solid var(--neutral-150); }
+.pa-chip-acoes  { background: var(--neutral-50); border: 1px solid var(--neutral-300); }
 .pa-chip-campos, .pa-chip-acoes { display: flex; align-items: center; gap: 6px; }
 
 .pa-chip-ico { display: flex; width: 11px; height: 11px; flex-shrink: 0; }
 .pa-chip-ico svg { width: 100%; height: 100%; }
 .pa-chip-txt {
   font-size: 10.5px;
-  color: #374151;
+  color: var(--neutral-700);
   line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3076,7 +3510,7 @@ select.demo-select:invalid { color: #374151; }
   margin-top: 8px;
   padding-right: 6px;
   font-size: 9.5px;
-  color: #6B7280;
+  color: var(--neutral-600);
   line-height: 1.2;
 }
 /* Nos nós que não são o gatilho a bolinha aparece sozinha, sem rótulo: a linha
@@ -3091,9 +3525,9 @@ select.demo-select:invalid { color: #374151; }
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #378ADD;
+  background: var(--neutral-900);
   border: 2px solid #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.25);
+  box-shadow: 0 0 0 3px rgba(45, 47, 51, 0.25);
 }
 
 /* A tela de seleção que abre quando a linha é solta. Versão compacta do diálogo
@@ -3133,7 +3567,7 @@ select.demo-select:invalid { color: #374151; }
 .pa-picker-cat {
   padding: 5px 9px;
   font-size: 9px;
-  color: #374151;
+  color: var(--neutral-700);
   border-left: 2px solid transparent;
   line-height: 1.2;
 }
@@ -3164,7 +3598,7 @@ select.demo-select:invalid { color: #374151; }
 .pa-picker-seta svg { width: 100%; height: 100%; }
 .pa-picker-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .pa-picker-op-titulo { font-size: 9.5px; font-weight: 600; color: #111111; line-height: 1.25; }
-.pa-picker-op-desc { font-size: 8.5px; color: #6B7280; line-height: 1.3; }
+.pa-picker-op-desc { font-size: 8.5px; color: var(--neutral-600); line-height: 1.3; }
 
 /* O ponteiro que monta a automação. Dentro do .pa-fluxo, então encolhe junto
    com o canvas: ele é parte do desenho, e não um cursor do sistema por cima.
@@ -3199,7 +3633,7 @@ select.demo-select:invalid { color: #374151; }
   height: 26px;
   margin: -13px 0 0 -13px;
   border-radius: 50%;
-  border: 2px solid #378ADD;
+  border: 2px solid var(--neutral-900);
   opacity: 0;
 }
 .pa-cursor-pressionado .pa-cursor-anel { animation: pa-clique .5s ease-out; }
@@ -3375,13 +3809,13 @@ select.demo-select:invalid { color: #374151; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.pp-resp-agente .pp-resp-nome { color: #128A68; font-weight: 500; }
+.pp-resp-agente .pp-resp-nome { color: var(--neutral-900); font-weight: 500; }
 
 .pp-valor {
   margin-top: 6px;
   font-size: 12px;
   font-weight: 700;
-  color: #128A68;
+  color: var(--neutral-900);
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
@@ -3445,4 +3879,50 @@ select.demo-select:invalid { color: #374151; }
 @media (prefers-reduced-motion: reduce) {
   .pp-tag { animation: none; }
   .pp-card, .pp-avatar { transition: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REZULT DESIGN SYSTEM (claro) · responsivo
+   ───────────────────────────────────────────────────────────────────────────
+   Fica no FIM do arquivo de propósito. As regras de body.ds-crm acima pesam
+   (0,2,1) e venciam as media queries do site, que pesam (0,1,1): sem este
+   bloco o h1 da planos ficaria em 48px no celular e o .h2 em 32px, porque
+   especificidade decide antes de ordem e antes do breakpoint.
+
+   Os valores são os mesmos que o site já usava nesses tamanhos de tela. O que
+   muda por causa do DS é só o peso e o tracking, que seguem o papel.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Rodapé: a etiqueta de coluna é um Overline, e no DS a segunda família serve
+   só a ID, token e código. Sai do mono. O link vai de 14,5px para os 14px do
+   papel Corpo. */
+body.ds-crm .footer .footer-col h3 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+body.ds-crm .footer .footer-col a { font-size: 14px; letter-spacing: 0; }
+body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter-spacing: 0; }
+
+@media (max-width: 980px) {
+  body.ds-crm .page-hero h1 { font-size: clamp(38px, 4vw, 46px); }
+}
+
+@media (max-width: 768px) {
+  /* O cartão de dúvidas aperta junto com os títulos de seção. */
+  body.ds-crm .ainda-duvidas h2 { font-size: 30px; }
+}
+
+@media (max-width: 560px) {
+  body.ds-crm .page-hero h1 { font-size: 38px; line-height: 1.07; letter-spacing: -0.03em; }
+  body.ds-crm .h2 { font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; }
+  body.ds-crm .ainda-duvidas h2 { font-size: 26px; line-height: 1.1; }
+  /* O nome do plano e o valor descem um degrau: no celular os três cartões
+     empilham e passam a ocupar a largura toda, mas o conjunto valor + ciclo +
+     economia continua disputando a mesma linha. */
+  body.ds-crm .pcard .pname { font-size: 20px; }
+  body.ds-crm .pcard .pprice .amt { font-size: 28px; }
+  body.ds-crm .footer .footer-col a { font-size: 13px; }
 }

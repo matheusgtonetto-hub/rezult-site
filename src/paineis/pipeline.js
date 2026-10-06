@@ -35,10 +35,16 @@ export const ALTURA_QUADRO = yDaPosicao(3) + 4;
 
 /* Etapas e cores como no funil real: a faixa colorida no topo da coluna e a
  * bolinha ao lado do nome saem da mesma cor. */
+/* A faixa escurece conforme a etapa avança, e o avatar do card acompanha: um
+ * negócio que anda de coluna fica visivelmente mais escuro. É o que as três
+ * cores (âmbar, laranja, vermelho) faziam por matiz.
+ *
+ * Os três valores carregam as iniciais em branco no avatar, então o mais claro
+ * é o --neutral-600, que dá 5,25:1. */
 export const COLUNAS = [
-  { nome: 'Novo lead', cor: '#F59E0B' },
-  { nome: 'Qualificado', cor: '#F97316' },
-  { nome: 'Reunião agendada', cor: '#EF4444' },
+  { nome: 'Novo lead', cor: '#6C6C6C' },
+  { nome: 'Qualificado', cor: '#525154' },
+  { nome: 'Reunião agendada', cor: '#3A3A3E' },
 ];
 
 /* Todo negócio já nasce com o agente como responsável: a automação não assume o
@@ -60,10 +66,10 @@ export const CARDS = [
 
 /* Cores das tags, como no CRM: pílula branca sobre a cor cadastrada na tag. */
 export const COR_DA_TAG = {
-  'Meta ads': '#38BDF8',
-  Qualificado: '#0F766E',
-  Demonstração: '#22C55E',
-  'Sem orçamento': '#B45309',
+  'Meta ads': '#6C6C6C',
+  Qualificado: '#525154',
+  Demonstração: '#3A3A3E',
+  'Sem orçamento': '#2D2F33',
 };
 
 /* O roteiro. Uma coisa por etapa, para o olho conseguir seguir: ou o card anda
