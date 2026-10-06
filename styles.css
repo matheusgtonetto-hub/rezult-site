@@ -287,8 +287,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section-sub { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
 h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-height: 1; font-weight: var(--fw-semibold); color: var(--ink); }
-.h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
-.eyebrow + .h2 { margin-top: 15px; }
+/* -0.8px, o mesmo valor da home.css, em todos os breakpoints (06/10/2026).
+   Era -0.02em, que a 36px dava -0.72px e a 30px dava -0.6px: o aperto mudava
+   com o tamanho. Com px fixo ele para de mudar. */
+.h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.1; }
+/* Zerado em 06/10/2026: a folga pill -> título passou a ser só o
+   margin-bottom da pill, como já era no hero.
+
+   As cinco classes repetem as do bloco das pills no fim do arquivo, e têm que
+   continuar repetindo. A .h2 nasce com margin: 5px 0 10px, então toda pill que
+   NÃO estiver nesta lista volta a somar 5px e sai dos 29px. Foi o que
+   aconteceu com a pill "Próximo passo" do CTA final, que é .hero-badge e não
+   .eyebrow: ela ficava em 34px enquanto o resto já estava em 29px. */
+.eyebrow + .h2,
+.hero-badge + .h2,
+.hero-badge-ia + .h2,
+.hero-badge-verde + .h2,
+.ag-overview-pill + .h2 { margin-top: 0; }
 #integ-heading { letter-spacing: -0.03em; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
 #demo-heading, #demo-planos-heading { font-size: 40px; }
@@ -1486,27 +1501,74 @@ body.ds-crm .pcard.featured .pname::after {
 
 /* H2 no nome do plano, Corpo na linha de apoio. */
 body.ds-crm .pcard .pname {
-  font-size: 24px; font-weight: 600; line-height: 1.2;
+  /* Afinado à mão pelo dono em 06/10/2026, e por isso fora dos papéis do DS,
+     que previam 24px/600 aqui. Passou por 25px (o tamanho de antes do design
+     system) e por peso 700 antes de parar em 27px/600.
+
+     O peso vale também para o "Rezult": o span dele não declara font-weight de
+     propósito, justamente para herdar deste ponto. */
+  font-size: 27px; font-weight: 600; line-height: 1.2;
   letter-spacing: -0.015em; color: var(--text);
 }
 body.ds-crm .pcard .pdesc {
   font-size: 14px; font-weight: 400; line-height: 1.45;
   letter-spacing: 0; color: var(--text-muted);
 }
-/* "Rezult" antes do nome segue pesando menos que o nome, e vira tinta verde
-   chapada: o degradê animado era peça de superfície escura. */
+/* "Rezult" antes do nome pesa menos que o nome: ali ele é prefixo de marca, e
+   quem decide compara Silver com Platinum, não um "Rezult" com o outro.
+
+   O BRILHO VOLTOU em 06/10/2026, a pedido do dono, mas NÃO é o degradê antigo.
+   O original foi desenhado para o cartão preto e usava neon: #00B87A, #5CFFC0 e
+   #00E599. Medidos sobre o branco do cartão de hoje eles dão 2,58:1, 1,27:1 e
+   1,66:1, ou seja, o nome da marca sumiria durante a maior parte da varredura.
+
+   Este degradê é o mesmo movimento com tinta escura. Os três tons sobre branco:
+     #0A5C45  7,99:1   (a âncora funda, onde a onda descansa)
+     #0F7A5B  5,31:1   (= --verde-tinta-forte, a cor chapada que havia aqui)
+     #128C69  4,22:1   (o pico da varredura; o DS libera esse tom a partir de
+                        24px, e o nome tem 25px nos dois breakpoints)
+   Nenhum stop fica mais claro que o verde que já estava aqui parado, então o
+   brilho só escurece e volta: na prática a onda lê como relevo, não como flash.
+
+   Se alguém trouxer o cartão preto de volta, este bloco inteiro deve voltar ao
+   degradê neon, que naquele fundo é o que funciona. */
 body.ds-crm .pcard .pname .em-shine-text {
-  font-weight: 500;
-  color: var(--green-text);
-  -webkit-text-fill-color: var(--green-text);
-  background: none;
-  animation: none;
+  /* SEM font-weight aqui, de propósito, desde 06/10/2026: o dono pediu que o
+     "Rezult" pese o MESMO que o nome do plano, e a forma de escrever isso é não
+     declarar nada e herdar do .pname. Se o peso do nome mudar um dia, o prefixo
+     muda junto sozinho; com o número repetido aqui, os dois silenciosamente
+     divergiriam.
+
+     Até hoje o prefixo era 500 contra 600 do nome, inclusive antes do design
+     system. A hierarquia por peso saiu: quem separa marca de plano agora é a
+     cor, verde contra tinta escura, e o brilho que corre só no prefixo. */
+  background: linear-gradient(90deg, #0A5C45, #0F7A5B, #128C69, #0F7A5B, #0A5C45);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: em-shine 5s linear infinite;
+}
+/* Quem pede menos movimento fica com o verde chapado, e não com texto
+   transparente: sem o background pintado, o background-clip: text não teria o
+   que recortar e o nome da marca desapareceria. */
+@media (prefers-reduced-motion: reduce) {
+  body.ds-crm .pcard .pname .em-shine-text {
+    background: none;
+    animation: none;
+    color: var(--green-text);
+    -webkit-text-fill-color: var(--green-text);
+  }
 }
 
 /* Métrica: o valor. tabular-nums porque no DS número é sempre tabular, para
    os dígitos não dançarem entre as três colunas. */
 body.ds-crm .pcard .pprice .amt {
-  font-size: 32px; font-weight: 600; line-height: 1.1;
+  /* 32px -> 40px em 06/10/2026, por pedido do dono. O tabular-nums abaixo é o
+     que segura o aumento: nesse tamanho a diferença de largura entre um "1" e
+     um "7" proporcional já move a linha inteira quando o toggle troca o preço. */
+  font-size: 40px; font-weight: 600; line-height: 1.1;
   letter-spacing: -0.02em; color: var(--text);
   font-variant-numeric: tabular-nums;
 }
@@ -1530,6 +1592,14 @@ body.ds-crm .pcard .pprice .pperiod {
    vermelho de botão. */
 body.ds-crm .pcard .pprice-savings {
   font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--green-text);
+  /* Folga entre esta linha ("De R$297 / Economize") e o valor do plano abaixo,
+     pedida em 06/10/2026. Foi afinada à mão no mesmo dia: 5px, 15px, 10px.
+
+     Vai como margem DESTE elemento e não como gap do .price-block: o gap de 4px
+     lá vale para os três filhos, então mexer nele afastaria junto o "Cobrança
+     mensal recorrente", que fica embaixo do valor e não foi pedido.
+     Somando: 4px de gap + 10px daqui = 14px só neste par. */
+  margin-bottom: 10px;
 }
 body.ds-crm .pcard .pprice-savings s {
   font-size: 14px; font-weight: 500;
@@ -2585,7 +2655,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .case-nums b { font-size: 21px; }
   .case-nums span { font-size: 11px; margin-top: 5px; }
   .case-tag { top: 13px; left: 13px; padding: 6px 10px; font-size: 12px; }
-  .h2, .cta-final h2 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
+  .h2, .cta-final h2 { font-size: 30px; letter-spacing: -0.8px; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
@@ -2622,11 +2692,22 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .price-toggle { gap: 3px; padding: 4px; width: 300px; }
   .price-toggle button { padding: 9px 9px; font-size: 14px; gap: 4px; flex: 1; justify-content: center; }
   .price-toggle .save { font-size: 10px; padding: 2px 5px; }
-  .pcard .price-block { align-items: center; }
-  .pcard .pprice { justify-content: center; }
-  .pcard .pprice .pperiod { margin-left: 0; }
-  .pcard .pprice-savings { justify-content: center; }
-  .pcard .pname, .pcard .pdesc { text-align: center; }
+  /* Cartão de plano no celular: o bloco inteiro de override FOI REMOVIDO em
+     06/10/2026, e no celular o cartão passou a se comportar igual ao desktop.
+     Eram cinco regras aqui: quatro centralizavam nome, descrição, a linha
+     "De R$297 / Economize" e a linha do preço, e a quinta zerava o
+     margin-left da etiqueta "Mensal".
+
+     O dono pediu os textos à ESQUERDA e a etiqueta "Mensal" à DIREITA, que é
+     exatamente o que as regras base já fazem: o .pcard é text-align: left, os
+     três blocos flex (.price-block, .pprice e .pprice-savings) não declaram
+     justify-content e caem em flex-start, e o .pperiod tem margin-left: auto,
+     que o empurra para a borda direita da linha do preço.
+
+     Por isso a correção foi por remoção e não por sobrescrita: cada regra
+     nova aqui seria uma segunda declaração brigando com a base para chegar no
+     mesmo lugar. Se alguém for recentralizar no celular algum dia, o lugar é
+     este, e vale lembrar que são cinco pontos e não um. */
   #implementacao h3.h2 { font-size: 28px !important; font-weight: 600 !important; line-height: 1.1 !important; }
   #entregaveis h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; width: 90%; text-align: left !important; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
@@ -4013,13 +4094,13 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
 
 @media (max-width: 560px) {
   body.ds-crm .page-hero h1 { font-size: 38px; line-height: 1.07; letter-spacing: -0.03em; }
-  body.ds-crm .h2 { font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; }
+  body.ds-crm .h2 { font-size: 30px; line-height: 1.1; letter-spacing: -0.8px; }
   body.ds-crm .ainda-duvidas h2 { font-size: 26px; line-height: 1.1; }
   /* O nome do plano e o valor descem um degrau: no celular os três cartões
      empilham e passam a ocupar a largura toda, mas o conjunto valor + ciclo +
      economia continua disputando a mesma linha. */
-  body.ds-crm .pcard .pname { font-size: 20px; }
-  body.ds-crm .pcard .pprice .amt { font-size: 28px; }
+  body.ds-crm .pcard .pname { font-size: 27px; }  /* era 20px; segue casado com o desktop desde 06/10/2026 */
+  body.ds-crm .pcard .pprice .amt { font-size: 40px; }  /* era 28px; mesmo valor do desktop desde 06/10/2026 */
   body.ds-crm .footer .footer-col a { font-size: 13px; }
 }
 
@@ -4176,7 +4257,25 @@ body.ds-crm .pcard .pfeats li svg { color: var(--verde-tinta); }
   align-items: center;
   gap: 7px;
   min-height: 30px;
-  margin-bottom: 14px;
+  /* A FOLGA DA PILL PARA O TÍTULO mora aqui e em nenhum outro lugar, desde
+     06/10/2026: 29px, o mesmo valor que o hero usa entre a pill e a h1. O
+     pedido foi que todas as seções tivessem o espaçamento do hero, e para isso
+     a conta precisou virar uma só.
+
+     Antes eram CINCO folgas diferentes na home, porque outras regras somavam
+     por cima desta. A .h2 nasce com margin-top: 5px, e .eyebrow + .h2 punha
+     20px por cima dele (15px na styles.css), mas só nas pills que tinham a
+     classe .eyebrow. Mais o .passive-compare-head .eyebrow, que subia a pill
+     para 18px. A conta dava: 38px no comparativo, 34px nas seções com
+     .eyebrow, 19px nas pills que eram só .hero-badge (CTA final e o painel de
+     agentes, 14 + os 5px da .h2), 14px na pill solta de #recursos e 29px no
+     hero. Nas outras páginas dava 29px com .eyebrow e 14px antes de h1.
+
+     As três foram zeradas ou alinhadas em 29px. Quem for mudar essa folga de
+     novo: mude ESTE valor, e confira se .eyebrow + .h2 continua em zero. A
+     .volume-nivel (Nível 1/2/3) fica fora deste bloco de propósito, por
+     decisão do dono. */
+  margin-bottom: 29px;
   padding: 6px 13px 6px 11px;
   /* Fundo branco com fio CINZA CLARO (06/10/2026; o fio nasceu preto e foi
      clareado no mesmo dia). A pill se define pelo CONTORNO e não pelo
