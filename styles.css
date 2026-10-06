@@ -1851,10 +1851,20 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .feature-text h3 { font-size: 30px; letter-spacing: -0.025em; margin-bottom: 16px; line-height: 1.2; font-weight: 600; }
 /* Tema de cor do card: declarado no .feature-text para alcançar os três que o
    usam — o ícone, a palavra em destaque no título e a seta do rodapé. */
-.tema-verde   { --hl-fg: #6C6C6C; --hl-bg: #F2F2F2; }
-.tema-laranja { --hl-fg: #8A8A8E; --hl-bg: #F2F2F2; }
-.tema-azul    { --hl-fg: #8A8A8E; --hl-bg: #F2F2F2; }
-.tema-roxo    { --hl-fg: #6C6C6C; --hl-bg: #F2F2F2; }
+/* Gêmeas das da home.css, com os mesmos hex e as mesmas contas de contraste.
+   A seção de recursos é a mesma nas duas páginas, e um lado colorido com o
+   outro em cinza seria divergência visível trocando de página. O agentes.html
+   usa só quatro das cinco (não tem o rosa).
+
+   Laranja e azul são escurecidos em VALOR em relação aos originais, mesmo
+   matiz: o #EA580C dava 3,19:1 e o #0284C7 dava 3,65:1 sobre as próprias
+   pastilhas, contra 4,7 a 5,5 dos outros três. Agora os quatro ficam entre
+   4,64 e 5,29. */
+.tema-verde   { --hl-fg: #067A4B; --hl-bg: #DFF6EC; }
+.tema-laranja { --hl-fg: #C2410C; --hl-bg: #FEF0E6; }
+.tema-azul    { --hl-fg: #0369A1; --hl-bg: #E6F4FE; }
+.tema-roxo    { --hl-fg: #7C3AED; --hl-bg: #F3EDFE; }
+.tema-rosa    { --hl-fg: #BE185D; --hl-bg: #FDF2F7; }
 /* box-decoration-break: clone mantem o radius nas duas pontas se a palavra quebrar linha. */
 .feature-text .hl { color: var(--hl-fg); background: var(--hl-bg); padding: 0.10em 0.25em; border-radius: 8px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .feature-text p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 24px; }
@@ -4185,11 +4195,9 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
    visível entre os que ainda passam com folga. O nome das classes fica como
    está, porque mudar
    obrigaria a mexer no HTML de duas páginas por um ganho só de vocabulário. */
-.tema-verde,
-.tema-laranja,
-.tema-azul,
-.tema-roxo,
-.tema-rosa { --hl-fg: var(--text); --hl-bg: var(--neutral-150); }
+/* As classes de tema NÃO são redefinidas aqui. Elas tinham sido achatadas num
+   cinza só neste ponto e, por esta regra morar DEPOIS da definição base, era ela
+   que valia. Removida em 06/10/2026 junto com a volta das cores. */
 
 /* O ÍCONE é a única peça verde da linha de recurso. A palavra marcada do h3
    voltou ao charcoal em 05/10/2026 ("palavras em verde para preto, só o ícone
@@ -4201,7 +4209,9 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
    A seta acompanha o ícone, que é o que ela é: sinal gráfico, não texto. */
 .feature-icon,
 .feature-heading .feature-icon,
-.feature-arrow { color: var(--verde-tinta); }
+/* A seta lê o --hl-fg (regra base, mais acima) e acompanha a cor do recurso.
+   Havia aqui um override em --verde-tinta, do tempo em que a palavra do h3 era
+   charcoal e a seta era o único acento da linha. Removido em 06/10/2026. */
 
 /* Ícones de confirmação e de recurso: objeto gráfico, tinta normal. O
    .feature-icon e o .feature-arrow já leem --hl-fg, então vêm de cima. */

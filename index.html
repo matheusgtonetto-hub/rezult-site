@@ -577,91 +577,45 @@ fbq('track','PageView');
     <div class="section-head center reveal passive-compare-head">
       <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>CRM passivo x ativo</span>
       <h2 class="h2" id="crm-passivo-heading">Quem atua quando o seu time<br class="desktop-only-br"> <span class="grad-verde">está ocupado?</span></h2>
-      <p class="lede">O mesmo lead. Duas jornadas. Veja o que acontece quando o CRM apenas registra e quando também entra em ação.</p>
+      <p class="lede">22:04 de uma terça. A mesma mensagem chega nos dois.</p>
     </div>
 
-    <div class="compare-grid reveal" data-stagger aria-label="Comparação ilustrativa entre duas jornadas para o mesmo lead">
-      <article class="compare-card compare-card-passive" aria-labelledby="compare-passive-title">
-        <div class="compare-card-top">
-          <span class="compare-label">CRM passivo</span>
-          <h3 id="compare-passive-title">O lead entra. Espera atendimento.</h3>
+    <!-- Os dois cartões são uma SIMULAÇÃO, e o cabeçalho do cartão ativo diz
+         isso em texto ("simulação de atendimento"). O nome, o telefone mascarado
+         e o diálogo são ilustração, não registro de atendimento real. -->
+    <div class="cv-grid reveal" id="cv">
+
+      <!-- Lado passivo: estático de propósito. A ausência de movimento aqui é o
+           argumento da seção, então ele não ganha animação nenhuma. -->
+      <div class="cv-hoje">
+        <div class="cv-barra">
+          <span class="cv-av" aria-hidden="true">M</span>
+          <span class="cv-quem"><b>Marcos Pereira</b><span>+55 11 9****-4821</span></span>
+          <span class="cv-tag">CRM passivo</span>
         </div>
-
-        <div class="compare-message" data-compare-message>
-          <span class="compare-channel" aria-hidden="true"><img src="logos/Logo-whatsapp.svg" alt=""></span>
-          <div>
-            <span>Novo contato · 22:04</span>
-            <p>“Olá! Gostaria de mais informações.”</p>
-          </div>
+        <div class="cv-hoje-corpo">
+          <div class="cv-bolha deles">“Olá! Gostaria de mais informações.”<time>22:04</time></div>
+          <b>Hoje, sem o Rezult</b>
+          <div class="cv-motivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>O lead espera o expediente</span></div>
+          <div class="cv-motivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>O follow-up depende de alguém lembrar</span></div>
+          <div class="cv-motivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>O histórico só existe se for digitado</span></div>
         </div>
+        <p class="cv-rodape cv-hoje-fecho"><span>O CRM registra. <b>Quem tem que agir continua sendo o seu time.</b></span></p>
+      </div>
 
-        <ul class="compare-list" aria-label="Jornada dependente de atendimento manual">
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span>
-            <span><strong>Registra o contato no funil</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-            <span><strong>Espera alguém iniciar a conversa</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-            <span><strong>Depende do time lembrar o próximo passo</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-            <span><strong>Exige atualização manual do histórico</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-            <span><strong>A oportunidade fica parada quando ninguém pode atender</strong></span>
-          </li>
-        </ul>
-
-        <p class="compare-card-footer">A conversa espera. A próxima ação ainda depende de alguém.</p>
-      </article>
-
-      <article class="compare-card compare-card-active" aria-labelledby="compare-active-title">
-        <div class="compare-card-top">
-          <span class="compare-label">CRM ativo</span>
-          <h3 id="compare-active-title">O lead entra. O Rezult atende.</h3>
+      <!-- Lado ativo: a conversa roda em loop enquanto a seção está na tela. -->
+      <div class="cv-painel vivo">
+        <div class="cv-barra">
+          <span class="cv-av" aria-hidden="true">R</span>
+          <span class="cv-quem"><b>Marcos Pereira</b><span>simulação de atendimento</span></span>
+          <span class="cv-tag">CRM ativo</span>
         </div>
-
-        <div class="compare-message" data-compare-message>
-          <span class="compare-channel" aria-hidden="true"><img src="logos/Logo-whatsapp.svg" alt=""></span>
-          <div>
-            <span>Novo contato · 22:04</span>
-            <p>“Olá! Gostaria de mais informações.”</p>
-          </div>
+        <div class="cv-corpo" data-palco>
+          <div class="cv-bolha deles">“Olá! Gostaria de mais informações.”<time>22:04</time></div>
         </div>
-
-        <ul class="compare-list" aria-label="Jornada com agentes de IA e automações configuradas">
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Responde conforme as regras definidas</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Entende a necessidade e qualifica o lead</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Agenda reuniões e executa follow-ups</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Registra conversas e próximos passos</strong></span>
-          </li>
-          <li class="compare-step" data-compare-step>
-            <span class="compare-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
-            <span><strong>Entrega o contexto pronto para o time vender</strong></span>
-          </li>
-        </ul>
-
-        <p class="compare-card-footer">A conversa avança. Seu time recebe o lead pronto para vender.</p>
-      </article>
+        <p class="cv-rodape"><span>A conversa avança. <b>Seu time recebe o lead pronto para vender.</b></span></p>
+      </div>
     </div>
-
   </div>
 </section>
 
@@ -686,7 +640,7 @@ fbq('track','PageView');
       <div class="ag-painel" id="ag-p0" role="region" aria-labelledby="ag-t0" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Atendente</h3>
+            <h3>Agente atendente</h3>
           </div>
           <h4>Recebe cada lead e entende o que ele precisa.</h4>
           <p class="ag-desc">Conversa no tom da sua empresa, com a sua base de conhecimento, e descobre o que o cliente quer antes de alguém do seu time precisar entrar.</p>
@@ -720,7 +674,7 @@ fbq('track','PageView');
       <div class="ag-painel" id="ag-p2" role="region" aria-labelledby="ag-t2" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Closer</h3>
+            <h3>Agente closer</h3>
           </div>
           <h4>Prepara a negociação para o seu time fechar.</h4>
           <p class="ag-desc">Acompanha cada proposta enviada, faz o follow-up que ninguém lembra de fazer e devolve a conversa ao seu vendedor na hora da decisão.</p>
@@ -737,7 +691,7 @@ fbq('track','PageView');
       <div class="ag-painel" id="ag-p3" role="region" aria-labelledby="ag-t3" hidden>
         <div class="ag-painel-txt">
           <div class="ag-painel-cab">
-            <h3>Agente Operacional</h3>
+            <h3>Agente operacional</h3>
           </div>
           <h4>Seu time nunca mais preenche CRM na mão.</h4>
           <p class="ag-desc">Cada conversa vira registro, anotação e etapa do funil, sozinha.</p>
@@ -760,22 +714,22 @@ fbq('track','PageView');
         <div class="ag-resumo reveal" data-stagger>
           <article class="ag-resumo-card">
             <span class="ag-resumo-num" aria-hidden="true">1</span>
-            <h3>Atendente</h3>
+            <h3>Agente atendente</h3>
             <p>Responde na hora, no tom da sua marca, e descobre o que o cliente precisa antes de alguém do time entrar.</p>
           </article>
           <article class="ag-resumo-card">
             <span class="ag-resumo-num" aria-hidden="true">2</span>
-            <h3>SDR</h3>
+            <h3>Agente SDR</h3>
             <p>Aplica os seus critérios de qualificação, agenda reunião com quem está pronto e mantém o resto em aquecimento.</p>
           </article>
           <article class="ag-resumo-card">
             <span class="ag-resumo-num" aria-hidden="true">3</span>
-            <h3>Closer</h3>
+            <h3>Agente closer</h3>
             <p>Acompanha cada proposta, faz o follow-up que ninguém lembra e devolve a conversa ao vendedor na hora da decisão.</p>
           </article>
           <article class="ag-resumo-card">
             <span class="ag-resumo-num" aria-hidden="true">4</span>
-            <h3>Operacional</h3>
+            <h3>Agente operacional</h3>
             <p>Transforma cada conversa em registro, anotação e etapa do funil, sem ninguém precisar clicar.</p>
           </article>
         </div>
@@ -822,17 +776,17 @@ fbq('track','PageView');
       <div class="volume-passo">
         <span class="volume-nivel">Nível 1</span>
         <h3>Operacional autônomo</h3>
-        <p>Seu time atende do jeito que sempre atendeu. O Rezult fica atrás, anotando cada conversa, preenchendo os campos do contato e movendo o lead de etapa. Ninguém do seu time muda de comportamento e o CRM para de ficar vazio.</p>
+        <p>Seu time atende como sempre atendeu. O Rezult fica atrás, anotando a conversa, preenchendo os campos do contato e movendo o lead de etapa. Ninguém muda de rotina e o CRM para de ficar vazio.</p>
       </div>
       <div class="volume-passo">
         <span class="volume-nivel">Nível 2</span>
         <h3>Qualificação e Agendamento</h3>
-        <p>O Rezult responde no minuto em que o lead entra. Qualifica quem tem perfil de compra e já marca a reunião na agenda do seu time. Entrando em chamada somente com lead quente.</p>
+        <p>O Rezult responde no minuto em que o lead entra. Qualifica quem tem perfil de compra e já marca a reunião na agenda do seu time. Seu vendedor entra em chamada só com lead quente.</p>
       </div>
       <div class="volume-passo">
         <span class="volume-nivel">Nível 3</span>
         <h3>Fechamento e pós-venda</h3>
-        <p>Os agentes cuidam da rotina comercial 24 horas por dia. Seu time entra nas conversas que exigem julgamento.</p>
+        <p>Os agentes cuidam da rotina comercial 24 horas por dia: respondem, qualificam, agendam e fazem o follow-up das propostas. Seu time entra só nas conversas que exigem julgamento.</p>
       </div>
     </div>
 
@@ -864,7 +818,7 @@ fbq('track','PageView');
            da para chegar" depois, em vez do contrario.
            O claim sobre os clientes nao terem usado IA antes foi confirmado
            pelo dono antes de subir. -->
-      <h2 class="h2">Nenhum dos clientes abaixo tinha usado IA no seu negócio <span class="grad-verde">antes do Rezult.</span></h2>
+      <h2 class="h2">Nenhum dos clientes abaixo tinha usado <span class="grad-verde">IA no seu negócio antes do Rezult.</span></h2>
         <p class="lede">Um cliente saiu de 40 para 120 reuniões por mês. Sem contratar mais ninguém.</p>
     </div>
     <div class="dep-esteira">
@@ -1121,7 +1075,7 @@ fbq('track','PageView');
     </div>
 
     <!-- Feature 2: Disparos em massa -->
-    <div class="feature-row">
+    <div class="feature-row flip">
       <div class="feature-text reveal tema-laranja">
         <div class="feature-heading">
           <div class="feature-icon">
@@ -1163,7 +1117,7 @@ fbq('track','PageView');
     </div>
 
     <!-- Feature 4: Pipelines -->
-    <div class="feature-row">
+    <div class="feature-row flip">
       <div class="feature-text reveal tema-roxo">
         <div class="feature-heading">
           <div class="feature-icon">
@@ -1330,7 +1284,7 @@ fbq('track','PageView');
     <div class="faq-grid">
       <div class="reveal faq-head-sticky">
         <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Perguntas frequentes</span>
-        <h2 class="h2" id="faq-titulo">Perguntas, respondidas.</h2>
+        <h2 class="h2" id="faq-titulo">Perguntas, <span class="grad-verde">respondidas.</span></h2>
         <p class="lede">As perguntas que importam antes de colocar sua operação de vendas dentro do Rezult CRM.</p>
       </div>
 

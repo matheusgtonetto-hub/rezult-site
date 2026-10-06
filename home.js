@@ -74,46 +74,133 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   });
 })();
 
-// ---- CRM passivo x CRM Ativo ----
-// O HTML contém a comparação completa. Este bloco só coordena uma execução
-// discreta quando a seção entra na tela.
+// ---- CRM passivo x CRM ativo: a conversa que roda ----
+// Só o painel ATIVO tem script. O cartão da esquerda é estático de propósito, e
+// a ausência de movimento ali é o argumento da seção: um lado anda e o outro
+// não. Se alguém for animar aquele lado algum dia, vale reler isto antes.
+//
+// O roteiro é SIMULAÇÃO, e o cabeçalho do cartão diz isso em texto. Nome,
+// telefone e diálogo são ilustração, não registro de atendimento real.
 (function () {
-  const section = document.querySelector(".passive-compare");
-  if (!section) return;
+  const palco = document.querySelector("#crm-passivo [data-palco]");
+  if (!palco) return;
 
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let completionTimer = 0;
-  let hasPlayed = false;
+  const reduz = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  function showWithoutMotion() {
-    window.clearTimeout(completionTimer);
-    section.classList.remove("is-prepared", "is-playing");
-    section.classList.add("is-complete");
+  const roteiro = [
+    { tipo: "digita", espera: 900 },
+    { tipo: "nossa", txt: "Oi, Marcos! Aqui é o Rezult. Posso te ajudar agora mesmo. Você procura para qual tamanho de time?", hora: "22:04" },
+    { tipo: "deles", txt: "Somos 6 vendedores, tudo no WhatsApp hoje.", hora: "22:05" },
+    { tipo: "digita", espera: 800 },
+    { tipo: "nossa", txt: "Perfeito. Tenho uma demonstração de 20 minutos. Amanhã às 14h funciona?", hora: "22:06" },
+    { tipo: "deles", txt: "Funciona sim.", hora: "22:07" },
+    { tipo: "digita", espera: 700 },
+    { tipo: "nossa", txt: "Agendado. Convite enviado e o time já está com o seu contexto. Até amanhã!", hora: "22:07" },
+  ];
+  const falas = roteiro.filter(p => p.tipo !== "digita");
+
+  // O quadro tem altura fixa e overflow hidden, então scrollTop é a única
+  // rolagem que existe: ela acompanha cada balão novo e o visitante não arrasta.
+  const aoFim = () => { palco.scrollTop = palco.scrollHeight; };
+
+  function bolha(p, oculta) {
+    const el = document.createElement("div");
+    el.className = "cv-bolha " + (p.tipo === "nossa" ? "nossa" : "deles") + (oculta ? " cv-oculta" : "");
+    el.textContent = p.txt;
+    const t = document.createElement("time");
+    t.textContent = p.hora;
+    el.appendChild(t);
+    return el;
   }
 
-  function playComparison() {
-    if (reducedMotion.matches) {
-      showWithoutMotion();
-      return;
-    }
+  // O fecho da conversa. Os "três minutos" são os horários que estão na tela
+  // (22:04 da primeira mensagem até 22:07 do agendamento), e "fora do expediente"
+  // responde ao "O lead espera o expediente" do cartão da esquerda.
+  const FECHO = {
+    titulo: "Reunião agendada · 22:07",
+    linha: "Três minutos depois da primeira mensagem, fora do expediente.",
+  };
 
-    window.clearTimeout(completionTimer);
-    section.classList.remove("is-prepared", "is-playing", "is-complete");
-    void section.offsetWidth;
-    section.classList.add("is-prepared");
-    requestAnimationFrame(() => section.classList.add("is-playing"));
-    completionTimer = window.setTimeout(() => section.classList.add("is-complete"), 2850);
+  function selo(oculta) {
+    const el = document.createElement("div");
+    el.className = "cv-fim" + (oculta ? " cv-oculta" : "");
+    el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+      + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+      + '<circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>';
+    const txt = document.createElement("div");
+    const b = document.createElement("b");
+    b.textContent = FECHO.titulo;
+    const span = document.createElement("span");
+    span.textContent = FECHO.linha;
+    txt.append(b, span);
+    el.appendChild(txt);
+    return el;
   }
 
-  const observer = new IntersectionObserver(entries => {
-    if (hasPlayed || !entries.some(entry => entry.isIntersecting)) return;
-    hasPlayed = true;
-    playComparison();
-    observer.disconnect();
-  }, { threshold: .18 });
+  function limpar() {
+    palco.querySelectorAll(".cv-bolha:not(:first-child), .cv-digita, .cv-fim").forEach(n => n.remove());
+  }
 
-  observer.observe(section);
-  reducedMotion.addEventListener?.("change", event => event.matches ? showWithoutMotion() : playComparison());
+  let timers = [];
+  const agendar = (fn, ms) => timers.push(window.setTimeout(fn, ms));
+  const parar = () => { timers.forEach(window.clearTimeout); timers = []; };
+
+  function tocar() {
+    parar();
+    limpar();
+    palco.scrollTop = 0;
+    let atraso = 600;
+
+    roteiro.forEach(p => {
+      if (p.tipo === "digita") {
+        agendar(() => {
+          const d = document.createElement("div");
+          d.className = "cv-digita";
+          d.innerHTML = "<i></i><i></i><i></i>";
+          palco.appendChild(d);
+          aoFim();
+        }, atraso);
+        atraso += p.espera;
+        agendar(() => palco.querySelector(".cv-digita")?.remove(), atraso);
+      } else {
+        agendar(() => {
+          const el = bolha(p, true);
+          palco.appendChild(el);
+          requestAnimationFrame(() => { el.classList.add("cv-entra"); aoFim(); });
+        }, atraso);
+        atraso += 1500;
+      }
+    });
+    // O selo entra ~0,9s depois da última resposta e segura 3,5s antes de o loop
+    // recomeçar. Sem essa pausa a conversa sumia no meio do raciocínio de quem
+    // estava lendo, e o visitante nunca via o desfecho que a seção promete.
+    agendar(() => {
+      const el = selo(true);
+      palco.appendChild(el);
+      requestAnimationFrame(() => { el.classList.add("cv-entra"); aoFim(); });
+    }, atraso + 900);
+    agendar(tocar, atraso + 900 + 3500);
+  }
+
+  // Sem movimento a conversa NÃO desaparece: ela é montada inteira e parada.
+  // Esconder o diálogo de quem pediu menos animação tiraria o conteúdo junto
+  // com o efeito, e o conteúdo é o argumento da seção.
+  function semMovimento() {
+    parar();
+    limpar();
+    falas.forEach(p => palco.appendChild(bolha(p, false)));
+    palco.appendChild(selo(false));
+  }
+
+  if (reduz.matches) { semMovimento(); return; }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? tocar() : parar());
+  }, { threshold: .25 });
+  io.observe(document.getElementById("crm-passivo"));
+
+  // Se a pessoa ligar a preferência com a página aberta, o loop para na hora.
+  reduz.addEventListener?.("change", e => { if (e.matches) { io.disconnect(); semMovimento(); } });
 })();
 
 
