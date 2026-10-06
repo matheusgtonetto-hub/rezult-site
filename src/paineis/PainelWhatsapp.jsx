@@ -12,14 +12,10 @@ import {
 } from './conversa';
 
 /* Réplica da coluna de conversa do Multiatendimento (rezult-crm,
- * src/pages/MultiatendimentoPage.tsx). Raios e tamanhos vieram de lá: bolha do
- * agente à direita com raio 16/4/16/16, bolha do lead branca à esquerda com
- * 4/16/16/16 e borda #EEE, fundo #FAFAFA, cabeçalho branco com borda #E5E5E5.
- *
- * As CORES não vieram: a bolha do agente era o #128A68 do app e virou charcoal
- * quando o site passou a ser preto, branco e cinza (05/10/2026). O único matiz
- * que sobrou aqui é o #25D366 do ícone do WhatsApp, que é marca de terceiro e
- * fica de propósito. Os valores estão em home.css, nas regras .pw-*.
+ * src/pages/MultiatendimentoPage.tsx). Cores, raios e tamanhos vieram de lá:
+ * bolha do agente #128A68 à direita com raio 16/4/16/16, bolha do lead branca
+ * à esquerda com 4/16/16/16 e borda #EEE, fundo #FAFAFA, cabeçalho branco com
+ * borda #E5E5E5.
  *
  * Atributos em camelCase e className: o Preact aceita as duas formas, o React
  * só esta. Escrever na forma restrita mantém o componente válido como React

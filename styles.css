@@ -27,21 +27,56 @@
   --neutral-600: #6C6C6C;
   --neutral-700: #525154;
   --neutral-800: #3A3A3E;
-  --neutral-900: #2D2F33;  /* o "preto" do sistema */
-  --neutral-950: #1B1B1B;
+  --neutral-900: #1D1D1D;  /* o "preto" do sistema; era #2D2F33 até 06/10/2026 */
+  --neutral-950: #1B1B1B;  /* a 2 pontos do 900: o par perdeu o degrau visível */
   --marca-whatsapp: #25D366;
   --marca-meta:     #0668E1;
+
+  /* ── O acento verde do Rezult ──
+     Superfície e as duas tintas. Gêmeos dos de home.css; a explicação completa
+     está no bloco "ACENTO VERDE" no fim deste arquivo. O --accent-100 é o
+     degrau da rampa do rezult-crm (src/index.css) de onde veio. */
+  --accent-100: #CFFAEB;
+  --verde-tinta: #128C69;
+  --verde-tinta-forte: #0F7A5B;
 
   /* Brand — o verde neon saiu do site. Ele rendia 1.66:1 de contraste sobre
      branco e, com a virada para fundo claro, não sobrou lugar onde
      funcionasse. Ficou um verde só, o #8A8A8E, que era o antigo --green-text. */
+  /* CTA EM EMERALD (06/10/2026). O par volta ao que o design system do CRM
+     manda: superfície --accent-400 #01D8A4 com tinta CHARCOAL, 7,25:1. O doc
+     do CRM é explícito, "primary-foreground: charcoal, NUNCA branco", porque
+     branco sobre esse emerald dá 1,85:1 e some.
+
+     Durante a passada de escala de cinza eu tinha invertido para charcoal com
+     tinta branca. Funcionava, mas era o oposto da marca: o botão mais visto do
+     site não dizia Rezult. */
+  /* CTA EM CHARCOAL com tinta branca, 13,41:1. O design system do CRM manda
+     emerald com tinta charcoal, e eu cheguei a aplicar isso em 06/10/2026; o
+     dono reverteu no mesmo dia ("não era para aplicar verde menta nos botões").
+     A divergência é deliberada: aqui o botão é a peça mais escura da página e
+     o verde fica para os ACENTOS (pill de seção, ícone, check, borda de
+     destaque), que é onde ele marca a identidade sem virar superfície. */
   --primary: var(--neutral-900);
   --primary-hi: var(--neutral-800);
   --primary-lo: var(--neutral-950);
   --on-primary: var(--neutral-0);
   /* Aponta para --primary: os dois são o mesmo verde desde a saída do neon, e
      um alias evita que saiam de sincronia numa troca futura. */
-  --green-text: var(--neutral-900);
+  /* VERDE DE VOLTA (06/10/2026). Este token é lido por 89 regras nas duas
+     folhas: eyebrow de seção, pill de nível, número de passo, ícone de
+     recurso, check de lista, seta, ponto do carrossel, anel de foco. Na
+     passada de escala de cinza ele passou a apontar para charcoal, e foi isso,
+     sozinho, que deixou o site com cara de jornal: toda peça que o design
+     queria verde saía cinza.
+
+     Aponta para o --verde-tinta-forte e não para o --verde-tinta porque a
+     maioria desses 89 usos é texto PEQUENO (pill de 11px, eyebrow de 11px,
+     numeral de 13px), e o #128C69 dá 3,94:1, que reprova abaixo de 24px. O
+     #0F7A5B passa nos três fundos do site (4,96:1 no canvas, 5,31:1 no branco,
+     4,68:1 na menta), então um token só serve a todos sem reabrir o problema
+     de contraste. */
+  --green-text: var(--verde-tinta-forte);
   --glow: transparent;
   --glow-btn: transparent;
   /* Verde dos CTAs do hero e da navbar. */
@@ -57,7 +92,7 @@
      As estrelas do selo acima do título "Nunca usou IA no seu negócio?"
      seguem em --green-text de propósito: aquilo é um selo da marca e não a
      nota de um cliente, então acompanha o verde e não a convenção. */
-  --dourado: var(--neutral-700);
+  --dourado: #F5A623;
   /* Verde escuro do bloco de texto da hero: o h1 e a subheadline saem nele.
      Nasceu escrito à mão no h1 e virou token quando a subheadline passou a usar
      o mesmo verde -- é o que impede as duas de saírem de sincronia. Não é o
@@ -85,7 +120,11 @@
   --surface-3: var(--neutral-150);
   --border: var(--neutral-200);
   --border-2: var(--neutral-200);
-  --border-active: var(--neutral-900);
+  /* Borda de acento: hover de cartão, cartão destacado do plano, último passo
+     da trilha. 22 regras nas duas folhas. Volta ao verde pelo mesmo motivo do
+     --green-text; aqui pode ser o --verde-tinta cheio, porque borda é objeto
+     gráfico (pede 3:1) e ele dá 3,94:1. */
+  --border-active: var(--verde-tinta);
 
   /* Text */
   --text: var(--neutral-900);
@@ -245,7 +284,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
-.section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
+.section-sub { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
 h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-height: 1; font-weight: var(--fw-semibold); color: var(--ink); }
 .h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.02em; line-height: 1.1; }
@@ -664,7 +703,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 
    Os 64px descontam o padding do .wrap (32px de cada lado). No celular o .wrap
    cai para 22px, então sobra folga extra ali, o que é seguro. */
-.hero h1 { font-size: min(44px, calc((100vw - 64px) / 16.01)); letter-spacing: normal; line-height: 1.05; font-weight: 700; color: var(--verde-titulo); }
+.hero h1 { font-size: min(44px, calc((100vw - 64px) / 16.01)); letter-spacing: -2px; line-height: 1.05; font-weight: 600; color: var(--verde-titulo); }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -684,7 +723,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   to { background-position: -200% center; }
 }
 /* O apoio da hero acompanha a mesma família dos títulos. */
-.hero-sub { font-family: var(--display); font-size: 18px; color: var(--verde-titulo); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
+.hero-sub { font-family: var(--display); font-size: 16px; color: var(--verde-titulo); line-height: 1.4; max-width: 600px; margin-top: 23px; letter-spacing: 0; font-weight: 400; }
 /* Traço à mão sob um trecho da subheadline, no lugar de sublinhado. Sublinhado
    corta as descidas das letras e lê como link; este é um risco de caneta.
 
@@ -779,7 +818,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   padding: 10px 12px 10px 24px;
   border-top: 1px solid var(--border-2);
 }
-.monta-nota { font-size: 14px; color: var(--text-subtle); }
+.monta-nota { font-size: 14px; color: var(--text-muted); } /* subtle a 14px dava 3,44:1 */
 /* Botão comum do site (.btn .btn-primary), e não o .btn-pontos das outras
    chamadas da página. Aqui ele mora dentro do cartão, a centímetros do campo de
    texto: os pontinhos correndo no fundo puxavam o olho de volta para o botão
@@ -880,7 +919,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .monta-chip.ativo {
   border-color: rgba(138, 138, 142, 0.45);
   background: rgba(138, 138, 142, 0.10);
-  color: #6C6C6C; font-weight: 500;
+  /* --neutral-700 e nao o #6C6C6C de antes: sobre o fundo deste chip
+     (10% de cinza sobre branco, ou seja ~#F3F3F3) o 600 media 4,45:1 e
+     reprovava por 0,05. O 700 da 7,43:1. */
+  color: var(--neutral-700); font-weight: 500;
 }
 .monta-chip:focus-visible { outline: 2px solid var(--green-text); outline-offset: 2px; }
 
@@ -1085,9 +1127,18 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
        --accent-100; virou --neutral-50 e --neutral-100.
      · o riscado do preço âncora saiu do vermelho para --neutral-600: em
        escala de cinza o que marca "você não paga isto" é o risco, não a cor.
-     · as estrelas dos depoimentos saíram do dourado para --neutral-700. É a
-       única troca que custa algo, porque dourado é a convenção universal de
-       nota; fica anotada aqui para quem quiser reverter só ela.
+
+   DUAS COISAS FICAM COLORIDAS, e não por esquecimento. Elas saíram para o
+   cinza em 05/10/2026 e voltaram no mesmo dia, a pedido do dono:
+     · as estrelas dos cards de depoimento, em --dourado #F5A623. Dourado é a
+       convenção universal de nota, reconhecida antes de o leitor chegar a
+       qualquer número, e em cinza a leitura se perde. Os avatares de iniciais
+       daqueles cards voltaram junto, cada um no hex que tinha.
+     · os motions, que são réplicas da interface do produto. Elas mostram o
+       CRM na cor em que ele é, e isso vale mais do que a coerência da paleta
+       da página em volta. As regras .pw-*, .pd-*, .pa-*, .pp-* e .pdb-*,
+       mais os hex dentro de src/paineis/*.jsx e de mockups.js, estão todos no
+       valor original. NÃO neutralizar de novo.
 
    Escopado em body.ds-crm porque styles.css serve quatro páginas. Só a planos
    carrega a classe; agentes, termo e politica seguem no design antigo do
@@ -1118,8 +1169,8 @@ body.ds-crm {
   --neutral-600: #6C6C6C;
   --neutral-700: #525154;
   --neutral-800: #3A3A3E;
-  --neutral-900: #2D2F33;  /* o "preto" do sistema */
-  --neutral-950: #1B1B1B;
+  --neutral-900: #1D1D1D;  /* o "preto" do sistema; era #2D2F33 até 06/10/2026 */
+  --neutral-950: #1B1B1B;  /* a 2 pontos do 900: o par perdeu o degrau visível */
 
   /* ── 2. Papéis do site, apontando para os neutros ──
      --bg é o canvas e --bg-deep virou o branco: é o que dá o ritmo de faixas
@@ -1136,7 +1187,7 @@ body.ds-crm {
   --border:        var(--neutral-200);
   --border-2:      var(--neutral-200);
   --border-strong: var(--neutral-300);
-  --border-active: var(--neutral-900);
+  /* --border-active lê o :root: lá voltou ao verde em 06/10/2026 */
 
   --text:        var(--neutral-900);   /* heading */
   --ink:         var(--neutral-900);
@@ -1144,23 +1195,22 @@ body.ds-crm {
   --text-subtle: var(--neutral-500);   /* proibido abaixo de 16px */
   --text-inverse: var(--neutral-0);
 
-  /* A superfície de destaque e a tinta que vai em cima dela. No app este par
-     é emerald + charcoal; aqui é charcoal + branco. */
-  --primary:     var(--neutral-900);
-  --primary-hi:  var(--neutral-800);
-  --primary-lo:  var(--neutral-950);
-  --on-primary:  var(--neutral-0);
-  --green-cta:       var(--neutral-900);
-  --green-cta-hover: var(--neutral-800);
+  /* A superfície de destaque e a tinta que vai em cima dela NÃO são
+     redefinidas aqui: elas moram no :root, que desde 06/10/2026 vale emerald
+     com tinta charcoal, como o design system do CRM manda. Este bloco chegou a
+     forçar charcoal + branco, e enquanto forçou ele VENCIA o :root (body.ds-crm
+     é mais específico), deixando o botão charcoal com texto charcoal, ou seja,
+     invisível nas quatro páginas que carregam a classe. */
 
   /* Os tokens de nome verde seguem existindo porque 30 regras deste arquivo
      os leem, e renomeá-los mexeria nas outras três páginas. Aqui eles apontam
      para o charcoal. O nome mente; o valor é que vale. */
-  --green-text:   var(--neutral-900);
+  /* lê o :root: lá o token voltou a ser verde em 06/10/2026 */
   --verde-titulo: var(--neutral-900);
 
   --red:     var(--neutral-600);
-  --dourado: var(--neutral-700);
+  /* --dourado não aparece aqui: ele vive no :root com o valor de verdade
+     (#F5A623) e as estrelas dos depoimentos o leem de lá. */
 
   /* O DS zera halo de propósito: "o destaque vem do contraste entre o cartão
      e o canvas, não de um brilho em volta". Sem verde isso fica mais verdade
@@ -1191,7 +1241,7 @@ body.ds-crm {
   --dur-fast:   120ms;
   --dur-normal: 180ms;
   --ease-out: cubic-bezier(.16, 1, .3, 1);
-  --ring-focus-color: rgba(45, 47, 51, .40);
+  --ring-focus-color: rgba(29, 29, 29, .40);
 
   background: var(--bg);
   color: var(--text);
@@ -1217,12 +1267,21 @@ body.ds-crm button:focus-visible {
      · mínimo funcional 12px, e nada de peso 300 (a família tem quatro pesos);
      · tracking negativo só a partir de 18px, zero abaixo disso. */
 
-/* Display: o h1 do hero. */
+/* Display: o h1 do hero. Duas divergências do papel Display do DS, as duas por
+   decisão do dono em 05/10/2026 e aplicadas às h1 de todas as páginas: o peso
+   é 600 e não 700, e o tracking é -2px e não -0,03em (que a 48px daria
+   -1,44px). Ficam escritas aqui porque o resto do papel (48px, 1,05 de
+   entrelinha) segue o DS, e sem esta nota pareceriam descuido.
+
+   O tracking vai em PX e não em em, acompanhando o hero da home, onde o valor
+   foi ajustado a olho nessa unidade. A consequência é que ele não escala com o
+   corpo: por isso o breakpoint de 560px abaixo mantém o próprio valor, em em,
+   em vez de herdar os -2px num título de 38px. */
 body.ds-crm .page-hero h1 {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -2px;
 }
 /* H1 do site: título de seção e do cartão de dúvidas. O site usava 36px e um
    clamp até 35px, nenhum dos dois papel do DS. */
@@ -1233,11 +1292,17 @@ body.ds-crm .ainda-duvidas h2 {
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
-/* Lede do hero e do cartão de dúvidas: 18px é o piso do tracking negativo, e
-   a entrelinha é a de Corpo. */
+/* Lede do hero e do cartão de dúvidas. 16px desde 05/10/2026, quando todos os
+   subtítulos do site foram igualados nesse corpo: antes eram 18px aqui, 18px
+   no .hero-sub, um clamp de 18 a 22 no .page-hero p e 16px no .lede, quatro
+   valores para o mesmo papel.
+
+   O tracking fica em zero e deixa de ser uma escolha: a regra do DS é tracking
+   negativo só a partir de 18px, e abaixo disso zero. Em 16px não há o que
+   decidir. A entrelinha é a de Corpo. */
 body.ds-crm .page-hero > .wrap > p,
 body.ds-crm .ainda-duvidas p {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0;
@@ -1277,7 +1342,7 @@ body.ds-crm .hero-badge .tag {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: var(--neutral-900);
+  background: var(--primary);
   color: var(--on-primary);
 }
 body.ds-crm .hero-badge {
@@ -1305,13 +1370,13 @@ body.ds-crm .btn {
 body.ds-crm .btn-lg { font-size: 16px; min-height: 44px; padding: 12px 28px; }
 /* O halo neon de 30px sai: no lugar dele, a sombra discreta do sistema. */
 body.ds-crm .btn-primary {
-  background: var(--neutral-900);
+  background: var(--primary);
   color: var(--on-primary);
   box-shadow: var(--shadow-xs);
   font-weight: 600;
 }
 body.ds-crm .btn-primary:hover {
-  background: var(--neutral-800);
+  background: var(--primary-hi);
   transform: translateY(-1px);
   box-shadow: var(--shadow-card);
 }
@@ -1356,7 +1421,7 @@ body.ds-crm .price-toggle {
 }
 body.ds-crm .price-toggle button { color: var(--text-muted); font-weight: 500; }
 body.ds-crm .price-toggle button.active {
-  background: var(--neutral-900);
+  background: var(--primary);
   color: var(--on-primary);
   font-weight: 600;
 }
@@ -1409,7 +1474,7 @@ body.ds-crm .pcard.featured .pname::after {
   padding: 4px 12px;
   border: 0;
   border-radius: 100px;
-  background: var(--neutral-900);
+  background: var(--primary);
   color: var(--on-primary);
   font-family: var(--sans);
   font-size: 12px;
@@ -1504,8 +1569,8 @@ body.ds-crm .pcard .btn-pontos .btn-pontos-inner {
 }
 body.ds-crm .pcard .btn-pontos:hover { background: var(--neutral-150); }
 body.ds-crm .pcard.featured .btn-pontos {
-  background: var(--neutral-900);
-  border-color: var(--neutral-900);
+  background: var(--primary);
+  border-color: var(--green-text);
 }
 body.ds-crm .pcard.featured .btn-pontos:hover { background: var(--neutral-800); }
 body.ds-crm .pcard.featured .btn-pontos .btn-pontos-inner { color: var(--on-primary); }
@@ -1522,9 +1587,6 @@ body.ds-crm .pcard .btn-pontos::after { display: none; }
    volta: a ênfase saía invertida. Resolve-se pelo outro lado, o título que
    contém um destaque recua para --neutral-600 e o destaque fica no charcoal.
    O :has() escopa aos títulos que de fato têm trecho marcado. */
-body.ds-crm .h2:has(.grad-verde),
-body.ds-crm .h2:has(.em-shine-text),
-body.ds-crm .page-hero h1:has(.em-shine-text) { color: var(--neutral-600); }
 
 body.ds-crm .grad-verde,
 body.ds-crm .em-shine-text {
@@ -1548,7 +1610,6 @@ body.ds-crm .tcard:hover {
   border-color: var(--neutral-300);
   box-shadow: var(--shadow-raised);
 }
-body.ds-crm .tcard .stars { color: var(--dourado); }
 
 /* ---------- FAQ ------------------------------------------------------------ */
 body.ds-crm .faq-item { border-bottom-color: var(--border); }
@@ -1595,20 +1656,7 @@ body.ds-crm .footer .footer-col a:hover { color: var(--neutral-0); }
    SÓ de cor: os pontinhos animados, o brilho de vidro do ::before e o degradê
    do ::after continuam.
 
-   O verde está em dois lugares, o fundo e o ::after, que repetem o mesmo par.
-   Nos dois o #01D8A4 vira o charcoal --neutral-900, e o radial de baixo vira
-   branco a 35%: ele tem que ser MAIS CLARO que a base, senão o efeito inverte
-   e o botão parece ter um buraco no lugar do brilho. A tinta vai de charcoal
-   para branco, porque a base trocou de lado.
-
-   Escopado em body.ds-crm de propósito: a navbar da home segue verde. Mudar
-   lá é mudar uma página que não estava em discussão. */
-body.ds-crm .nav-right .btn-pontos,
-body.ds-crm .nav-right .btn-pontos::after {
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(0deg, #2D2F33, #2D2F33);
-}
-body.ds-crm .nav-right .btn-pontos .btn-pontos-inner { color: var(--neutral-0); }
+   A tinta é branca sobre o charcoal, 13,41:1. */
 body.ds-crm .nav-right .btn-pontos .btn-pontos-icon { stroke: currentColor; }
 
 /* O "Entrar" ao lado dele usava um quase-preto próprio (#050A07) e uma borda
@@ -1624,10 +1672,10 @@ body.ds-crm .nav-cta-ghost:hover { color: var(--neutral-950); border-color: var(
 
 /* Seleção de texto: era o verde da marca a 30%. Vira cinza, senão a página
    fica neutra até alguém arrastar o cursor sobre um parágrafo. */
-body.ds-crm ::selection { background: rgba(45, 47, 51, 0.18); }
+body.ds-crm ::selection { background: rgba(29, 29, 29, 0.18); }
 
 /* Botão cheio SOBRE o rodapé escuro. Fora dele o botão cheio é charcoal com
-   tinta branca; aqui isso daria #2D2F33 sobre #1B1B1B, praticamente invisível.
+   tinta branca; aqui isso daria #1D1D1D sobre #1B1B1B, praticamente invisível.
    No fundo invertido o par inverte junto: branco com tinta charcoal, 15,8:1. */
 body.ds-crm .footer .btn-primary {
   background: var(--neutral-0);
@@ -1951,7 +1999,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .compare-table thead th.us { color: var(--green-text); }
 .compare-table tbody td { font-size: 15px; }
 .compare-table tbody td:first-child { color: var(--text-muted); }
-.compare-table .col-us { background: rgba(45, 47, 51, 0.0275); }
+.compare-table .col-us { background: rgba(29, 29, 29, 0.0275); }
 .compare-table td.center { text-align: center; }
 .compare-table td svg { width: 20px; height: 20px; margin: 0 auto; }
 .chk { color: var(--green-text); }
@@ -1999,7 +2047,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
    ::after do .pname para ficar na mesma linha do texto: como pseudo-elemento do
    próprio título, ele herda a linha em vez de precisar de posicionamento. Sem
    fundo, o verde do texto é o que o distingue. */
-.pcard.featured .pname::after { content: "MAIS ESCOLHIDO"; display: inline-block; margin-left: 12px; padding: 5px 12px; border: 1px solid var(--primary); border-radius: 100px; color: var(--primary); font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; vertical-align: middle; }
+.pcard.featured .pname::after { content: "MAIS ESCOLHIDO"; display: inline-block; margin-left: 12px; padding: 5px 12px; border: 1px solid var(--primary); border-radius: 100px; color: var(--green-text); font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; vertical-align: middle; }
 .pcard .pname { font-size: 25px; font-weight: 600; letter-spacing: -0.02em; }
 .pcard .pdesc { font-size: 15px; color: var(--text-muted); margin-top: 4px; }
 .pcard .price-block { display: flex; flex-direction: column; gap: 4px; }
@@ -2063,8 +2111,8 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 
 /* ---------- CTA ---------- */
 #demo, #demo-planos { background: #FBFCFA; }
-.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(45, 47, 51, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
-.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(45, 47, 51, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-l { position: absolute; left: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(29, 29, 29, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
+.demo-side-r { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(29, 29, 29, 0.32) 0%, transparent 65%); filter: blur(80px); pointer-events: none; animation: meshFloat2 28s ease-in-out infinite; }
 .demo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .demo-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 12px; }
 .demo-trust li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--neutral-700); font-weight: 500; }
@@ -2110,7 +2158,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .ainda-duvidas p {
   margin: 16px auto 30px;
   color: var(--text-muted);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.3px;
 }
@@ -2132,7 +2180,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 }
 .ainda-duvidas-acoes .btn-secondary:hover {
   background: rgba(138, 138, 142, 0.07);
-  border-color: var(--primary);
+  border-color: var(--green-text);
 }
 
 /* ---------- Demo form ---------- */
@@ -2142,7 +2190,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .demo-label { font-size: 13px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
 .demo-input { width: 100%; padding: 10px 14px; border: 1px solid var(--neutral-300); border-radius: 10px; font-size: 15px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; -webkit-appearance: none; appearance: none; }
 .demo-select { padding-right: 36px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-.demo-input:focus { border-color: var(--neutral-900); box-shadow: 0 0 0 3px rgba(45, 47, 51, 0.0825); background: #fff; }
+.demo-input:focus { border-color: var(--neutral-900); box-shadow: 0 0 0 3px rgba(29, 29, 29, 0.0825); background: #fff; }
 input.demo-input:not(:placeholder-shown) { background-color: var(--neutral-50); }
 select.demo-select.has-value { background-color: var(--neutral-50); }
 .demo-input::placeholder { color: var(--neutral-700); }
@@ -2230,7 +2278,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .page-hero .hero-bg { inset: 0 0 auto 0; height: 1080px; }
 .page-hero .wrap { position: relative; z-index: 1; }
 .page-hero h1 { font-size: 48px; letter-spacing: -0.02em; line-height: 1; }
-.page-hero p { font-size: clamp(18px, 2.2vw, 22px); color: var(--text-muted); line-height: 1.3; letter-spacing: -0.01em; max-width: 600px; margin: 15px auto 0; }
+.page-hero p { font-size: 16px; color: var(--text-muted); line-height: 1.3; letter-spacing: -0.01em; max-width: 600px; margin: 15px auto 0; }
 
 /* ---------- Implementação Gratuita ---------- */
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(20px); } }
@@ -2245,7 +2293,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .impl-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
 .impl-section-text { display: flex; flex-direction: column; }
 .impl-section-text .h2 { margin-bottom: 20px; }
-.impl-section-sub { font-size: 18px; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
+.impl-section-sub { font-size: 16px; font-weight: 500; color: var(--green-text); line-height: 1.4; margin-bottom: 20px; }
 .impl-section-description { font-size: 17px; line-height: 1.4; color: var(--text-muted); margin-bottom: 24px; }
 .impl-section-footer { padding: 15px; border-radius: var(--r-lg); background: rgba(138, 138, 142, 0.06); border: 1px solid rgba(138, 138, 142, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .impl-section-footer p { font-size: 14px; font-weight: 500; color: #D1D5DB; margin: 0; }
@@ -2438,11 +2486,24 @@ select.demo-select:invalid { color: var(--neutral-700); }
   #implementacao .impl-grid > div:first-child { width: 100%; overflow: hidden; }
 }
 @media (max-width: 560px) {
-  /* As listas de checks dos cards de recurso saem no celular: em tela estreita
-     cada item quebra em duas linhas e os três juntos alongam demais o card,
-     empurrando o mockup do próximo para longe. O parágrafo acima deles já
-     entrega a mensagem. */
-  .feature-list { display: none; }
+  /* As listas de checks VOLTAM a aparecer no celular (pedido de 05/10/2026).
+     Elas estavam escondidas por um motivo real, e o motivo continua valendo:
+     em tela estreita os itens quebram em VÁRIAS linhas e alongam o card. O
+     comentário anterior dizia "duas linhas"; medido a 390px, a maioria quebra
+     em TRÊS. Então, além de destravar o display, a lista vai apertada:
+
+       corpo de 15 para 14px, gap de 12 para 10px, ícone de 20 para 18px e a
+       folga entre ícone e texto de 12 para 10px.
+
+     Medido a 390px: 176,8px de lista com o aperto contra 198px sem ele, ou
+     seja, 21,2px e 10,7% a menos por card. O aperto reduz, não anula: cada
+     card de recurso ganha perto de 177px de altura no celular, e com cinco
+     recursos isso é quase 900px de página. É consequência aceita do pedido,
+     não efeito colateral esquecido. Se a altura incomodar, o caminho é cortar
+     texto dos itens, não esconder a lista de novo. */
+  .feature-list { display: flex; gap: 10px; }
+  .feature-list li { font-size: 14px; gap: 10px; line-height: 1.4; }
+  .feature-list li svg { width: 18px; height: 18px; }
   .wrap { padding: 0 22px; }
   #beneficios .wrap { padding: 0 15px; }
   .section { padding-top: 70px !important; padding-bottom: 70px !important; }
@@ -2472,7 +2533,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      Teto de 18px, e não 22px: o pedido é partir de 18 e só diminuir. O divisor
      17 (33 caracteres a ~0,50em, mais 3% de folga) faz os 18px valerem até por
      volta de 350px de tela, encolhendo abaixo disso. */
-  .hero-sub { max-width: 100%; font-size: min(18px, calc((100vw - 44px) / 18.03)); letter-spacing: 0; }
+  .hero-sub { max-width: 100%; font-size: min(16px, calc((100vw - 44px) / 18.03)); letter-spacing: 0; }
   /* Cartão colado nas laterais e mais compacto. */
   .hero-monta { margin-top: 25px; border-radius: 18px; }
   .monta-campo { font-size: 16px; padding: 18px 18px 16px; }
@@ -2528,11 +2589,20 @@ select.demo-select:invalid { color: var(--neutral-700); }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
-  /* A margem de 24px separava o parágrafo da lista de checks, que fica oculta
-     nesta faixa. Sem a lista, ela só somava ao padding do card e virava vazio
-     no rodapé. Zerada, o respiro passa a ser só o padding. */
+  /* A margem aqui foi zerada enquanto a lista de checks ficava OCULTA nesta
+     faixa: sem nada depois do parágrafo, ela só somava ao padding do card e
+     virava vazio no rodapé. A lista voltou em 05/10/2026, e com ela a premissa
+     caiu: zerada, o parágrafo encostava no primeiro check.
+
+     Volta como 20px, e não os 24px do desktop, acompanhando o resto do ritmo
+     do celular, que é mais apertado (o card tem 45px de padding contra 120px
+     no desktop). 20 está na escala base 2 do design system; 18 não estaria.
+
+     O `.feature-text p` segue zerado porque o parágrafo mora dentro do
+     .feature-foot e é a margem DELE que faz a separação. Dois margin-bottom
+     empilhados dariam 44px. */
   .feature-text p { margin-bottom: 0; }
-  .feature-foot { margin-bottom: 0; }
+  .feature-foot { margin-bottom: 20px; }
   #dashV0, #dashV1, #dashV2 { font-size: 12px !important; letter-spacing: -0.01em !important; }
   .metrics { grid-template-columns: 1fr; }
   .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 16px; }
@@ -2595,7 +2665,11 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .legal-layout { display: grid; grid-template-columns: 220px 1fr; gap: 64px; align-items: start; }
 
 .legal-toc { position: sticky; top: calc(var(--nav-h) + 32px); }
-.legal-toc h2 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; font-family: var(--mono); }
+/* --text-muted e nao --text-subtle: o subtle e o --neutral-500 (#8A8A8E), que o
+   proprio :root marca como "so a partir de 16px". Aqui o corpo e menor, e o par
+   media 3,21:1 contra os 4,5:1 que o AA pede. Medido em 06/10/2026 com
+   measure_render + axe-core. Com o muted (#6C6C6C) sobe para 4,90:1. */
+.legal-toc h2 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; font-family: var(--mono); }
 .legal-toc nav { display: flex; flex-direction: column; gap: 2px; }
 .legal-toc nav a { font-size: 13.5px; color: var(--text-muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--border); transition: color .15s, border-color .15s; text-decoration: none; line-height: 1.4; }
 .legal-toc nav a:hover { color: var(--text); border-left-color: rgba(138, 138, 142,0.4); }
@@ -2646,8 +2720,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   justify-content: center;
   overflow: hidden;
   transition: all 0.25s ease;
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(0deg, #2D2F33, #2D2F33);
+  background: var(--primary);
   border-radius: 0.75rem;
   border: none;
   outline: none;
@@ -2656,8 +2729,25 @@ select.demo-select:invalid { color: var(--neutral-700); }
   min-width: 102px;
   font-family: inherit;
 }
+/* ═══ 06/10/2026: o efeito do .btn-pontos saiu do site inteiro ════════════
+   O botão nasceu com quatro camadas de brilho e foi chapado primeiro só no
+   hero e na navbar, por regra escopada. Em 06/10/2026 o dono pediu que TODOS
+   ficassem iguais ao do hero, então a neutralização desceu para a BASE e as
+   regras escopadas de hero e navbar viraram redundantes (ficam, porque elas
+   também ajustam escala e raio, que continuam valendo).
+
+   O que foi desligado, nesta ordem:
+     . o brilho radial do fundo, que virou --primary chapado;
+     . o ::before e o ::after, duas molduras internas de 1px e 2px em branco
+       translúcido que davam o relevo de vidro;
+     . o .btn-pontos-wrap, caixa dos dez pontinhos brancos que subiam em loop.
+       Os <i> seguem no HTML das cinco páginas: o que os apaga é esta regra, e
+       desligar pelo CSS mantém o markup igual em todas elas.
+
+   Sobrevivem de propósito o :active com scale(0.95) e a seta que desliza no
+   hover, que são resposta ao toque e não decoração. O hero tem os dois. */
 .btn-pontos::before,
-.btn-pontos::after { content: ""; position: absolute; transition: all 0.5s ease-in-out; z-index: 0; }
+.btn-pontos::after { display: none; content: ""; position: absolute; transition: all 0.5s ease-in-out; z-index: 0; }
 .btn-pontos::before {
   inset: 1px;
   background: linear-gradient(177.95deg, rgba(255, 255, 255, 0.19) 0%, rgba(255, 255, 255, 0) 100%);
@@ -2666,12 +2756,12 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .btn-pontos::after {
   inset: 2px;
   background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(0deg, #2D2F33, #2D2F33);
+              linear-gradient(0deg, var(--primary), var(--primary));
   border-radius: calc(0.75rem - 2px);
 }
 .btn-pontos:active { transform: scale(0.95); }
 
-.btn-pontos-wrap { overflow: hidden; width: 100%; height: 100%; pointer-events: none; position: absolute; z-index: 1; }
+.btn-pontos-wrap { display: none; overflow: hidden; width: 100%; height: 100%; pointer-events: none; position: absolute; z-index: 1; }
 .btn-pontos-point {
   bottom: -10px; position: absolute;
   animation: floating-points infinite ease-in-out;
@@ -2697,11 +2787,11 @@ select.demo-select:invalid { color: var(--neutral-700); }
 
 .btn-pontos-inner {
   z-index: 2; gap: 6px; position: relative; width: 100%;
-  color: #fff; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--on-primary); display: inline-flex; align-items: center; justify-content: center;
   font-size: 15px; font-weight: 500; line-height: 1.5;
   transition: color 0.2s ease-in-out;
 }
-.btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: #fff; fill: none; }
+.btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: currentColor; fill: none; }
 .btn-pontos:hover .btn-pontos-icon { transform: translateX(2px); }
 .btn-pontos:hover .btn-pontos-icon path { animation: dash 0.8s linear forwards; }
 @keyframes dash {
@@ -2721,27 +2811,33 @@ select.demo-select:invalid { color: var(--neutral-700); }
    o CTA dominando a linha. Fonte, padding e radius voltam aos valores que o
    .nav-right .btn já usava. */
 .nav-right .btn-pontos { min-height: 34px; min-width: 0; padding: 6px 10px; border-radius: var(--r-sm); text-decoration: none; }
-.nav-right .btn-pontos::before { border-radius: calc(var(--r-sm) - 1px); }
-.nav-right .btn-pontos::after { border-radius: calc(var(--r-sm) - 2px); }
 .nav-right .btn-pontos-inner { font-size: 14px; }
-/* O CTA da navbar troca de verde, e SÓ de verde: os pontinhos animados, o
-   brilho de vidro do ::before e o degradê do ::after continuam como estão.
+/* O CTA da navbar fica CHAPADO: charcoal e nada mais (pedido de 05/10/2026).
+   O .btn-pontos nasceu com quatro camadas de efeito empilhadas, e as três
+   decorativas saem aqui:
 
-   O verde mora em dois lugares, o fundo do botão e o ::after, que repete o
-   mesmo par. Nos dois, o #059669 chapado vira #01D8A4 (o --accent-400 do CRM,
-   o mesmo do botão do Platinum) e o brilho de baixo acompanha, indo do
-   #10B981 para o #5CFFC0, que já existe no degradê de brilho do site. Sem
-   subir o brilho junto, o radial ficaria mais ESCURO que a base e o efeito
-   inverteria.
+     . o brilho radial que vinha dentro do próprio `background`, substituído
+       por uma cor sólida;
+     . o ::before, que punha um degradê de vidro branco a 19% sobre o botão;
+     . o ::after, que repetia fundo e brilho num segundo plano a 2px de inset;
+     . os dez .btn-pontos-point, pontinhos brancos de 2px que subiam em loop
+       pelo botão. Eles vêm no HTML, dentro do .btn-pontos-wrap, então o que
+       os desliga é esconder o wrapper, não remover a marcação.
 
-   A tinta vai para o charcoal do app: branco sobre #01D8A4 dá 1,85:1 e some,
-   contra 7,25:1 do #2D2F33. */
-.nav-right .btn-pontos,
-.nav-right .btn-pontos::after {
-  background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(0deg, #2D2F33, #2D2F33);
+   `background` sólido em vez de `display: none` no ::after: o ::after pintava
+   a cor do botão também, e só esconder as camadas deixaria o botão correto
+   apenas por acidente, dependendo de o fundo de baixo ter o mesmo valor.
+
+   Escopado em .nav-right de propósito. O .btn-pontos com efeito segue vivo em
+   outros nove lugares (dois na home, sete nos painéis de agentes), e nenhum
+   deles estava em discussão. */
+.nav-right .btn-pontos {
+  background: var(--primary);
 }
-.nav-right .btn-pontos .btn-pontos-inner { color: var(--neutral-0); }
+.nav-right .btn-pontos::before,
+.nav-right .btn-pontos::after { display: none; }
+.nav-right .btn-pontos-wrap { display: none; }
+.nav-right .btn-pontos .btn-pontos-inner { color: var(--on-primary); }
 
 
 /* ---------- Agentes de IA ---------- */
@@ -2853,12 +2949,12 @@ select.demo-select:invalid { color: var(--neutral-700); }
 /* Ícone em cima, nome do agente embaixo. `align-items: flex-start` para o
    quadrado do ícone não esticar na largura do nome. */
 .ag-painel-cab { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
-.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(138, 138, 142, 0.12); color: var(--primary); flex-shrink: 0; }
+.ag-icone { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-md); background: rgba(138, 138, 142, 0.12); color: var(--green-text); flex-shrink: 0; }
 .ag-icone svg { width: 24px; height: 24px; }
 /* O h3 é o nome do agente e o h4 é a promessa. O h4 sai maior de propósito:
    a hierarquia de leitura não é a mesma da hierarquia de marcação, e quem
    vende é a promessa, não o cargo. */
-.ag-painel-cab h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--primary); }
+.ag-painel-cab h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--green-text); }
 .ag-painel h4 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
 .ag-painel .ag-desc { font-size: 16px; font-weight: 500; color: var(--text-muted); line-height: 1.5; margin-top: 12px; }
 
@@ -2866,7 +2962,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
    preenchem as colunas sozinhos, sem precisar dividir a lista na marra. */
 .ag-lista { columns: 2; column-gap: 28px; margin-top: 26px; list-style: none; }
 .ag-lista li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; margin-bottom: 11px; break-inside: avoid; }
-.ag-lista li svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+.ag-lista li svg { width: 16px; height: 16px; color: var(--green-text); flex-shrink: 0; margin-top: 2px; }
 .ag-cta { margin-top: 28px; }
 .ag-cta .btn-pontos-inner { font-size: 15px; }
 
@@ -3212,11 +3308,11 @@ select.demo-select:invalid { color: var(--neutral-700); }
   gap: 5px;
   margin-top: 4px;
   padding: 3px 8px 3px 6px;
-  background: var(--neutral-100);
+  background: #E1F5EE;
   border-radius: 100px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--neutral-900);
+  color: #128A68;
   letter-spacing: -0.01em;
 }
 .pw-ico-wpp { flex-shrink: 0; }
@@ -3235,7 +3331,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--neutral-900);
+  background: #128A68;
   animation: pw-pulso 1.6s ease-in-out infinite;
 }
 
@@ -3300,7 +3396,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 }
 .pw-bolha-agente {
   border-radius: 16px 4px 16px 16px;
-  background: var(--neutral-900);
+  background: #128A68;
   color: #FFFFFF;
   border: none;
   box-shadow: none;
@@ -3412,7 +3508,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 
 .pa-linha {
   fill: none;
-  stroke: var(--neutral-300);
+  stroke: #CBD5E1;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 5 5;
@@ -3477,19 +3573,19 @@ select.demo-select:invalid { color: var(--neutral-700); }
   to   { opacity: 1; transform: none; }
 }
 
-.pa-chip-gatilho { background: #F0FDF4; border: 1px solid var(--neutral-200); }
-.pa-chip-titulo { font-size: 10.5px; font-weight: 600; color: var(--neutral-800); line-height: 1.25; }
-.pa-chip-desc { font-size: 9.5px; color: var(--neutral-300); margin-top: 2px; line-height: 1.25; }
+.pa-chip-gatilho { background: #F0FDF4; border: 1px solid #86EFAC; }
+.pa-chip-titulo { font-size: 10.5px; font-weight: 600; color: #15803D; line-height: 1.25; }
+.pa-chip-desc { font-size: 9.5px; color: #4ADE80; margin-top: 2px; line-height: 1.25; }
 
-.pa-chip-campos { background: #F0FDF4; border: 1px solid var(--neutral-150); }
-.pa-chip-acoes  { background: var(--neutral-50); border: 1px solid var(--neutral-300); }
+.pa-chip-campos { background: #F0FDF4; border: 1px solid #BBF7D0; }
+.pa-chip-acoes  { background: #FFF7ED; border: 1px solid #FED7AA; }
 .pa-chip-campos, .pa-chip-acoes { display: flex; align-items: center; gap: 6px; }
 
 .pa-chip-ico { display: flex; width: 11px; height: 11px; flex-shrink: 0; }
 .pa-chip-ico svg { width: 100%; height: 100%; }
 .pa-chip-txt {
   font-size: 10.5px;
-  color: var(--neutral-700);
+  color: #374151;
   line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3510,7 +3606,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   margin-top: 8px;
   padding-right: 6px;
   font-size: 9.5px;
-  color: var(--neutral-600);
+  color: #6B7280;
   line-height: 1.2;
 }
 /* Nos nós que não são o gatilho a bolinha aparece sozinha, sem rótulo: a linha
@@ -3525,9 +3621,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--neutral-900);
+  background: #378ADD;
   border: 2px solid #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(45, 47, 51, 0.25);
+  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.25);
 }
 
 /* A tela de seleção que abre quando a linha é solta. Versão compacta do diálogo
@@ -3567,15 +3663,15 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .pa-picker-cat {
   padding: 5px 9px;
   font-size: 9px;
-  color: var(--neutral-700);
+  color: #374151;
   border-left: 2px solid transparent;
   line-height: 1.2;
 }
 /* Categoria selecionada, no mesmo verde do CRM. */
 .pa-picker-cat-ativa {
   background: #F0FDF4;
-  border-left-color: var(--primary);
-  color: var(--primary);
+  border-left-color: var(--green-text);
+  color: var(--green-text);
   font-weight: 600;
 }
 
@@ -3598,7 +3694,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .pa-picker-seta svg { width: 100%; height: 100%; }
 .pa-picker-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .pa-picker-op-titulo { font-size: 9.5px; font-weight: 600; color: #111111; line-height: 1.25; }
-.pa-picker-op-desc { font-size: 8.5px; color: var(--neutral-600); line-height: 1.3; }
+.pa-picker-op-desc { font-size: 8.5px; color: #6B7280; line-height: 1.3; }
 
 /* O ponteiro que monta a automação. Dentro do .pa-fluxo, então encolhe junto
    com o canvas: ele é parte do desenho, e não um cursor do sistema por cima.
@@ -3633,7 +3729,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   height: 26px;
   margin: -13px 0 0 -13px;
   border-radius: 50%;
-  border: 2px solid var(--neutral-900);
+  border: 2px solid #378ADD;
   opacity: 0;
 }
 .pa-cursor-pressionado .pa-cursor-anel { animation: pa-clique .5s ease-out; }
@@ -3809,13 +3905,13 @@ select.demo-select:invalid { color: var(--neutral-700); }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.pp-resp-agente .pp-resp-nome { color: var(--neutral-900); font-weight: 500; }
+.pp-resp-agente .pp-resp-nome { color: #128A68; font-weight: 500; }
 
 .pp-valor {
   margin-top: 6px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--neutral-900);
+  color: #128A68;
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
@@ -3925,4 +4021,310 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
   body.ds-crm .pcard .pname { font-size: 20px; }
   body.ds-crm .pcard .pprice .amt { font-size: 28px; }
   body.ds-crm .footer .footer-col a { font-size: 13px; }
+}
+
+/* ---------- Escala tipográfica dos subtítulos ----------------------------
+   Gêmea da regra canônica do fim de home.css, e pelo mesmo motivo: as
+   variações por seção e por breakpoint usam ID (#agentes .lede,
+   #como-funciona .lede) ou duas classes (.meta-texto .lede), então a lista
+   repete cada seletor para empatar em especificidade e ganhar por ordem.
+
+   Esta folha serve agentes, termo, politica e planos. Antes da unificação de
+   05/10/2026 o mesmo papel saía em 16, 18 e 20px dependendo da seção e da
+   largura da tela.
+
+   O .page-hero p de termo e politica tem font-size inline de 16px no HTML, que
+   vence qualquer regra daqui. Já estava no valor certo; fica anotado para
+   ninguém procurar o override no CSS.
+
+   Fora desta lista, de propósito: o .pcard .pdesc (14px, papel Corpo do DS) e
+   os subtítulos dentro dos painéis de produto (.mk-sub 10px, .pdb-sub 11px).
+   Aqueles não são subtítulo de seção, são texto de cartão e de interface. */
+.section-sub,
+.hero-sub,
+.lede,
+.page-hero p,
+.impl-section-sub,
+.ainda-duvidas p,
+#agentes .lede,
+#como-funciona .lede,
+.meta-texto .lede {
+  font-size: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACENTO VERDE DO REZULT · dose mínima
+   ───────────────────────────────────────────────────────────────────────────
+   A página é preta, branca e cinza. O verde entra como ACENTO, pedido em
+   05/10/2026 ("trazer de forma minimalista a cor verde do rezult"), e tem um
+   significado só: marca AFIRMAÇÃO e AÇÃO DO PRODUTO. É isso que decide se uma
+   peça recebe verde ou não.
+
+   LEVA VERDE: a etiqueta de seção (.eyebrow), o trecho marcado dos títulos
+   (.hl e .grad-verde), os ícones de confirmação (check de lista, marca do
+   checklist, √ do CRM ativo), os ícones de recurso e os numerais pequenos que
+   ordenam uma sequência.
+
+   NÃO LEVA: corpo de texto, títulos inteiros, botões (a superfície de CTA é
+   charcoal), bordas de cartão, rodapé. Se tudo virar verde o acento deixa de
+   acentuar, e era justamente o que a paleta cinza veio resolver.
+
+   DUAS TINTAS, E A ESCOLHA NÃO É ESTÉTICA. O #128C69 que o dono fixou dá
+   3,94:1 sobre o canvas #F7F7F7: passa nos 3:1 que o AA pede para objeto
+   gráfico e para texto de 24px ou mais, e REPROVA nos 4,5:1 de texto menor.
+   Como metade destes usos é texto de 11 a 15px, existe um segundo valor, o
+   #0F7A5B, que é o irmão mais escuro mais próximo que passa nos três fundos
+   que o site tem (4,96:1 no canvas, 5,31:1 no branco, 4,68:1 na menta).
+
+     --verde-tinta        -> ícone, gráfico e texto a partir de 24px
+     --verde-tinta-forte  -> qualquer texto abaixo de 24px
+
+   Trocar um dos dois sem refazer essa conta é o jeito de reintroduzir uma
+   falha de contraste sem perceber.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Etiqueta de seção: texto de 11px, então tinta forte. A bolinha de 7px é
+   objeto gráfico e fica na tinta normal. */
+.eyebrow { color: var(--verde-tinta-forte); }
+.eyebrow::before { background: var(--verde-tinta); }
+
+/* Os cinco temas de recurso colapsam num só. Eles existiam para dar uma cor
+   por linha (verde, laranja, azul, roxo, rosa); na escala de cinza viraram
+   cinco cinzas iguais, e o destaque dos títulos desapareceu. Agora são um
+   acento verde único: o trecho marcado do h3 (30px, texto grande) na tinta
+   normal, sobre CINZA.
+
+   O fundo passou por menta, branco e cinza em 05/10/2026, e o que decide o
+   degrau é uma troca: a seção roda sobre o canvas --neutral-50, então quanto
+   mais escura a pastilha, mais ela se distingue do fundo e MENOS contraste
+   sobra para a tinta verde em cima dela. Medido: --neutral-100 dá 1,04:1 de
+   pastilha e 3,77:1 de tinta; o --neutral-150 daqui dá 1,11:1 e 3,54:1; o
+   --neutral-200 dá 1,15:1 e 3,41:1. O --neutral-300 está fora, derruba a
+   tinta para 2,87:1 e reprova nos 3:1 de texto grande. Este é o degrau mais
+   visível entre os que ainda passam com folga. O nome das classes fica como
+   está, porque mudar
+   obrigaria a mexer no HTML de duas páginas por um ganho só de vocabulário. */
+.tema-verde,
+.tema-laranja,
+.tema-azul,
+.tema-roxo,
+.tema-rosa { --hl-fg: var(--text); --hl-bg: var(--neutral-150); }
+
+/* O ÍCONE é a única peça verde da linha de recurso. A palavra marcada do h3
+   voltou ao charcoal em 05/10/2026 ("palavras em verde para preto, só o ícone
+   em verde"), e ela sai do --hl-fg logo acima.
+
+   O ícone precisa de regra própria por causa disso: ele lia
+   `var(--hl-fg, var(--green-text))`, ou seja, herdava a mesma tinta da
+   palavra. Com os dois no mesmo token não há como pintar um e não o outro.
+   A seta acompanha o ícone, que é o que ela é: sinal gráfico, não texto. */
+.feature-icon,
+.feature-heading .feature-icon,
+.feature-arrow { color: var(--verde-tinta); }
+
+/* Ícones de confirmação e de recurso: objeto gráfico, tinta normal. O
+   .feature-icon e o .feature-arrow já leem --hl-fg, então vêm de cima. */
+.feature-list li svg { color: var(--verde-tinta); }
+.faq-q .ico { color: var(--verde-tinta); }
+
+/* O check dos cartões de plano. Objeto gráfico de 18px, tinta normal. O ID
+   não entra aqui: o seletor precisa vencer o `body.ds-crm .pcard .pfeats li
+   svg` do bloco do design system, que pesa (0,5,2), então este pesa (0,5,2)
+   também e ganha por vir depois no arquivo. */
+body.ds-crm .pcard .pfeats li svg { color: var(--verde-tinta); }
+
+/* O numeral do card de agente e as duas pills da seção Agentes, que ficaram
+   todos em cinza. Mesma lógica da home: texto pequeno na tinta forte, e a
+   pill deixa de ser superfície preenchida, que no sistema é só de CTA. */
+#agentes .ag-resumo-num,
+#agentes .ag-overview-pill {
+  background: var(--accent-100);
+  color: var(--verde-tinta-forte);
+}
+#agentes .ag-channel-pill { border-color: var(--accent-100); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PILL DE SEÇÃO · um tratamento só
+   ───────────────────────────────────────────────────────────────────────────
+   Até 06/10/2026 existiam CINCO etiquetas de seção diferentes, cada uma com
+   fundo, borda, corpo e raio próprios:
+
+     .eyebrow            sem fundo, raio 5px, com bolinha
+     .hero-badge         transparente, borda verde a 25%, raio 100px, 14px
+     .hero-badge-ia      fundo branco, borda #C9C9C9, raio próprio
+     .hero-badge-verde   fundo --surface, borda --border, raio --r-sm
+     .volume-nivel       sem fundo, mono, 11px
+     .ag-overview-pill   fundo cinza chapado, tinta branca
+
+   Agora é uma: menta de fundo, tinta verde, 11px em caixa alta. É o mesmo par
+   de superfície e tinta dos ícones de benefício da hero e dos √ do CRM ativo,
+   então a página tem um jeito só de dizer "isto é um rótulo".
+
+   A tinta é a --verde-tinta-forte porque 11px é texto pequeno e o AA sobe para
+   4,5:1 ali: sobre a menta ela dá 4,68:1, enquanto a --verde-tinta daria 3,72.
+
+   O fundo preenchido NÃO conflita com a regra de "preenchido é CTA": CTA é
+   charcoal com tinta branca, a pill é menta com tinta verde. São dois pares
+   distintos, e nenhum botão usa menta. */
+.eyebrow,
+.hero-badge,
+.hero-badge-ia,
+.hero-badge-verde,
+.ag-overview-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  margin-bottom: 14px;
+  padding: 6px 13px 6px 11px;
+  /* Fundo branco com fio CINZA CLARO (06/10/2026; o fio nasceu preto e foi
+     clareado no mesmo dia). A pill se define pelo CONTORNO e não pelo
+     preenchimento, e o verde fica só no ícone.
+
+     --neutral-300 e não --neutral-200: a pill é branca e mora sobre o canvas
+     #F7F7F7, que é quase branco também. O 300 dá 1,37:1 contra o canvas e o
+     200 daria 1,15:1, perto demais para a borda segurar a forma sozinha. */
+  border: 1px solid var(--neutral-300);
+  border-radius: 999px;
+  background: var(--neutral-0);
+  color: var(--neutral-900);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  /* Caixa alta sai: o texto vale como está escrito no HTML, com só a primeira
+     letra maiúscula. Com isso o tracking de caixa alta (+0,08em) também sai,
+     porque ele existia para abrir as maiúsculas e em caixa baixa só esparrama. */
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+/* O ícone é obrigatório em TODAS, à esquerda, e é a única peça verde da pill.
+   14px para acompanhar o corpo de 12px sem dominar. */
+.eyebrow > svg,
+.hero-badge > svg,
+.hero-badge-ia > svg,
+.hero-badge-verde > svg,
+.ag-overview-pill > svg,
+.hero-badge-ico,
+.hero-badge-agent-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--green-text);
+  stroke: currentColor;
+}
+/* A bolinha do .eyebrow sai: o lugar dela agora é do ícone. */
+.eyebrow::before { content: none; }
+/* A bolinha do .eyebrow fica, mas em verde cheio: ela é objeto gráfico, não
+   texto, então o --verde-tinta serve e dá o acento mais vivo da peça. */
+.eyebrow::before { background: var(--verde-tinta); }
+/* Os ícones que moram dentro das pills acompanham a tinta. */
+.hero-badge-ico,
+.hero-badge-agent-icon,
+.hero-badge svg,
+.ag-overview-pill svg { color: var(--verde-tinta-forte); }
+/* A cápsula que vivia dentro da pill (o "PLANOS") deixa de ser uma pill dentro
+   de outra: vira só a palavra em peso 600, separada do resto pelo espaço. Duas
+   bordas arredondadas aninhadas competiam, e a de dentro não carregava
+   informação que o texto já não desse. */
+.hero-badge .tag {
+  background: none;
+  color: var(--neutral-900);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 0;
+  border-radius: 0;
+}
+/* A pill de canal mantém o fundo branco: ela carrega o logo do WhatsApp, que
+   é marca de terceiro e precisa de fundo neutro para ser reconhecida. Só a
+   borda acompanha o sistema. */
+.ag-channel-pill { border-color: var(--accent-100); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENTRADA NO SCROLL · escalonada
+   ───────────────────────────────────────────────────────────────────────────
+   O .reveal já existia: o IntersectionObserver do home.js/main.js põe .in e o
+   elemento sobe 24px com fade. O problema era onde ele estava aplicado. Em
+   grupo (a trilha de 3 níveis, os 4 cards de agente, os 6 itens do
+   diagnóstico) o .reveal ficava no CONTAINER, então os filhos apareciam todos
+   no mesmo instante. Um bloco inteiro piscando de uma vez não lê como
+   movimento, lê como troca de slide.
+
+   `data-stagger` resolve: o container segue sendo quem o observer vigia, e os
+   filhos entram em sequência, 70ms entre um e outro. Oito degraus cobrem o
+   maior grupo da página (os 6 itens do diagnóstico); do nono em diante todos
+   entram juntos no último degrau, que é melhor do que uma espera longa.
+
+   70ms é o meio da faixa que o Material recomenda para stagger de lista
+   (30 a 50ms por item em listas densas, mais folgado em cards grandes). Com
+   seis itens o conjunto fecha em 420ms, abaixo do teto de 500ms a partir do
+   qual a animação começa a atrasar a leitura em vez de guiá-la. */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform .55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+[data-stagger].in > * { opacity: 1; transform: none; }
+[data-stagger].in > *:nth-child(1) { transition-delay: 0s; }
+[data-stagger].in > *:nth-child(2) { transition-delay: .07s; }
+[data-stagger].in > *:nth-child(3) { transition-delay: .14s; }
+[data-stagger].in > *:nth-child(4) { transition-delay: .21s; }
+[data-stagger].in > *:nth-child(5) { transition-delay: .28s; }
+[data-stagger].in > *:nth-child(6) { transition-delay: .35s; }
+[data-stagger].in > *:nth-child(7) { transition-delay: .42s; }
+[data-stagger].in > *:nth-child(n+8) { transition-delay: .49s; }
+
+/* Degraus de atraso além dos três que existiam, para a ordem de entrada de uma
+   seção inteira (pill, título, apoio, grupo) poder ser escrita no HTML. */
+.reveal[data-d="4"] { transition-delay: .32s; }
+.reveal[data-d="5"] { transition-delay: .40s; }
+.reveal[data-d="6"] { transition-delay: .48s; }
+
+/* ── Quem pede menos movimento não perde conteúdo ──
+   O .reveal nasce com opacity: 0, e o observer é quem devolve. Se a animação
+   for simplesmente desligada sem zerar o estado inicial, o conteúdo some para
+   sempre. Por isso aqui o estado final é forçado, e não só a transição. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.in,
+  [data-stagger] > *,
+  [data-stagger].in > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
+/* A pill de nível fica FORA do sistema branco de contorno, por decisão de
+   06/10/2026 ("a pill de nivel 1, 2 e 3 pode ficar como está"). Ela mantém o
+   menta de fundo com tinta verde e sem ícone.
+
+   Não é inconsistência: as pills de contorno rotulam a SEÇÃO, e esta rotula um
+   degrau dentro de um cartão. São hierarquias diferentes, e o menta preenchido
+   a mantém subordinada ao título do cartão em vez de competir com ele. */
+.volume-nivel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent-100);
+  color: var(--verde-tinta-forte);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }

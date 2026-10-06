@@ -65,18 +65,11 @@ const RITMOS = [
 
 const RITMO_ATIVO = 'humano';
 
-/* Os três status vinham do ITEM_STATUS_META do CRM em amarelo, azul e verde.
- * Em cinza eles não podem se distinguir por matiz, então se distinguem por
- * VALOR, e o valor segue a ordem do processo: criado é o mais claro, em
- * execução um degrau abaixo, e concluído é o único preenchido em charcoal com
- * tinta branca. Lido de cima para baixo, o chip escurece conforme o envio
- * anda, o que diz a mesma coisa que as três cores diziam.
- *
- * Contrastes medidos: 4,69:1, 9,15:1 e 13,41:1. */
+/* Pares de cor do ITEM_STATUS_META do CRM, sem inventar tom novo. */
 const STATUS = {
-  criado: { label: 'Criado', bg: '#F2F2F2', fg: '#6C6C6C' },
-  execucao: { label: 'Em execução', bg: '#E7E7E7', fg: '#3A3A3E' },
-  concluido: { label: 'Concluído', bg: '#2D2F33', fg: '#FFFFFF' },
+  criado: { label: 'Criado', bg: '#FEF9C3', fg: '#854D0E' },
+  execucao: { label: 'Em execução', bg: '#DBEAFE', fg: '#1E40AF' },
+  concluido: { label: 'Concluído', bg: '#DCFCE7', fg: '#166534' },
 };
 
 const LEADS = [

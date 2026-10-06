@@ -9,9 +9,9 @@ MK.dashboard = `
 <div class="mockup">
   <div class="mockup-glow"></div>
   <div class="mockup-bar">
-    <span class="mockup-dot" style="background:#D5D5D5"></span>
-    <span class="mockup-dot" style="background:#C4C4C6"></span>
-    <span class="mockup-dot" style="background:#B4B4B7"></span>
+    <span class="mockup-dot" style="background:#FF5F57"></span>
+    <span class="mockup-dot" style="background:#FEBC2E"></span>
+    <span class="mockup-dot" style="background:#28C840"></span>
     <span class="addr">app.rezult.com.br/pipeline</span>
   </div>
   <div class="mockup-body">
@@ -35,18 +35,18 @@ MK.dashboard = `
       </div>
       <div class="mk-board">
         <div class="mk-col">
-          <div class="mk-col-h"><span class="dot" style="background:#6C6C6C"></span><span class="n">Novos Leads</span></div>
-          ${card("Diego Ramos","#6C6C6C","R$ 12.000")}
-          ${card("Patricia M.","#6C6C6C","R$ 4.800")}
+          <div class="mk-col-h"><span class="dot" style="background:#3B82F6"></span><span class="n">Novos Leads</span></div>
+          ${card("Diego Ramos","#3B82F6","R$ 12.000")}
+          ${card("Patricia M.","#3B82F6","R$ 4.800")}
         </div>
         <div class="mk-col">
-          <div class="mk-col-h"><span class="dot" style="background:#2D2F33"></span><span class="n">Qualificação</span></div>
-          ${card("Felipe Costa","#2D2F33","R$ 21.000")}
-          ${card("Marina Souza","#2D2F33","R$ 9.200")}
+          <div class="mk-col-h"><span class="dot" style="background:#00B873"></span><span class="n">Qualificação</span></div>
+          ${card("Felipe Costa","#00B873","R$ 21.000")}
+          ${card("Marina Souza","#00B873","R$ 9.200")}
         </div>
         <div class="mk-col">
-          <div class="mk-col-h"><span class="dot" style="background:#525154"></span><span class="n">Ganhos</span></div>
-          ${card("Joana Reis","#525154","R$ 6.700")}
+          <div class="mk-col-h"><span class="dot" style="background:#22C55E"></span><span class="n">Ganhos</span></div>
+          ${card("Joana Reis","#22C55E","R$ 6.700")}
         </div>
       </div>
     </div>
@@ -63,13 +63,13 @@ function card(name, color, val) {
 
 // ---- Agent config (feature) ----
 MK.agent = `
-<div id="agentMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(45,47,51,0.07), transparent 55%);">
+<div id="agentMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 10%, rgba(0,184,115,0.07), transparent 55%);">
   <div style="display:flex;align-items:center;gap:13px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border-active);border-radius:14px;margin-bottom:14px;">
-    <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2D2F33,#3A3A3E);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:700;font-size:16px;box-shadow:0 0 20px var(--glow-soft);">S</div>
+    <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00B873,#00B87A);display:flex;align-items:center;justify-content:center;color:var(--on-primary);font-weight:700;font-size:16px;box-shadow:0 0 20px var(--glow-soft);">S</div>
     <div style="flex:1;"><div style="font-size:14px;font-weight:600;letter-spacing:-0.02em;">Sofia</div><div style="font-size:11px;color:var(--text-muted);">Qualificadora · Tráfego pago</div></div>
-    <span style="font-family:var(--mono);font-size:9px;background:rgba(45,47,51,0.14);color:var(--primary);padding:4px 9px;border-radius:100px;letter-spacing:0.04em;"><span id="agentCounter">127</span> resp.</span>
+    <span style="font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.14);color:var(--primary);padding:4px 9px;border-radius:100px;letter-spacing:0.04em;"><span id="agentCounter">127</span> resp.</span>
   </div>
-  <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--primary);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#2D2F33;display:inline-block;animation:wppDot 1.5s infinite;"></span>Atividade ao vivo</div>
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--primary);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00B873;display:inline-block;animation:wppDot 1.5s infinite;"></span>Atividade ao vivo</div>
   <div id="agentFeed" style="display:flex;flex-direction:column;gap:7px;"></div>
 </div>`;
 
@@ -106,7 +106,7 @@ function animateAgent() {
     statusEl.style.flexShrink = "0";
     statusEl.innerHTML = `<span style="font-family:var(--mono);font-size:9px;color:var(--text-muted);">analisando...</span>`;
 
-    item.innerHTML = `<div style="width:28px;height:28px;border-radius:50%;background:rgba(45,47,51,0.15);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;">${initials(lead.name)}</div>
+    item.innerHTML = `<div style="width:28px;height:28px;border-radius:50%;background:rgba(0,184,115,0.15);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;">${initials(lead.name)}</div>
       <div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:500;letter-spacing:-0.01em;">${lead.name}</div><div style="font-size:10px;color:var(--text-subtle);">${lead.camp}</div></div>`;
     item.appendChild(statusEl);
 
@@ -120,7 +120,7 @@ function animateAgent() {
     requestAnimationFrame(() => requestAnimationFrame(() => { item.style.opacity = "1"; }));
 
     setTimeout(() => {
-      const color = lead.qual ? "#2D2F33" : "#B4B4B7";
+      const color = lead.qual ? "#00B873" : "#EF4444";
       const label = lead.qual ? `✓ qualificado · ${lead.score}` : `✗ descartado · ${lead.score}`;
       statusEl.innerHTML = `<span style="font-family:var(--mono);font-size:9px;background:${color}1a;color:${color};padding:3px 8px;border-radius:100px;white-space:nowrap;">${label}</span>`;
       item.style.borderColor = color + "45";
@@ -141,25 +141,25 @@ MK.integrations = `
 
 /* placeholder para manter referência sem animação */
 MK.integrations_disabled = `
-<div id="intgMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 15%, rgba(45,47,51,0.07), transparent 55%);">
+<div id="intgMock" style="padding:20px 24px;height:340px;overflow:hidden;position:relative;background:radial-gradient(circle at 80% 15%, rgba(0,184,115,0.07), transparent 55%);">
   <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px;">
     <div id="intgRow0" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;transition:border-color .3s,box-shadow .3s;">
       <div style="width:30px;height:30px;border-radius:9px;background:#25D36622;display:flex;align-items:center;justify-content:center;color:#25D366;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 19l1.4-3.5A7 7 0 1 1 9 18.5L5 19z" stroke-linejoin="round"/></svg></div>
       <span style="flex:1;font-size:12px;font-weight:500;letter-spacing:-0.01em;">WhatsApp Business</span>
-      <span style="font-family:var(--mono);font-size:9px;background:rgba(45,47,51,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">conectado</span>
+      <span style="font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">conectado</span>
     </div>
     <div id="intgRow1" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;transition:border-color .3s,box-shadow .3s;">
-      <div style="width:30px;height:30px;border-radius:9px;background:#6C6C6C22;display:flex;align-items:center;justify-content:center;color:#6C6C6C;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12c1-5 4-7 6-7 3 0 5 3 6 6 1-3 3-6 6-6" stroke-linecap="round"/></svg></div>
+      <div style="width:30px;height:30px;border-radius:9px;background:#3B82F622;display:flex;align-items:center;justify-content:center;color:#3B82F6;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12c1-5 4-7 6-7 3 0 5 3 6 6 1-3 3-6 6-6" stroke-linecap="round"/></svg></div>
       <span style="flex:1;font-size:12px;font-weight:500;letter-spacing:-0.01em;">Meta Ads</span>
-      <span style="font-family:var(--mono);font-size:9px;background:rgba(45,47,51,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">conectado</span>
+      <span style="font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">conectado</span>
     </div>
     <div id="intgRow2" style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;transition:border-color .3s,box-shadow .3s;">
-      <div style="width:30px;height:30px;border-radius:9px;background:#8A8A8E22;display:flex;align-items:center;justify-content:center;color:#8A8A8E;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="7" r="3"/><path d="M9 9l-3 6m6-6 3 6M7 17h10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div style="width:30px;height:30px;border-radius:9px;background:#A855F722;display:flex;align-items:center;justify-content:center;color:#A855F7;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="7" r="3"/><path d="M9 9l-3 6m6-6 3 6M7 17h10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <span style="flex:1;font-size:12px;font-weight:500;letter-spacing:-0.01em;">Webhook · pedidos</span>
-      <span style="font-family:var(--mono);font-size:9px;background:rgba(45,47,51,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">ativo</span>
+      <span style="font-family:var(--mono);font-size:9px;background:rgba(0,184,115,0.14);color:var(--primary);padding:3px 8px;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;">ativo</span>
     </div>
   </div>
-  <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--primary);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#2D2F33;display:inline-block;animation:wppDot 1.5s infinite;"></span>API · ao vivo</div>
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--primary);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#00B873;display:inline-block;animation:wppDot 1.5s infinite;"></span>API · ao vivo</div>
   <div id="intgCode" style="background:var(--bg-deep);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:11px;line-height:1.8;min-height:80px;transition:border-color .3s;"></div>
 </div>`;
 
@@ -170,8 +170,8 @@ function animateIntegrations() {
 
   const ROWS = [
     { idx: 0, color: "#25D366" },
-    { idx: 1, color: "#6C6C6C" },
-    { idx: 2, color: "#8A8A8E" },
+    { idx: 1, color: "#3B82F6" },
+    { idx: 2, color: "#A855F7" },
   ];
 
   const calls = [
