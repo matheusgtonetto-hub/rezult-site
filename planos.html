@@ -150,16 +150,16 @@ fbq('track','ViewContent',{content_name:'Planos'});
          semestral e entre 43,8% e 44,2% no anual, por isso arredondados para
          32 e 44. Mudar a base aqui sem mudar em main.js volta a descasar o
          seletor do cartão. -->
-    <div class="price-toggle" id="priceToggle" style="margin-top: 48px;">
-      <button class="active" data-period="mensal">Mensal</button>
-      <button data-period="semestral">Semestral <span class="save">-32%</span></button>
+    <div class="price-toggle" id="priceToggle" data-inicial="semestral" style="margin-top: 48px;">
+      <button data-period="mensal">Mensal</button>
+      <button class="active" data-period="semestral">Semestral <span class="save">-32%</span></button>
       <button data-period="anual">Anual <span class="save">-44%</span></button>
     </div>
 
     <div class="pgrid">
       <div class="pcard">
         <div>
-          <div class="pname"><span class="em-shine-text">Rezult</span> Silver</div>
+          <div class="pname">Silver</div>
           <div class="pdesc">Perfeito para pequenas equipes</div>
         </div>
         <div class="price-block">
@@ -202,7 +202,7 @@ fbq('track','ViewContent',{content_name:'Planos'});
 
       <div class="pcard featured">
         <div>
-          <div class="pname"><span class="em-shine-text">Rezult</span> Platinum</div>
+          <div class="pname">Platinum</div>
           <div class="pdesc">Pensado para quem está crescendo</div>
         </div>
         <div class="price-block">
@@ -245,7 +245,7 @@ fbq('track','ViewContent',{content_name:'Planos'});
 
       <div class="pcard">
         <div>
-          <div class="pname"><span class="em-shine-text">Rezult</span> Emerald</div>
+          <div class="pname">Emerald</div>
           <div class="pdesc">Ideal para empresas em escala</div>
         </div>
         <div class="price-block">

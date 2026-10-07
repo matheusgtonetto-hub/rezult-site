@@ -1529,65 +1529,25 @@ body.ds-crm .pcard.featured .pname::after {
 /* H2 no nome do plano, Corpo na linha de apoio. */
 body.ds-crm .pcard .pname {
   /* Afinado à mão pelo dono em 06/10/2026, e por isso fora dos papéis do DS,
-     que previam 24px/600 aqui. Passou por 25px (o tamanho de antes do design
-     system) e por peso 700 antes de parar em 27px/600.
-
-     O peso vale também para o "Rezult": o span dele não declara font-weight de
-     propósito, justamente para herdar deste ponto. */
-  font-size: 27px; font-weight: 600; line-height: 1.2;
+     que previam 24px/600 aqui. O tamanho passou por 25px e o peso por 700 antes
+     de pararem em 27px/500. */
+  font-size: 27px; font-weight: 500; line-height: 1.2;
   letter-spacing: -0.015em; color: var(--text);
 }
 body.ds-crm .pcard .pdesc {
   font-size: 14px; font-weight: 400; line-height: 1.45;
   letter-spacing: 0; color: var(--text-muted);
 }
-/* "Rezult" antes do nome pesa menos que o nome: ali ele é prefixo de marca, e
-   quem decide compara Silver com Platinum, não um "Rezult" com o outro.
+/* O prefixo "Rezult" saiu dos nomes de plano em 06/10/2026, a pedido do dono:
+   os cartões dizem só Silver, Platinum e Emerald. Com ele foram embora o span
+   .em-shine-text do markup e todo o bloco de estilo que vivia aqui, que pintava
+   o prefixo com um degradê verde animado mais o fallback de reduced-motion.
 
-   O BRILHO VOLTOU em 06/10/2026, a pedido do dono, mas NÃO é o degradê antigo.
-   O original foi desenhado para o cartão preto e usava neon: #00B87A, #5CFFC0 e
-   #00E599. Medidos sobre o branco do cartão de hoje eles dão 2,58:1, 1,27:1 e
-   1,66:1, ou seja, o nome da marca sumiria durante a maior parte da varredura.
-
-   Este degradê é o mesmo movimento com tinta escura. Os três tons sobre branco:
-     #0A5C45  7,99:1   (a âncora funda, onde a onda descansa)
-     #0F7A5B  5,31:1   (= --verde-tinta-forte, a cor chapada que havia aqui)
-     #128C69  4,22:1   (o pico da varredura; o DS libera esse tom a partir de
-                        24px, e o nome tem 25px nos dois breakpoints)
-   Nenhum stop fica mais claro que o verde que já estava aqui parado, então o
-   brilho só escurece e volta: na prática a onda lê como relevo, não como flash.
-
-   Se alguém trouxer o cartão preto de volta, este bloco inteiro deve voltar ao
-   degradê neon, que naquele fundo é o que funciona. */
-body.ds-crm .pcard .pname .em-shine-text {
-  /* SEM font-weight aqui, de propósito, desde 06/10/2026: o dono pediu que o
-     "Rezult" pese o MESMO que o nome do plano, e a forma de escrever isso é não
-     declarar nada e herdar do .pname. Se o peso do nome mudar um dia, o prefixo
-     muda junto sozinho; com o número repetido aqui, os dois silenciosamente
-     divergiriam.
-
-     Até hoje o prefixo era 500 contra 600 do nome, inclusive antes do design
-     system. A hierarquia por peso saiu: quem separa marca de plano agora é a
-     cor, verde contra tinta escura, e o brilho que corre só no prefixo. */
-  background: linear-gradient(90deg, #0A5C45, #0F7A5B, #128C69, #0F7A5B, #0A5C45);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: em-shine 5s linear infinite;
-}
-/* Quem pede menos movimento fica com o verde chapado, e não com texto
-   transparente: sem o background pintado, o background-clip: text não teria o
-   que recortar e o nome da marca desapareceria. */
-@media (prefers-reduced-motion: reduce) {
-  body.ds-crm .pcard .pname .em-shine-text {
-    background: none;
-    animation: none;
-    color: var(--green-text);
-    -webkit-text-fill-color: var(--green-text);
-  }
-}
+   Fica o registro de uma decisão que custou medição, caso o brilho volte a ser
+   usado em algum lugar: o degradê original era neon (#00B87A, #5CFFC0,
+   #00E599), desenhado para o cartão preto, e sobre o branco de hoje rende
+   2,58:1, 1,27:1 e 1,66:1. O substituto media 7,99, 5,31 e 4,22:1, com
+   #0A5C45, #0F7A5B e #128C69. */
 
 /* Métrica: o valor. tabular-nums porque no DS número é sempre tabular, para
    os dígitos não dançarem entre as três colunas. */
@@ -1610,7 +1570,12 @@ body.ds-crm .pcard .pprice-savings s.pprice-de {
   font-size: 13px; font-weight: 400; line-height: 1.4;
   letter-spacing: 0; color: var(--text-muted);
 }
-body.ds-crm .pcard .pprice-savings s.pprice-de { text-decoration-color: var(--text-muted); }
+/* O preço âncora vai 2px acima dos 13px do grupo acima (06/10/2026). Ele entra
+   AQUI, na regra que já era só dele, e não no grupo: lá o 13px é compartilhado
+   com o "/mês" e com o "Cobrança mensal recorrente", que não foram pedidos e
+   seguiriam junto. A tinta continua --text-muted, que o DS exige abaixo de
+   16px. */
+body.ds-crm .pcard .pprice-savings s.pprice-de { font-size: 15px; text-decoration-color: var(--text-muted); }
 body.ds-crm .pcard .pprice .pperiod {
   font-size: 12px; font-weight: 600; letter-spacing: 0;
   background: var(--neutral-200); color: var(--neutral-900);
@@ -4146,7 +4111,7 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
   /* O nome do plano e o valor descem um degrau: no celular os três cartões
      empilham e passam a ocupar a largura toda, mas o conjunto valor + ciclo +
      economia continua disputando a mesma linha. */
-  body.ds-crm .pcard .pname { font-size: 27px; }  /* era 20px; segue casado com o desktop desde 06/10/2026 */
+  body.ds-crm .pcard .pname { font-size: 29px; }  /* 2px acima do desktop desde 06/10/2026; o cartão no celular ocupa a largura toda e o nome aguenta mais corpo */
   body.ds-crm .pcard .pprice .amt { font-size: 40px; }  /* era 28px; mesmo valor do desktop desde 06/10/2026 */
   body.ds-crm .footer .footer-col a { font-size: 13px; }
 }

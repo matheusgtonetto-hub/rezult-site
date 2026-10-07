@@ -160,13 +160,24 @@ function brl(n) {
 function wirePricingToggle(toggleId) {
   const toggle = document.getElementById(toggleId);
   if (!toggle) return;
-  toggle.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => {
+
+  // O corpo saiu de dentro do addEventListener para poder rodar TAMBEM no
+  // carregamento, quando a pagina pede um ciclo inicial diferente do mensal.
+  // Toda a conta (preco, economia, riscado, linha de cobranca) continua num
+  // lugar so: repetir esses numeros no HTML seria duas fontes de verdade que
+  // divergem no primeiro ajuste de preco.
+  //
+  // O parametro `animar` existe por isso: no clique o numero conta ate o novo
+  // valor, no load ele ja nasce certo. Animar no load faria a pagina abrir
+  // mostrando o preco mensal e trocar sozinha na frente do visitante.
+  function aplicar(btn, animar) {
       const period = btn.dataset.period;
       toggle.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
       document.querySelectorAll(".amt").forEach(amt => {
         const val = period === "anual" ? amt.dataset.a : period === "semestral" ? amt.dataset.s : amt.dataset.m;
-        if (val) animateNumber(amt, parseInt(amt.textContent.replace(/\D/g, "")) || 0, parseInt(val));
+        if (!val) return;
+        if (animar) animateNumber(amt, parseInt(amt.textContent.replace(/\D/g, "")) || 0, parseInt(val));
+        else amt.textContent = parseInt(val);
       });
       document.querySelectorAll(".pprice .pperiod").forEach(tag => {
         tag.textContent = period === "anual" ? "Anual" : period === "semestral" ? "Semestral" : "Mensal";
@@ -215,8 +226,21 @@ function wirePricingToggle(toggleId) {
         savingsEl.innerHTML = `${riscado} Economize ${brl(savings)}`;
         recurringEl.textContent = `Cobrança ${period} de ${brl(total)}`;
       });
-    });
+  }
+
+  toggle.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => aplicar(btn, true));
   });
+
+  // Ciclo inicial, quando a pagina pede um. E opt-in por ATRIBUTO e nao pelo
+  // botao com .active: assim uma pagina que nao declarar nada (o ab2.html, por
+  // exemplo) continua exatamente como estava, sem ter o conteudo reescrito no
+  // load por efeito colateral desta mudanca.
+  const inicial = toggle.dataset.inicial;
+  if (inicial) {
+    const btn = toggle.querySelector(`button[data-period="${inicial}"]`);
+    if (btn) aplicar(btn, false);
+  }
 }
 function animateNumber(el, from, to) {
   const dur = 350, start = performance.now();
