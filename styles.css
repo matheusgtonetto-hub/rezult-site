@@ -290,7 +290,20 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
 /* -0.8px, o mesmo valor da home.css, em todos os breakpoints (06/10/2026).
    Era -0.02em, que a 36px dava -0.72px e a 30px dava -0.6px: o aperto mudava
    com o tamanho. Com px fixo ele para de mudar. */
-.h2 { font-size: 36px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.1; }
+/* O tamanho é FLUIDO, não dois degraus fixos. Antes a .h2 valia 36px e caía
+   para 30px de uma vez em 560px: um salto de 6px num único pixel de
+   largura, enquanto a h1 do hero já escalava contínuo por clamp. Entre 561 e
+   900px de tela o título ficava grande demais para a coluna, e logo abaixo de
+   560 pequeno demais.
+
+   A parte do meio usa rem MAIS vw, e não vw sozinho: com vw puro o título para
+   de responder ao tamanho de fonte que a pessoa configurou no navegador, e quem
+   aumenta a fonte do sistema não vê diferença nenhuma. O rem carrega essa parte.
+
+   A curva: 29px até 375px de tela, subindo até os 36px a partir de ~1150px.
+   Mexer no mínimo ou no máximo pede refazer a conta do meio, senão a rampa
+   deixa de encostar nas duas pontas. */
+.h2 { font-size: clamp(29px, 1.6rem + 0.9vw, 36px); font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.1; }
 /* Zerado em 06/10/2026: a folga pill -> título passou a ser só o
    margin-bottom da pill, como já era no hero.
 
@@ -1303,11 +1316,20 @@ body.ds-crm .page-hero h1 {
   line-height: 1.05;
   letter-spacing: -2px;
 }
-/* H1 do site: título de seção e do cartão de dúvidas. O site usava 36px e um
-   clamp até 35px, nenhum dos dois papel do DS. */
+/* Papel "H1" do design system: título de seção e do cartão de dúvidas.
+
+   ESTA é a regra que vale nas páginas com body.ds-crm, e não a .h2 crua lá em
+   cima: o body no seletor a torna mais específica. Quem for mudar o tamanho do
+   título de seção tem que mexer AQUI; alterar a .h2 base não produz efeito
+   nenhum nestas páginas.
+
+   O tamanho é fluido desde 06/10/2026. Era 32px fixo, caindo para 30px de uma
+   vez em 560px. O degrau é pequeno, bem menor que o de 40 para 30 da home, mas
+   é degrau do mesmo jeito. O clamp liga os dois extremos que já existiam, então
+   nada muda em 375px nem acima de 1150px: muda só o meio, que antes pulava. */
 body.ds-crm .h2,
 body.ds-crm .ainda-duvidas h2 {
-  font-size: 32px;
+  font-size: clamp(30px, 1.81rem + 0.26vw, 32px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -2215,7 +2237,7 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
-.cta-final h2 { font-size: 40px; letter-spacing: -0.025em; line-height: 1.02; }
+.cta-final h2 { font-size: clamp(29px, 1.48rem + 1.42vw, 40px); letter-spacing: -0.025em; line-height: 1.02; }
 #demo .btn-primary { box-shadow: none; }
 #demo .btn-primary:hover { box-shadow: none; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.01em; margin: 28px auto 36px; max-width: 600px; }
@@ -2676,7 +2698,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .case-nums b { font-size: 21px; }
   .case-nums span { font-size: 11px; margin-top: 5px; }
   .case-tag { top: 13px; left: 13px; padding: 6px 10px; font-size: 12px; }
-  .h2, .cta-final h2 { font-size: 30px; letter-spacing: -0.8px; line-height: 1.1; }
+  /* Sem font-size: ele agora vem do clamp da regra base e escala sozinho.
+     Havia 30px aqui, que era justamente o degrau que criava o salto. */
+  .h2, .cta-final h2 { letter-spacing: -0.8px; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
@@ -4115,7 +4139,9 @@ body.ds-crm .footer .footer-brand p { font-size: 14px; line-height: 1.45; letter
 
 @media (max-width: 560px) {
   body.ds-crm .page-hero h1 { font-size: 38px; line-height: 1.07; letter-spacing: -0.03em; }
-  body.ds-crm .h2 { font-size: 30px; line-height: 1.1; letter-spacing: -0.8px; }
+  /* Sem font-size pelo mesmo motivo da regra acima: travava o clamp em 30px,
+     e por ter body.ds-crm no seletor vencia até a regra base. */
+  body.ds-crm .h2 { line-height: 1.1; letter-spacing: -0.8px; }
   body.ds-crm .ainda-duvidas h2 { font-size: 26px; line-height: 1.1; }
   /* O nome do plano e o valor descem um degrau: no celular os três cartões
      empilham e passam a ocupar a largura toda, mas o conjunto valor + ciclo +

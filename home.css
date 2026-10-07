@@ -326,7 +326,20 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
    outras páginas. Virou um número só: se mudar, mudar nos cinco pontos (dois
    nesta folha, três na styles.css), senão o título aperta diferente conforme
    a largura da tela. */
-.h2 { font-size: 40px; font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.2; }
+/* O tamanho é FLUIDO, não dois degraus fixos. Antes a .h2 valia 40px e caía
+   para 30px de uma vez em 560px: um salto de 10px num único pixel de
+   largura, enquanto a h1 do hero já escalava contínuo por clamp. Entre 561 e
+   900px de tela o título ficava grande demais para a coluna, e logo abaixo de
+   560 pequeno demais.
+
+   A parte do meio usa rem MAIS vw, e não vw sozinho: com vw puro o título para
+   de responder ao tamanho de fonte que a pessoa configurou no navegador, e quem
+   aumenta a fonte do sistema não vê diferença nenhuma. O rem carrega essa parte.
+
+   A curva: 29px até 375px de tela, subindo até os 40px a partir de ~1150px.
+   Mexer no mínimo ou no máximo pede refazer a conta do meio, senão a rampa
+   deixa de encostar nas duas pontas. */
+.h2 { font-size: clamp(29px, 1.48rem + 1.42vw, 40px); font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.2; }
 /* Zerado em 06/10/2026: a folga pill -> título passou a ser só o
    margin-bottom da pill, como já era no hero.
 
@@ -1546,7 +1559,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
-.cta-final h2 { font-size: 40px; letter-spacing: -0.025em; line-height: 1.02; }
+.cta-final h2 { font-size: clamp(29px, 1.48rem + 1.42vw, 40px); letter-spacing: -0.025em; line-height: 1.02; }
 #demo .btn-primary { box-shadow: none; }
 #demo .btn-primary:hover { box-shadow: none; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.3px; margin: 28px auto 36px; max-width: 600px; }
@@ -1955,7 +1968,12 @@ select.demo-select:invalid { color: var(--neutral-700); }
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
   .hero-sub { max-width: 95%; font-size: 16px; letter-spacing: -0.3px; }
-  .hero.va .hero-conversion { margin-top: 26px; }
+  /* A folga ABAIXO dos botões, até os três benefícios. Era 26px, foi igualada
+     aos 45px da folga de cima e parou em 35px, afinada à mão pelo dono. A de
+     cima (.hero .hero-actions) não tem override de celular e segue nos 45px do
+     desktop, então as duas são assimétricas de propósito: mais respiro antes da
+     fileira de botões do que depois dela. */
+  .hero.va .hero-conversion { margin-top: 35px; }
   .hero-benefits { max-width: 330px; flex-direction: column; gap: 12px; }
   .hero-benefit { width: 100%; gap: 14px; font-size: 15px; white-space: normal; }
   .hero-cases { margin-top: 100px; }
@@ -1966,7 +1984,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .case-nums b { font-size: 21px; }
   .case-nums span { font-size: 11px; margin-top: 5px; }
   .case-tag { top: 13px; left: 13px; padding: 6px 10px; font-size: 12px; }
-  .h2, .cta-final h2 { font-size: 30px; letter-spacing: -0.8px; line-height: 1.1; }
+  /* Sem font-size: ele agora vem do clamp da regra base e escala sozinho.
+     Havia 30px aqui, que era justamente o degrau que criava o salto. */
+  .h2, .cta-final h2 { letter-spacing: -0.8px; line-height: 1.1; }
   #integ-heading { font-size: 35px; }
   #demo-heading, #demo-planos-heading { font-size: 40px; }
   .feature-text h3 { font-size: 24px; }
@@ -2035,7 +2055,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      980px aplica align-items: center e text-align: center no .hero.vb
      .hero-text. Uma versão anterior desta regra usava flex-start, e os botões
      ficavam à esquerda enquanto o h1 e o subtítulo estavam centrados. */
-  .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 12px; }
+  .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 15px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
