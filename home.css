@@ -546,14 +546,19 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    junta as duas o suficiente para lerem como um nome, não como duas palavras
    soltas.
 
-   O corpo é 16px e não os 15px do app: a barra do site é mais larga e tem menos
-   elementos, e em 15px o nome ficava miúdo ao lado do ladrilho de 30px.
+   O corpo é 18px no desktop e 16px no celular desde 06/10/2026. Nasceu em 16px,
+   "e não os 15px do app, porque a barra do site é mais larga e tem menos
+   elementos", e subiu de novo pelo mesmo raciocínio: ao lado do ladrilho de
+   30px o nome ainda lia como legenda e não como marca. Os dois valores são
+   escolha do dono, afinados à mão, então não seguem papel do design system.
 
    Escopado em .nav porque a classe .logo também serve o rodapé, que já traz a
    marca de outro jeito. */
 .nav .logo { gap: 10px; }
 .nav .logo-nome {
-  font-size: 16px;
+  /* 18px no desktop e 16px no celular (bloco de 560px), por pedido do dono em
+     06/10/2026. Passou por 16/15 e 20/18 antes de parar aqui. */
+  font-size: 18px;
   letter-spacing: -0.025em;
   white-space: nowrap;
   color: var(--ink);
@@ -1279,9 +1284,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .carousel-arrow-edge.carousel-arrow-left { left: 0; }
 .carousel-arrow-edge.carousel-arrow-right { right: 0; }
 @media (max-width: 560px) {
-  /* Mesma razão do modo compacto da barra do app: em tela estreita o logo
-     sozinho já diz o nome, e a marca escrita disputaria espaço com o CTA. */
-  .nav .logo-nome { display: none; }
+  /* A marca escrita VOLTA no celular (06/10/2026, pedido do dono). Ela estava
+     escondida aqui porque disputaria espaço com o CTA, e a barra nessa faixa
+     carrega logo + nome + "Começar 7 dias grátis" + o botão de menu: os links e
+     o "Entrar" já saem antes, em 980px.
+
+     Por isso ela vem um degrau menor, 15px em vez de 16px, e volta a sumir
+     abaixo de 380px. Os 380px não são chute: é onde a soma do nome com o CTA
+     passa a empurrar o botão de menu para fora em telas como o iPhone SE. Entre
+     380 e 560 a marca aparece, que é a faixa da maioria dos aparelhos. */
+  .nav .logo-nome { font-size: 16px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
@@ -4681,6 +4693,11 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .passive-compare { padding: 80px 0; }
   .passive-compare-head { margin-bottom: 38px; padding: 0; }
   .passive-compare-head .lede { font-size: 17px; }
+}
+
+@media (max-width: 380px) {
+  /* Ver a nota em .nav .logo-nome, no breakpoint de 560px. */
+  .nav .logo-nome { display: none; }
 }
 
 @media (max-width: 480px) {

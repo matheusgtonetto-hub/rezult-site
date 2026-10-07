@@ -507,14 +507,19 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    junta as duas o suficiente para lerem como um nome, não como duas palavras
    soltas.
 
-   O corpo é 16px e não os 15px do app: a barra do site é mais larga e tem menos
-   elementos, e em 15px o nome ficava miúdo ao lado do ladrilho de 30px.
+   O corpo é 18px no desktop e 16px no celular desde 06/10/2026. Nasceu em 16px,
+   "e não os 15px do app, porque a barra do site é mais larga e tem menos
+   elementos", e subiu de novo pelo mesmo raciocínio: ao lado do ladrilho de
+   30px o nome ainda lia como legenda e não como marca. Os dois valores são
+   escolha do dono, afinados à mão, então não seguem papel do design system.
 
    Escopado em .nav porque a classe .logo também serve o rodapé, que já traz a
    marca de outro jeito. */
 .nav .logo { gap: 10px; }
 .nav .logo-nome {
-  font-size: 16px;
+  /* 18px no desktop e 16px no celular (bloco de 560px), por pedido do dono em
+     06/10/2026. Passou por 16/15 e 20/18 antes de parar aqui. */
+  font-size: 18px;
   letter-spacing: -0.025em;
   white-space: nowrap;
   color: var(--ink);
@@ -1978,11 +1983,17 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
 .carousel-arrow-edge.carousel-arrow-left { left: 0; }
 .carousel-arrow-edge.carousel-arrow-right { right: 0; }
 @media (max-width: 560px) {
-  /* Mesma razão do modo compacto da barra do app: em tela estreita o logo
-     sozinho já diz o nome, e a marca escrita disputaria espaço com o CTA. */
-  .nav .logo-nome { display: none; }
+  /* Gêmea da home.css: a marca escrita aparece no celular, um degrau menor, e
+     some abaixo de 380px. A barra é a mesma nas cinco páginas, então as duas
+     folhas têm que concordar; se divergirem, o nome pisca ao trocar de página. */
+  .nav .logo-nome { font-size: 16px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
+}
+
+@media (max-width: 380px) {
+  /* Ver a nota em .nav .logo-nome, no breakpoint de 560px. */
+  .nav .logo-nome { display: none; }
 }
 .bcard { flex: 0 0 calc((100% - 40px) / 3); border-radius: var(--r-lg); background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 18px; min-height: 412px; position: relative; overflow: hidden; }.bcard .b-num { font-family: var(--mono); font-size: 12px; color: #525154; letter-spacing: 0.1em; position: relative; }
 .bcard .b-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--green-text); position: relative; box-shadow: none; }
