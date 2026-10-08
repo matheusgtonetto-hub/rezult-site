@@ -313,11 +313,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
-/* O .section-head de #recursos carrega SÓ a pill, sem h2 nem lede: a seção
-   abre direto no primeiro .feature-row. Os 40px da regra base somariam com os
-   120px de padding-top do .feature-text e a pill ficaria órfã no meio do
-   vazio, então aqui ela zera e o espaçamento fica por conta do feature. */
-#recursos .section-head { margin-bottom: 0; }
+/* O .section-head de #recursos zerava a margem porque carregava SÓ a pill: os
+   40px da regra base somariam com os 120px de padding-top do .feature-text e a
+   pill ficaria órfã no meio do vazio.
+
+   Desde 08/10/2026 ele tem h2, e a conta virou outra. Quem encosta no título
+   agora não é o texto do recurso (que tem os 120px) e sim a IMAGEM, que é
+   centrada na linha e por isso sobe quase até o topo dela. O primeiro recurso
+   ficava colado no título enquanto o segundo em diante respirava.
+
+   A margem resolve pelo lado certo: ela separa o cabeçalho da seção do que
+   vem abaixo, valha o que valer dentro da linha. Os 120px do .feature-text
+   seguem intactos, porque são eles que dão o ritmo ENTRE os recursos. */
+#recursos .section-head { margin-bottom: 56px; }
 .section-sub { font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-top: 16px; font-weight: 400; letter-spacing: -0.3px; }
 /* Preto esverdeado dos títulos, em vez do #000 puro do body. */
 h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-height: 1; font-weight: var(--fw-semibold); color: var(--ink); }
@@ -569,15 +577,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    marca de outro jeito. */
 .nav .logo { gap: 10px; }
 .nav .logo-nome {
-  /* 18px no desktop e 16px no celular (bloco de 560px), por pedido do dono em
-     06/10/2026. Passou por 16/15 e 20/18 antes de parar aqui. */
+  /* O tamanho aqui é o do "CRM": 18px no desktop e 16px no celular (bloco de
+     560px), por pedido do dono em 06/10/2026. Passou por 16/15 e 20/18 antes.
+
+     "Rezult" é maior, pelo <b> logo abaixo (dono, 08/10/2026). Quem cresce é
+     só ele, e não o bloco, porque as duas palavras dividem o `line-height`
+     herdado daqui -- mexer no tamanho do pai moveria a linha de base das
+     duas. */
   font-size: 18px;
   letter-spacing: -0.025em;
   white-space: nowrap;
   color: var(--ink);
   font-weight: 400;
 }
-.nav .logo-nome b { font-weight: 600; }
+.nav .logo-nome b { font-weight: 600; font-size: 20px; }
 
 
 /* ---------- Hero ---------- */
@@ -1212,6 +1225,43 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-visual .painel-pipeline { border: 0; }
 .feature-visual > * { flex: 1; min-width: 0; }
 
+/* ── Slot que leva CAPTURA DE TELA em vez do painel em React (08/10/2026) ──
+   Os cinco recursos mostram o produto de verdade, e a arte já vem com a janela
+   do navegador flutuando sobre o próprio fundo.
+
+   O slot tem o TAMANHO DA IMAGEM, e é isso que as duas regras resolvem. O
+   `.feature-visual` nasce com `align-self: stretch`, então ele crescia até a
+   altura da coluna de texto ao lado e sobrava caixa em volta da captura; a
+   primeira versão disto escondia a sobra pintando o slot de preto, o que
+   resolvia pelo lado errado -- continuava existindo caixa, só não dava para
+   ver. Com `align-self: start` a altura passa a ser a da imagem e a sobra não
+   existe, então não há o que esconder.
+
+   `height: auto` no lugar de `100%` pelo mesmo motivo: a altura vem da
+   proporção da arte, não do vizinho. Sem `object-fit` nenhum, porque não há
+   mais diferença de proporção para resolver. */
+.feature-visual.com-imagem {
+  /* `center`, e não `start` nem o `stretch` herdado. Ele resolve as DUAS
+     coisas de uma vez: a altura passa a ser a da imagem (stretch é o que
+     esticava o slot até a altura da coluna de texto e criava caixa em volta)
+     e a imagem fica na mesma linha de centro do texto ao lado, que também é
+     `align-self: center`. Com `start` o texto ficava centrado e a imagem
+     colada no topo da linha. */
+  align-self: center;
+  /* Sem card: a captura já vem com moldura, canto arredondado e sombra
+     próprios, então a borda, o raio, o fundo e a sombra do .feature-visual
+     viravam uma segunda moldura em volta da primeira. */
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.feature-visual.com-imagem img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 /* Degradê no título da seção, recortado no texto. Mesma técnica do
    .em-shine-text: o degradê é pintado na caixa e o background-clip: text o
@@ -1307,6 +1357,8 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
      passa a empurrar o botão de menu para fora em telas como o iPhone SE. Entre
      380 e 560 a marca aparece, que é a faixa da maioria dos aparelhos. */
   .nav .logo-nome { font-size: 16px; }
+  /* O par acompanha com o mesmo degrau de 2px do desktop. */
+  .nav .logo-nome b { font-size: 18px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
@@ -2375,13 +2427,17 @@ select.demo-select:invalid { color: var(--neutral-700); }
    lugares que seguem em charcoal (o h2 de #clientes nesta página e na planos,
    e o primeiro item dos cartões de plano). O ID vence o
    `body.ds-crm .grad-verde` e o `:has()` sem precisar de !important. */
-/* Só o numeral: o trecho marcado do título já vem verde do padrão. */
+/* Só o numeral: o trecho marcado do título já vem verde do padrão. E é pelo
+   MESMO token do padrão, senão o numeral e o título ao lado dele ficam em
+   verdes diferentes -- que foi o que aconteceu em 08/10/2026, quando a ênfase
+   de título passou de --verde-tinta para --green-text e esta regra ficou para
+   trás por um turno. */
 #perdendo-vendas .diag-numeral {
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
-  color: var(--verde-tinta);
-  -webkit-text-fill-color: var(--verde-tinta);
+  color: var(--green-text);
+  -webkit-text-fill-color: var(--green-text);
 }
 /* O título volta ao charcoal cheio. A regra `.h2:has(.grad-verde)` o recuava
    para --neutral-600 porque, em cinza, o trecho marcado ficava mais CLARO que
@@ -4838,12 +4894,22 @@ body.ds-crm button:focus-visible {
    dois passam nos 3:1 de texto grande, e a .h2 tem 40px no desktop e 30px no
    celular. Se esta classe algum dia servir texto abaixo de 24px, a tinta precisa
    virar --verde-tinta-forte. */
+/* O verde da ênfase de título, UM só nas duas folhas (dono, 08/10/2026).
+   Esta regra apontava para --verde-tinta (#128C69) enquanto a irmã em
+   styles.css, que cobre a h1 de /planos, apontava para --green-text
+   (#0F7A5B): um degrau de diferença, 1,26:1 entre eles, visível com as duas
+   páginas lado a lado.
+
+   Fica o mais fechado porque ele é o único dos dois que passa em texto
+   NORMAL (5,31:1 contra 4,22:1 sobre branco). Os dois serviam para título,
+   que é o uso de hoje; com o fechado, o verde continua válido se um dia
+   descer para um texto menor. */
 body.ds-crm .grad-verde {
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
-  color: var(--verde-tinta);
-  -webkit-text-fill-color: var(--verde-tinta);
+  color: var(--green-text);
+  -webkit-text-fill-color: var(--green-text);
   animation: none;
 }
 

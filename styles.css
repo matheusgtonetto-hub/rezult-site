@@ -530,15 +530,20 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    marca de outro jeito. */
 .nav .logo { gap: 10px; }
 .nav .logo-nome {
-  /* 18px no desktop e 16px no celular (bloco de 560px), por pedido do dono em
-     06/10/2026. Passou por 16/15 e 20/18 antes de parar aqui. */
+  /* O tamanho aqui é o do "CRM": 18px no desktop e 16px no celular (bloco de
+     560px), por pedido do dono em 06/10/2026. Passou por 16/15 e 20/18 antes.
+
+     "Rezult" é maior, pelo <b> logo abaixo (dono, 08/10/2026). Quem cresce é
+     só ele, e não o bloco, porque as duas palavras dividem o `line-height`
+     herdado daqui -- mexer no tamanho do pai moveria a linha de base das
+     duas. */
   font-size: 18px;
   letter-spacing: -0.025em;
   white-space: nowrap;
   color: var(--ink);
   font-weight: 400;
 }
-.nav .logo-nome b { font-weight: 600; }
+.nav .logo-nome b { font-weight: 600; font-size: 20px; }
 
 
 /* ---------- Hero ---------- */
@@ -1974,6 +1979,8 @@ body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
      some abaixo de 380px. A barra é a mesma nas cinco páginas, então as duas
      folhas têm que concordar; se divergirem, o nome pisca ao trocar de página. */
   .nav .logo-nome { font-size: 16px; }
+  /* O par acompanha com o mesmo degrau de 2px do desktop. */
+  .nav .logo-nome b { font-size: 18px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
