@@ -598,7 +598,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    Aquele inline definia o padding inteiro e vencia esta regra, então mexer no
    respiro pelo CSS não surtia efeito nenhum. */
 /* Sem fundo próprio: herda o --bg do body, que é o #FBFBFB do site inteiro. */
-.hero { position: relative; padding-top: calc(var(--nav-h) + 70px); padding-bottom: 100px; overflow: hidden; }
+/* +35px depois da navbar, o MESMO respiro da /planos (dono, 08/10/2026).
+   Eram +70px aqui contra +35px no `.page-hero` de planos, e a pill da home
+   começava o dobro mais abaixo que a de lá. O resto da pilha já era idêntico
+   nas duas folhas (`--nav-h` igual, `.hero-badge` igual, mesmo
+   `margin-bottom: 25px`), então o padding era a diferença inteira. */
+.hero { position: relative; padding-top: calc(var(--nav-h) + 35px); padding-bottom: 100px; overflow: hidden; }
 /* Altura mínima igual à do hero do gohighlevel.com, medida ao vivo a 1440x900
    (886px, do fim do nav até o começo da seção seguinte deles). Só a partir de
    981px: abaixo disso o hero já empilha texto sobre a imagem do mockup, e uma
