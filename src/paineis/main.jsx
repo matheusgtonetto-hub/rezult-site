@@ -33,16 +33,6 @@ const ILHAS = [
 ILHAS.forEach(({ id, classe, Painel }) => {
   const slot = document.getElementById(id);
   if (!slot) return;
-  /* Slot que JÁ tem conteúdo é captura de tela, e o React não entra nele.
-   *
-   * Desde 08/10/2026 a home mostra o produto de verdade nos cinco recursos, em
-   * <img> escrita no HTML. As outras páginas com estes mesmos ids (agentes,
-   * ab2, black) seguem com os painéis, e é por isso que a lista acima continua
-   * inteira: tirar as entradas daqui apagaria os painéis DELAS junto.
-   *
-   * A pergunta "tem filho?" é o que separa os dois casos sem precisar de uma
-   * lista por página. Slot vazio é do React; slot com imagem é do HTML. */
-  if (slot.children.length > 0) return;
   slot.classList.add(classe);
   createRoot(slot).render(<Painel />);
 });

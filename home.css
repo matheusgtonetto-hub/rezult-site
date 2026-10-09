@@ -1230,42 +1230,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .feature-visual .painel-pipeline { border: 0; }
 .feature-visual > * { flex: 1; min-width: 0; }
 
-/* ── Slot que leva CAPTURA DE TELA em vez do painel em React (08/10/2026) ──
-   Os cinco recursos mostram o produto de verdade, e a arte já vem com a janela
-   do navegador flutuando sobre o próprio fundo.
-
-   O slot tem o TAMANHO DA IMAGEM, e é isso que as duas regras resolvem. O
-   `.feature-visual` nasce com `align-self: stretch`, então ele crescia até a
-   altura da coluna de texto ao lado e sobrava caixa em volta da captura; a
-   primeira versão disto escondia a sobra pintando o slot de preto, o que
-   resolvia pelo lado errado -- continuava existindo caixa, só não dava para
-   ver. Com `align-self: start` a altura passa a ser a da imagem e a sobra não
-   existe, então não há o que esconder.
-
-   `height: auto` no lugar de `100%` pelo mesmo motivo: a altura vem da
-   proporção da arte, não do vizinho. Sem `object-fit` nenhum, porque não há
-   mais diferença de proporção para resolver. */
-.feature-visual.com-imagem {
-  /* `center`, e não `start` nem o `stretch` herdado. Ele resolve as DUAS
-     coisas de uma vez: a altura passa a ser a da imagem (stretch é o que
-     esticava o slot até a altura da coluna de texto e criava caixa em volta)
-     e a imagem fica na mesma linha de centro do texto ao lado, que também é
-     `align-self: center`. Com `start` o texto ficava centrado e a imagem
-     colada no topo da linha. */
-  align-self: center;
-  /* Sem card: a captura já vem com moldura, canto arredondado e sombra
-     próprios, então a borda, o raio, o fundo e a sombra do .feature-visual
-     viravam uma segunda moldura em volta da primeira. */
-  background: none;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-.feature-visual.com-imagem img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 
 /* Degradê no título da seção, recortado no texto. Mesma técnica do

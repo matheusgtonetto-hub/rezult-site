@@ -1054,17 +1054,6 @@ fbq('track','PageView');
       <h2 class="h2">Cada funcionalidade foi pensada para otimizar seu <span class="grad-verde">processo comercial.</span></h2>
     </div>
 
-    <!-- Os slots desta secao perderam o id (featWhatsapp, featDisparos,
-         featAutomation, featPipelines, featDashboards) em 08/10/2026, quando
-         passaram a levar captura de tela em vez do painel em React.
-
-         Nao e limpeza: e o que mantem a imagem no ar. O `build/paineis.js` e
-         gitignored, entao um deploy a partir do repositorio NAO atualiza o
-         bundle, e o que esta publicado hoje continua fazendo createRoot
-         nesses ids -- ou seja, trocaria a imagem pelo painel. Sem o id, ele
-         nao acha o slot e a imagem fica.
-
-         As outras paginas (agentes, ab2, black) mantem os ids e os paineis. -->
     <!-- Feature 1: WhatsApp -->
     <div class="feature-row">
       <div class="feature-text reveal tema-verde">
@@ -1083,10 +1072,7 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Instagram e WhatsApp na mesma fila, atendidos pela mesma pessoa</li>
         </ul>
       </div>
-      <div class="feature-visual reveal com-imagem" data-d="1">
-        <img src="recursos/recurso-whatsapp.png?v=1" alt="A caixa de atendimento do Rezult, com as conversas de WhatsApp e Instagram na mesma fila"
-             width="1200" height="856" loading="lazy" decoding="async">
-      </div>
+      <div class="feature-visual reveal" data-d="1" id="featWhatsapp"></div>
     </div>
 
     <!-- Feature 2: Disparos em massa -->
@@ -1107,10 +1093,7 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Cada contato aparece com status próprio: quem recebeu, quem está na fila e quem deu erro</li>
         </ul>
       </div>
-      <div class="feature-visual reveal com-imagem" data-d="1">
-        <img src="recursos/recurso-disparos.png?v=1" alt="A tela de criar disparo do Rezult, escolhendo os leads que vão receber"
-             width="1200" height="856" loading="lazy" decoding="async">
-      </div>
+      <div class="feature-visual reveal" data-d="1" id="featDisparos"></div>
     </div>
 
     <!-- Feature 3: Automações -->
@@ -1131,10 +1114,7 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>O follow-up sai mesmo na sexta às 19h, quando ninguém mais vai lembrar dele</li>
         </ul>
       </div>
-      <div class="feature-visual reveal com-imagem" data-d="1">
-        <img src="recursos/recurso-automacoes.png?v=1" alt="O construtor de automações do Rezult, com os blocos ligados no canvas"
-             width="1200" height="856" loading="lazy" decoding="async">
-      </div>
+      <div class="feature-visual reveal" data-d="1" id="featAutomation"></div>
     </div>
 
     <!-- Feature 4: Pipelines -->
@@ -1155,10 +1135,7 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Abra qualquer contato e encontre a última conversa registrada, com data</li>
         </ul>
       </div>
-      <div class="feature-visual reveal com-imagem" data-d="1">
-        <img src="recursos/recurso-crm.png?v=1" alt="O funil do Rezult, com os negócios distribuídos pelas etapas"
-             width="1200" height="856" loading="lazy" decoding="async">
-      </div>
+      <div class="feature-visual reveal" data-d="1" id="featPipelines"></div>
     </div>
 
     <!-- Feature 5: Dashboards -->
@@ -1179,10 +1156,7 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Número por vendedor para a reunião de time começar pelo dado, não pela versão de cada um</li>
         </ul>
       </div>
-      <div class="feature-visual reveal com-imagem" data-d="1">
-        <img src="recursos/recurso-dashboards.png?v=1" alt="O dashboard do Rezult, com os totais do período e o resultado por responsável"
-             width="1200" height="856" loading="lazy" decoding="async">
-      </div>
+      <div class="feature-visual reveal" data-d="1" id="featDashboards"></div>
     </div>
   </div>
 
