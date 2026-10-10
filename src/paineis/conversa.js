@@ -27,8 +27,8 @@ export const MS_POR_LADO = {
  *
  * É por isso que o passo inicial é 1 e não 0. Um painel em repouso mostrando um
  * chat vazio não diz nada a quem só passa o olho, e a mensagem de abertura é
- * justamente a que enuncia a dor ("a gente perde muito lead no WhatsApp") --
- * quem lê só o primeiro quadro já entende do que a cena trata. O reinício do
+ * justamente a que apresenta o interesse do lead -- quem lê só o primeiro
+ * quadro já entende do que a cena trata. O reinício do
  * loop volta para cá, e não para o zero, pelo mesmo motivo. */
 export const PASSO_INICIAL = 1;
 
@@ -55,32 +55,8 @@ export const MS_ANTES_DE_REINICIAR = 8000;
 
 /* O roteiro.
  *
- * Cada mensagem tem um trabalho, e nenhuma está ali só para encher a tela. A
- * cena existe para quem está avaliando o produto ver, na prática, um lead
- * entrando frio e saindo com reunião marcada e CRM preenchido:
- *
- *   1. A lead abre pela DOR, não por "como funciona". É assim que um lead real
- *      chega, e é o que faz quem lê se reconhecer na cena.
- *   2. A agente não despeja preço: faz uma pergunta de diagnóstico. Consultiva,
- *      não vendedora.
- *   3. A lead admite o número ruim. Sem essa confissão a dor fica abstrata.
- *   4. A agente nomeia a causa e emenda a pergunta de qualificação. Duas
- *      funções numa mensagem só, como um bom atendente faz.
- *   5. O dado de qualificação entra na conversa.
- *   6. A agente derruba a objeção de "vou ter que contratar mais gente" e já
- *      oferece DOIS horários. Fechamento por alternativa, não por sim ou não.
- *   7. A lead escolhe. O compromisso é dela.
- *   8. O desfecho fecha o ciclo inteiro: reunião marcada, CRM preenchido e
- *      convite enviado, sem ninguém do time ter tocado na conversa.
- *
- * Nota sobre a fala 4: "lead que espera mais de 5 minutos esfria" é qualitativo
- * de propósito. A versão com número ("converte 8x mais") circula muito, mas as
- * fontes divergem e isto vai num site público, onde um número desses é um claim
- * que alguém pode cobrar. Se você tiver um dado próprio, do seu funil, ele vale
- * mais que qualquer estatística de mercado.
- *
- * As horas sobem de minuto em minuto: oito mensagens carimbadas no mesmo
- * horário denunciariam o mockup. */
+ * Cada mensagem leva o lead da dor inicial até a reunião marcada, com o
+ * contexto registrado no CRM antes de o time comercial assumir. */
 export const ROTEIRO = [
   {
     de: 'lead',

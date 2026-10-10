@@ -878,6 +878,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    sem sombra). Já foram testados e descartados aqui o degradê animado com anel
    e glow, e o verde neon com texto preto. */
 .hero-actions .btn-secondary { border: 1px solid var(--neutral-300); }
+.hero-calendar-icon { flex-shrink: 0; }
 .hero-note { font-size: 15px; color: var(--text-subtle); margin-top: 18px; display: flex; align-items: center; gap: 8px; }
 .hero-note svg { width: 15px; height: 15px; color: var(--green-text); }
 
@@ -895,10 +896,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero.va .hero-actions { justify-content: center; }
 .hero.va .hero-note { justify-content: center; }
 .hero.va .hero-badge { margin-left: auto; margin-right: auto; }
-/* A folga da pill para a h1 do hero NÃO vive mais aqui. Ela era um override
-   escopado em .hero enquanto o resto do site usava 14px; em 06/10/2026 o dono
-   pediu que todas as seções usassem o valor do hero, então os 29px desceram
-   para o bloco das pills no fim do arquivo e este override saiu. */
+.hero .hero-badge { margin-bottom: 24px; }
+/* A Home é a única exceção ao ritmo geral de 29px entre pill e título: usa
+   24px para aproximar a nova pill da H1 sem afetar as demais seções. */
 .hero.va .hero-mockup-wrap { max-width: 100%; margin-top: 56px; }
 .hero.va .hero-conversion { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 47px; }  /* 32px -> 47px em 06/10/2026 (+15px) */
 .hero.va .hero-conversion .hero-note { margin-top: 0; }
@@ -1989,7 +1989,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      quebras fixadas ele nao tem o que distribuir e so atrapalharia se um
      segmento passasse de uma linha. */
   .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
-  .hero h1 { font-size: 33px; letter-spacing: -1.2px; line-height: 1.1; }
+  .hero h1 { font-size: 35px; letter-spacing: -1.2px; line-height: 1.1; }
   /* As paginas internas nao tem quebra fixada no markup, entao elas
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
@@ -2082,6 +2082,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      .hero-text. Uma versão anterior desta regra usava flex-start, e os botões
      ficavam à esquerda enquanto o h1 e o subtítulo estavam centrados. */
   .hero .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: center; width: 100%; gap: 15px; }
+  .hero .hero-actions > a { width: min(100%, 320px); min-height: 48px; }
   #implementacao .hero-actions { display: flex; flex-direction: column; }
   #implementacao .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   #implementacao .hero-actions .btn-secondary { display: none; }
@@ -4624,6 +4625,20 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .cv-painel.vivo .cv-quem b { color: #fff; }
 .cv-quem span { font-size: 12px; color: var(--text-muted); }
 .cv-painel.vivo .cv-quem span { color: var(--accent-100); }
+.cv-painel.vivo .cv-quem .pw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 3px 8px 3px 6px;
+  background: #E1F5EE;
+  border-radius: 100px;
+  color: #128A68;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cv-painel.vivo .cv-quem .pw-pill .pw-ico-wpp { flex-shrink: 0; }
 .cv-tag { padding: 4px 8px; border-radius: 999px; background: var(--neutral-150);
   color: var(--neutral-700); font-family: var(--mono); font-size: 10px;
   letter-spacing: .06em; text-transform: uppercase; }
@@ -4634,9 +4649,10 @@ select.demo-select:invalid { color: var(--neutral-700); }
   overflow: hidden; scroll-behavior: smooth; }
 
 .cv-bolha { max-width: 86%; padding: 11px 14px; border-radius: 14px; font-size: 15px; line-height: 1.45; }
+.cv-painel.vivo .cv-bolha { font-size: 14px; }
 .cv-bolha.deles { align-self: flex-start; background: #fff; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
 .cv-painel.vivo .cv-bolha.deles { background: var(--neutral-100); border-color: var(--neutral-100); }
-.cv-bolha.nossa { align-self: flex-end; background: var(--neutral-900); color: #fff; border-bottom-right-radius: 4px; }
+.cv-painel.vivo .cv-bolha.nossa { align-self: flex-end; background: #128A68; color: #FFFFFF; border-bottom-right-radius: 4px; }
 .cv-bolha time { display: block; margin-top: 5px; font-family: var(--mono); font-size: 10px; opacity: .55; }
 
 .cv-oculta { opacity: 0; transform: translateY(10px) scale(.97); }

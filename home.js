@@ -89,13 +89,16 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
   const roteiro = [
     { tipo: "digita", espera: 900 },
-    { tipo: "nossa", txt: "Oi, Marcos! Aqui é o Rezult. Posso te ajudar agora mesmo. Você procura para qual tamanho de time?", hora: "22:04" },
-    { tipo: "deles", txt: "Somos 6 vendedores, tudo no WhatsApp hoje.", hora: "22:05" },
+    { tipo: "nossa", txt: "Oi, Marina! Dá sim. A perda quase sempre começa na demora da primeira resposta. Quanto tempo vocês levam pra responder um lead novo?", hora: "14:32" },
+    { tipo: "deles", txt: "Sinceramente? Às vezes só no dia seguinte 😬", hora: "14:33" },
     { tipo: "digita", espera: 800 },
-    { tipo: "nossa", txt: "Perfeito. Tenho uma demonstração de 20 minutos. Amanhã às 14h funciona?", hora: "22:06" },
-    { tipo: "deles", txt: "Funciona sim.", hora: "22:07" },
+    { tipo: "nossa", txt: "É o padrão do mercado. Lead que espera mais de 5 minutos esfria. Quantos vendedores atendem hoje?", hora: "14:33" },
+    { tipo: "deles", txt: "Somos 4", hora: "14:34" },
     { tipo: "digita", espera: 700 },
-    { tipo: "nossa", txt: "Agendado. Convite enviado e o time já está com o seu contexto. Até amanhã!", hora: "22:07" },
+    { tipo: "nossa", txt: "Com 4 dá pra resolver sem contratar ninguém. Quer ver funcionando numa call de 20 minutos? Tenho amanhã às 10h ou às 15h.", hora: "14:34" },
+    { tipo: "deles", txt: "15h fica melhor", hora: "14:35" },
+    { tipo: "digita", espera: 700 },
+    { tipo: "nossa", txt: "Agendado, Marina. Amanhã às 15h. Já registrei tudo no CRM e te mandei o convite por e-mail.", hora: "14:35" },
   ];
   const falas = roteiro.filter(p => p.tipo !== "digita");
 
@@ -113,12 +116,11 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
     return el;
   }
 
-  // O fecho da conversa. Os "três minutos" são os horários que estão na tela
-  // (22:04 da primeira mensagem até 22:07 do agendamento), e "fora do expediente"
-  // responde ao "O lead espera o expediente" do cartão da esquerda.
+  // O fecho da conversa preserva o resultado do atendimento depois de os oito
+  // balões mostrarem a qualificação e o agendamento.
   const FECHO = {
-    titulo: "Reunião agendada · 22:07",
-    linha: "Três minutos depois da primeira mensagem, fora do expediente.",
+    titulo: "Reunião agendada · 14:35",
+    linha: "Três minutos depois da primeira mensagem, com o contexto no CRM.",
   };
 
   function selo(oculta) {
