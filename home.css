@@ -896,7 +896,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    escopado em .hero enquanto o resto do site usava 14px; em 06/10/2026 o dono
    pediu que todas as seções usassem o valor do hero, então os 29px desceram
    para o bloco das pills no fim do arquivo e este override saiu. */
-.hero.va .hero-mockup-wrap { max-width: 820px; margin-top: 56px; }
+.hero.va .hero-mockup-wrap { max-width: 100%; margin-top: 56px; }
 .hero.va .hero-conversion { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 47px; }  /* 32px -> 47px em 06/10/2026 (+15px) */
 .hero.va .hero-conversion .hero-note { margin-top: 0; }
 /* A lista saiu do fim do hero (depois do mockup) para logo abaixo dos botões,
