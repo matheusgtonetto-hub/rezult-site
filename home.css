@@ -307,9 +307,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
      três linhas, e a do meio ficava com 8,35em contra 19,25em da primeira,
      porque .grad-verde é inline-block e o trecho verde não parte. Como bloco
      indivisível de 12,28em, ele descia inteiro e deixava o buraco.
-     760px mantém uma largura editorial próxima das outras seções; conferir
-     a quebra de linhas quando o texto ou a fonte mudar. */
-  #clientes .section-head { max-width: 760px; }
+     Com a H2 em 48px, 900px acomoda "usado" na primeira linha e preserva
+     o trecho verde inteiro na segunda. */
+  #clientes .section-head { max-width: 900px; }
 }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
@@ -347,7 +347,7 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
    A curva: 29px até 375px de tela, subindo até os 40px a partir de ~1150px.
    Mexer no mínimo ou no máximo pede refazer a conta do meio, senão a rampa
    deixa de encostar nas duas pontas. */
-.h2 { font-size: clamp(29px, 1.48rem + 1.42vw, 40px); font-family: var(--display); margin: 5px 0 10px; letter-spacing: -0.8px; line-height: 1.2; }
+.h2 { font-size: 48px; font-family: var(--display); margin: 5px 0 10px; font-weight: 600; letter-spacing: -2px; line-height: 1.05; }
 /* Zerado em 06/10/2026: a folga pill -> título passou a ser só o
    margin-bottom da pill, como já era no hero.
 
@@ -361,11 +361,11 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
 .hero-badge-ia + .h2,
 .hero-badge-verde + .h2,
 .ag-overview-pill + .h2 { margin-top: 0; }
-#integ-heading { letter-spacing: -0.03em; }
+#integ-heading { letter-spacing: -2px; }
 #integ-heading + p { max-width: 640px; margin-left: auto; margin-right: auto; }
-#demo-heading, #demo-planos-heading { font-size: 40px; }
+#demo-heading, #demo-planos-heading { font-size: 48px; }
 @media (max-width: 768px) {
-  .h2 { line-height: 1.0; }
+  .h2 { line-height: 1.05; }
 }
 /* Degradê no texto: o fundo é pintado atrás das letras e recortado por elas.
    Precisa das três declarações juntas — background-clip: text sozinho não apaga
@@ -806,7 +806,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    com especificidade maior e, além disso, pinta o texto por gradiente clipado
    com -webkit-text-fill-color: transparent, que ignora color. */
 /* Tracking fixo de -2.5px para manter a compactação visual em todas as larguras. */
-.hero h1 { font-size: 48px; letter-spacing: -1.5px; line-height: 1.10; font-weight: 600; }
+.hero h1 { font-size: 55px; letter-spacing: -1.5px; line-height: 1.10; font-weight: 700; }
+@media (min-width: 981px) {
+  .hero h1 { font-size: 55px; font-weight: 600; line-height: 1.05; letter-spacing: -2px; }
+}
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
 .em { color: var(--green-text); }
@@ -1260,7 +1263,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    de 560px ele passa a usar os 30px do .h2, como os títulos das outras seções. */
 #recursos .h2 {
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -1580,7 +1583,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .cta-final-glow { position: absolute; bottom: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%); opacity: 0.4; pointer-events: none; }
 .cta-final-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 70%); mask-image: radial-gradient(ellipse at center, #000, transparent 70%); opacity: 0.4; }
 .cta-final > *:not(.cta-final-glow):not(.cta-final-grid) { position: relative; z-index: 1; }
-.cta-final h2 { font-size: clamp(29px, 1.48rem + 1.42vw, 40px); letter-spacing: -0.025em; line-height: 1.02; }
+.cta-final h2 { font-size: 48px; font-weight: 600; letter-spacing: -2px; line-height: 1.05; }
 #demo .btn-primary { box-shadow: none; }
 #demo .btn-primary:hover { box-shadow: none; }
 .cta-final p { font-size: clamp(18px, 2.2vw, 22px); color: #444; line-height: 1.3; letter-spacing: -0.3px; margin: 28px auto 36px; max-width: 600px; }
@@ -1604,9 +1607,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .ainda-duvidas h2 {
   margin: 0;
   color: var(--text);
-  font-size: clamp(26px, 4vw, 35px);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -2px;
 }
 .ainda-duvidas p {
   margin: 16px auto 30px;
@@ -1883,6 +1887,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      do bloco de 560px e a passagem entre as faixas ficar contínua. */
   .hero h1, .page-hero h1 { font-size: clamp(30px, 4vw, 42px); }
   .hero h1 { line-height: 1.2; }
+  .h2, .cta-final h2, .ainda-duvidas h2 { font-size: clamp(38px, 4vw, 46px); }
   .section { padding: 88px 0; }
   .impl-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-cta-ghost { display: none; }
@@ -1958,12 +1963,12 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .feature-list li svg { width: 18px; height: 18px; }
   #faq .faq-q { gap: 14px; padding: 20px 0; font-size: 17px; }
   #faq .faq-a-inner { padding-left: 38px; padding-right: 0; padding-bottom: 20px; }
-  .wrap { padding: 0 22px; }
-  #beneficios .wrap { padding: 0 15px; }
+  .wrap { padding: 0 10px; }
+  #beneficios .wrap { padding: 0 10px; }
   .section { padding-top: 70px !important; padding-bottom: 70px !important; }
   .section-sm { padding-top: 70px !important; padding-bottom: 70px !important; }
   #demo, #demo-planos { padding-top: 70px !important; padding-bottom: 70px !important; }
-  #demo .wrap { padding: 0 30px; }
+  #demo .wrap { padding: 0 10px; }
   #clientes { padding-bottom: 70px !important; }
   /* A manchete anterior tinha 58 caracteres e cabia em três linhas fixas, com
      um divisor medido no TTF para encostar nas margens. A atual tem 86, e o
@@ -2007,9 +2012,10 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .case-tag { top: 13px; left: 13px; padding: 6px 10px; font-size: 12px; }
   /* Sem font-size: ele agora vem do clamp da regra base e escala sozinho.
      Havia 30px aqui, que era justamente o degrau que criava o salto. */
-  .h2, .cta-final h2 { letter-spacing: -0.8px; line-height: 1.1; }
+  .h2, .cta-final h2, .ainda-duvidas h2 { font-size: 35px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.07; }
+  #recursos .h2 { line-height: 1.07; }
   #integ-heading { font-size: 35px; }
-  #demo-heading, #demo-planos-heading { font-size: 40px; }
+  #demo-heading, #demo-planos-heading { font-size: 35px; }
   .feature-text h3 { font-size: 24px; }
   /* A margem aqui foi zerada enquanto a lista de checks ficava OCULTA nesta
      faixa: sem nada depois do parágrafo, ela só somava ao padding do card e
@@ -2042,7 +2048,6 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .cta-final { padding: 48px 24px; }
   .ainda-duvidas { padding: 64px 0; }
   .ainda-duvidas-card { padding: 42px 22px; }
-  .ainda-duvidas h2 { font-size: 26px; }
   .ainda-duvidas p { font-size: 16px; margin-bottom: 26px; }
   .ainda-duvidas-acoes { flex-direction: column; }
   .ainda-duvidas-acoes .btn { width: 100%; min-width: 0; }
@@ -2055,8 +2060,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .pcard .pprice .pperiod { margin-left: 0; }
   .pcard .pprice-savings { justify-content: center; }
   .pcard .pname, .pcard .pdesc { text-align: center; }
-  #implementacao h3.h2 { font-size: 28px !important; font-weight: 600 !important; line-height: 1.1 !important; }
-  #entregaveis h3.h2 { font-size: 30px !important; font-weight: 600 !important; line-height: 1.2 !important; width: 90%; text-align: left !important; }
+  #implementacao h3.h2 { font-size: 35px !important; font-weight: 600 !important; line-height: 1.07 !important; letter-spacing: -0.03em !important; }
+  #entregaveis h3.h2 { font-size: 35px !important; font-weight: 600 !important; line-height: 1.07 !important; letter-spacing: -0.03em !important; width: 90%; text-align: left !important; }
   #entregaveis .impl-entregaveis-left h3.h2 { text-align: center; }
   /* A largura daqui é o que define o tamanho do botão no celular: o .btn tem
      flex: 1 e estica para preencher este container, então padding e fonte não
@@ -2082,9 +2087,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
   #implementacao .hero-actions .btn-secondary { display: none; }
   .impl-pill-mobile { display: block !important; }
   .impl-pill-desktop { display: none !important; }
-  #entregaveis .wrap { padding: 0 30px; }
+  #entregaveis .wrap { padding: 0 10px; }
   #entregaveis { padding-top: 50px !important; }
-  #implementacao .wrap { padding: 0 30px; }
+  #implementacao .wrap { padding: 0 10px; }
   #implementacao { padding-bottom: 70px !important; }
   .tl-num { font-size: 45px; }
   .tl-item { grid-template-columns: 56px 1fr; gap: 30px; }
@@ -2097,6 +2102,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .mobile-only-br { display: block; }
   .desktop-only-br { display: none; }
   .hero-l1, .hero-l3 { display: inline; }
+  .nav.scrolled .wrap, body.menu-aberto .nav .wrap { padding: 0 10px; }
 }
 
 
@@ -2881,7 +2887,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 @media (max-width: 560px) {
   .hero-prova { font-size: 13px; gap: 4px; }
   .hero-prova-sep { display: none; }
-  .cases-rotulo { padding: 0 22px; font-size: 12px; }
+  .cases-rotulo { padding: 0 10px; font-size: 12px; }
 }
 
 
