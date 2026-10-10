@@ -4640,8 +4640,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
 }
 .cv-painel.vivo .cv-quem .pw-pill .pw-ico-wpp { flex-shrink: 0; }
 .cv-tag { padding: 4px 8px; border-radius: 999px; background: var(--neutral-150);
-  color: var(--neutral-700); font-family: var(--mono); font-size: 10px;
-  letter-spacing: .06em; text-transform: uppercase; }
+  color: var(--neutral-700); font-family: var(--sans); font-size: 12px;
+  font-weight: 500; letter-spacing: 0; text-transform: none; }
 .cv-painel.vivo .cv-tag { background: var(--verde-tinta); color: #fff; }
 
 /* Altura fixa e overflow hidden: ver as duas decisões no topo deste bloco. */
