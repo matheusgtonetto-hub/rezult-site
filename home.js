@@ -590,9 +590,22 @@ wirePricingToggle("priceToggle");
   const esteira = document.querySelector(".hero-cases");
   const linha = esteira && esteira.querySelector(".cases-linha");
   if (!esteira || !linha) return;
+  // Os três conjuntos são cópias do mesmo trilho. A Clínica Bella entra após
+  // o Estúdio Creative em todos eles para a sequência não mudar na emenda.
+  const CONJUNTOS = 3;
+  const cards = Array.from(linha.children);
+  const porConjunto = cards.length / CONJUNTOS;
+  if (Number.isInteger(porConjunto)) {
+    for (let conjunto = 0; conjunto < CONJUNTOS; conjunto += 1) {
+      const inicio = conjunto * porConjunto;
+      const grupo = cards.slice(inicio, inicio + porConjunto);
+      const bella = grupo.find(card => card.querySelector(".case-empresa")?.textContent.trim() === "Clínica Bella");
+      const creative = grupo.find(card => card.querySelector(".case-empresa")?.textContent.trim() === "Estúdio Creative");
+      if (bella && creative) linha.insertBefore(bella, creative.nextElementSibling);
+    }
+  }
   const pontos = Array.from(document.querySelectorAll(".cases-ponto"));
 
-  const CONJUNTOS = 3;    // precisa bater com o HTML gerado
   const VELOCIDADE = 43;  // px por segundo
   // Só depois do toque, para a inércia do dedo terminar. Sem esta folga o
   // avanço volta a escrever em scrollLeft no meio do deslize e mata o impulso.

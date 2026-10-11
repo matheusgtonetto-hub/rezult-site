@@ -4604,7 +4604,16 @@ select.demo-select:invalid { color: var(--neutral-700); }
    O conteúdo é SIMULAÇÃO, e o cabeçalho do cartão ativo diz isso em texto. Nome,
    telefone mascarado e diálogo são ilustração. */
 
-.cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.cv-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.cv-item { display: flex; flex-direction: column; min-width: 0; }
+.cv-item > .cv-hoje,
+.cv-item > .cv-painel { flex: 1; }
+.cv-diferenca-icone { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid;
+  width: 42px; height: 42px; place-items: center; border: 1px solid var(--neutral-300);
+  border-radius: 50%; background: var(--neutral-0); color: var(--neutral-900);
+  box-shadow: 0 4px 12px rgba(29, 29, 29, .12); transform: translate(-50%, -50%);
+  pointer-events: none; }
+.cv-diferenca-icone svg { width: 20px; height: 20px; }
 
 /* ---------- O painel de conversa (lado ativo) ---------- */
 .cv-painel { display: flex; flex-direction: column; overflow: hidden;
@@ -4642,7 +4651,10 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .cv-tag { padding: 4px 8px; border-radius: 999px; background: var(--neutral-150);
   color: var(--neutral-700); font-family: var(--sans); font-size: 12px;
   font-weight: 500; letter-spacing: 0; text-transform: none; }
-.cv-painel.vivo .cv-tag { background: var(--verde-tinta); color: #fff; }
+.cv-tag--externa { display: inline-flex; align-items: center; align-self: center; gap: 5px; margin-bottom: 10px; }
+.cv-tag--externa svg { width: 13px; height: 13px; flex-shrink: 0; }
+.cv-tag--sem { background: var(--neutral-0); border: 1px solid var(--neutral-200); }
+.cv-tag--com { background: var(--verde-tinta); color: #fff; }
 
 /* Altura fixa e overflow hidden: ver as duas decisões no topo deste bloco. */
 .cv-corpo { display: flex; flex-direction: column; gap: 10px; height: 392px; padding: 20px 18px;
@@ -4725,7 +4737,6 @@ select.demo-select:invalid { color: var(--neutral-700); }
    --neutral-600 porque tem 12px, e abaixo de 16px o sistema só libera a partir
    desse degrau (5,25:1 sobre o branco). */
 .cv-hoje .cv-av { background: var(--neutral-0); color: var(--neutral-600); border: 1px solid var(--neutral-200); }
-.cv-hoje .cv-tag { background: var(--neutral-0); color: var(--neutral-700); border: 1px solid var(--neutral-200); }
 
 /* Os 20px de topo repetem os da .cv-corpo: com a barra idêntica em cima, o balão
    de abertura dos dois cartões cai na MESMA linha. */
@@ -4753,7 +4764,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
 @media (max-width: 900px) {
   /* Uma coluna. O cartão parado vai PRIMEIRO no HTML e continua primeiro aqui:
      a ordem de leitura é problema e depois solução. */
-  .cv-grid { grid-template-columns: 1fr; gap: 18px; }
+  .cv-grid { grid-template-columns: 1fr; gap: 14px; row-gap: 54px; }
+  .cv-diferenca-icone { display: none; }
 }
 
 @media (max-width: 780px) {
