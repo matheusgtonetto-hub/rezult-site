@@ -3437,20 +3437,14 @@ select.demo-select:invalid { color: var(--neutral-700); }
 }
 
 /* ---------- Parceiro oficial da Meta ---------- */
-/* Duas colunas: o argumento à esquerda, as provas empilhadas à direita.
-   align-items: center e não start -- a coluna de texto é bem mais baixa que a
-   pilha de três cards, e alinhada no topo ela ficaria pendurada com um vão
-   grande embaixo. */
+/* Uma única dobra centralizada: o selo oficial abre a conversa e o texto faz
+   todo o trabalho de prova, sem competir com uma imagem de produto. */
 .meta-grade {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-/* Alinhado à esquerda, ao contrário das outras seções: aqui o texto divide a
-   linha com a arte, e centralizado ele perderia a borda comum com ela. */
-.meta-texto { max-width: 460px; --meta-proof-gap: 20px; }
+.meta-texto { max-width: 760px; margin: 0 auto; text-align: center; --meta-proof-gap: 20px; }
 
 /* O destaque usa o azul oficial da Meta, acompanhando o selo de parceria da
    seção. */
@@ -3482,6 +3476,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .meta-badges {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0 0 var(--meta-proof-gap);
 }
@@ -3538,42 +3533,20 @@ select.demo-select:invalid { color: var(--neutral-700); }
 
 .meta-selo { display: block; width: auto; height: 28px; }
 
-/* A arte da coluna direita. O PNG tem fundo transparente, então pousa direto
-   sobre o #FBFBFB da seção sem precisar de card nem de moldura.
-
-   540px e não 400: a arte é paisagem (1448x1086) e carrega texto embutido, que
-   encolhe junto com ela. Nos 540px da coluna a frase da arte renderiza a ~37%
-   do tamanho original, o limite antes de virar textura.
-
-   height: auto junto com o width/height do HTML preserva a proporção enquanto o
-   max-width manda na largura: sem o auto, o atributo height do HTML venceria e
-   a imagem achataria. */
-.meta-arte {
-  display: block;
-  width: 100%;
-  max-width: 540px;
-  height: auto;
-  margin: 0 auto;
-}
-
-/* Uma coluna abaixo de 900px, com o texto centralizado de novo: sozinho na
-   largura toda, alinhado à esquerda ele não teria mais com o que se alinhar. */
 @media (max-width: 900px) {
-  .meta-grade { grid-template-columns: 1fr; gap: 34px; }
   .meta-texto { max-width: 560px; margin: 0 auto; text-align: center; }
   .meta-partner-pill { margin-left: auto; margin-right: auto; }
-  .meta-badges { justify-content: center; }
 }
 
 @media (max-width: 560px) {
   .meta-texto { --meta-proof-gap: 16px; }
+  #parceiro-meta .h2 { font-size: 30px; }
   .meta-partner-pill { white-space: normal; justify-content: center; }
   .meta-selo-caixa { padding: 11px 16px; border-radius: 10px; }
   .meta-selo { height: 24px; }
   /* 18px no celular: os 20px do desktop, numa coluna de tela inteira, deixam a
      linha longa demais para leitura confortável. */
   .meta-texto .lede { font-size: 18px; }
-  .meta-arte { max-width: 100%; }
 }
 
 
