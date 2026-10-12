@@ -1339,13 +1339,13 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
      carrega logo + nome + "Começar 7 dias grátis" + o botão de menu: os links e
      o "Entrar" já saem antes, em 980px.
 
-     Por isso ela vem um degrau menor, 15px em vez de 16px, e volta a sumir
+     Por isso ela vem um degrau menor, 17px em vez de 18px, e volta a sumir
      abaixo de 380px. Os 380px não são chute: é onde a soma do nome com o CTA
      passa a empurrar o botão de menu para fora em telas como o iPhone SE. Entre
      380 e 560 a marca aparece, que é a faixa da maioria dos aparelhos. */
-  .nav .logo-nome { font-size: 16px; }
+  .nav .logo-nome { font-size: 17px; }
   /* O par acompanha com o mesmo degrau de 2px do desktop. */
-  .nav .logo-nome b { font-size: 18px; }
+  .nav .logo-nome b { font-size: 19px; }
   .carousel-arrow-edge { width: 38px; height: 38px; }
   .carousel-arrow-edge svg { width: 16px; height: 16px; }
 }
@@ -1734,7 +1734,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
   max-width: 900px;
   margin: 0 auto;
 }
-.hero-mockup-img { width: 100%; height: auto; display: block; transform-origin: center bottom; will-change: transform; }
+.hero-mockup-img { width: 100%; height: auto; display: block; transform-origin: center bottom; will-change: transform;
+  filter: drop-shadow(0 20px 32px rgba(29, 29, 29, 0.16)); }
 
 /* ---------- Page hero (internal pages) ---------- */
 /* Mesmo respiro do hero da home: as três internas (planos, política, termos)
@@ -2004,7 +2005,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      quebras fixadas ele nao tem o que distribuir e so atrapalharia se um
      segmento passasse de uma linha. */
   .hero h1, .page-hero h1 { font-size: clamp(24px, 7vw, 30px); letter-spacing: -0.02em; line-height: 1.15; }
-  .hero h1 { font-size: 35px; font-weight: 600; letter-spacing: -1.2px; line-height: 1.1; }
+  .hero h1 { font-size: 35px; font-weight: 700; letter-spacing: -1.2px; line-height: 1.1; }
   /* As paginas internas nao tem quebra fixada no markup, entao elas
      seguem com balance para nao deixar a ultima linha orfa. */
   .page-hero h1 { text-wrap: balance; }
@@ -3264,29 +3265,24 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .ag-novo { animation: ag-pulsa 2.5s ease-in-out infinite; animation-delay: .66s; }
 @keyframes ag-pulsa { 0%, 30% { opacity: .25; } 45%, 82% { opacity: 1; } 94%, 100% { opacity: .25; } }
 
-/* 3 · a chave liga e, logo depois, as barras sobem em escada */
-.sw-bola { animation: sw-anda 2.5s ease-in-out infinite; }
-@keyframes sw-anda { 0%, 15% { transform: translateX(0); } 30%, 88% { transform: translateX(20px); } 100% { transform: translateX(0); } }
-.sw-trilho { animation: sw-liga 2.5s ease-in-out infinite; }
-@keyframes sw-liga { 0%, 15% { fill: #DDE0DF; } 30%, 88% { fill: #8A8A8E; } 100% { fill: #DDE0DF; } }
-.barras rect { transform-box: fill-box; transform-origin: bottom; animation: barra-sobe 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
-.barras .b1 { --alt: .34; } .barras .b2 { --alt: .56; }
-.barras .b3 { --alt: .78; } .barras .b4 { --alt: 1; }
-.barras .b2 { animation-delay: .07s; } .barras .b3 { animation-delay: .14s; } .barras .b4 { animation-delay: .21s; }
-@keyframes barra-sobe {
-  0%, 22%   { transform: scaleY(.12); }
-  48%, 88%  { transform: scaleY(var(--alt)); }
-  100%      { transform: scaleY(.12); }
+/* 3 · a chamada de boas-vindas ganha vida: participantes entram e o indicador
+   verde pulsa, reforçando que a configuração acontece junto com o time. */
+.call-person { transform-box: fill-box; transform-origin: center; animation: call-entra 2.5s ease-in-out infinite; }
+.call-person-2 { animation-delay: .18s; }
+@keyframes call-entra {
+  0%, 10% { opacity: 0; transform: scale(.88); }
+  24%, 86% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(.88); }
 }
+.call-status { transform-box: fill-box; transform-origin: center; animation: call-pulsa 1.25s ease-in-out infinite; }
+@keyframes call-pulsa { 0%, 100% { opacity: .45; transform: scale(.8); } 50% { opacity: 1; transform: scale(1); } }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Sem movimento, cada peça fica no estado final: QR lido, agentes visíveis,
-     chave ligada e barras no topo. O desenho continua contando a mesma história. */
+  /* Sem movimento, cada peça fica no estado final: QR lido, agentes visíveis
+     e participantes da chamada já conectados. */
   .qr-linha { opacity: 0; animation: none; }
   .ag-card-1, .ag-card-2, .ag-card-3, .ag-novo { opacity: 1; transform: none; animation: none; }
-  .sw-bola { transform: translateX(20px); animation: none; }
-  .sw-trilho { fill: #8A8A8E; animation: none; }
-  .barras rect { transform: scaleY(var(--alt)); animation: none; }
+  .call-person, .call-status { opacity: 1; transform: none; animation: none; }
 }
 
 @media (max-width: 980px) {
