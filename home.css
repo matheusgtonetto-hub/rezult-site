@@ -3363,14 +3363,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
    linha com a arte, e centralizado ele perderia a borda comum com ela. */
 .meta-texto { max-width: 460px; --meta-proof-gap: 20px; }
 
-/* O azul da Meta, #0668E1, e não o --blue do site (#3B82F6, que aliás não é
-   usado em lugar nenhum). Numa seção sobre a parceria, com o selo deles logo
-   acima, o destaque tem que ser a cor da marca a que ele se refere.
-
-   O tom mais fechado também resolve legibilidade: sobre o #F1F6FD do fundo, o
-   #3B82F6 dá 3.4:1 e este dá 4.7:1. Os dois passam no critério de texto
-   grande, mas a margem aqui é confortável em vez de raspar o mínimo. */
-.meta-azul { color: #0668E1; }
+/* O destaque usa o azul oficial da Meta, acompanhando o selo de parceria da
+   seção. */
+.meta-azul { color: var(--marca-meta); }
 
 /* Sem line-height aqui: a seção usa o 1.2 do .h2 global. A regra chegou a ter
    1.3 quando o global era 1.1 e o título de três linhas ficava colado; com o
