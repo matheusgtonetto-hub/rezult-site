@@ -49,115 +49,64 @@ function useMenosMovimento() {
 }
 
 const KPIS = [
-  { rotulo: 'Leads entraram', valor: 412, variacao: '+18%' },
-  { rotulo: 'Ganhos', valor: 64, variacao: '+9%' },
-  { rotulo: 'Conversão', valor: 15.5, sufixo: '%', variacao: '+2,4 p.p.' },
+  { rotulo: 'Total de negócios', valor: 'R$ 10.890', apoio: '312 negócios' },
+  { rotulo: 'Total em vendas', valor: 'R$ 7.130', apoio: '9 negócios' },
+  { rotulo: 'Total perdidos', valor: 'R$ 200', apoio: '98 negócios' },
+  { rotulo: 'Em aberto', valor: 'R$ 3.560', apoio: '205 negócios' },
 ];
-
-/* Etapas de um funil comercial comum, com a conversão desde o início, que é
- * uma das duas leituras que o funil do CRM mostra ("Conv. desde o início"). */
-const ETAPAS = [
-  { nome: 'Entrada', qtd: 412, pct: 100 },
-  { nome: 'Qualificado', qtd: 236, pct: 57 },
-  { nome: 'Reunião', qtd: 118, pct: 29 },
-  { nome: 'Proposta', qtd: 81, pct: 20 },
-  { nome: 'Ganho', qtd: 64, pct: 16 },
-];
-
-const MS_DEGRAU = 620;
-
-function formata(n, sufixo) {
-  if (sufixo === '%') return `${n.toFixed(1).replace('.', ',')}%`;
-  return n.toLocaleString('pt-BR');
-}
-
-/* Conta do zero até o valor em passos iguais. Sem biblioteca: o painel inteiro
- * precisa caber no bundle que já serve os outros três. */
-function useContagem(alvo, ativo, ms = 900) {
-  const [n, setN] = useState(ativo ? alvo : 0);
-
-  useEffect(() => {
-    if (!ativo) { setN(0); return undefined; }
-    const inicio = performance.now();
-    let id = 0;
-    const passo = (agora) => {
-      const t = Math.min((agora - inicio) / ms, 1);
-      /* easeOutCubic: começa rápido e assenta, em vez de parar seco. */
-      setN(alvo * (1 - Math.pow(1 - t, 3)));
-      if (t < 1) id = requestAnimationFrame(passo);
-    };
-    id = requestAnimationFrame(passo);
-    return () => cancelAnimationFrame(id);
-  }, [alvo, ativo, ms]);
-
-  return n;
-}
-
-function Kpi({ dado, anima }) {
-  const n = useContagem(dado.valor, anima);
-  return (
-    <div className="pdb-kpi">
-      <span className="pdb-kpi-rotulo">{dado.rotulo}</span>
-      <strong className="pdb-kpi-valor">
-        {formata(anima ? n : dado.valor, dado.sufixo)}
-      </strong>
-      <span className="pdb-kpi-var">{dado.variacao}</span>
-    </div>
-  );
-}
 
 export default function PainelDashboards() {
   const caixa = useRef(null);
   const naTela = useNaTela(caixa);
   const menosMovimento = useMenosMovimento();
-  const [degrau, setDegrau] = useState(0);
-
   const anima = naTela && !menosMovimento;
 
-  /* As barras do funil entram uma a uma, de cima para baixo, e o conjunto
-   * reinicia quando o card volta à tela. */
-  useEffect(() => {
-    if (!anima) { setDegrau(ETAPAS.length); return undefined; }
-    if (degrau >= ETAPAS.length) return undefined;
-    const t = window.setTimeout(() => setDegrau((d) => d + 1), MS_DEGRAU / 2);
-    return () => window.clearTimeout(t);
-  }, [degrau, anima]);
-
-  useEffect(() => {
-    if (!naTela) setDegrau(0);
-  }, [naTela]);
-
   return (
-    <div className="painel-dashboards" ref={caixa}>
+    <div className={`painel-dashboards${anima ? ' pdb-animar' : ''}`} ref={caixa}>
       <header className="pdb-topo">
         <div>
-          <div className="pdb-titulo">Desempenho geral do seu negócio</div>
-          <span className="pdb-sub">Atualizado automaticamente</span>
+          <div className="pdb-titulo">Dashboards</div>
+          <span className="pdb-sub">Aqui, 1 Jan 26 · Sáb, 10 Out 26</span>
         </div>
-        <span className="pdb-periodo">Este mês</span>
+        <span className="pdb-periodo">⌄&nbsp; Selecione o período</span>
       </header>
 
-      <div className="pdb-kpis">
-        {KPIS.map((k) => <Kpi key={k.rotulo} dado={k} anima={anima} />)}
+      <div className="pdb-filtros" aria-label="Visualizações do dashboard">
+        <span className="ativo">◔&nbsp; Performance Geral</span>
+        <span>▽&nbsp; Por Pipeline</span>
+        <span>♧&nbsp; Da Equipe</span>
       </div>
 
-      <div className="pdb-funil">
-        <div className="pdb-funil-cab">
-          <span>Conversão do funil</span>
-          <span className="pdb-funil-leg">desde o início</span>
+      <div className="pdb-kpis">
+        {KPIS.map((k) => (
+          <div className="pdb-kpi" key={k.rotulo}>
+            <span className="pdb-kpi-rotulo">{k.rotulo}</span>
+            <strong className="pdb-kpi-valor">{k.valor}</strong>
+            <span className="pdb-kpi-var">novo ↗</span>
+            <small>{k.apoio}</small>
+          </div>
+        ))}
+      </div>
+
+      <div className="pdb-resultados">
+        <div className="pdb-grafico">
+          <div className="pdb-bloco-cab">
+            <div><strong>Resultado no período</strong><span>A evolução das suas vendas no período</span></div>
+            <span className="pdb-medida">Quantidade</span>
+          </div>
+          <svg viewBox="0 0 390 132" role="img" aria-label="Gráfico de resultado no período">
+            <path className="pdb-grade" d="M20 18H374M20 51H374M20 84H374M20 117H374" />
+            <path className="pdb-linha pdb-linha--escura" d="M22 19C87 21 127 28 183 39C228 48 244 61 269 91C291 116 313 116 374 65" />
+            <path className="pdb-linha pdb-linha--coral" d="M22 63C81 87 127 102 183 114C228 119 286 117 374 117" />
+            <path className="pdb-linha pdb-linha--verde" d="M22 117C70 107 101 104 137 108C175 113 221 117 374 117" />
+            <g className="pdb-eixos"><text x="20" y="130">Jun</text><text x="104" y="130">Jul</text><text x="190" y="130">Ago</text><text x="277" y="130">Set</text><text x="355" y="130">Out</text></g>
+          </svg>
         </div>
-        <ul className="pdb-etapas">
-          {ETAPAS.map((e, i) => (
-            <li key={e.nome} className="pdb-etapa">
-              <span className="pdb-etapa-nome">{e.nome}</span>
-              <span className="pdb-trilho" aria-hidden="true">
-                <i style={{ width: i < degrau ? `${e.pct}%` : '0%' }} />
-              </span>
-              <span className="pdb-etapa-num">{e.qtd}</span>
-              <span className="pdb-etapa-pct">{e.pct}%</span>
-            </li>
-          ))}
-        </ul>
+
+        <div className="pdb-responsavel">
+          <div className="pdb-bloco-cab"><div><strong>Resultado por responsável</strong><span>Veja os ganhos por pessoa</span></div></div>
+          <div className="pdb-donut"><b>9</b><span>ganhos</span></div>
+        </div>
       </div>
     </div>
   );

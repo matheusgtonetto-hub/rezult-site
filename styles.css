@@ -1742,15 +1742,14 @@ body.ds-crm .nav-cta-ghost:hover { color: var(--neutral-950); border-color: var(
    fica neutra até alguém arrastar o cursor sobre um parágrafo. */
 body.ds-crm ::selection { background: rgba(29, 29, 29, 0.18); }
 
-/* Botão cheio SOBRE o rodapé escuro. Fora dele o botão cheio é charcoal com
-   tinta branca; aqui isso daria #1D1D1D sobre #1B1B1B, praticamente invisível.
-   No fundo invertido o par inverte junto: branco com tinta charcoal, 15,8:1. */
+/* Botão cheio do rodapé acompanha o verde dos CTAs da Home, com contraste
+   suficiente sobre o fundo escuro. */
 body.ds-crm .footer .btn-primary {
-  background: var(--neutral-0);
-  color: var(--neutral-900);
+  background: var(--green-text);
+  color: var(--on-primary);
   box-shadow: none;
 }
-body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
+body.ds-crm .footer .btn-primary:hover { background: #0C6349; }
 
 @media (prefers-reduced-motion: reduce) {
   body.ds-crm .pcard,

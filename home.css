@@ -1234,6 +1234,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   position: relative;
   align-self: stretch;
   display: flex;
+  /* No desktop, preserva a altura da linha para o ritmo da seção, mas deixa
+     cada motion 20px mais compacto (10px de respiro em cima e embaixo). Os
+     painéis React preenchem o espaço restante e acompanham o novo tamanho. */
+  margin-block: 10px;
   overflow: hidden;
   border: 1px solid #E7E7E7;
   border-radius: 20px;
@@ -1934,7 +1938,10 @@ select.demo-select:invalid { color: var(--neutral-700); }
      ordem do HTML, que já é texto e depois mockup. O reset do .flip continua
      necessário para desfazer o order: 2 do desktop, que troca os lados. */
   .feature-row.flip .feature-text { order: 0; }
-  .feature-visual { width: 100%; min-width: 0; overflow: hidden; }
+  /* Tablet e celular continuam usando a altura total do painel: nessa faixa
+     o conteúdo fica empilhado e o respiro vertical do desktop poderia cortar
+     elementos das simulações. */
+  .feature-visual { width: 100%; min-width: 0; margin-block: 0; overflow: hidden; }
   .feature-visual > div { max-width: 100%; }
   /* Ícone alinhado à primeira linha do título. Em tela estreita o h3 quebra em
      2 ou 3 linhas, e o align-items: center que vale no desktop deixava o ícone
@@ -3764,48 +3771,65 @@ select.demo-select:invalid { color: var(--neutral-700); }
   inset: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 18px;
+  gap: 10px;
+  padding: 16px;
   overflow: hidden;
-  background: #F4F6F8;
+  border: 1px solid #E4E4E4;
+  border-radius: 16px;
+  background: #FFFFFF;
   font-family: var(--sans);
 }
 .pdb-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.pdb-titulo { font-size: 14px; font-weight: 600; color: #111111; line-height: 1.3; }
+.pdb-titulo { font-size: 17px; font-weight: 600; color: #1D1D1D; line-height: 1.2; letter-spacing: -0.03em; }
 .pdb-sub { font-size: 11px; color: #737373; }
-.pdb-periodo { flex-shrink: 0; padding: 5px 10px; border: 1px solid #E8E7E0; border-radius: 8px; background: #FFFFFF; font-size: 11px; font-weight: 500; color: #525252; }
+.pdb-periodo { flex-shrink: 0; padding: 6px 9px; border: 1px solid #E4E4E4; border-radius: 7px; background: #FFFFFF; font-size: 10px; font-weight: 500; color: #525252; }
 
-.pdb-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pdb-filtros { display: flex; align-self: center; max-width: 100%; overflow: hidden; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFFFFF; }
+.pdb-filtros span { padding: 6px 8px; color: #737373; font-size: 9.5px; font-weight: 500; white-space: nowrap; }
+.pdb-filtros .ativo { border-radius: 6px; background: #1D1D1D; color: #FFFFFF; }
+
+.pdb-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
 .pdb-kpi {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 10px 11px;
-  border: 1px solid #E8E7E0;
-  border-radius: 10px;
+  gap: 3px;
+  padding: 9px 10px;
+  border: 1px solid #E4E4E4;
+  border-radius: 9px;
   background: #FFFFFF;
 }
-.pdb-kpi-rotulo { font-size: 10.5px; color: #737373; line-height: 1.2; }
-/* Tabular para o número não dançar de largura enquanto conta do zero. */
-.pdb-kpi-valor { font-size: 19px; font-weight: 700; color: #111111; line-height: 1.15; font-variant-numeric: tabular-nums; }
-.pdb-kpi-var { font-size: 10px; font-weight: 600; color: #16A34A; }
+.pdb-kpi-rotulo { font-size: 9px; color: #737373; line-height: 1.2; }
+.pdb-kpi-valor { overflow: hidden; font-size: 15px; font-weight: 650; color: #1D1D1D; line-height: 1.15; letter-spacing: -0.035em; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pdb-kpi-var { display: inline-flex; align-self: flex-start; padding: 2px 4px; border-radius: 3px; background: #F2F2F2; color: #525252; font-size: 8px; font-weight: 600; }
+.pdb-kpi small { overflow: hidden; color: #8A8A8E; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
 
-.pdb-funil { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 13px; border: 1px solid #E8E7E0; border-radius: 10px; background: #FFFFFF; }
-.pdb-funil-cab { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
-.pdb-funil-cab span:first-child { font-size: 12px; font-weight: 600; color: #111111; }
-.pdb-funil-leg { font-size: 10px; color: #9CA3AF; }
-.pdb-etapas { display: flex; flex-direction: column; gap: 9px; list-style: none; margin: 0; padding: 0; }
-/* Quatro colunas: nome, trilho elástico, contagem e percentual. Os dois
-   últimos têm largura fixa para as linhas alinharem na vertical. */
-.pdb-etapa { display: grid; grid-template-columns: 62px minmax(0, 1fr) 30px 32px; align-items: center; gap: 8px; }
-.pdb-etapa-nome { font-size: 11px; color: #525252; }
-.pdb-trilho { display: block; height: 8px; border-radius: 100px; background: #ECEEF0; overflow: hidden; }
-.pdb-trilho i { display: block; height: 100%; border-radius: 100px; background: linear-gradient(90deg, #128A68, #00B873); transition: width .55s cubic-bezier(.22,.8,.3,1); }
-.pdb-etapa-num { font-size: 11px; font-weight: 600; color: #111111; text-align: right; font-variant-numeric: tabular-nums; }
-.pdb-etapa-pct { font-family: var(--mono); font-size: 10px; color: #128A68; text-align: right; }
+.pdb-resultados { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(118px, .85fr); gap: 9px; }
+.pdb-grafico, .pdb-responsavel { min-width: 0; padding: 10px; border: 1px solid #E4E4E4; border-radius: 9px; background: #FFFFFF; }
+.pdb-grafico { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.pdb-bloco-cab { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.pdb-bloco-cab strong { display: block; color: #303030; font-size: 10px; font-weight: 600; line-height: 1.25; }
+.pdb-bloco-cab span { display: block; margin-top: 2px; color: #8A8A8E; font-size: 8.5px; line-height: 1.25; }
+.pdb-medida { flex-shrink: 0; margin-top: 0 !important; padding: 4px 6px; border: 1px solid #E8E8E8; border-radius: 6px; background: #FAFAFA; color: #525252 !important; font-size: 8px !important; font-weight: 600; }
+.pdb-grafico svg { display: block; flex: 1; min-height: 0; width: 100%; height: auto; margin-top: 4px; overflow: visible; }
+.pdb-grade { fill: none; stroke: #E9E9E9; stroke-dasharray: 3 4; stroke-width: 1; }
+.pdb-linha { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5; }
+.pdb-linha--escura { stroke: #1D1D1D; } .pdb-linha--coral { stroke: #FF655C; } .pdb-linha--verde { stroke: #00B873; }
+.pdb-eixos text { fill: #8A8A8E; font-family: var(--sans); font-size: 8px; }
+.pdb-animar .pdb-linha { stroke-dasharray: 500; stroke-dashoffset: 500; animation: pdb-desenha 1.25s cubic-bezier(.2,.8,.3,1) forwards; }
+.pdb-animar .pdb-linha--coral { animation-delay: .12s; } .pdb-animar .pdb-linha--verde { animation-delay: .24s; }
+@keyframes pdb-desenha { to { stroke-dashoffset: 0; } }
+
+.pdb-responsavel { display: flex; flex-direction: column; }
+.pdb-donut { display: grid; width: 74px; height: 74px; place-content: center; align-self: center; margin: 8px 0; border-radius: 50%; background: radial-gradient(circle at center, #FFFFFF 0 52%, transparent 53%), conic-gradient(#1D1D1D 0 88%, #C8C8CC 88% 100%); text-align: center; }
+.pdb-donut b { color: #1D1D1D; font-size: 20px; line-height: 1; }.pdb-donut span { margin-top: 2px; color: #8A8A8E; font-size: 8px; }
+.pdb-ranking { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 7px; border-top: 1px solid #EEEEEE; }
+.pdb-ranking span { display: flex; align-items: center; gap: 5px; color: #525252; font-size: 8.5px; }.pdb-ranking i { width: 5px; height: 5px; border-radius: 50%; background: #1D1D1D; }.pdb-ranking span:nth-child(2) i { background: #B4B4B7; }.pdb-ranking b { margin-left: auto; color: #303030; }
 
 @media (prefers-reduced-motion: reduce) {
-  .pdb-trilho i { transition: none; }
+  .pdb-linha { animation: none !important; stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+}
+@media (max-width: 560px) {
+  .painel-dashboards { padding: 13px; }.pdb-periodo { font-size: 8px; }.pdb-filtros { align-self: stretch; }.pdb-filtros span { flex: 1; padding-inline: 5px; font-size: 8px; text-align: center; }.pdb-kpi { padding: 7px; }.pdb-kpi-valor { font-size: 12px; }.pdb-kpi-rotulo, .pdb-kpi small { font-size: 7.5px; }.pdb-resultados { grid-template-columns: 1fr; }.pdb-responsavel { display: none; }
 }
 
 /* ---------- Painel de disparos em massa ----------
@@ -5070,12 +5094,12 @@ body.ds-crm .footer .btn-secondary {
   box-shadow: none;
 }
 body.ds-crm .footer .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
-/* Botão cheio sobre o rodapé: charcoal sobre quase-preto seria invisível, então
-   o par inverte para branco com tinta charcoal. */
+/* Botão cheio do rodapé segue o verde dos CTAs da Home e continua legível sobre
+   o fundo escuro. */
 body.ds-crm .footer .btn-primary {
-  background: var(--neutral-0); color: var(--neutral-900); box-shadow: none;
+  background: var(--cta-verde); color: var(--on-primary); box-shadow: none;
 }
-body.ds-crm .footer .btn-primary:hover { background: var(--neutral-200); }
+body.ds-crm .footer .btn-primary:hover { background: var(--cta-verde-hi); }
 
 @media (prefers-reduced-motion: reduce) {
   body.ds-crm .tcard, body.ds-crm .ag-resumo-card,
