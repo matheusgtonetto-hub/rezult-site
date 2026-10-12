@@ -824,6 +824,10 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero h1 { font-size: 55px; letter-spacing: -1.5px; line-height: 1.10; font-weight: 700; }
 @media (min-width: 981px) {
   .hero h1 { font-size: 55px; font-weight: 600; line-height: 1.05; letter-spacing: -2px; }
+  /* A headline usa duas linhas longas. A hero pode ocupar uma faixa maior que
+     as seções de conteúdo sem alterar a largura de nenhum outro bloco. */
+  .hero.va > .wrap { max-width: 1320px; }
+  .hero.va .hero-text { max-width: 1256px; }
 }
 /* Fora do hero o verde é chapado; dentro dele as palavras destacadas voltam a
    ter o degradê animado, que só funciona sobre fundo escuro. */
@@ -900,7 +904,9 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .hero.va { text-align: center; }
 .hero.va .hero-text {
   width: 100%;
-  max-width: 900px;
+  /* A headline atual é mais longa e precisa aproveitar a largura útil da
+     página também no intervalo de tablet horizontal. */
+  max-width: 1136px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1729,6 +1735,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .hero-badge  { animation: heroIn .65s cubic-bezier(0.2,0.8,0.2,1) .05s both; }
 .mobile-only-br { display: none; }
 .desktop-only-br { display: inline; }
+.hero-h1-mobile { display: none; }
 .hero-l1 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .15s both; }
 .hero-l2 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .28s both; }
 .hero-l3 { display: block; animation: heroIn .7s cubic-bezier(0.2,0.8,0.2,1) .41s both; }
@@ -2129,6 +2136,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
   .tl-cta-mobile { display: none !important; }
   .mobile-only-br { display: block; }
   .desktop-only-br { display: none; }
+  .hero-h1-desktop { display: none; }
+  .hero-h1-mobile { display: inline; }
   .hero-l1, .hero-l3 { display: inline; }
   .nav.scrolled .wrap, body.menu-aberto .nav .wrap { padding: 0 10px; }
 }
