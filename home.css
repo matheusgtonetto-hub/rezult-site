@@ -1244,12 +1244,16 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   background: #FAFAFA;
   box-shadow: 0 24px 55px -34px rgba(29, 29, 29, .3);
 }
-/* A borda-divisória de cada painel servia para separá-lo da coluna de texto
-   dentro do card branco. Agora a moldura do .feature-visual faz esse papel, e
-   a borda interna apareceria como linha dupla. */
+/* O Dashboard ganhou uma linha interna de 1px, além da moldura do slot. Os
+   demais motions repetem esse mesmo acabamento para a seção ler como um único
+   conjunto de produtos. */
 .feature-visual .painel-wpp,
 .feature-visual .painel-automacao,
-.feature-visual .painel-pipeline { border: 0; }
+.feature-visual .painel-pipeline,
+.feature-visual .painel-disparos {
+  border: 1px solid #E4E4E4;
+  border-radius: 16px;
+}
 .feature-visual > * { flex: 1; min-width: 0; }
 
 
