@@ -814,6 +814,54 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
   flex: 0 0 16px;
   color: var(--green-text);
 }
+.hero-social-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 auto 24px;
+  color: var(--neutral-700);
+  text-align: left;
+}
+.hero-social-avatars {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+.hero-social-avatars img {
+  width: 32px;
+  height: 32px;
+  margin-left: -8px;
+  border: 2px solid var(--neutral-0);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--neutral-100);
+}
+.hero-social-copy {
+  padding-left: 14px;
+  border-left: 1px solid var(--neutral-300);
+}
+.hero-social-rating {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--neutral-900);
+  font-size: 13px;
+  line-height: 1;
+}
+.hero-social-stars {
+  color: #F6B51B;
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.hero-social-rating strong,
+.hero-social-copy p strong { font-weight: 700; color: var(--neutral-900); }
+.hero-social-copy p {
+  margin: 4px 0 0;
+  color: var(--neutral-700);
+  font-size: 12px;
+  line-height: 1.25;
+}
 .hero-badge .tag { background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--mono); letter-spacing: 0.02em; }
 /* No desktop a H1 usa 55px fixos. As regras responsivas abaixo reduzem o corpo
    no tablet e no celular para preservar as quebras e evitar transbordamento. */
@@ -1979,6 +2027,13 @@ select.demo-select:invalid { color: var(--neutral-700); }
   #implementacao .impl-grid > div:first-child { width: 100%; overflow: hidden; }
 }
 @media (max-width: 560px) {
+  .hero-social-proof { gap: 10px; margin-bottom: 24px; }
+  .hero-social-avatars { padding-left: 7px; }
+  .hero-social-avatars img { width: 28px; height: 28px; margin-left: -7px; border-width: 2px; }
+  .hero-social-copy { padding-left: 12px; }
+  .hero-social-rating { gap: 6px; font-size: 13px; }
+  .hero-social-stars { font-size: 15px; }
+  .hero-social-copy p { margin-top: 4px; font-size: 12px; }
   /* As listas de checks VOLTAM a aparecer no celular (pedido de 05/10/2026).
      Elas estavam escondidas por um motivo real, e o motivo continua valendo:
      em tela estreita os itens quebram em VÁRIAS linhas e alongam o card. O
