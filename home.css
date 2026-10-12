@@ -102,6 +102,21 @@
      4,68:1 na menta), então um token só serve a todos sem reabrir o problema
      de contraste. */
   --green-text: var(--verde-tinta-forte);
+  /* ═══ Superfície dos CTAs (11/10/2026) ═══════════════════════════════════
+     O dono pediu os botões cheios da home no MESMO verde dos h2, no lugar do
+     charcoal. Não é o --primary que muda: aquele token é lido por quase 90
+     regras que não são botão (bolinha da eyebrow, ponto do carrossel, preenchi-
+     mento da linha do tempo, marca do checkbox), e virá-lo pintaria a página
+     toda de verde. Daí um token próprio, lido só pelas regras de botão.
+
+     Aponta para o --green-text, e não repete o hex, para que uma troca futura
+     do verde de título leve o botão junto, que é o pedido.
+
+     O hover é #0C6349, um degrau mais escuro: o caminho natural seria clarear
+     para o --verde-tinta #128C69, mas branco sobre ele dá 4,22:1 e os 16px do
+     texto do botão pedem 4,5:1. Escurecendo, vai a 7,15:1. */
+  --cta-verde: var(--green-text);
+  --cta-verde-hi: #0C6349;
   --glow: transparent;
   --glow-btn: transparent;
   /* Verde dos CTAs do hero e da navbar. */
@@ -413,14 +428,14 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: var(--ls-tight); line-
    --on-primary (quase preto: branco sobre este verde dá 1,7:1 e some). A
    sombra tem duas camadas neon: um anel de 1px sem blur, que define a borda,
    e um halo de 30px em --glow. No hover o botão sobe 2px e o halo cresce. */
-.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 1px var(--primary), 0 8px 30px var(--glow-btn); font-weight: 600; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--primary), 0 12px 40px var(--glow-btn); }
+.btn-primary { background: var(--cta-verde); color: var(--on-primary); box-shadow: 0 0 0 1px var(--cta-verde), 0 8px 30px var(--glow-btn); font-weight: 600; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--cta-verde), 0 12px 40px var(--glow-btn); }
 /* .btn-shine perdeu o efeito. Era um degradê animado percorrendo os verdes
    claros da marca; virou o mesmo verde chapado dos demais botões. A classe
    continua no HTML de index e planos (5 botões) e agora não faz nada além de
    garantir o fundo, então pode sair numa limpeza futura. */
 .btn-shine {
-  background: var(--primary);
+  background: var(--cta-verde);
   animation: none;
 }
 .btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
@@ -2164,7 +2179,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
   justify-content: center;
   overflow: hidden;
   transition: all 0.25s ease;
-  background: var(--primary);
+  background: var(--cta-verde);
   border-radius: 0.75rem;
   border: none;
   outline: none;
@@ -2240,8 +2255,14 @@ select.demo-select:invalid { color: var(--neutral-700); }
 /* O primário do hero, chapado pelo mesmo motivo e com a mesma mecânica da
    navbar acima. O secundário ao lado dele nunca teve essas camadas: é um
    .btn-secondary comum, com borda, e segue como está. */
+/* VERDE NO CTA DO HERO (11/10/2026). Era o charcoal do --primary; passou ao
+   --cta-verde, que aponta para o verde dos h2, para o botão principal falar a
+   cor da marca. Branco sobre #0F7A5B dá 5,37:1, acima do 4,5:1 que o AA pede
+   para o texto de 16px do botão, então a tinta segue --on-primary. A regra
+   sobrevive ao token porque o padding e o texto do hero são próprios; o fundo
+   em si já viria do base. */
 .hero .hero-btn-pontos {
-  background: var(--primary);
+  background: var(--cta-verde);
 }
 .hero .hero-btn-pontos::before,
 .hero .hero-btn-pontos::after { display: none; }
@@ -2251,7 +2272,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 /* O SVG já vem com stroke="currentColor", mas a regra .btn-pontos-icon o
    sobrescreve com #fff, e atributo de apresentação perde para CSS. Devolvendo
    o currentColor aqui, a seta passa a seguir a tinta do texto sozinha: hoje o
-   charcoal, e o que vier depois. Só no botão do hero, porque os outros dois
+   branco sobre o verde, e o que vier depois. Só no botão do hero, porque os outros dois
    que têm seta seguem no verde escuro com texto branco. */
 .hero .hero-btn-pontos .btn-pontos-icon { stroke: currentColor; }
 .btn-pontos-icon { width: 20px; height: 20px; transition: transform 0.3s ease; stroke: currentColor; fill: none; }
@@ -2341,7 +2362,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
    desta página (o CTA da dobra de diagnóstico e o do fim da FAQ) e em sete nos
    painéis de agentes. Nenhum deles estava em discussão. */
 .nav-right .btn-pontos {
-  background: var(--primary);
+  background: var(--cta-verde);
 }
 .nav-right .btn-pontos::before,
 .nav-right .btn-pontos::after { display: none; }
@@ -2532,6 +2553,10 @@ select.demo-select:invalid { color: var(--neutral-700); }
      linha). */
   .diag-item { padding: 18px 16px; gap: 12px; }
   .diag-fecho { margin-top: 44px; }
+  /* O clamp do numeral encosta no piso de 72px nesta faixa (9vw dá 50px num
+     celular de 560px), então o ajuste pedido em 11/10/2026 é sobre o piso:
+     77px aqui, e o desktop segue no clamp sem alteração. */
+  .diag-numeral { font-size: 77px; }
 }
 
 /* Barra de rodapé do celular. Nasce escondida e só entra depois do primeiro
@@ -4979,11 +5004,11 @@ body.ds-crm .btn {
 }
 body.ds-crm .btn-lg { font-size: 16px; min-height: 44px; padding: 12px 28px; }
 body.ds-crm .btn-primary {
-  background: var(--primary); color: var(--on-primary);
+  background: var(--cta-verde); color: var(--on-primary);
   box-shadow: var(--shadow-xs); font-weight: 600;
 }
 body.ds-crm .btn-primary:hover {
-  background: var(--primary-hi); transform: translateY(-1px);
+  background: var(--cta-verde-hi); transform: translateY(-1px);
   box-shadow: var(--shadow-card);
 }
 body.ds-crm .btn-secondary {
