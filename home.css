@@ -882,6 +882,7 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
    verde direto no span, e cor declarada no próprio elemento vence a herança do
    .hero h1, por mais específico que o pai seja. */
 .hero h1 .em { color: inherit; }
+.hero h1 .hero-h1-green { color: var(--ink); }
 /* O efeito de brilho saiu: era um degradê animado que passava pelos verdes
    claros da marca, ilegível sobre branco. Virou verde chapado, o mesmo do .em. */
 .em-shine-text {
@@ -1352,6 +1353,12 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 #recursos .h2 {
   font-weight: 600;
   line-height: 1.05;
+}
+@media (min-width: 981px) {
+  #recursos .recursos-desktop-green { color: var(--green-text); }
+}
+@media (max-width: 980px) {
+  #recursos .recursos-desktop-break { display: none; }
 }
 /* Sem degradê nos títulos dos cards: eles saem na cor de texto padrão. Junto
    com o background foram embora o background-clip e o
@@ -3180,7 +3187,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .segmento-card p { margin: 12px 0 0; color: var(--text-muted); font-size: 15px; line-height: 1.5; }
 .segmento-cta {
   justify-content: space-between;
-  background: var(--neutral-900);
+  background: var(--verde-tinta);
 }
 .segmento-cta h3 { color: var(--neutral-0); }
 .segmento-cta p { color: var(--neutral-300); }
@@ -4779,7 +4786,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .cv-item > .cv-painel { flex: 1; }
 .cv-diferenca-icone { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid;
   width: 42px; height: 42px; place-items: center; border: 1px solid var(--neutral-300);
-  border-radius: 50%; background: var(--neutral-0); color: var(--neutral-900);
+  border-radius: 50%; background: var(--neutral-0); color: #168F6C;
   box-shadow: 0 4px 12px rgba(29, 29, 29, .12); transform: translate(-50%, -50%);
   pointer-events: none; }
 .cv-diferenca-icone svg { width: 20px; height: 20px; }
@@ -4794,7 +4801,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
    padding e a mesma linha de base, e um ajuste futuro pega os dois de uma vez. */
 .cv-barra { display: flex; align-items: center; gap: 10px; padding: 14px 18px;
   border-bottom: 1px solid var(--border); background: #fff; }
-.cv-painel.vivo .cv-barra { background: var(--neutral-900); border-bottom-color: var(--neutral-900); }
+.cv-painel.vivo .cv-barra { background: var(--verde-tinta); border-bottom-color: var(--verde-tinta); }
 .cv-av { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%;
   background: var(--neutral-300); color: #fff; font-size: 12px; font-weight: 600; }
 .cv-painel.vivo .cv-av { background: var(--accent-100); color: var(--verde-tinta); }
@@ -4817,13 +4824,29 @@ select.demo-select:invalid { color: var(--neutral-700); }
   letter-spacing: -0.01em;
 }
 .cv-painel.vivo .cv-quem .pw-pill .pw-ico-wpp { flex-shrink: 0; }
+.cv-hoje .cv-quem .pw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 3px 8px 3px 6px;
+  background: #FEE2E2;
+  border-radius: 100px;
+  color: #B91C1C;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cv-hoje .cv-quem .pw-pill svg { flex-shrink: 0; }
 .cv-tag { padding: 4px 8px; border-radius: 999px; background: var(--neutral-150);
   color: var(--neutral-700); font-family: var(--sans); font-size: 12px;
   font-weight: 500; letter-spacing: 0; text-transform: none; }
 .cv-tag--externa { display: inline-flex; align-items: center; align-self: center; gap: 5px; margin-bottom: 10px; }
 .cv-tag--externa svg { width: 13px; height: 13px; flex-shrink: 0; }
+.cv-tag--interna { display: inline-flex; align-items: center; flex-shrink: 0; gap: 5px; }
+.cv-tag--interna svg { width: 13px; height: 13px; flex-shrink: 0; }
 .cv-tag--sem { background: var(--neutral-0); border: 1px solid var(--neutral-200); }
-.cv-tag--com { background: var(--verde-tinta); color: #fff; }
+.cv-tag--com { background: var(--neutral-0); color: var(--verde-tinta); }
 
 /* Altura fixa e overflow hidden: ver as duas decisões no topo deste bloco. */
 .cv-corpo { display: flex; flex-direction: column; gap: 10px; height: 392px; padding: 20px 18px;
@@ -4833,7 +4856,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .cv-painel.vivo .cv-bolha { font-size: 14px; }
 .cv-bolha.deles { align-self: flex-start; background: #fff; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
 .cv-painel.vivo .cv-bolha.deles { background: var(--neutral-100); border-color: var(--neutral-100); }
-.cv-painel.vivo .cv-bolha.nossa { align-self: flex-end; background: #128A68; color: #FFFFFF; border-bottom-right-radius: 4px; }
+.cv-painel.vivo .cv-bolha.nossa { align-self: flex-end; background: #168F6C; color: #FFFFFF; border-bottom-right-radius: 4px; }
 .cv-bolha time { display: block; margin-top: 5px; font-family: var(--mono); font-size: 10px; opacity: .55; }
 
 .cv-oculta { opacity: 0; transform: translateY(10px) scale(.97); }
@@ -4896,7 +4919,9 @@ select.demo-select:invalid { color: var(--neutral-700); }
    este elemento também usa, declara background #fff e mora ACIMA no arquivo.
    Com uma classe só, o branco dela venceria por ordem e o rodapé ficaria branco
    enquanto o topo já é cinza. Especificidade resolve sem depender de ordem. */
-.cv-hoje .cv-barra { background: var(--neutral-100); }
+.cv-hoje .cv-barra { background: var(--neutral-900); border-bottom-color: var(--neutral-900); }
+.cv-hoje .cv-quem b { color: #fff; }
+.cv-hoje .cv-quem span { color: var(--neutral-300); }
 .cv-hoje .cv-hoje-fecho { background: var(--neutral-100); }
 
 /* Avatar e etiqueta invertidos: preenchimento branco com tinta cinza. A borda
@@ -4914,6 +4939,15 @@ select.demo-select:invalid { color: var(--neutral-700); }
    Sem ele este lado vira uma lista de defeitos genérica, sem ligação com a
    conversa ao lado. */
 .cv-hoje .cv-bolha { margin-bottom: 24px; }
+.cv-hoje .cv-bolha.deles { background: #FFFFFF; }
+.cv-hoje .cv-bolha + .cv-motivo { margin-top: 47px; }
+
+/* Troca visualmente as posições de Recursos e Para quem é o Rezult, mantendo
+   a seção de clientes entre as duas. */
+.content-order { display: flex; flex-direction: column; }
+.content-order #recursos { order: 1; }
+.content-order #segmentos { order: 2; }
+.content-order #clientes { order: 3; }
 .cv-hoje > b { display: block; width: 100%; margin-bottom: 14px; padding-top: 20px;
   border-top: 1px solid var(--neutral-300);
   font-family: var(--mono); font-size: 11px; font-weight: 500;
@@ -4933,8 +4967,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
 @media (max-width: 900px) {
   /* Uma coluna. O cartão parado vai PRIMEIRO no HTML e continua primeiro aqui:
      a ordem de leitura é problema e depois solução. */
-  .cv-grid { grid-template-columns: 1fr; gap: 14px; row-gap: 54px; }
-  .cv-diferenca-icone { display: none; }
+  .cv-grid { grid-template-columns: 1fr; gap: 14px; }
+  .cv-diferenca-icone { position: static; display: grid; justify-self: center; transform: none; }
 }
 
 @media (max-width: 780px) {
