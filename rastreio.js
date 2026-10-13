@@ -22,6 +22,12 @@
 (function () {
   var CHAVES = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"];
   var DESTINO = "https://app.rezultcrm.com/register";
+  // A página de agendamento, servida pelo próprio site desde 13/10/2026. Era um
+  // link direto para o cal.com, domínio de terceiro: lá o pixel não estava
+  // presente e a reserva não virava evento nenhum. Entrou nesta lista pelo mesmo
+  // motivo que o cadastro: sem repassar a origem, a demonstração agendada não
+  // sabe de qual anúncio veio.
+  var DESTINO_AGENDA = "demonstracao.html";
   var ARMAZEM = "rz_atribuicao";
   var ARMAZEM_VARIANTE = "rz_home_variante";
 
@@ -96,12 +102,24 @@
   // ANTES de o navegador seguir o link. A troca é no clique, e não no
   // carregamento, porque a seção só é conhecida no clique.
   document.addEventListener("click", function (ev) {
-    var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="' + DESTINO + '"]') : null;
-    if (!a) return;
-    var secao = secaoDe(a);
-    a.href = comParametros(a.getAttribute("href"), secao);
-    if (typeof fbq === "function") {
+    if (!ev.target || !ev.target.closest) return;
+    var a = ev.target.closest('a[href^="' + DESTINO + '"]');
+    var agenda = a ? null : ev.target.closest('a[href^="' + DESTINO_AGENDA + '"]');
+    if (!a && !agenda) return;
+
+    var alvo = a || agenda;
+    var secao = secaoDe(alvo);
+    alvo.href = comParametros(alvo.getAttribute("href"), secao);
+
+    if (typeof fbq !== "function") return;
+    // Dois cliques diferentes, dois eventos diferentes: um diz "quero testar
+    // sozinho", o outro diz "quero falar com alguém". Medir os dois juntos
+    // esconderia qual dobra puxa qual intenção, que é a pergunta que o teste
+    // de criativo responde.
+    if (a) {
       fbq("trackCustom", "TrialStartClick", { section: secao, variant: variante() });
+    } else {
+      fbq("trackCustom", "AgendarDemoClick", { section: secao, variant: variante() });
     }
   }, true);
 })();
