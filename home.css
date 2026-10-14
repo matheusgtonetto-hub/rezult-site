@@ -1819,6 +1819,19 @@ select.demo-select:invalid { color: var(--neutral-700); }
 }
 .hero-mockup-img { width: 100%; height: auto; display: block; transform-origin: center bottom; will-change: transform;
   filter: drop-shadow(0 20px 32px rgba(29, 29, 29, 0.16)); }
+.hero-cal-wrap {
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: 0 20px 32px rgba(29, 29, 29, 0.16);
+}
+#my-cal-inline-demonstracao { width: 100%; height: 100%; overflow: auto; }
+@media (max-width: 560px) {
+  .hero-cal-wrap { height: 620px; border-radius: var(--r-md); }
+}
 
 /* ---------- Page hero (internal pages) ---------- */
 /* Mesmo respiro do hero da home: as três internas (planos, política, termos)
@@ -3251,7 +3264,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
    WhatsApp. Desde a remoção da .ag-agent-nav este resumo é a única porta de
    entrada dos agentes na página: os .ag-painel detalhados seguem no HTML, mas
    sem botão que os abra. */
-.ag-resumo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; min-width: 0; }
+.ag-resumo { display: grid; grid-template-columns: 1fr; gap: 14px; min-width: 0; }
 .ag-resumo-card {
   display: flex;
   flex-direction: column;
@@ -3308,6 +3321,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
 }
 .ag-overview-copy .h2 {
   max-width: 560px;
+  font-size: 35px;
   /* SEM margin-top aqui desde 06/10/2026. Havia 20px, e eles SOMAVAM aos 29px
      de margin-bottom da pill: esta era a única pill do site com 49px até o
      título, contra 29px em todas as outras.
@@ -3317,6 +3331,7 @@ select.demo-select:invalid { color: var(--neutral-700); }
      mesma especificidade disputavam, e a que vencia era esta, por vir depois
      no arquivo. */
 }
+.ag-overview-muted { color: var(--text-muted); }
 .ag-overview-copy > p {
   max-width: 560px;
   margin-top: 18px;

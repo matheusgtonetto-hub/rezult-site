@@ -189,10 +189,28 @@ fbq('track','PageView');
         </div>
       </div>
       <div class="hero-mockup-wrap" id="mockupSlotA">
-        <img id="hero-img" src="new-hero.png" alt="Plataforma Rezult CRM" class="hero-mockup-img" />
+        <div class="hero-cal-wrap" aria-label="Agende uma demonstração com o Rezult">
+          <!-- Cal inline embed code begins -->
+          <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-demonstracao"></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "demonstracao", {origin:"https://app.cal.com"});
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    Cal.ns.demonstracao("inline", {
+      elementOrSelector:"#my-cal-inline-demonstracao",
+      config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+      calLink: "rezult-crm/demonstracao",
+    });
+    Cal.ns.demonstracao("ui", {"hideEventTypeDetails":true,"layout":"month_view"});
+  </script>
+  <!-- Cal inline embed code ends -->
 
   <!-- Faixa de provas · esteira de cases -->
   <!-- tabindex="0" porque a esteira rola na horizontal: sem ele, quem navega
@@ -575,9 +593,9 @@ fbq('track','PageView');
         <div class="ag-copy-stage">
       <div class="ag-painel ag-painel--overview ativo" id="ag-overview">
         <div class="ag-overview-copy">
-          <span class="ag-overview-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Seu time cresce sem contratar</span>
-          <h2 class="h2">Agentes de IA que <span class="grad-verde">atendem, qualificam e agendam.</span></h2>
-          <p>Quatro agentes fazem o trabalho em volta da venda, no seu tom de voz e com as suas regras. Quem fecha é o seu time.</p>
+          <span class="ag-overview-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>A super IA do Rezult</span>
+          <h2 class="h2"><span class="ag-overview-muted">Tonni: a inteligência que conecta todo seu comercial.</span> Reduza em até 75% o trabalho operacional da sua equipe.</h2>
+          <p>O Tonni é a inteligência nativa do Rezult que integra todas as frentes do seu negócio. Desenvolvida especialmente para a rotina comercial, ele entende o contexto do seu negócio, executa tarefas de forma proativa, automatiza processos e conecta diferentes recursos de inteligência em uma única experiência. Você define o que ele faz e o nível de autonomia dele.<br><br>E o melhor: você não precisa entrar no sistema para interagir com o Tonni. É só chamar pelo WhatsApp.</p>
           <div class="ag-channel">
             <strong>Conectados ao seu principal canal de atendimento.</strong>
             <span class="ag-channel-pill"><img src="logos/whatsapp.svg" alt="" aria-hidden="true">WhatsApp Oficial</span>
