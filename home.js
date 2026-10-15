@@ -408,17 +408,19 @@ function brl(n) {
 function wirePricingToggle(toggleId) {
   const toggle = document.getElementById(toggleId);
   if (!toggle) return;
-  toggle.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => {
+  function aplicar(btn, animar) {
       const period = btn.dataset.period;
       document.querySelectorAll(".price-toggle").forEach(group => {
         group.querySelectorAll("button").forEach(b => {
           b.classList.toggle("active", b.dataset.period === period);
+          b.setAttribute("aria-pressed", String(b.dataset.period === period));
         });
       });
       document.querySelectorAll(".amt").forEach(amt => {
         const val = period === "anual" ? amt.dataset.a : period === "semestral" ? amt.dataset.s : amt.dataset.m;
-        if (val) animateNumber(amt, parseInt(amt.textContent.replace(/\D/g, "")) || 0, parseInt(val));
+        if (!val) return;
+        if (animar) animateNumber(amt, parseInt(amt.textContent.replace(/\D/g, "")) || 0, parseInt(val));
+        else amt.textContent = parseInt(val);
       });
       document.querySelectorAll(".pprice .pperiod").forEach(tag => {
         tag.textContent = period === "anual" ? "Anual" : period === "semestral" ? "Semestral" : "Mensal";
@@ -430,23 +432,33 @@ function wirePricingToggle(toggleId) {
         if (!recurringEl || !recurringEl.classList.contains("pprice-recurring")) return;
         const m = parseInt(pp.dataset.m);
         if (period === "mensal") {
-          savingsEl.innerHTML = "";
+          const de = parseInt(pp.dataset.de);
+          savingsEl.innerHTML = de
+            ? `<s class="pprice-de">De R$${de}/mês</s> Economize ${brl(de - m)}`
+            : "";
           recurringEl.textContent = "Cobrança mensal recorrente";
           return;
         }
         const months = period === "anual" ? 12 : 6;
         const total = parseInt(period === "anual" ? pp.dataset.atotal : pp.dataset.stotal);
-        const savings = m * months - total;
+        const de = parseInt(pp.dataset.de);
+        const savings = (de || m) * months - total;
         // Risca a MENSALIDADE cheia, não o total do ciclo. As duas linhas ficam
         // na mesma unidade (R$ 237 riscado, R$ 202/mês abaixo) e a comparação
         // se lê sem conta nenhuma. O total do ciclo continua na linha de
         // cobrança logo abaixo, onde há espaço para dizer o que ele é.
         // Mesmo critério do OfertaDeContratacao do app.
-        savingsEl.innerHTML = `<s>${brl(m)}</s> Economize ${brl(savings)}`;
+        const riscado = de ? `<s class="pprice-de">De R$${de}/mês</s>` : `<s>${brl(m)}</s>`;
+        savingsEl.innerHTML = `${riscado} Economize ${brl(savings)}`;
         recurringEl.textContent = `Cobrança ${period} de ${brl(total)}`;
       });
-    });
+  }
+  toggle.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => aplicar(btn, true));
   });
+  // A home abre no mesmo ciclo de /planos, sem animar a primeira renderização.
+  const inicial = toggle.querySelector(`button[data-period="${toggle.dataset.inicial}"]`);
+  if (inicial) aplicar(inicial, false);
 }
 function animateNumber(el, from, to) {
   const dur = 350, start = performance.now();

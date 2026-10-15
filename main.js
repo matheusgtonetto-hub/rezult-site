@@ -172,7 +172,10 @@ function wirePricingToggle(toggleId) {
   // mostrando o preco mensal e trocar sozinha na frente do visitante.
   function aplicar(btn, animar) {
       const period = btn.dataset.period;
-      toggle.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+      toggle.querySelectorAll("button").forEach(b => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
       document.querySelectorAll(".amt").forEach(amt => {
         const val = period === "anual" ? amt.dataset.a : period === "semestral" ? amt.dataset.s : amt.dataset.m;
         if (!val) return;
