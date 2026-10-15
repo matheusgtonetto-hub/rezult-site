@@ -11,9 +11,9 @@
   try { data = JSON.parse(source.textContent); } catch (error) { return; }
 
   var periods = {
-    mensal: { name: 'Mensal', months: 1, billing: 'Cobrado mensalmente', saving: 'no mês' },
-    semestral: { name: 'Semestral', months: 6, billing: 'Cobrado a cada 6 meses', saving: 'no semestre' },
-    anual: { name: 'Anual', months: 12, billing: 'Cobrado a cada 12 meses', saving: 'no ano' }
+    mensal: { name: 'Mensal', months: 1, billing: 'Cobrado mensalmente', saving: 'no mês', payment: 'Cobrança mensal sem carência' },
+    semestral: { name: 'Semestral', months: 6, billing: 'Cobrado a cada 6 meses', saving: 'no semestre', payment: 'Pagamento em até 6x no cartão' },
+    anual: { name: 'Anual', months: 12, billing: 'Cobrado a cada 12 meses', saving: 'no ano', payment: 'Pagamento em até 12x no cartão' }
   };
   var currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   var integer = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
@@ -51,6 +51,7 @@
       setText(card, '[data-total-price]', currency.format(price.total));
       setText(card, '[data-savings-amount]', currency.format(plan.reference * period.months - price.total));
       setText(card, '[data-savings-period]', period.saving);
+      setText(card, '[data-payment-note]', period.payment);
 
       var investment = card.querySelector('.rz-plan-investment');
       if (announce && !reduceMotion.matches && investment.animate) {

@@ -53,7 +53,9 @@ test('os três planos ficam visíveis e apenas o período precisa ser escolhido'
 });
 
 test('o ciclo inicial, o teste grátis e as integrações existentes são preservados', () => {
-  assert.equal(data.defaultPeriod, 'semestral');
+  assert.equal(data.defaultPeriod, 'mensal');
+  assert.match(home, /name="rz-pricing-period" value="mensal" checked/);
+  assert.doesNotMatch(home, /name="rz-pricing-period" value="semestral" checked/);
   const section = home.slice(home.indexOf('<!-- DOBRA · PLANOS -->'), home.indexOf('<!-- faq -->'));
   const registerLinks = section.match(/href="https:\/\/app\.rezultcrm\.com\/register"/g);
   assert.equal(registerLinks.length, 6);
@@ -73,6 +75,20 @@ test('cada checklist destaca usuários e preserva os seis limites do plano', () 
     assert.ok(list.includes('data-capacity="users">' + users));
     assert.ok(list.includes('com até ' + data.plans[index].stages + ' etapas'));
     assert.match(list, /via Webhook/);
+  });
+});
+
+test('a primeira renderização já mostra preços e cobrança mensais', () => {
+  const cards = [...home.matchAll(/<article class="rz-plan-card[^\"]*" data-pricing-plan="[^\"]+"[\s\S]*?<\/article>/g)];
+  assert.equal(cards.length, 3);
+  cards.forEach(([card], index) => {
+    const plan = data.plans[index];
+    assert.ok(card.includes('data-monthly-price>' + plan.prices.mensal.monthly + '<'));
+    assert.match(card, /data-billing-description>Cobrado mensalmente</);
+    assert.match(card, /data-price-approx hidden/);
+    assert.match(card, /data-savings-period>no mês</);
+    assert.match(card, /data-payment-note>Cobrança mensal sem carência</);
+    assert.doesNotMatch(card, /Sem cartão de crédito/);
   });
 });
 
