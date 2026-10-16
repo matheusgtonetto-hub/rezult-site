@@ -45,13 +45,11 @@
       // O equivalente mensal é arredondado na oferta original.
       // Preservar o total contratado: nunca multiplicar o valor arredondado.
       setText(card, '[data-monthly-price]', integer.format(price.monthly));
-      card.querySelector('[data-price-approx]').hidden = !approximate;
+      setText(card, '[data-monthly-discount]', '−R$' + integer.format(plan.reference - price.monthly));
       setText(card, '[data-equivalent-note]', approximate ? 'Equivalente mensal aproximado' : 'Valor da assinatura mensal');
-      setText(card, '[data-billing-description]', period.billing);
-      setText(card, '[data-total-price]', currency.format(price.total));
-      setText(card, '[data-savings-amount]', currency.format(plan.reference * period.months - price.total));
-      setText(card, '[data-savings-period]', period.saving);
       setText(card, '[data-payment-note]', period.payment);
+      var discount = Math.round((1 - price.total / (plan.reference * period.months)) * 100);
+      setText(card, '[data-discount-percent]', integer.format(discount) + '% OFF');
 
       var investment = card.querySelector('.rz-plan-investment');
       if (announce && !reduceMotion.matches && investment.animate) {
@@ -65,7 +63,7 @@
         return plan.name + ': ' + currency.format(plan.prices[periodId].monthly);
       }).join('; ');
       setText(root, '[data-pricing-status]', 'Ciclo ' + period.name.toLowerCase() + '. Valores mensais' +
-        (approximate ? ' aproximados' : '') + ': ' + prices + '. Total cobrado informado em cada plano.');
+        (approximate ? ' aproximados' : '') + ': ' + prices + '. ' + period.payment + '.');
     }
   }
 

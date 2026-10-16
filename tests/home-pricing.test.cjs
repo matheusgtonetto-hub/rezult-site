@@ -71,11 +71,17 @@ test('cada checklist destaca usuários e preserva os seis limites do plano', () 
   lists.forEach(([, list], index) => {
     assert.equal([...list.matchAll(/<li(?:\s|>)/g)].length, 6);
     assert.match(list, /<li class="rz-plan-user-limit">/);
+    assert.doesNotMatch(list, /rz-plan-bundle/);
     const users = index === 2 ? 'Usuários ilimitados' : data.plans[index].users + ' usuários';
     assert.ok(list.includes('data-capacity="users">' + users));
     assert.ok(list.includes('com até ' + data.plans[index].stages + ' etapas'));
     assert.match(list, /via Webhook/);
   });
+});
+
+test('WhatsApp Oficial e Agentes aparece acima de Capacidade incluída nos três planos', () => {
+  const blocks = [...home.matchAll(/<div class="rz-plan-included">\s*<div class="rz-plan-bundle"><img src="logos\/meta\.svg" alt="Meta"[^>]*><span>WhatsApp Oficial e Agentes inclusos<\/span><\/div>\s*<h4>Capacidade incluída<\/h4>/g)];
+  assert.equal(blocks.length, 3);
 });
 
 test('a primeira renderização já mostra preços e cobrança mensais', () => {
@@ -84,11 +90,15 @@ test('a primeira renderização já mostra preços e cobrança mensais', () => {
   cards.forEach(([card], index) => {
     const plan = data.plans[index];
     assert.ok(card.includes('data-monthly-price>' + plan.prices.mensal.monthly + '<'));
-    assert.match(card, /data-billing-description>Cobrado mensalmente</);
-    assert.match(card, /data-price-approx hidden/);
-    assert.match(card, /data-savings-period>no mês</);
+    assert.ok(card.includes('>−R$' + (plan.reference - plan.prices.mensal.monthly) + '</strong>'));
+    assert.doesNotMatch(card, /rz-pricing-total|data-billing-description|data-total-price/);
+    assert.doesNotMatch(card, /data-price-approx|≈/);
+    assert.doesNotMatch(card, /rz-pricing-savings|data-savings-amount|Economize/);
     assert.match(card, /data-payment-note>Cobrança mensal sem carência</);
     assert.doesNotMatch(card, /Sem cartão de crédito/);
+    const discount = Math.round((1 - plan.prices.mensal.total / plan.reference) * 100);
+    assert.ok(card.includes('data-discount-percent>' + discount + '% OFF<'));
+    assert.ok(card.indexOf('class="rz-pricing-discount"') < card.indexOf('class="rz-pricing-reference"'));
   });
 });
 
