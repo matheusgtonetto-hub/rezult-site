@@ -57,8 +57,10 @@ test('o ciclo inicial, o teste grátis e as integrações existentes são preser
   assert.match(home, /name="rz-pricing-period" value="mensal" checked/);
   assert.doesNotMatch(home, /name="rz-pricing-period" value="semestral" checked/);
   const section = home.slice(home.indexOf('<!-- DOBRA · PLANOS -->'), home.indexOf('<!-- faq -->'));
-  const registerLinks = section.match(/href="https:\/\/app\.rezultcrm\.com\/register"/g);
-  assert.equal(registerLinks.length, 6);
+  const demoLinks = section.match(/href="demonstracao\.html"/g);
+  assert.equal(demoLinks.length, 6);
+  assert.ok(fs.existsSync(path.join(root, 'demonstracao.html')));
+  assert.match(home, /src="agenda\.js"/);
   assert.match(section, /Sem cartão de crédito/);
   assert.match(section, /href="planos\.html"/);
   assert.match(home, /src="rastreio\.js"/);
@@ -112,12 +114,12 @@ test('o comparativo volta abaixo dos cards com os três planos', () => {
   }
 });
 
-test('os botões dos cards e do comparativo exibem Escolher plano', () => {
+test('os botões dos cards e do comparativo agendam a demonstração', () => {
   const section = home.slice(home.indexOf('<!-- DOBRA · PLANOS -->'), home.indexOf('<!-- faq -->'));
-  const links = [...section.matchAll(/<a[^>]+href="https:\/\/app\.rezultcrm\.com\/register"[^>]*>([\s\S]*?)<\/a>/g)];
+  const links = [...section.matchAll(/<a[^>]+href="demonstracao\.html"[^>]*>([\s\S]*?)<\/a>/g)];
   assert.equal(links.length, 6);
   for (const link of links) {
-    assert.equal(link[1].replace(/<[^>]+>/g, '').trim(), 'Escolher plano');
-    assert.match(link[0], /aria-label="Escolher plano (Silver|Platinum|Emerald)"/);
+    assert.equal(link[1].replace(/<[^>]+>/g, '').trim(), 'Agendar demo');
+    assert.match(link[0], /aria-label="Agendar demo do plano (Silver|Platinum|Emerald)"/);
   }
 });

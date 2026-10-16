@@ -3450,8 +3450,8 @@ select.demo-select:invalid { color: var(--neutral-700); }
   color: var(--neutral-200);
   -webkit-text-fill-color: currentColor;
 }
-#agentes .ag-overview-copy .h2 { color: #FFFFFF; }
-#agentes .ag-overview-copy .h2 .grad-verde { color: var(--verde-neon); }
+#agentes .ag-overview-copy .h2 { color: #FFFFFF; font-weight: 500; }
+#agentes .ag-overview-copy .h2 .grad-verde { color: #FFFFFF; font-weight: 700; }
 @media (min-width: 981px) {
   #agentes .ag-overview-copy .h2 { text-wrap: wrap; }
   #agentes .ag-overview-copy .h2 .grad-verde { display: inline; }
