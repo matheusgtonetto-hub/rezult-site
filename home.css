@@ -5402,12 +5402,6 @@ select.demo-select:invalid { color: var(--neutral-700); }
 .cv-hoje .cv-bolha.deles { background: #FFFFFF; }
 .cv-hoje .cv-bolha + .cv-motivo { margin-top: 47px; }
 
-/* Troca visualmente as posições de Recursos e Para quem é o Rezult, mantendo
-   a seção de clientes entre as duas. */
-.content-order { display: flex; flex-direction: column; }
-.content-order #recursos { order: 1; }
-.content-order #segmentos { order: 2; }
-.content-order #clientes { order: 3; }
 .cv-hoje > b { display: block; width: 100%; margin-bottom: 14px; padding-top: 20px;
   border-top: 1px solid var(--neutral-300);
   font-family: var(--mono); font-size: 11px; font-weight: 500;
