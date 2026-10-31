@@ -1646,7 +1646,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 .rz-pricing-kicker { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; color: var(--rz-green); font-size: 13px; font-weight: 600; }
 .rz-pricing .rz-pricing-heading .h2 { margin: 0; color: var(--rz-ink); font-size: 48px; line-height: 1.08; font-weight: 600; letter-spacing: -2px; }
 .rz-pricing-intro { max-width: 640px; padding-bottom: 3px; }
-.rz-pricing-intro p { margin: 0 0 18px; color: var(--rz-muted); font-size: 15px; line-height: 1.6; }
 .rz-pricing-intro > span { display: flex; align-items: center; justify-content: center; gap: 7px; color: var(--rz-green); font-size: 12px; font-weight: 500; }
 .rz-pricing-intro svg { flex-shrink: 0; }
 .rz-pricing-workspace { color: var(--rz-ink); }
@@ -1775,7 +1774,6 @@ body.menu-aberto .nav .wrap { padding: 0 32px; }
 @media (max-width: 760px) {
   .rz-pricing-heading { flex-direction: column; gap: 20px; margin-bottom: 28px; }
   .rz-pricing-intro { max-width: 390px; }
-  .rz-pricing-intro p { margin-bottom: 12px; font-size: 14px; }
   .rz-pricing-toolbar { flex-direction: column; align-items: stretch; }
   .rz-pricing .rz-pricing-period { width: 100%; }
   .rz-pricing-period label { flex: 1; min-width: 0; }
